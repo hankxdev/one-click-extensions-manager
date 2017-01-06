@@ -1,0 +1,103 @@
+html {
+  width: 320px;
+  max-width: 320px;
+  white-space: nowrap;
+}
+ul {
+  padding-left: 5px;
+  margin-top: 5px;
+  padding-bottom: 5px;
+}
+li {
+  list-style: none;
+  margin-top: 5px;
+  max-width: 290px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.2em;
+  color: black;
+  font-weight: bolder;
+  border-bottom: 1px dashed #d9d9d9;
+}
+.btn-flat{
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  z-index: 1;
+  will-change: opacity, transform;
+  transition: all .3s ease-out;
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 2px;
+  height: 36px;
+  line-height: 36px;
+  outline: 0;
+  padding: 0 2rem;
+  text-transform: uppercase;
+}
+a:active, a:hover {
+  outline: 0;
+}
+li a {
+  margin-right: 5px;
+}
+li.disabled {
+  font-weight: normal;
+  color: gray;
+  -webkit-filter: grayscale(60%)
+}
+li:hover {
+  background-color: #ecf0f1;
+}
+#disableAll {
+  padding: 0 1rem;
+}
+#disableAll:hover,#extensionPage:hover{
+  color: black;
+  font-weight: bold;
+}
+#extensionPage{
+  padding: 0 1rem;
+  margin-left: 65px;
+}
+input {
+  margin: 5px 0 0 5px;
+  width: 290px;
+}
+.extIcon {
+  vertical-align: middle;
+
+}
+.extIcon a{
+  cursor: default;
+
+}
+.extIcon img {
+  width: 16px;
+  height: 16px;
+  cursor: default;
+}
+a .hasOpt {
+  overflow: hidden;
+  transition-duration: 0.8s;
+  transition-property: transform;
+  cursor: pointer;
+}
+.hasOpt:hover {
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+}
+.extName {
+  display: inline;
+  width: 100%;
+  cursor: pointer;
+}

@@ -1,0 +1,41 @@
+{
+  "extName": {
+    "message": "快捷擴展管理-無廣告版"
+  },
+  "extDesc": {
+    "message": "一鍵管理所有擴展，快速激活、禁用插件。無廣告，永久免費。"
+  },
+  "clkEnable": {
+    "message": "單擊以啟用該擴展"
+  },
+  "clkDisable": {
+    "message": "單擊以禁用該擴展"
+  },
+  "clkUninstall": {
+    "message": "你真的要卸載這個擴展？"
+  },
+  "disableAll": {
+    "message": "真的要禁用所有擴展麽？"
+  },
+  "extensionPage": {
+    "message": "更多"
+  },
+  "disAll": {
+    "message": "禁用所有擴展"
+  },
+  "searchTxt": {
+    "message": "搜尋擴展"
+  },
+  "gotoOpt": {
+    "message": "打開設置頁面"
+  },
+  "uninstall": {
+    "message": "卸載這個擴展"
+  },
+  "toggleEnable": {
+    "message": "點擊以啓用/禁用該擴展"
+  },
+  "openOpt": {
+    "message": "點擊以打開設置頁面"
+  }
+}

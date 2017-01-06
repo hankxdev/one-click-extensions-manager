@@ -1,0 +1,41 @@
+{
+  "extName": {
+    "message": "快捷扩展管理-无广告版"
+  },
+  "extDesc": {
+    "message": "一键管理所有扩展，快速激活、禁用插件。无广告，永久免费。"
+  },
+  "clkEnable": {
+    "message": "单击以启用该扩展"
+  },
+  "clkDisable": {
+    "message": "单击以禁用该扩展"
+  },
+  "clkUninstall": {
+    "message": "你真的要卸载这个扩展？"
+  },
+  "disableAll": {
+    "message": "真的要禁用所有扩展么？"
+  },
+  "extensionPage": {
+    "message": "更多"
+  },
+  "disAll": {
+    "message": "禁用所有扩展"
+  },
+  "searchTxt": {
+    "message": "搜寻扩展"
+  },
+  "gotoOpt": {
+    "message": "打开设置页面"
+  },
+  "uninstall": {
+    "message": "卸载这个扩展"
+  },
+  "toggleEnable": {
+    "message": "点击以啓用/禁用该扩展"
+  },
+  "openOpt": {
+    "message": "点击以打开设置页面"
+  }
+}
