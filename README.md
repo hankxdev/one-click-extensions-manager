@@ -1,7 +1,13 @@
-# One Click Extension Manager -No Ads
-a simple chrome extension to manage chrome extension by Hank Yang
+# One Click Extension Manager - No Ads
 
-it does not require any other permissions except management
+A simple Chrome extension to manage chrome extension by [Hank Yang.](https://momane.com/)
 
-install and play with it here
-https://chrome.google.com/webstore/detail/pbgjpgbpljobkekbhnnmlikbbfhbhmem/publish-accepted?utm_source=chrome-ntp-icon
+It does not require any other permissions except `management`
+
+## Install
+
+Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/one-click-extension-manag/pbgjpgbpljobkekbhnnmlikbbfhbhmem)
+
+## License
+
+© [Hank Yang](https://momane.com/)
