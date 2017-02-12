@@ -49,8 +49,7 @@ input {
   list-style: none;
 }
 .ext {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: flex;
   white-space: nowrap;
   font-size: 1.2em;
   line-height: 1.8;
@@ -68,28 +67,28 @@ input {
 .ext.disabled + .disabled {
   margin-top: 0;
 }
-.ext:hover {
-  background-color: #ecf0f1;
-  cursor: pointer;
+.extName {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ext img {
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
 }
 .extIcon {
   margin-right: 0.3em;
 }
-.extIcon a{
-  cursor: default;
+.extOptions {
+  padding: 0 0.3em;
+  opacity: 0.1;
 }
-.extIcon img {
-  width: 16px;
-  height: 16px;
-  cursor: default;
-  vertical-align: -3px;
-}
-a .hasOpt {
-  overflow: hidden;
-  transition-duration: 0.8s;
-  transition-property: transform;
+.ext > *:hover {
+  background-color: #ecf0f1;
   cursor: pointer;
 }
-.hasOpt:hover {
-  transform: rotate(360deg);
+*:hover + .extOptions,
+.extOptions:hover {
+  opacity: 1;
 }

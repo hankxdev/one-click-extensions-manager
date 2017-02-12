@@ -4,7 +4,7 @@ const getI18N = chrome.i18n.getMessage;
 const searchText = $('#searchext');
 
 // disable the default context menu
-window.oncontextmenu = () => false;
+eul.on('contextmenu', () => false);
 
 searchText.attr('placeholder', getI18N('searchTxt')).focus();
 
@@ -56,9 +56,8 @@ cme.getAll(ets => {
 	$('#pbgjpgbpljobkekbhnnmlikbbfhbhmem').remove();
 });
 
-$('body').on('click', 'li.ext', function (e) {
-	const that = $(this);
-	const extSel = that.find('.extName');
+$('body').on('click', '.extName', function (e) {
+	const extSel = $(this);
 	const eid = extSel.attr('data-id');
 	cme.get(eid, e => {
 		extSel.parent().remove();
@@ -72,17 +71,11 @@ $('body').on('click', 'li.ext', function (e) {
 			});
 		}
 	});
-}).on('click', 'li .extIcon a', function (e) {
-	const that = $(this);
-	const href = that.attr('href');
-	if (href !== '#') {
-		chrome.tabs.create({url: href});
-	}
-}).on('mouseup', 'li.ext', function (e) {
+}).on('click', '.extOptions', e => {
+	chrome.tabs.create({url: e.target.href});
+}).on('mouseup', '.extName', e => {
 	if (e.which == 3) {
-		const that = $(this);
-		const eid = that.find('.extName').attr('data-id');
-		cme.uninstall(eid);
+		cme.uninstall(e.target.dataset.id);
 	}
 });
 
@@ -114,7 +107,7 @@ function getIcon(icons, size = 16) {
 				return false;
 			}
 			selectedIcon = icon.url;
-		})
+		});
 	}
 	return selectedIcon;
 }
@@ -122,13 +115,17 @@ function getIcon(icons, size = 16) {
 function createList(e, enabled) {
 	return `
 		<li class='ext ${enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
-			<span class='extIcon' title='${e.optionsUrl ? getI18N('openOpt') : ''}'>
-				<a href='${e.optionsUrl ? e.optionsUrl : ''}'><img
-					src='${getIcon(e.icons, 16)}'
-					class='${e.optionsUrl ? 'hasOpt' : ''}'
-				></a>
+			<span class='extName' data-id='${e.id}' title='${getI18N('toggleEnable')}'>
+				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
+				${e.name}
 			</span>
-			<span class='extName' data-id='${e.id}' title='${getI18N('toggleEnable')}'>${e.name}</span>
+			${
+				e.optionsUrl ? `
+					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('openOpt')}'>
+						<img src="${chrome.extension.getURL('icon-options.svg')}">
+					</a>
+				` : ``
+			}
 		</li>
 	`;
 }
