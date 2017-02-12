@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "One Click Extension Manager -No Ads"
+    "message": "One Click Extension Manager - No Ads"
   },
   "extDesc": {
-    "message": "Manage your extension with one click, No ads"
+    "message": "View, enable, disable, remove your extensions with ease."
   },
   "clkEnable": {
     "message": "Click to enable this extension"
@@ -18,13 +18,13 @@
     "message": "Are you sure you want to disable all extensions?"
   },
   "extensionPage": {
-    "message": "More..."
+    "message": "More…"
   },
   "disAll": {
-    "message": "Disable all extensions"
+    "message": "Disable all"
   },
   "searchTxt": {
-    "message": "Search the extensions"
+    "message": "Search by name..."
   },
   "gotoOpt": {
     "message": "Go to options page"
@@ -33,7 +33,7 @@
     "message": "Uninstall this extension"
   },
   "toggleEnable": {
-    "message": "Click to enable/disable ths extension"
+    "message": "Click to enable/disable this extension"
   },
   "openOpt": {
     "message": "Click to open options page"
