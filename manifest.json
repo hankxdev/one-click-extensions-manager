@@ -4,7 +4,7 @@
     "version": "0.2.7",
     "manifest_version": 2,
     "homepage_url": "https://github.com/HangYang/ext_manager",
-    "default_locale": "en_US",
+    "default_locale": "en",
     "permissions": [
         "management"
     ],
