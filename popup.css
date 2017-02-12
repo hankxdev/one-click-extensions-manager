@@ -1,6 +1,7 @@
 /* RESETS */
 html {
   width: 320px;
+  min-width: 100vw;
 }
 a {
   outline: 0;
@@ -34,6 +35,8 @@ input {
   padding: 0.5em;
   outline: 0;
   text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
 }
 .btn-flat:hover{
   color: black;
