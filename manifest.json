@@ -3,18 +3,17 @@
     "description": "__MSG_extDesc__",
     "version": "0.2.7",
     "manifest_version": 2,
-    "homepage_url" : "http://momane.com",
-    "default_locale": "en_US",
-
-    "permissions": ["management"],
-
+    "homepage_url": "https://github.com/HangYang/ext_manager",
+    "default_locale": "en",
+    "permissions": [
+        "management"
+    ],
     "icons": {
-        "128": "logo.png",
-        "16": "logo.png"
+        "16": "logo.png",
+        "128": "logo.png"
     },
     "browser_action": {
         "default_icon": "logo.png",
         "default_popup": "popup.html"
     }
-
 }
