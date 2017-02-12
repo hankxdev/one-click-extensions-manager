@@ -114,10 +114,10 @@ function createList(e, enabled){
 	}
 	if (!e.optionsUrl) {
 		t += "<span class='extIcon'><a href='#'><img src= '" + (e.icons ? e.icons[0].url:chrome.extension.getURL("plugin.png")) + "'></a></span>" +
-			"<div class='extName' data-id='" + e.id + "' title='" + getI18N("toggleEnable") + "'>" + e.name + "</div></li>";
+			"<span class='extName' data-id='" + e.id + "' title='" + getI18N("toggleEnable") + "'>" + e.name + "</span></li>";
 	} else {
 		t += "<span title='" + getI18N("openOpt") + "' class='extIcon'><a href='" + e.optionsUrl + "'><img class='hasOpt' src= '" + (e.icons ? e.icons[0].url:chrome.extension.getURL("plugin.png")) + "' ></a></span>" +
-			"<div class='extName' data-id='" + e.id + "' title='" + getI18N("toggleEnable") + "'>" + e.name + "</div></li>";
+			"<span class='extName' data-id='" + e.id + "' title='" + getI18N("toggleEnable") + "'>" + e.name + "</span></li>";
 	}
 
 	return t;
