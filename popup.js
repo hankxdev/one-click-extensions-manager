@@ -108,19 +108,19 @@ searchText.on('keyup', function (e) {
 });
 
 function createList(e, enabled) {
-	let t = '';
-	if (!enabled) {
-		t = `<li class='ext disabled' id='${e.id}'>`;
-	} else {
-		t = `<li class='ext' id='${e.id}' >`;
-	}
-	if (!e.optionsUrl) {
-		t += `<span class='extIcon'><a href='#'><img src= '${e.icons ? e.icons[0].url : chrome.extension.getURL('plugin.png')}'></a></span><span class='extName' data-id='${e.id}' title='${getI18N('toggleEnable')}'>${e.name}</span></li>`;
-	} else {
-		t += `<span title='${getI18N('openOpt')}' class='extIcon'><a href='${e.optionsUrl}'><img class='hasOpt' src= '${e.icons ? e.icons[0].url : chrome.extension.getURL('plugin.png')}' ></a></span><span class='extName' data-id='${e.id}' title='${getI18N('toggleEnable')}'>${e.name}</span></li>`;
-	}
-
-	return t;
+	return `
+		<li class='ext ${enabled ? '' : 'disabled'}' id='${e.id}'>
+			<span class='extIcon' title='${e.optionsUrl ? getI18N('openOpt') : ''}'>
+				<a href='${e.optionsUrl ? e.optionsUrl : ''}'>
+					<img
+						src='${e.icons ? e.icons[0].url : chrome.extension.getURL('plugin.png')}'
+						class='${e.optionsUrl ? 'hasOpt' : ''}'
+					>
+				</a>
+			</span>
+			<span class='extName' data-id='${e.id}' title='${getI18N('toggleEnable')}'>${e.name}</span>
+		</li>
+	`;
 }
 
 function disableAll() {
