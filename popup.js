@@ -100,12 +100,31 @@ searchText.on('keyup', function () {
 	extensions.not(hiddenExtensions).show();
 });
 
+function getIcon(icons, size = 16) {
+	// Set fallback icon
+	let selectedIcon = chrome.extension.getURL('icon-puzzle.svg');
+
+	// Get retina size if necessary
+	size *= window.devicePixelRatio;
+
+	if (icons && icons.length) {
+		// Get a large icon closest to the desired size
+		icons.reverse().some(icon => {
+			if (icon.size < size) {
+				return false;
+			}
+			selectedIcon = icon.url;
+		})
+	}
+	return selectedIcon;
+}
+
 function createList(e, enabled) {
 	return `
 		<li class='ext ${enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
 			<span class='extIcon' title='${e.optionsUrl ? getI18N('openOpt') : ''}'>
 				<a href='${e.optionsUrl ? e.optionsUrl : ''}'><img
-					src='${e.icons ? e.icons[0].url : chrome.extension.getURL('plugin.png')}'
+					src='${getIcon(e.icons, 16)}'
 					class='${e.optionsUrl ? 'hasOpt' : ''}'
 				></a>
 			</span>
