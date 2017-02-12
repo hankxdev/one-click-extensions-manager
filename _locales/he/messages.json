@@ -1,0 +1,41 @@
+{
+  "extName": {
+    "message": "אחת לחץ מודעות -לא מנהל הרחבות"
+  },
+  "extDesc": {
+    "message": "ניהול השלוחה שלך בלחיצה אחת, אין מודעות"
+  },
+  "clkEnable": {
+    "message": "לחץ כדי להפעיל את התוסף"
+  },
+  "clkDisable": {
+    "message": "לחץ כדי להשבית תוסף זה"
+  },
+  "clkUninstall": {
+    "message": "האם אתה באמת רוצה לבטל את התקנת ההרחבה?"
+  },
+  "disableAll": {
+    "message": "האם אתה בטוח שאתה רוצה להשבית את כל הרחבות?"
+  },
+  "extensionPage": {
+    "message": "עוד ..."
+  },
+  "disAll": {
+    "message": "השבת את כל התוספים"
+  },
+  "searchTxt": {
+    "message": "חפש הרחבות"
+  },
+  "gotoOpt": {
+    "message": "עבור אל אפשרויות דף"
+  },
+  "uninstall": {
+    "message": "לבטל את התקנת ההרחבה"
+  },
+  "toggleEnable": {
+    "message": "לחץ כדי להפעיל / להשבית ths רחבה"
+  },
+  "openOpt": {
+    "message": "לחץ על מנת לפתוח את דף האפשרויות"
+  }
+}
