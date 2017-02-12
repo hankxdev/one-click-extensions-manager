@@ -2,7 +2,6 @@ const cme = chrome.management;
 const eul = $('#extList');
 const getI18N = chrome.i18n.getMessage;
 const searchText = $('#searchext');
-let curExtID;
 
 // disable the default context menu
 window.oncontextmenu = () => false;
@@ -91,32 +90,24 @@ cme.onUninstalled.addListener(id => {
 	$(`#${id}`).remove();
 });
 
-searchText.on('keyup', function (e) {
-	const keyword = $(this).val();
-	const extLists = $('#extList').find('li');
-	if (keyword.trim() == '') {
-		extLists.show();
-	} else {
-		extLists.each(function () {
-			if (!$(this).text().toLowerCase().includes(keyword.toLowerCase())) {
-				$(this).hide();
-			} else {
-				$(this).show();
-			}
-		});
-	}
+searchText.on('keyup', function () {
+	const keywords = this.value.split(' ').filter(s => s.length);
+	const extensions = $('#extList li');
+	const hiddenExtensions = extensions.not((i, el) => {
+		return keywords.every(word => el.dataset.name.includes(word));
+	});
+	hiddenExtensions.hide();
+	extensions.not(hiddenExtensions).show();
 });
 
 function createList(e, enabled) {
 	return `
-		<li class='ext ${enabled ? '' : 'disabled'}' id='${e.id}'>
+		<li class='ext ${enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
 			<span class='extIcon' title='${e.optionsUrl ? getI18N('openOpt') : ''}'>
-				<a href='${e.optionsUrl ? e.optionsUrl : ''}'>
-					<img
-						src='${e.icons ? e.icons[0].url : chrome.extension.getURL('plugin.png')}'
-						class='${e.optionsUrl ? 'hasOpt' : ''}'
-					>
-				</a>
+				<a href='${e.optionsUrl ? e.optionsUrl : ''}'><img
+					src='${e.icons ? e.icons[0].url : chrome.extension.getURL('plugin.png')}'
+					class='${e.optionsUrl ? 'hasOpt' : ''}'
+				></a>
 			</span>
 			<span class='extName' data-id='${e.id}' title='${getI18N('toggleEnable')}'>${e.name}</span>
 		</li>
