@@ -1,7 +1,7 @@
 {
     "name": "__MSG_extName__",
     "description": "__MSG_extDesc__",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "manifest_version": 2,
     "homepage_url" : "http://momane.com",
     "default_locale": "en_US",
