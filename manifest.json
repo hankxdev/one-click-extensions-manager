@@ -3,7 +3,7 @@
     "description": "__MSG_extDesc__",
     "version": "0.2.7",
     "manifest_version": 2,
-    "homepage_url": "http://momane.com",
+    "homepage_url": "https://github.com/HangYang/ext_manager",
     "default_locale": "en_US",
     "permissions": [
         "management"
