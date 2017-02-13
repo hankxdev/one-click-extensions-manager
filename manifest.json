@@ -1,7 +1,7 @@
 {
     "name": "__MSG_extName__",
     "description": "__MSG_extDesc__",
-    "version": "0.2.8",
+    "version": "0.2.9",
     "manifest_version": 2,
     "homepage_url": "https://github.com/HangYang/ext_manager",
     "default_locale": "en",
