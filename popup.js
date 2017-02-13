@@ -72,7 +72,7 @@ $('body').on('click', '.extName', function (e) {
 		}
 	});
 }).on('click', '.extOptions', e => {
-	chrome.tabs.create({url: e.target.href});
+	chrome.tabs.create({url: e.currentTarget.href});
 }).on('mouseup', '.extName', e => {
 	if (e.which == 3) {
 		cme.uninstall(e.target.dataset.id);
