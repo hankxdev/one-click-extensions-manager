@@ -112,6 +112,13 @@ function getIcon(icons, size = 16) {
 	return selectedIcon;
 }
 
+window.scrollTo(0, 0);
+
+// Fit to options window, since it's larger
+setTimeout(() => {
+	document.documentElement.style.width = document.documentElement.clientWidth + 'px';
+}, 200);
+
 function createList(e, enabled) {
 	return `
 		<li class='ext ${enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">

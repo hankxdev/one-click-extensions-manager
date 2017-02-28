@@ -34,6 +34,8 @@ input {
   padding: 0.5em;
   outline: 0;
   text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
 }
 .btn-flat:hover{
   color: black;
