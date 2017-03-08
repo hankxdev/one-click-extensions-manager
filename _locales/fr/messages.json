@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Gestionnaire d'extensions à un clic - Aucune annonce"
+    "message": "Gestionnaire d'extensions à un clic"
   },
   "extDesc": {
-    "message": "Gérer votre extension en un seul clic, Aucune annonce"
+    "message": "Gérer votre extension en un seul clic."
   },
   "clkEnable": {
     "message": "Cliquer pour activer cette extension"
