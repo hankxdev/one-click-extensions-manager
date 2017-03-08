@@ -120,11 +120,11 @@ function createList(e) {
 function disableAll() {
 	cme.getAll(ets => {
 		const myid = getI18N('@@extension_id');
-		for (let i = 0; i < ets.length; i++) {
-			if (ets[i].id !== myid) {
-				cme.setEnabled(ets[i].id, false);
+		ets.forEach(extension => {
+			if(extension.enabled && extension.id !== myid) {
+				cme.setEnabled(extension.id, false);
 			}
-		}
+		});
 		$('.ext').addClass('disabled');
 	});
 }
