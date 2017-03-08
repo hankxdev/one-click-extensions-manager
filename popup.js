@@ -34,21 +34,19 @@ cme.getAll(ets => {
 	$(listHTML.join('')).appendTo(eul);
 });
 
-$('body').on('click', '.extName', function () {
-	const extSel = $(this);
-	const eid = extSel.attr('data-id');
-	cme.get(eid, e => {
-		extSel.parent().remove();
-		if (!e.enabled) {
-			cme.setEnabled(eid, true, () => {
-				eul.prepend(createList(e));
-			});
+$('body').on('click', '.extName', e => {
+	const $extension = $(e.currentTarget).parent();
+	const id = $extension.attr('id');
+	const wasEnabled = !$extension.hasClass('disabled');
+
+	cme.setEnabled(id, !wasEnabled, () => {
+		$extension.toggleClass('disabled', wasEnabled);
+		if (wasEnabled) {
+			eul.append($extension);
 		} else {
-			cme.setEnabled(eid, false, () => {
-				eul.append(createList(e));
-			});
+			eul.prepend($extension);
 		}
-	});
+	})
 }).on('mouseup', '.extName', e => {
 	if (e.which == 3) {
 		cme.uninstall(e.target.dataset.id);
@@ -104,7 +102,7 @@ $extensionPageButton.click(() => {
 function createList(e) {
 	return `
 		<li class='ext ${e.enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
-			<span class='extName' data-id='${e.id}' title='${getI18N('toggleEnable')}'>
+			<span class='extName' title='${getI18N('toggleEnable')}'>
 				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
 				${e.name}
 			</span>
