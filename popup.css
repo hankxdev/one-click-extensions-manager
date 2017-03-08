@@ -19,7 +19,7 @@ input {
   justify-content: space-between;
   margin: 0.5em 0;
 }
-.btn-flat{
+button {
   cursor: pointer;
   display: inline-block;
   overflow: hidden;
@@ -37,7 +37,7 @@ input {
   text-decoration: none;
   color: inherit;
 }
-.btn-flat:hover{
+button:hover {
   color: black;
   background-color: #d9d9d9;
 }

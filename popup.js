@@ -1,22 +1,36 @@
 const cme = chrome.management;
-const eul = $('#extList');
 const getI18N = chrome.i18n.getMessage;
-const searchText = $('#searchext');
+
+// Generate page
+const searchText = $(`<input autofocus placeholder="${ getI18N('searchTxt') }">`);
+const eul = $('<ul id="extList">');
+const $options = $('<div class="options">');
+const $disableAllButton = $(`<button>${ getI18N('disAll') }</button>`);
+const $extensionPageButton = $(`<button>${ getI18N('extensionPage') }</button>`);
+
+$options
+	.append($disableAllButton)
+	.append($extensionPageButton);
+
+$('body')
+	.append(searchText)
+	.append($options)
+	.append(eul);
 
 // disable the default context menu
 eul.on('contextmenu', () => false);
 
-searchText.attr('placeholder', getI18N('searchTxt')).focus();
-
-$('#disableAll').text(getI18N('disAll')).click(() => {
+$disableAllButton.click(() => {
 	const c = confirm(getI18N('disableAll'));
 	if (c) {
 		disableAll();
 	}
 });
-$('#extensionPage').text(getI18N('extensionPage')).click(() => {
+$extensionPageButton.click(() => {
 	chrome.tabs.create({url: 'chrome://extensions'});
 });
+
+// Generate extension list
 cme.getAll(ets => {
 	const enableArr = [];
 	const disableArr = [];
