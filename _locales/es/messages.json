@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "Haga clic para deshabilitar esta extensión"
   },
-  "clkUninstall": {
-    "message": "¿Realmente desea desinstalar esta extensión?"
-  },
   "disableAll": {
     "message": "¿Está seguro de que desea deshabilitar todas las extensiones?"
   },
@@ -31,11 +28,5 @@
   },
   "uninstall": {
     "message": "Desinstalar esta extensión"
-  },
-  "toggleEnable": {
-    "message": "Haga clic para habilitar / deshabilitar la extensión ths"
-  },
-  "openOpt": {
-    "message": "Haga clic para abrir la página de opciones"
   }
 }

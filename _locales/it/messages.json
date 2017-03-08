@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "Clicca per disattivare quest’estensione"
   },
-  "clkUninstall": {
-    "message": "Vuoi davvero DISINSTALLARE quest’estensione?"
-  },
   "disableAll": {
     "message": "Vuoi davvero disattivare tutte le estensioni?"
   },
@@ -31,11 +28,5 @@
   },
   "uninstall": {
     "message": "Disinstalla quest’estensione"
-  },
-  "toggleEnable": {
-    "message": "Clicca per attivare/disattivare quest’estensione"
-  },
-  "openOpt": {
-    "message": "Clicca per aprire le impostazioni"
   }
 }
