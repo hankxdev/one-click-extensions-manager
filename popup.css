@@ -72,6 +72,12 @@ button:hover {
 .ext.disabled + .disabled {
   margin-top: 0;
 }
+.ext.type-development {
+  color: #4170C3;
+}
+.ext.type-admin {
+  color: #C32700;
+}
 .extName {
   flex-grow: 1;
   overflow: hidden;
