@@ -50,9 +50,9 @@ $('body').on('click', '.extName', e => {
 			eul.prepend($extension);
 		}
 	})
-}).on('mouseup', '.extName', e => {
+}).on('mouseup', '.ext', e => {
 	if (e.which == 3) {
-		cme.uninstall(e.target.dataset.id);
+		cme.uninstall(e.currentTarget.id);
 	}
 });
 
