@@ -34,6 +34,9 @@ cme.getAll(ets => {
 	$(listHTML.join('')).appendTo(eul);
 });
 
+/**
+ * EVENT LISTENERS
+ */
 $('body').on('click', '.extName', e => {
 	const $extension = $(e.currentTarget).parent();
 	const id = $extension.attr('id');
@@ -67,6 +70,22 @@ $searchField.on('keyup', function () {
 	extensions.not(hiddenExtensions).show();
 });
 
+// disable the default context menu
+eul.on('contextmenu', () => false);
+
+$disableAllButton.click(() => {
+	if (confirm(getI18N('disableAll'))) {
+		disableAll();
+	}
+});
+
+$extensionPageButton.click(() => {
+	chrome.tabs.create({url: 'chrome://extensions'});
+});
+
+/**
+ * FUNCTIONS
+ */
 function getIcon(icons, size = 16) {
 	// Set fallback icon
 	let selectedIcon = chrome.extension.getURL('icon-puzzle.svg');
@@ -85,19 +104,6 @@ function getIcon(icons, size = 16) {
 	}
 	return selectedIcon;
 }
-
-// disable the default context menu
-eul.on('contextmenu', () => false);
-
-$disableAllButton.click(() => {
-	if (confirm(getI18N('disableAll'))) {
-		disableAll();
-	}
-});
-
-$extensionPageButton.click(() => {
-	chrome.tabs.create({url: 'chrome://extensions'});
-});
 
 function createList(e) {
 	return `
