@@ -115,7 +115,7 @@ function createList(e) {
 			</span>
 			${
 				e.optionsUrl ? `
-					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('openOpt')}' target='_blank'>
+					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'>
 						<img src="${chrome.extension.getURL('icon-options.svg')}">
 					</a>
 				` : ``
