@@ -44,6 +44,7 @@ $('body').on('click', '.extName', e => {
 
 	cme.setEnabled(id, !wasEnabled, () => {
 		$extension.toggleClass('disabled', wasEnabled);
+		$extension.find('.extName').attr('title', getI18N(wasEnabled ? 'clkEnable' : 'clkDisable'));
 		if (wasEnabled) {
 			eul.append($extension);
 		} else {
@@ -108,7 +109,7 @@ function getIcon(icons, size = 16) {
 function createList(e) {
 	return `
 		<li class='ext ${e.enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
-			<span class='extName' title='${getI18N('toggleEnable')}'>
+			<span class='extName' title='${getI18N(e.enabled ? 'clkDisable' : 'clkEnable')}'>
 				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
 				${e.name}
 			</span>
