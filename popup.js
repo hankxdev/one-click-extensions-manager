@@ -60,9 +60,9 @@ cme.onUninstalled.addListener(id => {
 	$(`#${id}`).remove();
 });
 
-$searchField.on('keyup', function () {
+const extensions = $('#extList li');
+$searchField.on('input', function () {
 	const keywords = this.value.split(' ').filter(s => s.length);
-	const extensions = $('#extList li');
 	const hiddenExtensions = extensions.not((i, el) => {
 		return keywords.every(word => el.dataset.name.includes(word));
 	});
