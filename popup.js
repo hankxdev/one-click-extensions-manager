@@ -61,8 +61,8 @@ cme.onUninstalled.addListener(id => {
 	$(`#${id}`).remove();
 });
 
-const extensions = $('#extList li');
 $searchField.on('input', function () {
+	const extensions = $('#extList li');
 	const keywords = this.value.split(' ').filter(s => s.length);
 	const hiddenExtensions = extensions.not((i, el) => {
 		return keywords.every(word => el.dataset.name.includes(word));
