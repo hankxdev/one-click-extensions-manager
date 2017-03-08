@@ -1,6 +1,9 @@
 /* RESETS */
-html {
+body {
   width: 320px;
+}
+body.options-page {
+  width: 400px;
 }
 a {
   outline: 0;
