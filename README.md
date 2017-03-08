@@ -1,8 +1,8 @@
 # One Click Extension Manager - No Ads
 
-A simple Chrome extension to manage chrome extensions
+A simple Chrome extension to manage your Chrome extensions.
 
-It does not require any other permissions except `management`
+It only requires the `management` permission.
 
 ## Install
 
