@@ -2,7 +2,7 @@ const cme = chrome.management;
 const getI18N = chrome.i18n.getMessage;
 
 // Generate page
-const searchText = $(`<input autofocus placeholder="${ getI18N('searchTxt') }">`);
+const $searchField = $(`<input placeholder="${ getI18N('searchTxt') }">`);
 const eul = $('<ul id="extList">');
 const $options = $('<div class="options">');
 const $disableAllButton = $(`<button>${ getI18N('disAll') }</button>`);
@@ -13,22 +13,12 @@ $options
 	.append($extensionPageButton);
 
 $('body')
-	.append(searchText)
+	.append($searchField)
 	.append($options)
 	.append(eul);
 
-// disable the default context menu
-eul.on('contextmenu', () => false);
-
-$disableAllButton.click(() => {
-	const c = confirm(getI18N('disableAll'));
-	if (c) {
-		disableAll();
-	}
-});
-$extensionPageButton.click(() => {
-	chrome.tabs.create({url: 'chrome://extensions'});
-});
+$searchField.focus();
+window.scrollTo(0, 0); // fix overscroll caused by autofocus
 
 // Generate extension list
 cme.getAll(ets => {
@@ -97,7 +87,7 @@ cme.onUninstalled.addListener(id => {
 	$(`#${id}`).remove();
 });
 
-searchText.on('keyup', function () {
+$searchField.on('keyup', function () {
 	const keywords = this.value.split(' ').filter(s => s.length);
 	const extensions = $('#extList li');
 	const hiddenExtensions = extensions.not((i, el) => {
@@ -126,7 +116,18 @@ function getIcon(icons, size = 16) {
 	return selectedIcon;
 }
 
-window.scrollTo(0, 0);
+// disable the default context menu
+eul.on('contextmenu', () => false);
+
+$disableAllButton.click(() => {
+	if (confirm(getI18N('disableAll'))) {
+		disableAll();
+	}
+});
+
+$extensionPageButton.click(() => {
+	chrome.tabs.create({url: 'chrome://extensions'});
+});
 
 function createList(e, enabled) {
 	return `
