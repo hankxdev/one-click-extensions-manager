@@ -22,56 +22,30 @@ window.scrollTo(0, 0); // fix overscroll caused by autofocus
 
 // Generate extension list
 cme.getAll(ets => {
-	const enableArr = [];
-	const disableArr = [];
-	$.each(ets, (i, e) => {
-		if (!e.isApp) {
-			if (e.enabled) {
-				enableArr.push(e.name.toLowerCase());
-			} else {
-				disableArr.push(e.name.toLowerCase());
-			}
+	const listHTML = ets
+	.filter(extension => extension.id !== 'pbgjpgbpljobkekbhnnmlikbbfhbhmem')
+	.sort((a, b) => {
+		if (a.enabled === b.enabled) {
+			return a.name.localeCompare(b.name); // sort by name
 		}
-	});
-    // sort the extension name
-	enableArr.sort();
-	disableArr.sort();
-	let extListStr = '';
-	$.each(enableArr, (i, n) => {
-		$.each(ets, (j, e) => {
-			if (e && e.name.toLowerCase() === n && e.enabled) {
-				extListStr += createList(e, e.enabled);
-				delete ets[j];
-				return false;
-			}
-		});
-	});
-	$.each(disableArr, (i, n) => {
-		$.each(ets, (j, e) => {
-			if (e && e.name.toLowerCase() === n && !e.enabled) {
-				extListStr += createList(e, e.enabled);
-				delete ets[j];
-				return false;
-			}
-		});
-	});
-
-	eul.append(extListStr);
-	$('#pbgjpgbpljobkekbhnnmlikbbfhbhmem').remove();
+		return a.enabled < b.enabled ? 1 : -1; // sort by state
+	})
+	.map(createList);
+	$(listHTML.join('')).appendTo(eul);
 });
 
-$('body').on('click', '.extName', function (e) {
+$('body').on('click', '.extName', function () {
 	const extSel = $(this);
 	const eid = extSel.attr('data-id');
 	cme.get(eid, e => {
 		extSel.parent().remove();
 		if (!e.enabled) {
 			cme.setEnabled(eid, true, () => {
-				eul.prepend(createList(e, true));
+				eul.prepend(createList(e));
 			});
 		} else {
 			cme.setEnabled(eid, false, () => {
-				eul.append(createList(e, false));
+				eul.append(createList(e));
 			});
 		}
 	});
@@ -127,9 +101,9 @@ $extensionPageButton.click(() => {
 	chrome.tabs.create({url: 'chrome://extensions'});
 });
 
-function createList(e, enabled) {
+function createList(e) {
 	return `
-		<li class='ext ${enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
+		<li class='ext ${e.enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
 			<span class='extName' data-id='${e.id}' title='${getI18N('toggleEnable')}'>
 				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
 				${e.name}
