@@ -103,8 +103,8 @@ function getIcon(icons, size = 16) {
 
 function createList(e) {
 	return `
-		<li class='ext ${e.enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
-			<span class='extName' title='${getI18N(e.enabled ? 'clkDisable' : 'clkEnable')}'>
+		<li class='ext ${e.enabled ? '' : 'disabled'} type-${e.installType}' id='${e.id}' data-name="${e.name.toLowerCase()}">
+			<span class='extName' title='${getI18N('toggleEnable')}'>
 				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
 				${e.name}
 			</span>
