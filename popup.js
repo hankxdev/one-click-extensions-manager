@@ -45,11 +45,6 @@ $('body').on('click', '.extName', e => {
 	cme.setEnabled(id, !wasEnabled, () => {
 		$extension.toggleClass('disabled', wasEnabled);
 		$extension.find('.extName').attr('title', getI18N(wasEnabled ? 'clkEnable' : 'clkDisable'));
-		if (wasEnabled) {
-			eul.append($extension);
-		} else {
-			eul.prepend($extension);
-		}
 	})
 }).on('mouseup', '.ext', e => {
 	if (e.which == 3) {
