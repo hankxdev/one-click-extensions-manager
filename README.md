@@ -1,4 +1,4 @@
-# One Click Extension Manager - No Ads
+# One Click Extension Manager
 
 A simple Chrome extension to manage your Chrome extensions.
 

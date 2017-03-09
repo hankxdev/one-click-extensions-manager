@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Administrador de extensión de un clic - sin anuncios"
+    "message": "Administrador de extensión de un clic"
   },
   "extDesc": {
-    "message": "Administrar su extensión con un solo clic, sin anuncios"
+    "message": "Administrar su extensión con un solo clic."
   },
   "clkEnable": {
     "message": "Haga clic para activar esta extensión"

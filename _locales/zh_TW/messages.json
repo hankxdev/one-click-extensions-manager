@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "快捷擴展管理-無廣告版"
+    "message": "快捷擴展管理"
   },
   "extDesc": {
-    "message": "一鍵管理所有擴展，快速激活、禁用插件。無廣告，永久免費。"
+    "message": "一鍵管理所有擴展，快速激活、禁用插件。"
   },
   "clkEnable": {
     "message": "單擊以啟用該擴展"
