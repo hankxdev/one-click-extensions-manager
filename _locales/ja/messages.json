@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "この拡張機能を無効にするにはクリックしてください"
   },
-  "clkUninstall": {
-    "message": "本当にこの拡張機能をアンインストールしますか？"
-  },
   "disableAll": {
     "message": "すべての内線番号を無効にしてもよろしいですか？"
   },
@@ -31,11 +28,5 @@
   },
   "uninstall": {
     "message": "この拡張機能をアンインストールする"
-  },
-  "toggleEnable": {
-    "message": "クリックするとその拡張子を有効/無効にします"
-  },
-  "openOpt": {
-    "message": "クリックしてオプションページを開く"
   }
 }

@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "Click to disable this extension"
   },
-  "clkUninstall": {
-    "message": "Do you really want to UNINSTALL this extension?"
-  },
   "disableAll": {
     "message": "Are you sure you want to disable all extensions?"
   },
@@ -31,11 +28,5 @@
   },
   "uninstall": {
     "message": "Uninstall this extension"
-  },
-  "toggleEnable": {
-    "message": "Click to enable/disable this extension"
-  },
-  "openOpt": {
-    "message": "Click to open options page"
   }
 }

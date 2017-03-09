@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "이 확장 프로그램을 사용하지 않으려면 클릭하십시오"
   },
-  "clkUninstall": {
-    "message": "정말로이 확장 기능을 제거 하시겠습니까?"
-  },
   "disableAll": {
     "message": "모든 확장 기능을 비활성화 하시겠습니까?"
   },
@@ -31,11 +28,5 @@
   },
   "uninstall": {
     "message": "이 확장 기능을 제거하십시오"
-  },
-  "toggleEnable": {
-    "message": "ths 확장 기능을 활성화 / 비활성화하려면 클릭하십시오"
-  },
-  "openOpt": {
-    "message": "옵션 페이지를 열려면 클릭하십시오"
   }
 }

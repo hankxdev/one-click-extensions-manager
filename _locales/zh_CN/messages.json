@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "单击以禁用该扩展"
   },
-  "clkUninstall": {
-    "message": "你真的要卸载这个扩展？"
-  },
   "disableAll": {
     "message": "真的要禁用所有扩展么？"
   },
@@ -31,11 +28,5 @@
   },
   "uninstall": {
     "message": "卸载这个扩展"
-  },
-  "toggleEnable": {
-    "message": "点击以啓用/禁用该扩展"
-  },
-  "openOpt": {
-    "message": "点击以打开设置页面"
   }
 }
