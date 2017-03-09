@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "원 클릭 확장 관리자 - 광고 없음"
+    "message": "원 클릭 확장 관리자"
   },
   "extDesc": {
-    "message": "한 번의 클릭으로 광고 확장 관리, 광고 없음"
+    "message": "한 번의 클릭으로 광고 확장 관리."
   },
   "clkEnable": {
     "message": "이 확장 기능을 사용하려면 클릭하십시오"
