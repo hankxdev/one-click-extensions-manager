@@ -69,6 +69,9 @@ button:hover {
   color: gray;
   filter: grayscale(60%);
 }
+.ext.disabled .extOptions {
+  display: none;
+}
 .ext.disabled + .disabled {
   margin-top: 0;
 }

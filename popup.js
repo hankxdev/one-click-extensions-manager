@@ -44,10 +44,11 @@ $('body').on('click', '.extName', e => {
 
 	cme.setEnabled(id, !wasEnabled, () => {
 		$extension.toggleClass('disabled', wasEnabled);
+		$extension.find('.extName').attr('title', getI18N(wasEnabled ? 'clkEnable' : 'clkDisable'));
 	})
-}).on('mouseup', '.extName', e => {
+}).on('mouseup', '.ext', e => {
 	if (e.which == 3) {
-		cme.uninstall(e.target.dataset.id);
+		cme.uninstall(e.currentTarget.id);
 	}
 });
 
@@ -55,8 +56,8 @@ cme.onUninstalled.addListener(id => {
 	$(`#${id}`).remove();
 });
 
-const extensions = $('#extList li');
 $searchField.on('input', function () {
+	const extensions = $('#extList li');
 	const keywords = this.value.split(' ').filter(s => s.length);
 	const hiddenExtensions = extensions.not((i, el) => {
 		return keywords.every(word => el.dataset.name.includes(word));
@@ -103,13 +104,13 @@ function getIcon(icons, size = 16) {
 function createList(e) {
 	return `
 		<li class='ext ${e.enabled ? '' : 'disabled'}' id='${e.id}' data-name="${e.name.toLowerCase()}">
-			<span class='extName' title='${getI18N('toggleEnable')}'>
+			<span class='extName' title='${getI18N(e.enabled ? 'clkDisable' : 'clkEnable')}'>
 				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
 				${e.name}
 			</span>
 			${
 				e.optionsUrl ? `
-					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('openOpt')}' target='_blank'>
+					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'>
 						<img src="${chrome.extension.getURL('icon-options.svg')}">
 					</a>
 				` : ``
