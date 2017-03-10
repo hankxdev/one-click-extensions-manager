@@ -23,7 +23,7 @@ window.scrollTo(0, 0); // fix overscroll caused by autofocus
 // Generate extension list
 cme.getAll(ets => {
 	const listHTML = ets
-	.filter(extension => extension.id !== 'pbgjpgbpljobkekbhnnmlikbbfhbhmem')
+	.filter(ext => !ext.isApp && ext.id !== 'pbgjpgbpljobkekbhnnmlikbbfhbhmem')
 	.sort((a, b) => {
 		if (a.enabled === b.enabled) {
 			return a.name.localeCompare(b.name); // sort by name
