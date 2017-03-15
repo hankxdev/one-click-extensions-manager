@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "Cliquez pour désactiver cette extension"
   },
-  "disableAll": {
-    "message": "Voulez-vous vraiment désactiver toutes les extensions?"
-  },
   "extensionPage": {
     "message": "Plus ..."
   },

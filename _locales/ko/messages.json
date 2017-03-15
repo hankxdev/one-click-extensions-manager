@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "이 확장 프로그램을 사용하지 않으려면 클릭하십시오"
   },
-  "disableAll": {
-    "message": "모든 확장 기능을 비활성화 하시겠습니까?"
-  },
   "extensionPage": {
     "message": "More ..."
   },

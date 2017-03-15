@@ -81,11 +81,7 @@ $searchField.on('input', function () {
 // disable the default context menu
 eul.on('contextmenu', () => false);
 
-$disableAllButton.click(() => {
-	if (confirm(getI18N('disableAll'))) {
-		disableAll();
-	}
-});
+$disableAllButton.click(disableAll);
 
 $extensionPageButton.click(() => {
 	chrome.tabs.create({url: 'chrome://extensions'});

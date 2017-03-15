@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "Click to disable this extension"
   },
-  "disableAll": {
-    "message": "Are you sure you want to disable all extensions?"
-  },
   "extensionPage": {
     "message": "More…"
   },

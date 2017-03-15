@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "לחץ כדי להשבית תוסף זה"
   },
-  "disableAll": {
-    "message": "האם אתה בטוח שאתה רוצה להשבית את כל הרחבות?"
-  },
   "extensionPage": {
     "message": "עוד ..."
   },
