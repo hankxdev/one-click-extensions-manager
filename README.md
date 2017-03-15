@@ -1,5 +1,7 @@
 # One Click Extension Manager
 
+<img src="screencast.gif" align="right" alt="">
+
 A simple Chrome extension to manage your Chrome extensions.
 
 It only requires the `management` permission.
