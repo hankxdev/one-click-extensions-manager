@@ -1,5 +1,6 @@
 const cme = chrome.management;
 const getI18N = chrome.i18n.getMessage;
+const myid = getI18N('@@extension_id');
 
 // Generate page
 const $searchField = $(`<input placeholder="${ getI18N('searchTxt') }">`);
@@ -23,7 +24,7 @@ window.scrollTo(0, 0); // fix overscroll caused by autofocus
 // Generate extension list
 cme.getAll(ets => {
 	const listHTML = ets
-	.filter(ext => !ext.isApp && ext.id !== 'pbgjpgbpljobkekbhnnmlikbbfhbhmem')
+	.filter(ext => !ext.isApp && ext.id !== myid)
 	.sort((a, b) => {
 		if (a.enabled === b.enabled) {
 			return a.name.localeCompare(b.name); // sort by name
@@ -121,7 +122,6 @@ function createList(e) {
 
 function disableAll() {
 	cme.getAll(ets => {
-		const myid = getI18N('@@extension_id');
 		ets.forEach(extension => {
 			if(extension.enabled && extension.id !== myid) {
 				cme.setEnabled(extension.id, false);
