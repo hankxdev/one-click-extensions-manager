@@ -9,6 +9,17 @@ const $options = $('<div class="options">');
 const $disableAllButton = $(`<button>${ getI18N('disAll') }</button>`);
 const $extensionPageButton = $(`<button>${ getI18N('extensionPage') }</button>`);
 
+if (!localStorage.getItem('undo-info-message')) {
+	const $undoInfoMessage = $(`<p>${ getI18N('undoInfoMsg')} </p>`);
+	const $hideInfoMessage = $(`<a href="#hide">${ getI18N('hideInfoMsg') }</a>`);
+	$undoInfoMessage.append($hideInfoMessage);
+	$('body').append($undoInfoMessage);
+	$hideInfoMessage.click(() => {
+		localStorage.setItem('undo-info-message', 1);
+		$undoInfoMessage.slideUp(300);
+	});
+}
+
 $options
 	.append($disableAllButton)
 	.append($extensionPageButton);
