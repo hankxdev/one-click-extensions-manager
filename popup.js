@@ -12,7 +12,7 @@ const $searchField = $(`<input placeholder="${ getI18N('searchTxt') }">`);
 const eul = $('<ul id="extList">');
 const $options = $('<div class="options">');
 const $disableAllButton = $(`<button>${ getI18N('disAll') }</button>`);
-const $extensionPageButton = $(`<button>${ getI18N('extensionPage') }</button>`);
+const $extensionPageButton = $(`<a href="chrome://extensions">${ getI18N('extensionPage') }</a>`);
 
 if (!localStorage.getItem('undo-info-message')) {
 	const $undoInfoMessage = $(`<p>${ getI18N('undoInfoMsg')} </p>`);
@@ -101,7 +101,7 @@ $searchField.on('input', function () {
 $disableAllButton.click(disableAll);
 
 // Enable chrome:// links
-eul.on('click', '[href^="chrome"]', e => {
+$('body').on('click', '[href^="chrome"]', e => {
 	chrome.tabs.create({url: e.currentTarget.href});
 	return false;
 });
@@ -142,13 +142,13 @@ function createList(e) {
 				${e.name}
 			</button>
 			${
-				url ? `
-					<a hidden class="extUrl" href='${url}' title='${ getI18N('openUrl') }' target='_blank'></a>
+				e.optionsUrl ? `
+					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'></a>
 				` : ``
 			}
 			${
-				e.optionsUrl ? `
-					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'></a>
+				url ? `
+					<a hidden class="extUrl" href='${url}' title='${ getI18N('openUrl') }' target='_blank'></a>
 				` : ``
 			}
 			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${ getI18N('manage') }' target='_blank'></a>

@@ -42,12 +42,14 @@ button {
   text-align: left;
   padding: 0;
 }
-.options button {
+.options * {
+  text-decoration: none;
+  color: inherit;
   padding: 0.5em;
   text-transform: uppercase;
   border-radius: 2px;
 }
-.options button:hover {
+.options *:hover {
   color: black;
   background-color: #d9d9d9;
 }
