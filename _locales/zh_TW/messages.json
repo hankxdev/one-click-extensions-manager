@@ -34,5 +34,11 @@
   },
   "openOpt": {
     "message": "點擊以打開設置頁面"
+  },
+  "undoInfoMsg": {
+    "message": "在關閉這個窗口前你可以撤銷你的操作。 <br>在Windows中按<kbd>ctrl+z</kbd>macOS中按<kbd>cmd+z</kbd>Linux中按<kbd>super+z</kbd>"
+  },
+  "hideInfoMsg": {
+    "message": "知道了"
   }
 }
