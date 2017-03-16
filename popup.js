@@ -75,8 +75,8 @@ eul.on('click', '.extName', e => {
 });
 
 // Show extra buttons on right click
-eul.on('contextmenu', '.ext', e => {
-	$(e.currentTarget).toggleClass('show-extras');
+eul.on('contextmenu', '.ext', () => {
+	$('[hidden]').removeAttr('hidden');
 	return false;
 });
 
@@ -143,7 +143,7 @@ function createList(e) {
 			</button>
 			${
 				url ? `
-					<a class="extExtra extUrl" href='${url}' title='${ getI18N('openUrl') }' target='_blank'></a>
+					<a hidden class="extUrl" href='${url}' title='${ getI18N('openUrl') }' target='_blank'></a>
 				` : ``
 			}
 			${
@@ -151,8 +151,8 @@ function createList(e) {
 					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'></a>
 				` : ``
 			}
-			<a class="extExtra extMore" href='chrome://extensions/?id=${e.id}' title='${ getI18N('manage') }' target='_blank'></a>
-			<button class="extExtra extUninstall" title='${ getI18N('uninstall') }' ></button>
+			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${ getI18N('manage') }' target='_blank'></a>
+			<button hidden class="extUninstall" title='${ getI18N('uninstall') }' ></button>
 		</li>
 	`;
 }

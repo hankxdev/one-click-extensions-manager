@@ -13,6 +13,9 @@ input {
   width: 100%;
   font: inherit;
 }
+[hidden] {
+  display: none;
+}
 
 /**
  * HEADER
@@ -109,9 +112,6 @@ button {
 .ext button:hover {
   background-color: #ecf0f1;
   cursor: pointer;
-}
-.ext:not(.show-extras) .extExtra {
-  display: none;
 }
 .ext :before {
   display: inline-block;
