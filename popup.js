@@ -38,9 +38,8 @@ $searchField.focus();
 window.scrollTo(0, 0); // fix overscroll caused by autofocus
 
 // Generate extension list
-cme.getAll(ets => {
-	const listHTML = ets
-	.filter(ext => !ext.isApp && ext.id !== myid)
+getExtensions(extensions => {
+	const listHTML = extensions
 	.sort((a, b) => {
 		if (a.enabled === b.enabled) {
 			return a.name.localeCompare(b.name); // sort by name
@@ -145,8 +144,8 @@ function createList(e) {
 }
 
 function disableAll() {
-	cme.getAll(ets => {
-		const wereEnabled = ets.filter(ext => ext.enabled && ext.id !== myid);
+	getExtensions(extensions => {
+		const wereEnabled = extensions.filter(ext => ext.enabled);
 		const selector = wereEnabled.map(ext => '#' + ext.id).join(',');
 		const $wereEnabled = $(selector);
 
@@ -156,5 +155,11 @@ function disableAll() {
 			});
 			$wereEnabled.toggleClass('disabled', disable)
 		});
+	});
+}
+
+function getExtensions(callback) {
+	cme.getAll(exts => {
+		callback(exts.filter(ext => ext.type === 'extension' && ext.id !== myid));
 	});
 }
