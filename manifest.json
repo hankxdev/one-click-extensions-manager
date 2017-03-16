@@ -3,7 +3,7 @@
     "description": "__MSG_extDesc__",
     "version": "1.2.1",
     "manifest_version": 2,
-    "homepage_url": "https://github.com/HangYang/ext_manager",
+    "homepage_url": "https://github.com/HangYang/one-click-extensions-manager",
     "default_locale": "en",
     "permissions": [
         "management"
