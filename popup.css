@@ -27,20 +27,24 @@ button {
   display: inline-block;
   overflow: hidden;
   user-select: none;
+  font: inherit;
   -webkit-tap-highlight-color: transparent;
   vertical-align: middle;
-  transition: all .2s ease-out;
   box-shadow: none;
   background-color: transparent;
   border: none;
-  border-radius: 2px;
-  padding: 0.5em;
   outline: 0;
-  text-transform: uppercase;
   text-decoration: none;
   color: inherit;
+  text-align: left;
+  padding: 0;
 }
-button:hover {
+.options button {
+  padding: 0.5em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.options button:hover {
   color: black;
   background-color: #d9d9d9;
 }
