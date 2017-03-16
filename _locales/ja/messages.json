@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "この拡張機能を無効にするにはクリックしてください"
   },
-  "disableAll": {
-    "message": "すべての内線番号を無効にしてもよろしいですか？"
-  },
   "extensionPage": {
     "message": "その他..."
   },

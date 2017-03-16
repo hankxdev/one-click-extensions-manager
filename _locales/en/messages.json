@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "Click to disable this extension"
   },
-  "disableAll": {
-    "message": "Are you sure you want to disable all extensions?"
-  },
   "extensionPage": {
     "message": "More…"
   },
@@ -28,5 +25,11 @@
   },
   "uninstall": {
     "message": "Uninstall this extension"
+  },
+  "undoInfoMsg": {
+    "message": "You can undo and redo your last action until you close this popup. <br>Press <kbd>ctrl+z</kbd> on Windows and <kbd>cmd+z</kbd> on macOS."
+  },
+  "hideInfoMsg": {
+    "message": "Hide this"
   }
 }

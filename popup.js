@@ -9,6 +9,17 @@ const $options = $('<div class="options">');
 const $disableAllButton = $(`<button>${ getI18N('disAll') }</button>`);
 const $extensionPageButton = $(`<button>${ getI18N('extensionPage') }</button>`);
 
+if (!localStorage.getItem('undo-info-message')) {
+	const $undoInfoMessage = $(`<p>${ getI18N('undoInfoMsg')} </p>`);
+	const $hideInfoMessage = $(`<a href="#hide">${ getI18N('hideInfoMsg') }</a>`);
+	$undoInfoMessage.append($hideInfoMessage);
+	$('body').append($undoInfoMessage);
+	$hideInfoMessage.click(() => {
+		localStorage.setItem('undo-info-message', 1);
+		$undoInfoMessage.slideUp(300);
+	});
+}
+
 $options
 	.append($disableAllButton)
 	.append($extensionPageButton);
@@ -35,6 +46,9 @@ cme.getAll(ets => {
 	$(listHTML.join('')).appendTo(eul);
 });
 
+// Handle undo/redo events
+const undoStack = new UndoStack(document.body);
+
 /**
  * EVENT LISTENERS
  */
@@ -42,11 +56,19 @@ $('body').on('click', '.extName', e => {
 	const $extension = $(e.currentTarget).parent();
 	const id = $extension.attr('id');
 	const wasEnabled = !$extension.hasClass('disabled');
+	const toggle = enabled => {
+		cme.setEnabled(id, enabled, () => {
+			$extension.toggleClass('disabled', !enabled);
+			$extension.find('.extName').attr('title', getI18N(enabled ? 'clkDisable' : 'clkEnable'));
+		});
+	}
 
-	cme.setEnabled(id, !wasEnabled, () => {
-		$extension.toggleClass('disabled', wasEnabled);
-		$extension.find('.extName').attr('title', getI18N(wasEnabled ? 'clkEnable' : 'clkDisable'));
-	})
+	undoStack.do(() => {
+		toggle(!wasEnabled);
+	}, () => {
+		toggle(wasEnabled);
+	});
+
 }).on('mouseup', '.ext', e => {
 	if (e.which == 3) {
 		cme.uninstall(e.currentTarget.id);
@@ -70,11 +92,7 @@ $searchField.on('input', function () {
 // disable the default context menu
 eul.on('contextmenu', () => false);
 
-$disableAllButton.click(() => {
-	if (confirm(getI18N('disableAll'))) {
-		disableAll();
-	}
-});
+$disableAllButton.click(disableAll);
 
 $extensionPageButton.click(() => {
 	chrome.tabs.create({url: 'chrome://extensions'});
@@ -122,11 +140,15 @@ function createList(e) {
 
 function disableAll() {
 	cme.getAll(ets => {
-		ets.forEach(extension => {
-			if(extension.enabled && extension.id !== myid) {
-				cme.setEnabled(extension.id, false);
-			}
+		const wereEnabled = ets.filter(ext => ext.enabled && ext.id !== myid);
+		const selector = wereEnabled.map(ext => '#' + ext.id).join(',');
+		const $wereEnabled = $(selector);
+
+		undoStack.do(disable => {
+			wereEnabled.forEach(extension => {
+				cme.setEnabled(extension.id, !disable);
+			});
+			$wereEnabled.toggleClass('disabled', disable)
 		});
-		$('.ext').addClass('disabled');
 	});
 }

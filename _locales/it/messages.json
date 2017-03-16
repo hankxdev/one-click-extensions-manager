@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "Clicca per disattivare quest’estensione"
   },
-  "disableAll": {
-    "message": "Vuoi davvero disattivare tutte le estensioni?"
-  },
   "extensionPage": {
     "message": "Altro…"
   },

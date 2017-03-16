@@ -11,9 +11,6 @@
   "clkDisable": {
     "message": "单击以禁用该扩展"
   },
-  "disableAll": {
-    "message": "真的要禁用所有扩展么？"
-  },
   "extensionPage": {
     "message": "更多"
   },

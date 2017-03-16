@@ -14,9 +14,6 @@
   "clkUninstall": {
     "message": "你真的要卸載這個擴展？"
   },
-  "disableAll": {
-    "message": "真的要禁用所有擴展麽？"
-  },
   "extensionPage": {
     "message": "更多"
   },
