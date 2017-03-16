@@ -98,15 +98,36 @@ button {
 .extIcon {
   margin-right: 0.3em;
 }
-.extOptions {
+.ext > *:not(:first-child) {
   padding: 0 0.3em;
   opacity: 0.1;
 }
-.ext > *:hover {
+.ext:hover > * {
+  opacity: 1;
+}
+.ext a:hover,
+.ext button:hover {
   background-color: #ecf0f1;
   cursor: pointer;
 }
-*:hover + .extOptions,
-.extOptions:hover {
-  opacity: 1;
+.ext:not(.show-extras) .extExtra {
+  display: none;
+}
+.ext :before {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
+}
+.extOptions:before {
+  content: url(icons/options.svg);
+}
+.extMore:before {
+  content: url(icons/ellipsis.svg);
+}
+.extUrl:before {
+  content: url(icons/globe.svg);
+}
+.extUninstall:before {
+  content: url(icons/bin.svg);
 }

@@ -31,5 +31,11 @@
   },
   "hideInfoMsg": {
     "message": "Hide this"
+  },
+  "openUrl": {
+    "message": "See on the Chrome Web Store"
+  },
+  "manage": {
+    "message": "See in Chrome’s extensions page"
   }
 }
