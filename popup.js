@@ -2,7 +2,12 @@ const cme = chrome.management;
 const getI18N = chrome.i18n.getMessage;
 const myid = getI18N('@@extension_id');
 
-// Generate page
+// Handle undo/redo events
+const undoStack = new UndoStack(document.body);
+
+/**
+ * GENERATE PAGE
+ */
 const $searchField = $(`<input placeholder="${ getI18N('searchTxt') }">`);
 const eul = $('<ul id="extList">');
 const $options = $('<div class="options">');
@@ -46,13 +51,12 @@ cme.getAll(ets => {
 	$(listHTML.join('')).appendTo(eul);
 });
 
-// Handle undo/redo events
-const undoStack = new UndoStack(document.body);
-
 /**
  * EVENT LISTENERS
  */
-$('body').on('click', '.extName', e => {
+
+// Toggle on click
+eul.on('click', '.extName', e => {
 	const $extension = $(e.currentTarget).parent();
 	const id = $extension.attr('id');
 	const wasEnabled = !$extension.hasClass('disabled');
@@ -68,17 +72,17 @@ $('body').on('click', '.extName', e => {
 	}, () => {
 		toggle(wasEnabled);
 	});
+});
 
-}).on('mouseup', '.ext', e => {
+// Uninstall on right click
+eul.on('contextmenu', '.ext', e => false);
+eul.on('mouseup', '.ext', e => {
 	if (e.which == 3) {
 		cme.uninstall(e.currentTarget.id);
 	}
 });
 
-cme.onUninstalled.addListener(id => {
-	$(`#${id}`).remove();
-});
-
+// Enable filtering
 $searchField.on('input', function () {
 	const extensions = $('#extList li');
 	const keywords = this.value.split(' ').filter(s => s.length);
@@ -89,13 +93,15 @@ $searchField.on('input', function () {
 	extensions.not(hiddenExtensions).show();
 });
 
-// disable the default context menu
-eul.on('contextmenu', () => false);
-
+// Enable general buttons
 $disableAllButton.click(disableAll);
-
 $extensionPageButton.click(() => {
 	chrome.tabs.create({url: 'chrome://extensions'});
+});
+
+// Update list on uninstall
+cme.onUninstalled.addListener(id => {
+	$(`#${id}`).remove();
 });
 
 /**
