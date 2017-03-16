@@ -109,7 +109,7 @@ cme.onUninstalled.addListener(id => {
  */
 function getIcon(icons, size = 16) {
 	// Set fallback icon
-	let selectedIcon = chrome.extension.getURL('icon-puzzle.svg');
+	let selectedIcon = 'icon-puzzle.svg';
 
 	// Get retina size if necessary
 	size *= window.devicePixelRatio;
@@ -136,7 +136,7 @@ function createList(e) {
 			${
 				e.optionsUrl ? `
 					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'>
-						<img src="${chrome.extension.getURL('icon-options.svg')}">
+						<img src="icon-options.svg">
 					</a>
 				` : ``
 			}
