@@ -1,6 +1,6 @@
-# One Click Extension Manager
-
 <img src="screencast.gif" align="right" alt="">
+
+# One Click Extension Manager
 
 A simple Chrome extension to manage your Chrome extensions.
 
