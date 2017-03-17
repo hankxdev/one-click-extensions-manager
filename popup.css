@@ -13,6 +13,9 @@ input {
   width: 100%;
   font: inherit;
 }
+[hidden] {
+  display: none;
+}
 
 /**
  * HEADER
@@ -39,12 +42,14 @@ button {
   text-align: left;
   padding: 0;
 }
-.options button {
+.options * {
+  text-decoration: none;
+  color: inherit;
   padding: 0.5em;
   text-transform: uppercase;
   border-radius: 2px;
 }
-.options button:hover {
+.options *:hover {
   color: black;
   background-color: #d9d9d9;
 }
@@ -98,15 +103,33 @@ button {
 .extIcon {
   margin-right: 0.3em;
 }
-.extOptions {
+.ext > *:not(:first-child) {
   padding: 0 0.3em;
-  opacity: 0.1;
+  opacity: 0.2;
 }
-.ext > *:hover {
+.ext:hover > * {
+  opacity: 1;
+}
+.ext a:hover,
+.ext button:hover {
   background-color: #ecf0f1;
   cursor: pointer;
 }
-*:hover + .extOptions,
-.extOptions:hover {
-  opacity: 1;
+.ext :before {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
+}
+.extOptions:before {
+  content: url(icons/options.svg);
+}
+.extMore:before {
+  content: url(icons/ellipsis.svg);
+}
+.extUrl:before {
+  content: url(icons/globe.svg);
+}
+.extUninstall:before {
+  content: url(icons/bin.svg);
 }

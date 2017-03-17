@@ -12,7 +12,7 @@ const $searchField = $(`<input placeholder="${ getI18N('searchTxt') }">`);
 const eul = $('<ul id="extList">');
 const $options = $('<div class="options">');
 const $disableAllButton = $(`<button>${ getI18N('disAll') }</button>`);
-const $extensionPageButton = $(`<button>${ getI18N('extensionPage') }</button>`);
+const $extensionPageButton = $(`<a href="chrome://extensions">${ getI18N('extensionPage') }</a>`);
 
 if (!localStorage.getItem('undo-info-message')) {
 	const $undoInfoMessage = $(`<p>${ getI18N('undoInfoMsg')} </p>`);
@@ -73,13 +73,17 @@ eul.on('click', '.extName', e => {
 	});
 });
 
-// Uninstall on right click
-eul.on('contextmenu', '.ext', e => false);
-eul.on('mouseup', '.ext', e => {
-	if (e.which == 3) {
-		cme.uninstall(e.currentTarget.id);
-	}
+// Show extra buttons on right click
+eul.on('contextmenu', '.ext', () => {
+	$('[hidden]').removeAttr('hidden');
+	return false;
 });
+
+// Enable uninstall button
+eul.on('click', '.extUninstall', e => {
+	cme.uninstall(e.currentTarget.parentNode.id);
+});
+
 
 // Enable filtering
 $searchField.on('input', function () {
@@ -92,10 +96,13 @@ $searchField.on('input', function () {
 	extensions.not(hiddenExtensions).show();
 });
 
-// Enable general buttons
+// Enable disable all button
 $disableAllButton.click(disableAll);
-$extensionPageButton.click(() => {
-	chrome.tabs.create({url: 'chrome://extensions'});
+
+// Enable chrome:// links
+$('body').on('click', '[href^="chrome"]', e => {
+	chrome.tabs.create({url: e.currentTarget.href});
+	return false;
 });
 
 // Update list on uninstall
@@ -108,7 +115,7 @@ cme.onUninstalled.addListener(id => {
  */
 function getIcon(icons, size = 16) {
 	// Set fallback icon
-	let selectedIcon = 'icon-puzzle.svg';
+	let selectedIcon = 'icon/puzzle.svg';
 
 	// Get retina size if necessary
 	size *= window.devicePixelRatio;
@@ -126,6 +133,7 @@ function getIcon(icons, size = 16) {
 }
 
 function createList(e) {
+	const url = e.installType === 'normal' ? `https://chrome.google.com/webstore/detail/${e.id}` : e.homepageUrl;
 	return `
 		<li class='ext ${e.enabled ? '' : 'disabled'} type-${e.installType}' id='${e.id}' data-name="${e.name.toLowerCase()}">
 			<button class='extName' title='${getI18N('toggleEnable')}'>
@@ -134,11 +142,16 @@ function createList(e) {
 			</button>
 			${
 				e.optionsUrl ? `
-					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'>
-						<img src="icon-options.svg">
-					</a>
+					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'></a>
 				` : ``
 			}
+			${
+				url ? `
+					<a hidden class="extUrl" href='${url}' title='${ getI18N('openUrl') }' target='_blank'></a>
+				` : ``
+			}
+			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${ getI18N('manage') }' target='_blank'></a>
+			<button hidden class="extUninstall" title='${ getI18N('uninstall') }' ></button>
 		</li>
 	`;
 }
