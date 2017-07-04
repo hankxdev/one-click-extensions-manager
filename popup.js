@@ -88,9 +88,9 @@ eul.on('click', '.extUninstall', e => {
 // Enable filtering
 $searchField.on('input', function () {
 	const extensions = $('#extList li');
-	const keywords = this.value.split(' ').filter(s => s.length);
+	const keywords = this.value.toLowerCase().split(' ').filter(s => s.length);
 	const hiddenExtensions = extensions.not((i, el) => {
-		return keywords.every(word => el.dataset.name.includes(word.toLowerCase()));
+		return keywords.every(word => el.dataset.name.includes(word));
 	});
 	hiddenExtensions.hide();
 	extensions.not(hiddenExtensions).show();
