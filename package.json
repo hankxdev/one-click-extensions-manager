@@ -1,0 +1,27 @@
+{
+  "name": "one-click-extensions-manager",
+  "version": "1.0.0",
+  "description": "View, enable, disable, remove your extensions with ease.",
+  "main": "popup.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./node_modules/gulp/bin/gulp.js build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HangYang/one-click-extensions-manager.git"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "webextension"
+  ],
+  "author": "Hank Yang, Federico Brigante",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HangYang/one-click-extensions-manager/issues"
+  },
+  "homepage": "https://github.com/HangYang/one-click-extensions-manager#readme"
+}

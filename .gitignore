@@ -49,3 +49,7 @@ Temporary Items
 # IDE
 .idea/
 *.zip
+
+#deploy stuff
+node_modules/
+deploy/
