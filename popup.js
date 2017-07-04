@@ -64,7 +64,7 @@ eul.on('click', '.extName', e => {
 			$extension.toggleClass('disabled', !enabled);
 			$extension.find('.extName').attr('title', getI18N(enabled ? 'clkDisable' : 'clkEnable'));
 		});
-	}
+	};
 
 	undoStack.do(() => {
 		toggle(!wasEnabled);
@@ -90,7 +90,7 @@ $searchField.on('input', function () {
 	const extensions = $('#extList li');
 	const keywords = this.value.split(' ').filter(s => s.length);
 	const hiddenExtensions = extensions.not((i, el) => {
-		return keywords.every(word => el.dataset.name.includes(word));
+		return keywords.every(word => el.dataset.name.includes(word.toLowerCase()));
 	});
 	hiddenExtensions.hide();
 	extensions.not(hiddenExtensions).show();
