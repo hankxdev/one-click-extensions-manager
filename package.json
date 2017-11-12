@@ -1,8 +1,5 @@
 {
-  "name": "one-click-extensions-manager",
-  "version": "1.0.0",
-  "description": "View, enable, disable, remove your extensions with ease.",
-  "main": "popup.js",
+  "private": true,
   "dependencies": {},
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -17,43 +14,16 @@
     "fix": "xo --fix",
     "build": "gulp build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HangYang/one-click-extensions-manager.git"
-  },
-  "keywords": [
-    "chrome",
-    "extension",
-    "webextension"
-  ],
-  "author": "Hank Yang, Federico Brigante",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/HangYang/one-click-extensions-manager/issues"
-  },
-  "homepage": "https://github.com/HangYang/one-click-extensions-manager#readme",
   "xo": {
     "envs": [
       "webextensions",
       "browser",
       "jquery"
     ],
-    "rules": {
-      "import/no-unassigned-import": 0,
-      "no-unused-vars": [
-        2,
-        {
-          "varsIgnorePattern": "^h$"
-        }
-      ]
-    },
     "ignores": [
       "deploy/**",
       "gulpfile.js",
       "src/lib/jquery*"
-    ],
-    "globals": [
-      "browser"
     ]
   }
 }
