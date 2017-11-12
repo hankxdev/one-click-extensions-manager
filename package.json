@@ -4,10 +4,15 @@
   "description": "View, enable, disable, remove your extensions with ease.",
   "main": "popup.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-debug": "^3.1.0",
+    "gulp-string-replace": "^0.4.0",
+    "gulp-zip": "^4.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ./node_modules/gulp/bin/gulp.js build"
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
