@@ -1,3 +1,5 @@
+/* global UndoStack */
+
 const cme = chrome.management;
 const getI18N = chrome.i18n.getMessage;
 const myid = getI18N('@@extension_id');
@@ -8,15 +10,15 @@ const undoStack = new UndoStack(document.body);
 /**
  * GENERATE PAGE
  */
-const $searchField = $(`<input placeholder="${ getI18N('searchTxt') }">`);
+const $searchField = $(`<input placeholder="${getI18N('searchTxt')}">`);
 const eul = $('<ul id="extList">');
 const $options = $('<div class="options">');
-const $disableAllButton = $(`<button>${ getI18N('disAll') }</button>`);
-const $extensionPageButton = $(`<a href="chrome://extensions">${ getI18N('extensionPage') }</a>`);
+const $disableAllButton = $(`<button>${getI18N('disAll')}</button>`);
+const $extensionPageButton = $(`<a href="chrome://extensions">${getI18N('extensionPage')}</a>`);
 
 if (!localStorage.getItem('undo-info-message')) {
-	const $undoInfoMessage = $(`<p>${ getI18N('undoInfoMsg')} </p>`);
-	const $hideInfoMessage = $(`<a href="#hide">${ getI18N('hideInfoMsg') }</a>`);
+	const $undoInfoMessage = $(`<p>${getI18N('undoInfoMsg')} </p>`);
+	const $hideInfoMessage = $(`<a href="#hide">${getI18N('hideInfoMsg')}</a>`);
 	$undoInfoMessage.append($hideInfoMessage);
 	$('body').append($undoInfoMessage);
 	$hideInfoMessage.click(() => {
@@ -35,16 +37,16 @@ $('body')
 	.append(eul);
 
 $searchField.focus();
-window.scrollTo(0, 0); // fix overscroll caused by autofocus
+window.scrollTo(0, 0); // Fix overscroll caused by autofocus
 
 // Generate extension list
 getExtensions(extensions => {
 	const listHTML = extensions
 	.sort((a, b) => {
 		if (a.enabled === b.enabled) {
-			return a.name.localeCompare(b.name); // sort by name
+			return a.name.localeCompare(b.name); // Sort by name
 		}
-		return a.enabled < b.enabled ? 1 : -1; // sort by state
+		return a.enabled < b.enabled ? 1 : -1; // Sort by state
 	})
 	.map(createList);
 	$(listHTML.join('')).appendTo(eul);
@@ -84,7 +86,6 @@ eul.on('click', '.extUninstall', e => {
 	cme.uninstall(e.currentTarget.parentNode.id);
 });
 
-
 // Enable filtering
 $searchField.on('input', function () {
 	const extensions = $('#extList li');
@@ -120,13 +121,14 @@ function getIcon(icons, size = 16) {
 	// Get retina size if necessary
 	size *= window.devicePixelRatio;
 
-	if (icons && icons.length) {
+	if (icons && icons.length > 0) {
 		// Get a large icon closest to the desired size
 		icons.reverse().some(icon => {
 			if (icon.size < size) {
 				return false;
 			}
 			selectedIcon = icon.url;
+			return true;
 		});
 	}
 	return selectedIcon;
@@ -147,11 +149,11 @@ function createList(e) {
 			}
 			${
 				url ? `
-					<a hidden class="extUrl" href='${url}' title='${ getI18N('openUrl') }' target='_blank'></a>
+					<a hidden class="extUrl" href='${url}' title='${getI18N('openUrl')}' target='_blank'></a>
 				` : ``
 			}
-			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${ getI18N('manage') }' target='_blank'></a>
-			<button hidden class="extUninstall" title='${ getI18N('uninstall') }' ></button>
+			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${getI18N('manage')}' target='_blank'></a>
+			<button hidden class="extUninstall" title='${getI18N('uninstall')}' ></button>
 		</li>
 	`;
 }
@@ -166,7 +168,7 @@ function disableAll() {
 			wereEnabled.forEach(extension => {
 				cme.setEnabled(extension.id, !disable);
 			});
-			$wereEnabled.toggleClass('disabled', disable)
+			$wereEnabled.toggleClass('disabled', disable);
 		});
 	});
 }

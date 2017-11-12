@@ -10,7 +10,7 @@ window.UndoStack = class UndoStack {
 	}
 
 	_keyboardEventListener(e) {
-		if (e.keyCode === this._Z_KEY && ( this._isWin ? e.ctrlKey : e.metaKey)) {
+		if (e.keyCode === this._Z_KEY && (this._isWin ? e.ctrlKey : e.metaKey)) {
 			if (e.shiftKey) {
 				this.redo();
 			} else {
@@ -44,9 +44,9 @@ window.UndoStack = class UndoStack {
 	}
 
 	do(doFn, undoFn) {
-		console.log('UndoStack: pushed')
+		console.log('UndoStack: pushed');
 		if (typeof doFn !== 'function') {
-			throw new Error('you must pass at least one function');
+			throw new TypeError('you must pass at least one function');
 		}
 		if (undoFn && typeof undoFn !== 'function') {
 			throw new Error('undoFn must be a function or undefined');
@@ -60,4 +60,4 @@ window.UndoStack = class UndoStack {
 		this._undoStack.length = 0;
 		this._redoStack.length = 0;
 	}
-}
+};

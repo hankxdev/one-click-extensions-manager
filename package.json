@@ -9,9 +9,12 @@
     "gulp-clean": "^0.3.2",
     "gulp-debug": "^3.1.0",
     "gulp-string-replace": "^0.4.0",
-    "gulp-zip": "^4.0.0"
+    "gulp-zip": "^4.0.0",
+    "xo": "^0.18.2"
   },
   "scripts": {
+    "test": "xo",
+    "fix": "xo --fix",
     "build": "gulp build"
   },
   "repository": {
@@ -28,5 +31,29 @@
   "bugs": {
     "url": "https://github.com/HangYang/one-click-extensions-manager/issues"
   },
-  "homepage": "https://github.com/HangYang/one-click-extensions-manager#readme"
+  "homepage": "https://github.com/HangYang/one-click-extensions-manager#readme",
+  "xo": {
+    "envs": [
+      "webextensions",
+      "browser",
+      "jquery"
+    ],
+    "rules": {
+      "import/no-unassigned-import": 0,
+      "no-unused-vars": [
+        2,
+        {
+          "varsIgnorePattern": "^h$"
+        }
+      ]
+    },
+    "ignores": [
+      "deploy/**",
+      "gulpfile.js",
+      "src/lib/jquery*"
+    ],
+    "globals": [
+      "browser"
+    ]
+  }
 }
