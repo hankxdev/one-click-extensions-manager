@@ -4,7 +4,6 @@
   "devDependencies": {
     "dot-json": "^1.0.3",
     "web-ext": "^2.2.2",
-    "webext": "^1.0.0",
     "xo": "^0.18.2"
   },
   "scripts": {
