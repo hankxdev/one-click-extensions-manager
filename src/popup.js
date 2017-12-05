@@ -7,6 +7,8 @@ const myid = getI18N('@@extension_id');
 // Handle undo/redo events
 const undoStack = new UndoStack(document.body);
 
+const escapeCssId = id => id.replace(/[@.]/g, '\\$0');
+
 /**
  * GENERATE PAGE
  */
@@ -108,7 +110,7 @@ $('body').on('click', '[href^="chrome"]', e => {
 
 // Update list on uninstall
 cme.onUninstalled.addListener(id => {
-	$(`#${id}`).remove();
+	$('#' + escapeCssId(id)).remove();
 });
 
 /**
@@ -161,7 +163,7 @@ function createList(e) {
 function disableAll() {
 	getExtensions(extensions => {
 		const wereEnabled = extensions.filter(ext => ext.enabled);
-		const selector = wereEnabled.map(ext => '#' + ext.id).join(',');
+		const selector = wereEnabled.map(ext => '#' + escapeCssId(ext.id)).join(',');
 		const $wereEnabled = $(selector);
 
 		undoStack.do(disable => {
