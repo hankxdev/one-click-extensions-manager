@@ -25,7 +25,7 @@ if (!localStorage.getItem('undo-info-message')) {
 	$('body').append($undoInfoMessage);
 	$hideInfoMessage.click(() => {
 		localStorage.setItem('undo-info-message', 1);
-		$undoInfoMessage.slideUp(300);
+		$undoInfoMessage.hide();
 	});
 }
 
