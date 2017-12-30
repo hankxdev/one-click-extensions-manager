@@ -146,7 +146,7 @@ function createList(e) {
 			</button>
 			${
 				e.optionsUrl ? `
-					<a class='extOptions' href='${e.optionsUrl}' title='${getI18N('gotoOpt')}' target='_blank'></a>
+					<a class='extOptions' href='chrome://extensions/?options=${e.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
 				` : ``
 			}
 			${
