@@ -118,7 +118,7 @@ cme.onUninstalled.addListener(id => {
  */
 function getIcon(icons, size = 16) {
 	// Set fallback icon
-	let selectedIcon = 'icon/puzzle.svg';
+	let selectedIcon = 'icons/puzzle.svg';
 
 	// Get retina size if necessary
 	size *= window.devicePixelRatio;
