@@ -25,5 +25,8 @@
   },
   "uninstall": {
     "message": "この拡張機能をアンインストールする"
+  },
+  "enableAll": {
+    "message": "Enable all"
   }
 }

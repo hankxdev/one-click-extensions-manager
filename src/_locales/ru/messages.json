@@ -25,5 +25,8 @@
   },
   "uninstall": {
     "message": "Удалить это расширение"
+  },
+  "enableAll": {
+    "message": "Enable all"
   }
 }

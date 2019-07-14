@@ -25,5 +25,8 @@
   },
   "uninstall": {
     "message": "לבטל את התקנת ההרחבה"
+  },
+  "enableAll": {
+    "message": "Enable all"
   }
 }
