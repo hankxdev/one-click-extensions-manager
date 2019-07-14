@@ -25,5 +25,8 @@
   },
   "uninstall": {
     "message": "이 확장 기능을 제거하십시오"
+  },
+  "enableAll": {
+    "message": "Enable all"
   }
 }

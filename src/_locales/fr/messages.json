@@ -25,5 +25,8 @@
   },
   "uninstall": {
     "message": "Désinstaller cette extension"
+  },
+  "enableAll": {
+    "message": "Enable all"
   }
 }

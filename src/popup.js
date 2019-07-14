@@ -16,6 +16,7 @@ const $searchField = $(`<input placeholder="${getI18N('searchTxt')}">`);
 const eul = $('<ul id="extList">');
 const $options = $('<div class="options">');
 const $disableAllButton = $(`<button>${getI18N('disAll')}</button>`);
+const $enableAllButton = $(`<button>${getI18N('enableAll')}</button>`);
 const $extensionPageButton = $(`<a href="chrome://extensions">${getI18N('extensionPage')}</a>`);
 
 if (!localStorage.getItem('undo-info-message')) {
@@ -31,6 +32,7 @@ if (!localStorage.getItem('undo-info-message')) {
 
 $options
 	.append($disableAllButton)
+	.append($enableAllButton)
 	.append($extensionPageButton);
 
 $('body')
@@ -100,7 +102,12 @@ $searchField.on('input', function () {
 });
 
 // Enable disable all button
-$disableAllButton.click(disableAll);
+$disableAllButton.click(() => {
+	toggleAll(false);
+});
+$enableAllButton.click(() => {
+	toggleAll(true);
+});
 
 // Enable chrome:// links
 $('body').on('click', '[href^="chrome"]', e => {
@@ -160,17 +167,17 @@ function createList(e) {
 	`;
 }
 
-function disableAll() {
+function toggleAll(enable) {
 	getExtensions(extensions => {
-		const wereEnabled = extensions.filter(ext => ext.enabled);
+		const wereEnabled = extensions.filter(ext => enable ? !ext.enabled : ext.enabled);
 		const selector = wereEnabled.map(ext => '#' + escapeCssId(ext.id)).join(',');
 		const $wereEnabled = $(selector);
 
 		undoStack.do(disable => {
 			wereEnabled.forEach(extension => {
-				cme.setEnabled(extension.id, !disable);
+				cme.setEnabled(extension.id, enable ? disable : !disable);
 			});
-			$wereEnabled.toggleClass('disabled', disable);
+			$wereEnabled.toggleClass('disabled', enable ? !disable : disable);
 		});
 	});
 }

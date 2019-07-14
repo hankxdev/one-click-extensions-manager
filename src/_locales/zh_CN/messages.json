@@ -15,7 +15,7 @@
     "message": "更多"
   },
   "disAll": {
-    "message": "禁用所有扩展"
+    "message": "全部禁用"
   },
   "searchTxt": {
     "message": "搜寻扩展"
@@ -31,5 +31,8 @@
   },
   "hideInfoMsg": {
     "message": "知道了"
+  },
+  "enableAll": {
+    "message": "全部启用"
   }
 }

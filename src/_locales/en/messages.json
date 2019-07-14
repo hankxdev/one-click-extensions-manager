@@ -37,5 +37,8 @@
   },
   "manage": {
     "message": "See in Chrome’s extensions page"
+  },
+  "enableAll": {
+    "message": "Enable all"
   }
 }
