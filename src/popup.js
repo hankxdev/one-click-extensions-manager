@@ -82,6 +82,7 @@ eul.on('click', '.extName', e => {
 // Show extra buttons on right click
 eul.on('contextmenu', '.ext', () => {
 	$('[hidden]').removeAttr('hidden');
+	$("#extList").addClass("show-option")
 	return false;
 });
 
@@ -113,7 +114,9 @@ $enableAllButton.click(() => {
 $('body').on('click', '[href^="chrome"]', e => {
 	chrome.tabs.create({url: e.currentTarget.href});
 	return false;
-});
+}).on("click", '.disabled', e => {
+	e.preventDefault()
+})
 
 // Update list on uninstall
 cme.onUninstalled.addListener(id => {
@@ -149,18 +152,14 @@ function createList(e) {
 		<li class='ext ${e.enabled ? '' : 'disabled'} type-${e.installType}' id='${e.id}' data-name="${e.name.toLowerCase()}">
 			<button class='extName' title='${getI18N('toggleEnable')}'>
 				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
-				${e.name}
+				<span title="${e.name}">${e.name}</span>
 			</button>
 			${
 				e.optionsUrl ? `
 					<a class='extOptions' href='chrome://extensions/?options=${e.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
 				` : ``
 			}
-			${
-				url ? `
-					<a hidden class="extUrl" href='${url}' title='${getI18N('openUrl')}' target='_blank'></a>
-				` : ``
-			}
+			<a hidden class="extUrl ${url ? '' : 'disabled'}" href='${url ? url : ''}' title='${url ? getI18N('openUrl') : ''}' target='_blank'></a>
 			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${getI18N('manage')}' target='_blank'></a>
 			<button hidden class="extUninstall" title='${getI18N('uninstall')}' ></button>
 		</li>

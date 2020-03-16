@@ -133,3 +133,15 @@ button {
 .extUninstall:before {
   content: url(icons/bin.svg);
 }
+
+.extUrl.disabled:before{
+  content: "";
+}
+.extUrl.disabled:hover{
+  background-color: white;
+  cursor: initial;
+}
+
+.show-option button{
+  max-width: 246px;
+}
