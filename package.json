@@ -3,8 +3,8 @@
   "dependencies": {},
   "devDependencies": {
     "dot-json": "^1.0.3",
-    "web-ext": "^2.2.2",
-    "xo": "^0.18.2"
+    "web-ext": "^4.1.0",
+    "xo": "^0.28.0"
   },
   "scripts": {
     "test": "xo",
