@@ -46,13 +46,14 @@ window.scrollTo(0, 0); // Fix overscroll caused by autofocus
 // Generate extension list
 getExtensions(extensions => {
 	const listHTML = extensions
-	.sort((a, b) => {
-		if (a.enabled === b.enabled) {
-			return a.name.localeCompare(b.name); // Sort by name
-		}
-		return a.enabled < b.enabled ? 1 : -1; // Sort by state
-	})
-	.map(createList);
+		.sort((a, b) => {
+			if (a.enabled === b.enabled) {
+				return a.name.localeCompare(b.name); // Sort by name
+			}
+
+			return a.enabled < b.enabled ? 1 : -1; // Sort by state
+		})
+		.map(createList);
 	$(listHTML.join('')).appendTo(eul);
 });
 
@@ -82,7 +83,7 @@ eul.on('click', '.extName', e => {
 // Show extra buttons on right click
 eul.on('contextmenu', '.ext', () => {
 	$('[hidden]').removeAttr('hidden');
-	$("#extList").addClass("show-option")
+	$('#extList').addClass('show-option');
 	return false;
 });
 
@@ -95,8 +96,8 @@ eul.on('click', '.extUninstall', e => {
 $searchField.on('input', function () {
 	const extensions = $('#extList li');
 	const keywords = this.value.toLowerCase().split(' ').filter(s => s.length);
-	const hiddenExtensions = extensions.not((i, el) => {
-		return keywords.every(word => el.dataset.name.includes(word));
+	const hiddenExtensions = extensions.not((i, element) => {
+		return keywords.every(word => element.dataset.name.includes(word));
 	});
 	hiddenExtensions.hide();
 	extensions.not(hiddenExtensions).show();
@@ -114,9 +115,9 @@ $enableAllButton.click(() => {
 $('body').on('click', '[href^="chrome"]', e => {
 	chrome.tabs.create({url: e.currentTarget.href});
 	return false;
-}).on("click", '.disabled', e => {
-	e.preventDefault()
-})
+}).on('click', '.disabled', e => {
+	e.preventDefault();
+});
 
 // Update list on uninstall
 cme.onUninstalled.addListener(id => {
@@ -139,29 +140,31 @@ function getIcon(icons, size = 16) {
 			if (icon.size < size) {
 				return false;
 			}
+
 			selectedIcon = icon.url;
 			return true;
 		});
 	}
+
 	return selectedIcon;
 }
 
 function createList(e) {
 	const url = e.installType === 'normal' ? `https://chrome.google.com/webstore/detail/${e.id}` : e.homepageUrl;
 	return `
-		<li class='ext ${e.enabled ? '' : 'disabled'} type-${e.installType}' id='${e.id}' data-name="${e.name.toLowerCase()}">
-			<button class='extName' title='${getI18N('toggleEnable')}'>
-				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
+		<li class=’ext ${e.enabled ? '' : 'disabled'} type-${e.installType}’ id=’${e.id}’ data-name="${e.name.toLowerCase()}">
+			<button class=’extName’ title=’${getI18N('toggleEnable')}’>
+				<img class=’extIcon’ src=’${getIcon(e.icons, 16)}’>
 				<span title="${e.name}">${e.name}</span>
 			</button>
 			${
-				e.optionsUrl ? `
-					<a class='extOptions' href='chrome://extensions/?options=${e.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
-				` : ``
-			}
-			<a hidden class="extUrl ${url ? '' : 'disabled'}" href='${url ? url : ''}' title='${url ? getI18N('openUrl') : ''}' target='_blank'></a>
-			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${getI18N('manage')}' target='_blank'></a>
-			<button hidden class="extUninstall" title='${getI18N('uninstall')}' ></button>
+	e.optionsUrl ? `
+					<a class=’extOptions’ href=’chrome://extensions/?options=${e.id}’ title=’${getI18N('gotoOpt')}’ target=’_blank’></a>
+				` : ''
+}
+			<a hidden class="extUrl ${url ? '' : 'disabled'}" href=’${url ? url : ''}’ title=’${url ? getI18N('openUrl') : ''}’ target=’_blank’></a>
+			<a hidden class="extMore" href=’chrome://extensions/?id=${e.id}’ title=’${getI18N('manage')}’ target=’_blank’></a>
+			<button hidden class="extUninstall" title=’${getI18N('uninstall')}’ ></button>
 		</li>
 	`;
 }

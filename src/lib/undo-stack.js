@@ -48,9 +48,11 @@ window.UndoStack = class UndoStack {
 		if (typeof doFn !== 'function') {
 			throw new TypeError('you must pass at least one function');
 		}
+
 		if (undoFn && typeof undoFn !== 'function') {
 			throw new Error('undoFn must be a function or undefined');
 		}
+
 		this._redoStack.length = 0;
 		this._undoStack.push([doFn, undoFn]);
 		doFn(true);
