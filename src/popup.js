@@ -152,19 +152,19 @@ function getIcon(icons, size = 16) {
 function createList(e) {
 	const url = e.installType === 'normal' ? `https://chrome.google.com/webstore/detail/${e.id}` : e.homepageUrl;
 	return `
-		<li class=’ext ${e.enabled ? '' : 'disabled'} type-${e.installType}’ id=’${e.id}’ data-name="${e.name.toLowerCase()}">
-			<button class=’extName’ title=’${getI18N('toggleEnable')}’>
-				<img class=’extIcon’ src=’${getIcon(e.icons, 16)}’>
+		<li class='ext ${e.enabled ? '' : 'disabled'} type-${e.installType}' id='${e.id}' data-name="${e.name.toLowerCase()}">
+			<button class='extName' title='${getI18N('toggleEnable')}'>
+				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
 				<span title="${e.name}">${e.name}</span>
 			</button>
 			${
 	e.optionsUrl ? `
-					<a class=’extOptions’ href=’chrome://extensions/?options=${e.id}’ title=’${getI18N('gotoOpt')}’ target=’_blank’></a>
+					<a class='extOptions' href='chrome://extensions/?options=${e.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
 				` : ''
 }
-			<a hidden class="extUrl ${url ? '' : 'disabled'}" href=’${url ? url : ''}’ title=’${url ? getI18N('openUrl') : ''}’ target=’_blank’></a>
-			<a hidden class="extMore" href=’chrome://extensions/?id=${e.id}’ title=’${getI18N('manage')}’ target=’_blank’></a>
-			<button hidden class="extUninstall" title=’${getI18N('uninstall')}’ ></button>
+			<a hidden class="extUrl ${url ? '' : 'disabled'}" href='${url ? url : ''}' title='${url ? getI18N('openUrl') : ''}' target='_blank'></a>
+			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${getI18N('manage')}' target='_blank'></a>
+			<button hidden class="extUninstall" title='${getI18N('uninstall')}' ></button>
 		</li>
 	`;
 }

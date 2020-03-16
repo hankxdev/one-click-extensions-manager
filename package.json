@@ -22,6 +22,9 @@
     "ignores": [
       "dist",
       "src/lib/jquery*"
-    ]
+    ],
+    "rules": {
+      "unicorn/string-content": "off"
+    }
   }
 }
