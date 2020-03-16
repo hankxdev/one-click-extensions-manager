@@ -62,8 +62,8 @@ getExtensions(extensions => {
  */
 
 // Toggle on click
-eul.on('click', '.extName', e => {
-	const $extension = $(e.currentTarget).parent();
+eul.on('click', '.extName', evt => {
+	const $extension = $(evt.currentTarget).parent();
 	const id = $extension.attr('id');
 	const wasEnabled = !$extension.hasClass('disabled');
 	const toggle = enabled => {
@@ -88,8 +88,8 @@ eul.on('contextmenu', '.ext', () => {
 });
 
 // Enable uninstall button
-eul.on('click', '.extUninstall', e => {
-	cme.uninstall(e.currentTarget.parentNode.id);
+eul.on('click', '.extUninstall', evt => {
+	cme.uninstall(evt.currentTarget.parentNode.id);
 });
 
 // Enable filtering
@@ -112,11 +112,11 @@ $enableAllButton.click(() => {
 });
 
 // Enable chrome:// links
-$('body').on('click', '[href^="chrome"]', e => {
-	chrome.tabs.create({url: e.currentTarget.href});
+$('body').on('click', '[href^="chrome"]', evt => {
+	chrome.tabs.create({url: evt.currentTarget.href});
 	return false;
-}).on('click', '.disabled', e => {
-	e.preventDefault();
+}).on('click', '.disabled', evt => {
+	evt.preventDefault();
 });
 
 // Update list on uninstall
@@ -149,21 +149,21 @@ function getIcon(icons, size = 16) {
 	return selectedIcon;
 }
 
-function createList(e) {
-	const url = e.installType === 'normal' ? `https://chrome.google.com/webstore/detail/${e.id}` : e.homepageUrl;
+function createList(evt) {
+	const url = evt.installType === 'normal' ? `https://chrome.google.com/webstore/detail/${evt.id}` : evt.homepageUrl;
 	return `
-		<li class='ext ${e.enabled ? '' : 'disabled'} type-${e.installType}' id='${e.id}' data-name="${e.name.toLowerCase()}">
+		<li class='ext ${evt.enabled ? '' : 'disabled'} type-${evt.installType}' id='${evt.id}' data-name="${evt.name.toLowerCase()}">
 			<button class='extName' title='${getI18N('toggleEnable')}'>
-				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
-				<span title="${e.name}">${e.name}</span>
+				<img class='extIcon' src='${getIcon(evt.icons, 16)}'>
+				<span title="${evt.name}">${evt.name}</span>
 			</button>
 			${
-	e.optionsUrl ? `
-					<a class='extOptions' href='chrome://extensions/?options=${e.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
+	evt.optionsUrl ? `
+					<a class='extOptions' href='chrome://extensions/?options=${evt.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
 				` : ''
 }
 			<a hidden class="extUrl ${url ? '' : 'disabled'}" href='${url ? url : ''}' title='${url ? getI18N('openUrl') : ''}' target='_blank'></a>
-			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${getI18N('manage')}' target='_blank'></a>
+			<a hidden class="extMore" href='chrome://extensions/?id=${evt.id}' title='${getI18N('manage')}' target='_blank'></a>
 			<button hidden class="extUninstall" title='${getI18N('uninstall')}' ></button>
 		</li>
 	`;

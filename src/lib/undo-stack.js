@@ -5,13 +5,13 @@ window.UndoStack = class UndoStack {
 		this._Z_KEY = 90;
 		this._isWin = navigator.userAgent.match(/win/i);
 		if (element) {
-			element.addEventListener('keydown', e => this._keyboardEventListener(e));
+			element.addEventListener('keydown', evt => this._keyboardEventListener(evt));
 		}
 	}
 
-	_keyboardEventListener(e) {
-		if (e.keyCode === this._Z_KEY && (this._isWin ? e.ctrlKey : e.metaKey)) {
-			if (e.shiftKey) {
+	_keyboardEventListener(evt) {
+		if (evt.keyCode === this._Z_KEY && (this._isWin ? evt.ctrlKey : evt.metaKey)) {
+			if (evt.shiftKey) {
 				this.redo();
 			} else {
 				this.undo();
