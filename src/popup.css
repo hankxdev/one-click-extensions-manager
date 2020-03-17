@@ -111,6 +111,7 @@ button {
 .ext > *:not(:first-child) {
   padding: 0 0.3em;
   opacity: 0.2;
+  flex-shrink: 0;
 }
 .ext:hover > * {
   opacity: 1;
