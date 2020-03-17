@@ -16,6 +16,11 @@ input {
 [hidden] {
   display: none;
 }
+@media (min-width: 400px) {
+  [hidden] {
+    display: block;
+  }
+}
 
 /**
  * HEADER
@@ -115,6 +120,10 @@ button {
   background-color: #ecf0f1;
   cursor: pointer;
 }
+
+/**
+ * BUTTON ICONS
+ */
 .ext :before {
   display: inline-block;
   width: 16px;
