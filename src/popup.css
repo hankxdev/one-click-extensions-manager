@@ -110,6 +110,7 @@ button {
 .ext:hover > * {
   opacity: 1;
 }
+
 .ext a:hover,
 .ext button:hover {
   background-color: #ecf0f1;
@@ -134,10 +135,10 @@ button {
   content: url(icons/bin.svg);
 }
 
-.extUrl.disabled:before{
+.extUrl.local-ext:before{
   content: "";
 }
-.extUrl.disabled:hover{
+.extUrl.local-ext:hover{
   background-color: white;
   cursor: initial;
 }

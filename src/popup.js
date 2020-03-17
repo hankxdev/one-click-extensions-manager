@@ -115,7 +115,7 @@ $enableAllButton.click(() => {
 $('body').on('click', '[href^="chrome"]', evt => {
 	chrome.tabs.create({url: evt.currentTarget.href});
 	return false;
-}).on('click', '.disabled', evt => {
+}).on('click', '.local-ext', evt => {
 	evt.preventDefault();
 });
 
@@ -162,7 +162,7 @@ function createList(evt) {
 					<a class='extOptions' href='chrome://extensions/?options=${evt.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
 				` : ''
 }
-			<a hidden class="extUrl ${url ? '' : 'disabled'}" href='${url ? url : ''}' title='${url ? getI18N('openUrl') : ''}' target='_blank'></a>
+			<a hidden class="extUrl ${url ? '' : 'local-ext'}" href='${url ? url : ''}' title='${url ? getI18N('openUrl') : ''}' target='_blank'></a>
 			<a hidden class="extMore" href='chrome://extensions/?id=${evt.id}' title='${getI18N('manage')}' target='_blank'></a>
 			<button hidden class="extUninstall" title='${getI18N('uninstall')}' ></button>
 		</li>
