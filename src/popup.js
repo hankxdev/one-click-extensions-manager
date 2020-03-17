@@ -13,7 +13,7 @@ const escapeCssId = id => id.replace(/[@.]/g, '\\$0');
  * GENERATE PAGE
  */
 const $searchField = $(`<input placeholder="${getI18N('searchTxt')}">`);
-const $list = $('<ul id="extList">');
+const eul = $('<ul id="extList">');
 const $options = $('<div class="options">');
 const $disableAllButton = $(`<button>${getI18N('disAll')}</button>`);
 const $enableAllButton = $(`<button>${getI18N('enableAll')}</button>`);
@@ -38,7 +38,7 @@ $options
 $('body')
 	.append($searchField)
 	.append($options)
-	.append($list);
+	.append(eul);
 
 $searchField.focus();
 window.scrollTo(0, 0); // Fix overscroll caused by autofocus
@@ -54,7 +54,7 @@ getExtensions(extensions => {
 			return a.enabled < b.enabled ? 1 : -1; // Sort by state
 		})
 		.map(createList);
-	$list.append(listHTML.join(''));
+	$(listHTML.join('')).appendTo(eul);
 });
 
 /**
@@ -62,7 +62,7 @@ getExtensions(extensions => {
  */
 
 // Toggle on click
-$list.on('click', '.extName', event => {
+eul.on('click', '.extName', event => {
 	const $extension = $(event.currentTarget).parent();
 	const id = $extension.attr('id');
 	const wasEnabled = !$extension.hasClass('disabled');
@@ -80,14 +80,14 @@ $list.on('click', '.extName', event => {
 	});
 });
 
-// Show extra buttons on right click on the name
-$list.on('contextmenu', '.extName', () => {
+// Show extra buttons on right click
+eul.on('contextmenu', '.ext', () => {
 	$('[hidden]').removeAttr('hidden');
 	return false;
 });
 
 // Enable uninstall button
-$list.on('click', '.extUninstall', event => {
+eul.on('click', '.extUninstall', event => {
 	cme.uninstall(event.currentTarget.parentNode.id);
 });
 
