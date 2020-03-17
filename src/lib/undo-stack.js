@@ -5,13 +5,13 @@ window.UndoStack = class UndoStack {
 		this._Z_KEY = 90;
 		this._isWin = navigator.userAgent.match(/win/i);
 		if (element) {
-			element.addEventListener('keydown', e => this._keyboardEventListener(e));
+			element.addEventListener('keydown', event => this._keyboardEventListener(event));
 		}
 	}
 
-	_keyboardEventListener(e) {
-		if (e.keyCode === this._Z_KEY && (this._isWin ? e.ctrlKey : e.metaKey)) {
-			if (e.shiftKey) {
+	_keyboardEventListener(event) {
+		if (event.keyCode === this._Z_KEY && (this._isWin ? event.ctrlKey : event.metaKey)) {
+			if (event.shiftKey) {
 				this.redo();
 			} else {
 				this.undo();
@@ -48,9 +48,11 @@ window.UndoStack = class UndoStack {
 		if (typeof doFn !== 'function') {
 			throw new TypeError('you must pass at least one function');
 		}
+
 		if (undoFn && typeof undoFn !== 'function') {
 			throw new Error('undoFn must be a function or undefined');
 		}
+
 		this._redoStack.length = 0;
 		this._undoStack.push([doFn, undoFn]);
 		doFn(true);
