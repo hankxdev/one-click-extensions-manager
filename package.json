@@ -3,6 +3,7 @@
   "dependencies": {},
   "devDependencies": {
     "dot-json": "^1.2.0",
+    "utc-version": "^2.0.1",
     "web-ext": "^4.1.0",
     "xo": "^0.28.0"
   },
@@ -10,7 +11,7 @@
     "test": "xo",
     "fix": "xo --fix",
     "build": "npm run update-version && npm run zip",
-    "update-version": "VERSION=$(date -u +%y.%-m.%-d.%-H%M); echo $VERSION; dot-json src/manifest.json version $VERSION",
+    "update-version": "VERSION=$(utc-version); echo $VERSION; dot-json src/manifest.json version $VERSION",
     "zip": "web-ext build --source-dir src --artifacts-dir dist"
   },
   "xo": {
