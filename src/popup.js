@@ -46,14 +46,13 @@ window.scrollTo(0, 0); // Fix overscroll caused by autofocus
 // Generate extension list
 getExtensions(extensions => {
 	const listHTML = extensions
-		.sort((a, b) => {
-			if (a.enabled === b.enabled) {
-				return a.name.localeCompare(b.name); // Sort by name
-			}
-
-			return a.enabled < b.enabled ? 1 : -1; // Sort by state
-		})
-		.map(createList);
+	.sort((a, b) => {
+		if (a.enabled === b.enabled) {
+			return a.name.localeCompare(b.name); // Sort by name
+		}
+		return a.enabled < b.enabled ? 1 : -1; // Sort by state
+	})
+	.map(createList);
 	$(listHTML.join('')).appendTo(eul);
 });
 
@@ -62,8 +61,8 @@ getExtensions(extensions => {
  */
 
 // Toggle on click
-eul.on('click', '.extName', evt => {
-	const $extension = $(evt.currentTarget).parent();
+eul.on('click', '.extName', e => {
+	const $extension = $(e.currentTarget).parent();
 	const id = $extension.attr('id');
 	const wasEnabled = !$extension.hasClass('disabled');
 	const toggle = enabled => {
@@ -83,21 +82,20 @@ eul.on('click', '.extName', evt => {
 // Show extra buttons on right click
 eul.on('contextmenu', '.ext', () => {
 	$('[hidden]').removeAttr('hidden');
-	$('#extList').addClass('show-option');
 	return false;
 });
 
 // Enable uninstall button
-eul.on('click', '.extUninstall', evt => {
-	cme.uninstall(evt.currentTarget.parentNode.id);
+eul.on('click', '.extUninstall', e => {
+	cme.uninstall(e.currentTarget.parentNode.id);
 });
 
 // Enable filtering
 $searchField.on('input', function () {
 	const extensions = $('#extList li');
 	const keywords = this.value.toLowerCase().split(' ').filter(s => s.length);
-	const hiddenExtensions = extensions.not((i, element) => {
-		return keywords.every(word => element.dataset.name.includes(word));
+	const hiddenExtensions = extensions.not((i, el) => {
+		return keywords.every(word => el.dataset.name.includes(word));
 	});
 	hiddenExtensions.hide();
 	extensions.not(hiddenExtensions).show();
@@ -112,11 +110,9 @@ $enableAllButton.click(() => {
 });
 
 // Enable chrome:// links
-$('body').on('click', '[href^="chrome"]', evt => {
-	chrome.tabs.create({url: evt.currentTarget.href});
+$('body').on('click', '[href^="chrome"]', e => {
+	chrome.tabs.create({url: e.currentTarget.href});
 	return false;
-}).on('click', '.local-ext', evt => {
-	evt.preventDefault();
 });
 
 // Update list on uninstall
@@ -140,30 +136,32 @@ function getIcon(icons, size = 16) {
 			if (icon.size < size) {
 				return false;
 			}
-
 			selectedIcon = icon.url;
 			return true;
 		});
 	}
-
 	return selectedIcon;
 }
 
-function createList(evt) {
-	const url = evt.installType === 'normal' ? `https://chrome.google.com/webstore/detail/${evt.id}` : evt.homepageUrl;
+function createList(e) {
+	const url = e.installType === 'normal' ? `https://chrome.google.com/webstore/detail/${e.id}` : e.homepageUrl;
 	return `
-		<li class='ext ${evt.enabled ? '' : 'disabled'} type-${evt.installType}' id='${evt.id}' data-name="${evt.name.toLowerCase()}">
+		<li class='ext ${e.enabled ? '' : 'disabled'} type-${e.installType}' id='${e.id}' data-name="${e.name.toLowerCase()}">
 			<button class='extName' title='${getI18N('toggleEnable')}'>
-				<img class='extIcon' src='${getIcon(evt.icons, 16)}'>
-				<span title="${evt.name}">${evt.name}</span>
+				<img class='extIcon' src='${getIcon(e.icons, 16)}'>
+				${e.name}
 			</button>
 			${
-	evt.optionsUrl ? `
-					<a class='extOptions' href='chrome://extensions/?options=${evt.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
-				` : ''
-}
-			<a hidden class="extUrl ${url ? '' : 'local-ext'}" href='${url ? url : ''}' title='${url ? getI18N('openUrl') : ''}' target='_blank'></a>
-			<a hidden class="extMore" href='chrome://extensions/?id=${evt.id}' title='${getI18N('manage')}' target='_blank'></a>
+				e.optionsUrl ? `
+					<a class='extOptions' href='chrome://extensions/?options=${e.id}' title='${getI18N('gotoOpt')}' target='_blank'></a>
+				` : ``
+			}
+			${
+				url ? `
+					<a hidden class="extUrl" href='${url}' title='${getI18N('openUrl')}' target='_blank'></a>
+				` : ``
+			}
+			<a hidden class="extMore" href='chrome://extensions/?id=${e.id}' title='${getI18N('manage')}' target='_blank'></a>
 			<button hidden class="extUninstall" title='${getI18N('uninstall')}' ></button>
 		</li>
 	`;
