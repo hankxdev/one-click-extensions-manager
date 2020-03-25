@@ -1,18 +1,14 @@
 {
   "private": true,
-  "dependencies": {},
-  "devDependencies": {
-    "dot-json": "^1.2.0",
-    "utc-version": "^2.0.1",
-    "web-ext": "^4.1.0",
-    "xo": "^0.28.0"
-  },
   "scripts": {
-    "test": "xo",
+    "build": "rollup -c",
     "fix": "xo --fix",
-    "build": "npm run update-version && npm run zip",
-    "update-version": "VERSION=$(utc-version); echo $VERSION; dot-json src/manifest.json version $VERSION",
-    "zip": "web-ext build --source-dir src --artifacts-dir dist"
+    "release": "npm run update-version && npm run zip",
+    "start": "sirv distribution",
+    "test": "xo",
+    "update-version": "VERSION=$(utc-version); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
+    "watch": "rollup -c -w",
+    "zip": "web-ext build --source-dir distribution"
   },
   "xo": {
     "envs": [
@@ -21,8 +17,7 @@
       "jquery"
     ],
     "ignores": [
-      "dist",
-      "src/lib/jquery*"
+      "distribution"
     ],
     "rules": {
       "unicorn/string-content": "off",
@@ -36,5 +31,21 @@
         }
       ]
     }
+  },
+  "dependencies": {
+    "sirv-cli": "^0.4.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "dot-json": "^1.2.0",
+    "rollup": "^1.20.0",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "svelte": "^3.0.0",
+    "utc-version": "^2.0.1",
+    "web-ext": "^4.1.0",
+    "xo": "^0.28.0"
   }
 }
