@@ -10,6 +10,7 @@ body.options-page {
 }
 a {
   outline: 0;
+  color: inherit;
 }
 input {
   box-sizing: border-box;
@@ -29,6 +30,8 @@ input {
  * HEADER
  */
 input {
+  background-color: transparent;
+  border: solid 1px;
   padding: 0.2em 0.4em;
 }
 .options {
@@ -55,14 +58,9 @@ button {
 }
 .options * {
   text-decoration: none;
-  color: inherit;
   padding: 0.5em;
   text-transform: uppercase;
   border-radius: 2px;
-}
-.options *:hover {
-  color: black;
-  background-color: #d9d9d9;
 }
 
 /**
@@ -79,7 +77,7 @@ button {
   font-size: 1.2em;
   line-height: 1.9;
   font-weight: bolder;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #88888833;
   padding-right: var(--margin);
 }
 
@@ -88,8 +86,8 @@ button {
 }
 .ext.disabled .extName {
   font-weight: normal;
-  color: gray;
   filter: grayscale(60%);
+  opacity: 0.5;
 }
 .ext.disabled .extOptions {
   display: none;
@@ -125,8 +123,8 @@ button {
 .ext:hover > * {
   opacity: 1;
 }
-.ext a:hover,
-.ext button:hover {
+a:hover,
+button:hover {
   background-color: #ecf0f1;
   cursor: pointer;
 }
@@ -151,4 +149,43 @@ button {
 }
 .extUninstall:before {
   content: url(icons/bin.svg);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Border around improves contrast */
+  body:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    border: solid 1px #595a5e;
+  }
+  body {
+    background-color: #292a2d;
+    color: #e8eaed;
+  }
+  input {
+    color: inherit;
+    background-color: transparent;
+    border: solid 1px;
+    padding: 0.2em 0.4em;
+  }
+
+  a:hover,
+  button:hover {
+    background-color: #c4d7dc38;
+  }
+  .ext :before {
+    filter: brightness(1.6);
+  }
+  .ext.type-development {
+      color: #83acf5;
+  }
+
+  .ext.type-admin {
+    color: #ffa38d;
+  }
 }
