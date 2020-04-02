@@ -14,9 +14,9 @@
   },
   "browser_action": {
     "default_icon": "logo.png",
-    "default_popup": "popup.html"
+    "default_popup": "index.html"
   },
   "options_ui": {
-    "page": "options.html"
+    "page": "index.html"
   }
 }

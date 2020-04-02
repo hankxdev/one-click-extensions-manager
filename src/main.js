@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill'
+window.browser = browser;
 import App from './App.svelte';
 
 const app = new App({

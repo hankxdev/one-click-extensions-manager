@@ -7,7 +7,9 @@
 	export let optionsUrl;
 	export let icons;
 	export let showExtras;
+	export let undoStack;
 
+	const getI18N = chrome.i18n.getMessage;
 	const url = installType === 'normal' ? `https://chrome.google.com/webstore/detail/${id}` : homepageUrl;
 
 	function onExtensionClick(event) {

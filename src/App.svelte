@@ -1,6 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import Extension from './Extension.svelte';
+	import UndoStack from './lib/undo-stack';
+
+	const undoStack = new UndoStack(window);
 
 	const cme = chrome.management;
 	const getI18N = chrome.i18n.getMessage;
@@ -25,9 +28,10 @@
 
 				return a.enabled < b.enabled ? 1 : -1; // Sort by state
 			})
-			.forEach(extension => {
+			.map(extension => {
 				extension.shown = true;
 				extension.indexedName = extension.name.toLowerCase();
+				return extension;
 			});
 	});
 
@@ -55,7 +59,7 @@
 	<ul id="extList">
 		{#each extensions as extension (extension.id)}
 			{#if extension.shown}
-				<Extension {...extension} {showExtras} on:contextmenu|once={onContextMenu}/>
+				<Extension {...extension} {showExtras} on:contextmenu|once={onContextMenu} {undoStack}/>
 			{/if}
 		{/each}
 	</ul>
