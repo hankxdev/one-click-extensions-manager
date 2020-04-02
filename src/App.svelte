@@ -15,6 +15,18 @@
 	let showExtras = false;
 	let searchValue = '';
 
+	function toggleAll(enable) {
+		const affectedExtensions = extensions.filter(extension => enable !== extension.enabled);
+
+		undoStack.do(toggle => {
+			for (const extension of affectedExtensions) {
+				extension.enabled = enable ? toggle : !toggle;
+				cme.setEnabled(extension.id, extension.enabled);
+			}
+			extensions = extensions;
+		});
+	}
+
 	onMount(async () => {
 		searchField.focus();
 		window.scrollTo(0, 0); // Fix overscroll caused by autofocus
@@ -52,8 +64,8 @@
 	<p>{getI18N('undoInfoMsg')} <a href="#hide">{getI18N('hideInfoMsg')}</a></p>
 	<input bind:this={searchField} placeholder={getI18N('searchTxt')} bind:value={searchValue} on:input={onSearchInput}>
 	<div class="options">
-		<button>{getI18N('disAll')}</button>
-		<button>{getI18N('enableAll')}</button>
+		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
+		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
 		<a href="chrome://extensions">{getI18N('extensionPage')}</a>
 	</div>
 	<ul id="extList">

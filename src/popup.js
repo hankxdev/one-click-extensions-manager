@@ -28,22 +28,3 @@ $('body').on('click', '[href^="chrome"]', event => {
 cme.onUninstalled.addListener(id => {
 	$('#' + escapeCssId(id)).remove();
 });
-
-/**
- * FUNCTIONS
- */
-
-function toggleAll(enable) {
-	getExtensions(extensions => {
-		const wereEnabled = extensions.filter(ext => enable ? !ext.enabled : ext.enabled);
-		const selector = wereEnabled.map(ext => '#' + escapeCssId(ext.id)).join(',');
-		const $wereEnabled = $(selector);
-
-		undoStack.do(disable => {
-			wereEnabled.forEach(extension => {
-				cme.setEnabled(extension.id, enable ? disable : !disable);
-			});
-			$wereEnabled.toggleClass('disabled', enable ? !disable : disable);
-		});
-	});
-}
