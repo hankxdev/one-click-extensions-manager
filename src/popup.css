@@ -193,11 +193,10 @@ button:hover {
 /**
  * Right to Left
  */
-html.rtl {
-  direction: rtl;
+html[dir='rtl'] {
   text-align: right;
 }
 
-html.rtl button {
+html[dir='rtl'] button {
   text-align: right;
 }
