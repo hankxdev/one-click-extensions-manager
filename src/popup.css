@@ -189,3 +189,15 @@ button:hover {
     color: #ffa38d;
   }
 }
+
+/**
+ * Right to Left
+ */
+html.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+html.rtl button {
+  text-align: right;
+}
