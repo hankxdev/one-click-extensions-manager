@@ -1,4 +1,8 @@
 /* RESETS */
+:root {
+  --ext-icon-margin: 0.3em;
+}
+
 body {
   width: 320px;
   margin: auto;
@@ -53,7 +57,7 @@ button {
   outline: 0;
   text-decoration: none;
   color: inherit;
-  text-align: left;
+  text-align: var(--align-to);
   padding: 0;
 }
 .options * {
@@ -78,7 +82,7 @@ button {
   line-height: 1.9;
   font-weight: bolder;
   border-bottom: 1px solid #88888833;
-  padding-right: var(--margin);
+  padding: 0 var(--margin) 0 0;
 }
 
 .ext:last-child {
@@ -105,7 +109,7 @@ button {
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-left: var(--margin);
+  padding: 0 0 0 var(--margin);
 }
 .ext img {
   width: 16px;
@@ -113,7 +117,7 @@ button {
   vertical-align: -3px;
 }
 .extIcon {
-  margin-right: 0.3em;
+  margin: 0 var(--ext-icon-margin) 0 0;
 }
 .ext > *:not(:first-child) {
   padding: 0 0.3em;
@@ -190,9 +194,14 @@ button:hover {
   }
 }
 
-/**
- * Right to Left
- */
-html[dir='rtl'] button {
-  text-align: right;
+html[dir=rtl] .ext {
+  padding: 0 0 0 var(--margin);
+}
+
+html[dir=rtl] .extName {
+  padding: 0 var(--margin) 0 0;
+}
+
+html[dir=rtl] .extIcon {
+  margin: 0 0 0 var(--ext-icon-margin);
 }
