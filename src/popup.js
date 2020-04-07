@@ -124,8 +124,8 @@ cme.onUninstalled.addListener(id => {
 const uiLang = chrome.i18n.getUILanguage();
 const rtlLangs = ['he'];
 $('html')
-  .attr('lang', uiLang)
-  .toggleClass('rtl', rtlLangs.includes(uiLang));
+	.attr('lang', uiLang)
+	.toggleClass('rtl', rtlLangs.includes(uiLang));
 
 /**
  * FUNCTIONS
