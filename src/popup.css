@@ -193,10 +193,6 @@ button:hover {
 /**
  * Right to Left
  */
-html[dir='rtl'] {
-  text-align: right;
-}
-
 html[dir='rtl'] button {
   text-align: right;
 }
