@@ -125,8 +125,7 @@ $('html')
 	.attr({
 		lang: chrome.i18n.getUILanguage(),
 		dir: chrome.i18n.getMessage('@@bidi_dir')
-	})
-	.get(0).style.setProperty('--align-to', chrome.i18n.getMessage('@@bidi_start_edge'));
+	});
 
 /**
  * FUNCTIONS

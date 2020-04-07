@@ -1,6 +1,7 @@
 /* RESETS */
 :root {
   --ext-icon-margin: 0.3em;
+  --align-to: __MSG_@@@@bidi_start_edge__;
 }
 
 body {
