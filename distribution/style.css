@@ -1,9 +1,9 @@
 /* RESETS */
 body {
-  width: 320px;
-}
-body.options-page {
   width: 400px;
+}
+body[data-type=popup] {
+  width: 320px;
 }
 a {
   outline: 0;

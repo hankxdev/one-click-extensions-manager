@@ -19,3 +19,5 @@ document.body.addEventListener('click', event => {
 		return false;
 	}
 });
+
+document.body.dataset.type = new URLSearchParams(location.search).get('type');
