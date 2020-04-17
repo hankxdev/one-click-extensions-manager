@@ -121,6 +121,12 @@ cme.onUninstalled.addListener(id => {
 	$('#' + escapeCssId(id)).remove();
 });
 
+$('html')
+	.attr({
+		lang: chrome.i18n.getUILanguage(),
+		dir: chrome.i18n.getMessage('@@bidi_dir')
+	});
+
 /**
  * FUNCTIONS
  */
@@ -151,8 +157,7 @@ function createList({id, name, enabled, installType, homepageUrl, optionsUrl, ic
 	return `
 		<li class='ext ${enabled ? '' : 'disabled'} type-${installType}' id='${id}' data-name="${name.toLowerCase()}">
 			<button class='extName' title='${getI18N('toggleEnable')}'>
-				<img class='extIcon' src='${getIcon(icons, 16)}'>
-				${name.length < 25 ? name : `<span title="${name}">${name}</span>`}
+				<img class='extIcon' src='${getIcon(icons, 16)}'>${name.length < 25 ? name : `<span title="${name}">${name}</span>`}
 			</button>
 			${
 				optionsUrl ? `

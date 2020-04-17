@@ -1,8 +1,12 @@
 /* RESETS */
+:root {
+  --margin: 8px;
+  --ext-icon-margin: 0.3em;
+}
+
 body {
   width: 320px;
   margin: auto;
-  --margin: 8px;
   padding: var(--margin);
 }
 body.options-page {
@@ -53,8 +57,8 @@ button {
   outline: 0;
   text-decoration: none;
   color: inherit;
-  text-align: left;
   padding: 0;
+  text-align: start;
 }
 .options * {
   text-decoration: none;
@@ -78,7 +82,7 @@ button {
   line-height: 1.9;
   font-weight: bolder;
   border-bottom: 1px solid #88888833;
-  padding-right: var(--margin);
+  padding-inline-end: var(--margin);
 }
 
 .ext:last-child {
@@ -105,7 +109,6 @@ button {
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-left: var(--margin);
 }
 .ext img {
   width: 16px;
@@ -113,7 +116,7 @@ button {
   vertical-align: -3px;
 }
 .extIcon {
-  margin-right: 0.3em;
+  padding: 0 var(--margin);
 }
 .ext > *:not(:first-child) {
   padding: 0 0.3em;
