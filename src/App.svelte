@@ -71,7 +71,7 @@
 	<ul id="extList">
 		{#each extensions as extension (extension.id)}
 			{#if extension.shown}
-				<Extension {...extension} {showExtras} on:contextmenu|once={onContextMenu} {undoStack}/>
+				<Extension {...extension} bind:enabled={extension.enabled} {showExtras} on:contextmenu|once={onContextMenu} {undoStack}/>
 			{/if}
 		{/each}
 	</ul>
