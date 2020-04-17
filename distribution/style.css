@@ -1,30 +1,35 @@
 /* RESETS */
+:root {
+  --margin: 8px;
+  --ext-icon-margin: 0.3em;
+}
+
 body {
   width: 400px;
+  margin: auto;
+  padding: var(--margin);
 }
 body[data-type=popup] {
   width: 320px;
 }
 a {
   outline: 0;
+  color: inherit;
 }
 input {
   box-sizing: border-box;
   width: 100%;
   font: inherit;
 }
-[hidden] {
-  display: none;
-}
-@media (min-width: 400px) {
-  [hidden] {
-    display: block;
-  }
-}
 
 /**
  * HEADER
  */
+input {
+  background-color: transparent;
+  border: solid 1px;
+  padding: 0.2em 0.4em;
+}
 .options {
   display: flex;
   justify-content: space-between;
@@ -44,26 +49,21 @@ button {
   outline: 0;
   text-decoration: none;
   color: inherit;
-  text-align: left;
   padding: 0;
+  text-align: start;
 }
 .options * {
   text-decoration: none;
-  color: inherit;
   padding: 0.5em;
   text-transform: uppercase;
   border-radius: 2px;
-}
-.options *:hover {
-  color: black;
-  background-color: #d9d9d9;
 }
 
 /**
  * LIST
  */
 #extList {
-  margin: 0;
+  margin: 0 calc(var(--margin) * -1);
   padding: 0;
   list-style: none;
 }
@@ -71,17 +71,19 @@ button {
   display: flex;
   white-space: nowrap;
   font-size: 1.2em;
-  line-height: 1.8;
+  line-height: 1.9;
   font-weight: bolder;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #88888833;
+  padding-inline-end: var(--margin);
 }
+
 .ext:last-child {
   border-bottom: none;
 }
-.ext.disabled {
+.ext.disabled .extName {
   font-weight: normal;
-  color: gray;
   filter: grayscale(60%);
+  opacity: 0.5;
 }
 .ext.disabled .extOptions {
   display: none;
@@ -106,17 +108,18 @@ button {
   vertical-align: -3px;
 }
 .extIcon {
-  margin-right: 0.3em;
+  padding: 0 var(--margin);
 }
 .ext > *:not(:first-child) {
   padding: 0 0.3em;
   opacity: 0.2;
+  flex-shrink: 0;
 }
 .ext:hover > * {
   opacity: 1;
 }
-.ext a:hover,
-.ext button:hover {
+a:hover,
+button:hover {
   background-color: #ecf0f1;
   cursor: pointer;
 }
@@ -141,4 +144,43 @@ button {
 }
 .extUninstall:before {
   content: url(icons/bin.svg);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Border around improves contrast */
+  body:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    border: solid 1px #595a5e;
+  }
+  body {
+    background-color: #292a2d;
+    color: #e8eaed;
+  }
+  input {
+    color: inherit;
+    background-color: transparent;
+    border: solid 1px;
+    padding: 0.2em 0.4em;
+  }
+
+  a:hover,
+  button:hover {
+    background-color: #c4d7dc38;
+  }
+  .ext :before {
+    filter: brightness(1.6);
+  }
+  .ext.type-development {
+      color: #83acf5;
+  }
+
+  .ext.type-admin {
+    color: #ffa38d;
+  }
 }

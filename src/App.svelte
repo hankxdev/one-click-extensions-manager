@@ -11,7 +11,7 @@
 
 	export let extensions = [];
 	let searchField;
-	let showExtras = false;
+	let showExtras = new URLSearchParams(location.search).get('type') !== 'popup'
 	let searchValue = '';
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 

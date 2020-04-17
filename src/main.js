@@ -20,4 +20,7 @@ document.body.addEventListener('click', event => {
 	}
 });
 
+document.documentElement.setAttribute('lang', browser.i18n.getUILanguage());
+document.documentElement.setAttribute('dif', browser.i18n.getMessage('@@bidi_dir'));
+
 document.body.dataset.type = new URLSearchParams(location.search).get('type');

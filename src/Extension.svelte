@@ -50,8 +50,7 @@
 
 <li class:disabled={!enabled} class="ext type-{installType}" id={id}>
 	<button type="button" class="extName" on:click={onExtensionClick} on:contextmenu>
-		<img class="extIcon" alt="" src={getIcon(icons, 16)}>
-		{name}
+		<img class="extIcon" alt="" src={getIcon(icons, 16)}>{name}
 	</button>
 
 	{#if optionsUrl}

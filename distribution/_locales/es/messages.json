@@ -3,30 +3,42 @@
     "message": "Administrador de extensión de un clic"
   },
   "extDesc": {
-    "message": "Administrar su extensión con un solo clic."
+    "message": "Ver, activar, desactivar y eliminar tus extensiones con facilidad."
   },
   "clkEnable": {
-    "message": "Haga clic para activar esta extensión"
+    "message": "Clic para activar esta extensión"
   },
   "clkDisable": {
-    "message": "Haga clic para deshabilitar esta extensión"
+    "message": "Clic para desactivar esta extensión"
   },
   "extensionPage": {
-    "message": "Más ..."
+    "message": "Más…"
   },
   "disAll": {
-    "message": "Deshabilitar todas las extensiones"
+    "message": "Desactivar todas"
   },
   "searchTxt": {
-    "message": "Buscar las extensiones"
+    "message": "Búscar por nombre..."
   },
   "gotoOpt": {
     "message": "Ir a la página de opciones"
   },
   "uninstall": {
-    "message": "Desinstalar esta extensión"
+    "message": "Eliminar esta extensión"
+  },
+  "undoInfoMsg": {
+    "message": "Puedes deshacer y rehacer tu última acción hasta que cierres esta ventana. Presiona <kbd>ctrl+z</kbd> en Windows y <kbd>cmd+z</kbd> en macOS, <kbd>super+z</kbd> en Ubuntu."
+  },
+  "hideInfoMsg": {
+    "message": "Ocultar esto"
+  },
+  "openUrl": {
+    "message": "Ver en Chrome Web Store"
+  },
+  "manage": {
+    "message": "Ver en la página de extensiones de Chrome"
   },
   "enableAll": {
-    "message": "Enable all"
+    "message": "Activar todas"
   }
 }
