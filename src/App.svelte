@@ -14,6 +14,12 @@
 	let optionsShown
 	let showExtras = false;
 	let searchValue = '';
+	let showInfoMessage = !localStorage.getItem('undo-info-message');
+
+	function hideInfoMessage() {
+		localStorage.setItem('undo-info-message', 1);
+		showInfoMessage = false;
+	}
 
 	function toggleAll(enable) {
 		const affectedExtensions = extensions.filter(extension => enable !== extension.enabled);
@@ -61,7 +67,9 @@
 </script>
 
 <main>
-	<p>{getI18N('undoInfoMsg')} <a href="#hide">{getI18N('hideInfoMsg')}</a></p>
+	{#if showInfoMessage}
+		<p>{getI18N('undoInfoMsg')} <a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a></p>
+	{/if}
 	<input bind:this={searchField} placeholder={getI18N('searchTxt')} bind:value={searchValue} on:input={onSearchInput}>
 	<div class="options">
 		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
