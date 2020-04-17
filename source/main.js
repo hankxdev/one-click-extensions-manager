@@ -1,13 +1,8 @@
 import App from './App.svelte';
 
-const app = new App({
-	target: document.body,
-	props: {
-		name: 'world'
-	}
+export default new App({
+	target: document.body
 });
-
-export default app;
 
 // TODO: maybe move this in App.svelte
 document.body.addEventListener('click', event => {
@@ -18,6 +13,7 @@ document.body.addEventListener('click', event => {
 	}
 });
 
+// Move to Svelte once this is supported: https://github.com/sveltejs/svelte/issues/3105
 document.documentElement.setAttribute('lang', browser.i18n.getUILanguage());
 document.documentElement.setAttribute('dif', browser.i18n.getMessage('@@bidi_dir'));
 
