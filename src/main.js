@@ -1,4 +1,4 @@
-import browser from 'webextension-polyfill'
+import browser from 'webextension-polyfill';
 window.browser = browser;
 import App from './App.svelte';
 
@@ -15,7 +15,7 @@ export default app;
 document.body.addEventListener('click', event => {
 	const clickedChromeLink = event.target.closest('[href^="chrome"]');
 	if (clickedChromeLink) {
-		chrome.tabs.create({url: clickedChromeLink.href});
+		browser.tabs.create({url: clickedChromeLink.href});
 		return false;
 	}
 });

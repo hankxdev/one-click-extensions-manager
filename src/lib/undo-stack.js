@@ -62,4 +62,4 @@ export default class UndoStack {
 		this._undoStack.length = 0;
 		this._redoStack.length = 0;
 	}
-};
+}
