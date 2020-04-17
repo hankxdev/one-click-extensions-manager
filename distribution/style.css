@@ -148,7 +148,7 @@ button:hover {
 
 @media (prefers-color-scheme: dark) {
   /* Border around improves contrast */
-  body:before {
+  [data-type=popup] body:before {
     content: "";
     position: fixed;
     top: 0;
