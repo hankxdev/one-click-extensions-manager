@@ -10,7 +10,3 @@ $enableAllButton.click(() => {
 	toggleAll(true);
 });
 
-// Update list on uninstall
-cme.onUninstalled.addListener(id => {
-	$('#' + escapeCssId(id)).remove();
-});

@@ -51,6 +51,11 @@
 				extension.indexedName = extension.name.toLowerCase();
 				return extension;
 			});
+
+		// Update list on uninstall
+		cme.onUninstalled.addListener(deleted => {
+			extensions = extensions.filter(({id}) => id !== deleted)
+		});
 	});
 
 	// Show extra buttons on right click on the name
