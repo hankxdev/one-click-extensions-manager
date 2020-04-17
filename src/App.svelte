@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
+	import {onMount} from 'svelte';
 	import Extension from './Extension.svelte';
 	import UndoStack from './lib/undo-stack';
 
@@ -11,7 +11,6 @@
 
 	export let extensions = [];
 	let searchField;
-	let optionsShown
 	let showExtras = false;
 	let searchValue = '';
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
@@ -29,6 +28,7 @@
 				extension.enabled = enable ? toggle : !toggle;
 				cme.setEnabled(extension.id, extension.enabled);
 			}
+
 			extensions = extensions;
 		});
 	}
@@ -54,7 +54,7 @@
 
 		// Update list on uninstall
 		cme.onUninstalled.addListener(deleted => {
-			extensions = extensions.filter(({id}) => id !== deleted)
+			extensions = extensions.filter(({id}) => id !== deleted);
 		});
 	});
 
@@ -64,7 +64,7 @@
 		event.preventDefault();
 	}
 
-	function onSearchInput(event) {
+	function onSearchInput() {
 		const keywords = this.value.toLowerCase().split(' ').filter(s => s.length);
 		for (const extension of extensions) {
 			extension.shown = keywords.every(word => extension.indexedName.includes(word));

@@ -12,16 +12,16 @@
 	const getI18N = chrome.i18n.getMessage;
 	const url = installType === 'normal' ? `https://chrome.google.com/webstore/detail/${id}` : homepageUrl;
 
-	function onExtensionClick(event) {
+	function onExtensionClick() {
 		const wasEnabled = enabled;
 
 		undoStack.do(toggle => {
-			browser.management.setEnabled(id, toggle !== wasEnabled)
+			browser.management.setEnabled(id, toggle !== wasEnabled);
 			enabled = toggle !== wasEnabled;
 		});
 	}
 
-	function onUninstallClick(event) {
+	function onUninstallClick() {
 		browser.management.uninstall(id);
 	}
 
