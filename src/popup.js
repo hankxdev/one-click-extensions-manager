@@ -18,12 +18,6 @@ $enableAllButton.click(() => {
 	toggleAll(true);
 });
 
-// Enable chrome:// links
-$('body').on('click', '[href^="chrome"]', event => {
-	chrome.tabs.create({url: event.currentTarget.href});
-	return false;
-});
-
 // Update list on uninstall
 cme.onUninstalled.addListener(id => {
 	$('#' + escapeCssId(id)).remove();
