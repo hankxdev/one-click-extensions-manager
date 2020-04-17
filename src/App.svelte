@@ -68,6 +68,8 @@
 		for (const extension of extensions) {
 			extension.shown = keywords.every(word => extension.indexedName.includes(word));
 		}
+
+		extensions = extensions;
 	}
 </script>
 
