@@ -11,6 +11,7 @@ const app = new App({
 
 export default app;
 
+// TODO: maybe move this in App.svelte
 document.body.addEventListener('click', event => {
 	const clickedChromeLink = event.target.closest('[href^="chrome"]');
 	if (clickedChromeLink) {
