@@ -57,9 +57,11 @@
 	{#if optionsUrl}
 		<a class='extOptions' href='chrome://extensions/?options={id}' title={getI18N('gotoOpt')} target='_blank'></a>
 	{/if}
-	{#if url}
-		<a hidden={showExtras} class="extUrl" href={url} title={getI18N('openUrl')} target="_blank"></a>
+	{#if showExtras}
+		{#if url}
+			<a class="extUrl" href={url} title={getI18N('openUrl')} target="_blank"></a>
+		{/if}
+		<a class="extMore" href="chrome://extensions/?id={id}" title="See in Chrome’s extensions page" target="_blank"></a>
+		<button type="button" class="extUninstall" title={getI18N('uninstall')} on:click={onUninstallClick}></button>
 	{/if}
-	<a hidden={showExtras} class="extMore" href="chrome://extensions/?id={id}" title="See in Chrome’s extensions page" target="_blank"></a>
-	<button type="button" hidden class="extUninstall" title={getI18N('uninstall')} on:click={onUninstallClick}></button>
 </li>

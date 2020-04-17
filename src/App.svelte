@@ -61,6 +61,7 @@
 	// Show extra buttons on right click on the name
 	function onContextMenu(event) {
 		showExtras = true;
+		event.preventDefault();
 	}
 
 	function onSearchInput(event) {
@@ -86,7 +87,7 @@
 	<ul id="extList">
 		{#each extensions as extension (extension.id)}
 			{#if extension.shown}
-				<Extension {...extension} bind:enabled={extension.enabled} {showExtras} on:contextmenu|once={onContextMenu} {undoStack}/>
+				<Extension {...extension} bind:enabled={extension.enabled} bind:showExtras on:contextmenu|once={onContextMenu} {undoStack}/>
 			{/if}
 		{/each}
 	</ul>
