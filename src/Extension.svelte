@@ -15,12 +15,9 @@
 	function onExtensionClick(event) {
 		const wasEnabled = enabled;
 
-		undoStack.do(() => {
-			browser.management.setEnabled(id, !wasEnabled)
-			enabled = !wasEnabled;
-		}, () => {
-			browser.management.setEnabled(id, wasEnabled)
-			enabled = wasEnabled;
+		undoStack.do(toggle => {
+			browser.management.setEnabled(id, toggle !== wasEnabled)
+			enabled = toggle !== wasEnabled;
 		});
 	}
 
