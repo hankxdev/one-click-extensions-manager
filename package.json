@@ -61,7 +61,7 @@
     "dot-json": "^1.2.0",
     "eslint-plugin-svelte3": "^2.7.3",
     "rollup": "^2.6.1",
-    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-copy-glob": "^0.3.1",
     "rollup-plugin-livereload": "^1.2.0",
     "rollup-plugin-svelte": "^5.2.1",
     "svelte": "^3.20.1",

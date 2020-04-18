@@ -2,7 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
-import copy from 'rollup-plugin-copy';
+import copy from 'rollup-plugin-copy-glob';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -16,7 +16,7 @@ export default {
 	plugins: [
 		svelte({
 			// Enable run-time checks when not in production
-			dev: !production,
+			dev: !production
 		}),
 
 		resolve({
@@ -24,17 +24,17 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-		copy({
-			targets: [
-				{
-					src: ['source/*', '!source/*.js', '!source/*.svelte'],
-					dest: 'distribution'
-				},
-				{
-					src: 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js',
-					dest: 'distribution'
-				}
-			]
+		copy([
+			{
+				files: 'source/**/!(*.js|*.svelte)',
+				dest: 'distribution'
+			},
+			{
+				files: 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js',
+				dest: 'distribution'
+			}
+		], {
+			watch: true
 		}),
 
 		// Watch the `distribution` directory and refresh the
