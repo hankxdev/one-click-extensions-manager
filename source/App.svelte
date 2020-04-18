@@ -72,10 +72,11 @@
 	});
 
 	// Show extra buttons on right click on the name
-	function onContextMenu(event) {
+	let onContextMenu;
+	$: onContextMenu = showExtras ? () => {} : (event => {
 		showExtras = true;
 		event.preventDefault();
-	}
+	});
 </script>
 
 <svelte:window on:keydown={keyboardNavigationHandler}/>
@@ -94,7 +95,7 @@
 	<ul id="ext-list">
 		{#each extensions as extension (extension.id)}
 			{#if extension.shown}
-				<Extension {...extension} bind:enabled={extension.enabled} bind:showExtras on:contextmenu|once={onContextMenu} {undoStack}/>
+				<Extension {...extension} bind:enabled={extension.enabled} bind:showExtras on:contextmenu={onContextMenu} {undoStack}/>
 			{/if}
 		{/each}
 	</ul>
