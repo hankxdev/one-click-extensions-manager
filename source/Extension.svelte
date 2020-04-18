@@ -46,7 +46,7 @@
 </script>
 
 <li class:disabled={!enabled} class="ext type-{installType}">
-	<button type="button" class="extName" on:click={toggleExtension} on:contextmenu>
+	<button type="button" class="ext-name" on:click={toggleExtension} on:contextmenu>
 		<img alt="" src={getIcon(icons, 16)}>{name}
 	</button>
 

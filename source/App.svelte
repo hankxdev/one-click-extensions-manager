@@ -83,7 +83,7 @@
 		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
 		<a href="chrome://extensions" on:click={openInTab}>{getI18N('extensionPage')}</a>
 	</div>
-	<ul id="extList">
+	<ul id="ext-list">
 		{#each extensions as extension (extension.id)}
 			{#if extension.shown}
 				<Extension {...extension} bind:enabled={extension.enabled} bind:showExtras on:contextmenu|once={onContextMenu} {undoStack}/>
