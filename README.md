@@ -12,13 +12,12 @@ Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail
 
 ## Internationalization(i18n)
 
-We enabled multiple languages for this extension. But most of them are translated from English by Google translator. 
+We enabled multiple languages for this extension. But most of them are translated from English by Google translator.
 Except Chinese Simplified.
 
 Welcome to help us translate it.
 
 There are only 14 sentences needed to be translated. You can find them in `src/_locals/en/message.json`.
-
 
 ## License
 

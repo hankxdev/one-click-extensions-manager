@@ -1,63 +1,63 @@
 {
-  "private": true,
-  "dependencies": {},
-  "devDependencies": {
-    "dot-json": "^1.2.0",
-    "eslint": "^6.8.0",
-    "npm-run-all": "^4.1.5",
-    "stylelint": "^13.3.2",
-    "stylelint-config-xo": "^0.16.1",
-    "utc-version": "^2.0.1",
-    "web-ext": "^4.1.0",
-    "xo": "^0.29.1"
-  },
-  "scripts": {
-    "fix": "run-p 'lint:* -- --fix'",
-    "lint": "run-p lint:*",
-    "lint:css": "stylelint 'src/*.css'",
-    "lint:js": "eslint src",
-    "test": "run-p 'lint:*' build",
-    "build": "npm run update-version && npm run zip",
-    "update-version": "VERSION=$(utc-version); echo $VERSION; dot-json src/manifest.json version $VERSION",
-    "zip": "web-ext build --source-dir src --artifacts-dir dist"
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "jquery": true,
-      "webextensions": true
-    },
-    "plugins": [
-      "unicorn"
-    ],
-    "extends": [
-      "xo/browser",
-      "plugin:unicorn/recommended"
-    ],
-    "rules": {
-      "indent": [
-        "error",
-        "tab",
-        {
-          "ignoredNodes": [
-            "TemplateLiteral > *"
-          ]
-        }
-      ]
-    },
-    "ignorePatterns": [
-      "src/lib/jquery*",
-      "dist"
-    ]
-  },
-  "stylelint": {
-    "extends": "stylelint-config-xo",
-    "rules": {
-      "no-duplicate-selectors": null,
-      "selector-id-pattern": null,
-      "selector-class-pattern": null,
-      "no-descending-specificity": null,
-      "function-url-quotes": null
-    }
-  }
+	"private": true,
+	"scripts": {
+		"build": "npm run update-version && npm run zip",
+		"fix": "run-p 'lint:* -- --fix'",
+		"lint": "run-p lint:*",
+		"lint:css": "stylelint 'src/*.css'",
+		"lint:js": "eslint src",
+		"test": "run-p 'lint:*' build",
+		"update-version": "VERSION=$(utc-version); echo $VERSION; dot-json src/manifest.json version $VERSION",
+		"zip": "web-ext build --source-dir src --artifacts-dir dist"
+	},
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"jquery": true,
+			"webextensions": true
+		},
+		"plugins": [
+			"unicorn"
+		],
+		"extends": [
+			"xo/browser",
+			"plugin:unicorn/recommended"
+		],
+		"rules": {
+			"indent": [
+				"error",
+				"tab",
+				{
+					"ignoredNodes": [
+						"TemplateLiteral > *"
+					]
+				}
+			]
+		},
+		"ignorePatterns": [
+			"src/lib/jquery*",
+			"dist"
+		]
+	},
+	"stylelint": {
+		"extends": "stylelint-config-xo",
+		"rules": {
+			"no-duplicate-selectors": null,
+			"selector-id-pattern": null,
+			"selector-class-pattern": null,
+			"no-descending-specificity": null,
+			"function-url-quotes": null
+		}
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"dot-json": "^1.2.0",
+		"eslint": "^6.8.0",
+		"npm-run-all": "^4.1.5",
+		"stylelint": "^13.3.2",
+		"stylelint-config-xo": "^0.16.1",
+		"utc-version": "^2.0.1",
+		"web-ext": "^4.1.0",
+		"xo": "^0.29.1"
+	}
 }
