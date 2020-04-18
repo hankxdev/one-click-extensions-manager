@@ -11,19 +11,15 @@
     "zip": "web-ext build --source-dir distribution"
   },
   "eslintConfig": {
-    "extends": "xo/browser",
     "env": {
       "browser": true,
       "webextensions": true
     },
-    "globals": {
-      "chrome": "off"
-    },
     "plugins": [
       "svelte3"
     ],
+    "extends": "xo/browser",
     "rules": {
-      "no-new": "off",
       "import/extensions": [
         "error",
         "never",
@@ -38,14 +34,18 @@
           "maxBOF": 2,
           "maxEOF": 1
         }
-      ]
+      ],
+      "no-new": "off"
     },
     "overrides": [
       {
         "files": "**/*.svelte",
         "processor": "svelte3/svelte3"
       }
-    ]
+    ],
+    "globals": {
+      "chrome": "off"
+    }
   },
   "dependencies": {
     "webextension-polyfill": "^0.6.0"
