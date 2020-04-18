@@ -29,6 +29,13 @@
 		showInfoMessage = false;
 	}
 
+	function keyboardNavigationHandler(event) {
+		if (event.key === 'Tab') {
+			document.body.classList.add('keyboard-navigation');
+			showExtras = true;
+		}
+	}
+
 	function toggleAll(enable) {
 		const affectedExtensions = extensions.filter(extension => enable !== extension.enabled);
 
@@ -70,6 +77,8 @@
 		event.preventDefault();
 	}
 </script>
+
+<svelte:window on:keydown={keyboardNavigationHandler}/>
 
 <main>
 	{#if showInfoMessage}
