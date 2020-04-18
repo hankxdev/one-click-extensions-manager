@@ -44,7 +44,9 @@ button {
 }
 
 a:hover,
-button:hover {
+.keyboard-navigation a:focus,
+button:hover,
+.keyboard-navigation button:focus {
 	background-color: #ecf0f1;
 	cursor: pointer;
 }
@@ -125,7 +127,8 @@ button:hover {
 	margin-inline-end: var(--margin);
 }
 
-.ext:hover > * {
+.ext:hover > *,
+.keyboard-navigation .ext:focus-within > * {
 	opacity: 1;
 }
 
@@ -148,7 +151,9 @@ button:hover {
 	}
 
 	a:hover,
-	button:hover {
+	.keyboard-navigation a:focus,
+	button:hover,
+	.keyboard-navigation button:focus {
 		background-color: #c4d7dc38;
 	}
 
