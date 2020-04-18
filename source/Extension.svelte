@@ -26,25 +26,20 @@
 	}
 
 	function getIcon(icons, size = 16) {
-		// Set fallback icon
-		let selectedIcon = 'icons/puzzle.svg';
-
 		// Get retina size if necessary
 		size *= window.devicePixelRatio;
 
-		if (icons && icons.length > 0) {
+		if (icons) {
 			// Get a large icon closest to the desired size
-			icons.reverse().some(icon => {
-				if (icon.size < size) {
-					return false;
+			for (const icon of icons.reverse()) {
+				if (icon.size >= size) {
+					return  icon.url;
 				}
-
-				selectedIcon = icon.url;
-				return true;
-			});
+			}
 		}
 
-		return selectedIcon;
+		// Fallback icon
+		return 'icons/puzzle.svg';
 	}
 </script>
 

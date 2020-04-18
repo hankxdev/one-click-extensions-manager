@@ -11,18 +11,12 @@ export default {
 	output: {
 		sourcemap: !production,
 		format: 'iife',
-		name: 'app',
-		file: 'distribution/bundle.js'
+		dir: 'distribution'
 	},
 	plugins: [
 		svelte({
 			// Enable run-time checks when not in production
 			dev: !production,
-			// We'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('distribution/bundle.css');
-			}
 		}),
 
 		resolve({
