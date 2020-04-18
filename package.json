@@ -1,14 +1,16 @@
 {
 	"private": true,
 	"scripts": {
-		"build": "npm run update-version && npm run zip",
+		"build": "rollup --config",
 		"fix": "run-p 'lint:* -- --fix'",
 		"lint": "run-p lint:*",
-		"lint:css": "stylelint 'src/*.css'",
-		"lint:js": "eslint src",
+		"lint:css": "stylelint 'source/*.css'",
+		"lint:js": "eslint source",
+		"release": "run-s version zip",
 		"test": "run-p 'lint:*' build",
-		"update-version": "VERSION=$(utc-version); echo $VERSION; dot-json src/manifest.json version $VERSION",
-		"zip": "web-ext build --source-dir src --artifacts-dir dist"
+		"version": "VERSION=$(utc-version); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
+		"watch": "rollup --config --watch",
+		"zip": "web-ext build --source-dir distribution"
 	},
 	"eslintConfig": {
 		"env": {
@@ -33,11 +35,7 @@
 					]
 				}
 			]
-		},
-		"ignorePatterns": [
-			"src/lib/jquery*",
-			"dist"
-		]
+		}
 	},
 	"stylelint": {
 		"extends": "stylelint-config-xo",
@@ -49,11 +47,16 @@
 			"function-url-quotes": null
 		}
 	},
-	"dependencies": {},
+	"dependencies": {
+		"jquery": "^3.5.0"
+	},
 	"devDependencies": {
 		"dot-json": "^1.2.0",
 		"eslint": "^6.8.0",
 		"npm-run-all": "^4.1.5",
+		"rollup": "^2.6.1",
+		"rollup-plugin-copy-glob": "^0.3.1",
+		"rollup-plugin-livereload": "^1.2.0",
 		"stylelint": "^13.3.2",
 		"stylelint-config-xo": "^0.16.1",
 		"utc-version": "^2.0.1",

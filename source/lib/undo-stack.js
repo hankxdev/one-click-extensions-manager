@@ -1,4 +1,4 @@
-window.UndoStack = class UndoStack {
+export default class UndoStack {
 	constructor(element) {
 		this._undoStack = [];
 		this._redoStack = [];
@@ -62,4 +62,4 @@ window.UndoStack = class UndoStack {
 		this._undoStack.length = 0;
 		this._redoStack.length = 0;
 	}
-};
+}

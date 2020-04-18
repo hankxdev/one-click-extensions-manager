@@ -1,4 +1,4 @@
-/* global UndoStack */
+import UndoStack from './lib/undo-stack.js';
 
 const cme = chrome.management;
 const getI18N = chrome.i18n.getMessage;
