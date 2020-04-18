@@ -7,7 +7,7 @@ const myid = getI18N('@@extension_id');
 // Handle undo/redo events
 const undoStack = new UndoStack(document.body);
 
-const escapeCssId = id => id.replace(/[@.]/g, '\\$0');
+const escapeCssId = id => id.replace(/[.@]/g, '\\$0');
 
 /**
  * GENERATE PAGE
@@ -177,8 +177,8 @@ function createList({id, name, enabled, installType, homepageUrl, optionsUrl, ic
 
 function toggleAll(enable) {
 	getExtensions(extensions => {
-		const wereEnabled = extensions.filter(ext => enable ? !ext.enabled : ext.enabled);
-		const selector = wereEnabled.map(ext => '#' + escapeCssId(ext.id)).join(',');
+		const wereEnabled = extensions.filter(extension => enable ? !extension.enabled : extension.enabled);
+		const selector = wereEnabled.map(extension => '#' + escapeCssId(extension.id)).join(',');
 		const $wereEnabled = $(selector);
 
 		undoStack.do(disable => {
@@ -191,7 +191,7 @@ function toggleAll(enable) {
 }
 
 function getExtensions(callback) {
-	cme.getAll(exts => {
-		callback(exts.filter(ext => ext.type === 'extension' && ext.id !== myid));
+	cme.getAll(extensions => {
+		callback(extensions.filter(extension => extension.type === 'extension' && extension.id !== myid));
 	});
 }
