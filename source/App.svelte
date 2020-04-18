@@ -6,15 +6,22 @@
 
 	const undoStack = new UndoStack(window);
 
-	const cme = browser.management;
 	const getI18N = browser.i18n.getMessage;
 	const myid = getI18N('@@extension_id');
 
 	export let extensions = [];
-	let searchField;
-	let showExtras = new URLSearchParams(window.location.search).get('type') !== 'popup';
 	let searchValue = '';
+	let showExtras = new URLSearchParams(window.location.search).get('type') !== 'popup';
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
+
+	$: {
+		const keywords = searchValue.toLowerCase().split(' ').filter(s => s.length);
+		for (const extension of extensions) {
+			extension.shown = keywords.every(word => extension.indexedName.includes(word));
+		}
+
+		extensions = extensions;
+	}
 
 	function hideInfoMessage() {
 		localStorage.setItem('undo-info-message', 1);
@@ -27,7 +34,7 @@
 		undoStack.do(toggle => {
 			for (const extension of affectedExtensions) {
 				extension.enabled = enable ? toggle : !toggle;
-				cme.setEnabled(extension.id, extension.enabled);
+				browser.management.setEnabled(extension.id, extension.enabled);
 			}
 
 			extensions = extensions;
@@ -51,7 +58,7 @@
 			});
 
 		// Update list on uninstall
-		cme.onUninstalled.addListener(deleted => {
+		browser.management.onUninstalled.addListener(deleted => {
 			extensions = extensions.filter(({id}) => id !== deleted);
 		});
 	});
@@ -61,15 +68,6 @@
 		showExtras = true;
 		event.preventDefault();
 	}
-
-	function onSearchInput() {
-		const keywords = this.value.toLowerCase().split(' ').filter(s => s.length);
-		for (const extension of extensions) {
-			extension.shown = keywords.every(word => extension.indexedName.includes(word));
-		}
-
-		extensions = extensions;
-	}
 </script>
 
 <main>
@@ -77,7 +75,7 @@
 		<p>{getI18N('undoInfoMsg')} <a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a></p>
 	{/if}
 	<!-- svelte-ignore a11y-autofocus -->
-	<input autofocus bind:this={searchField} placeholder={getI18N('searchTxt')} bind:value={searchValue} on:input={onSearchInput}>
+	<input autofocus placeholder={getI18N('searchTxt')} bind:value={searchValue}>
 	<div class="options">
 		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
 		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
