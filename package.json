@@ -16,10 +16,16 @@
       "webextensions": true
     },
     "plugins": [
-      "svelte3"
+      "svelte3",
+      "unicorn"
     ],
-    "extends": "xo/browser",
+    "extends": [
+      "xo/browser",
+      "plugin:unicorn/recommended"
+    ],
     "rules": {
+      "unicorn/filename-case": "off",
+      "unicorn/prevent-abbreviations": "error",
       "import/extensions": [
         "error",
         "never",
@@ -46,6 +52,9 @@
     "globals": {
       "chrome": "off"
     }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-xo"
   },
   "dependencies": {
     "webextension-polyfill": "^0.6.0"
