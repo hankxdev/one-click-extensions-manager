@@ -18,8 +18,8 @@
 		const wasEnabled = enabled;
 
 		undoStack.do(toggle => {
-			browser.management.setEnabled(id, toggle !== wasEnabled);
 			enabled = toggle !== wasEnabled;
+			browser.management.setEnabled(id, enabled);
 		});
 	}
 

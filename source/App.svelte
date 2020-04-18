@@ -4,13 +4,14 @@
 	import openInTab from './lib/open-in-tab';
 	import UndoStack from './lib/undo-stack';
 
+	const getI18N = browser.i18n.getMessage;
 	const undoStack = new UndoStack(window);
 
-	const getI18N = browser.i18n.getMessage;
 	const myid = getI18N('@@extension_id');
-
-	export let extensions = [];
+	let extensions = [];
 	let searchValue = '';
+
+	// Show all buttons when it's not in a popup #32
 	let showExtras = new URLSearchParams(window.location.search).get('type') !== 'popup';
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 
@@ -20,7 +21,7 @@
 			extension.shown = keywords.every(word => extension.indexedName.includes(word));
 		}
 
-		extensions = extensions;
+		extensions = extensions; // Signals to Svelte that the content was updated
 	}
 
 	function hideInfoMessage() {
@@ -37,7 +38,7 @@
 				browser.management.setEnabled(extension.id, extension.enabled);
 			}
 
-			extensions = extensions;
+			extensions = extensions; // Signals to Svelte that the content was updated
 		});
 	}
 
