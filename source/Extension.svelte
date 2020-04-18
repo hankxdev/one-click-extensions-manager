@@ -11,7 +11,7 @@
 	export let showExtras;
 	export let undoStack;
 
-	const getI18N = chrome.i18n.getMessage;
+	const getI18N = browser.i18n.getMessage;
 	const url = installType === 'normal' ? `https://chrome.google.com/webstore/detail/${id}` : homepageUrl;
 
 	function toggleExtension() {
@@ -35,7 +35,7 @@
 			// Get a large icon closest to the desired size
 			for (const icon of icons.reverse()) {
 				if (icon.size >= size) {
-					return  icon.url;
+					return icon.url;
 				}
 			}
 		}

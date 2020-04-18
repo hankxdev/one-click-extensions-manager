@@ -6,13 +6,13 @@
 
 	const undoStack = new UndoStack(window);
 
-	const cme = chrome.management;
-	const getI18N = chrome.i18n.getMessage;
+	const cme = browser.management;
+	const getI18N = browser.i18n.getMessage;
 	const myid = getI18N('@@extension_id');
 
 	export let extensions = [];
 	let searchField;
-	let showExtras = new URLSearchParams(location.search).get('type') !== 'popup'
+	let showExtras = new URLSearchParams(window.location.search).get('type') !== 'popup';
 	let searchValue = '';
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 

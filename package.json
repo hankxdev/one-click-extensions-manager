@@ -2,37 +2,35 @@
   "private": true,
   "scripts": {
     "build": "rollup -c",
-    "fix": "xo --fix",
+    "fix": "npm run test:lint -- --fix",
     "release": "npm run update-version && npm run zip",
-    "test": "xo && npm run build",
+    "test": "npm run test:lint && npm run build",
+    "test:lint": "eslint source --ext svelte",
     "update-version": "VERSION=$(utc-version); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
     "watch": "rollup -c -w",
     "zip": "web-ext build --source-dir distribution"
   },
-  "xo": {
-    "envs": [
-      "browser"
-    ],
-    "globals": [
-      "browser"
-    ],
-    "extensions": [
-      "svelte"
-    ],
+  "eslintConfig": {
+    "extends": "xo/browser",
+    "env": {
+      "browser": true,
+      "webextensions": true
+    },
+    "globals": {
+      "chrome": "off"
+    },
     "plugins": [
       "svelte3"
     ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.svelte"
-        ],
-        "processor": "svelte3/svelte3"
-      }
-    ],
     "rules": {
       "no-new": "off",
-      "import/extensions": "off",
+      "import/extensions": [
+        "error",
+        "never",
+        {
+          "svelte": "always"
+        }
+      ],
       "no-multiple-empty-lines": [
         "error",
         {
@@ -40,17 +38,14 @@
           "maxBOF": 2,
           "maxEOF": 1
         }
-      ],
-      "indent": [
-        "error",
-        "tab",
-        {
-          "ignoredNodes": [
-            "TemplateLiteral > *"
-          ]
-        }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": "**/*.svelte",
+        "processor": "svelte3/svelte3"
+      }
+    ]
   },
   "dependencies": {
     "webextension-polyfill": "^0.6.0"
@@ -59,6 +54,7 @@
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-node-resolve": "^7.1.3",
     "dot-json": "^1.2.0",
+    "eslint": "^6.8.0",
     "eslint-plugin-svelte3": "^2.7.3",
     "rollup": "^2.6.1",
     "rollup-plugin-copy-glob": "^0.3.1",
