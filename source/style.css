@@ -12,51 +12,53 @@ body {
 body[data-type=popup] {
   width: 320px;
 }
-a {
-  outline: 0;
-  color: inherit;
-}
+
 input {
   box-sizing: border-box;
   width: 100%;
   font: inherit;
+  background-color: transparent;
+  color: inherit;
+  border: solid 1px;
+  padding: 0.2em 0.4em;
+}
+
+a {
+  outline: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  background: none;
+  color: inherit;
+  text-align: start;
+}
+a:hover,
+button:hover {
+  background-color: #ecf0f1;
+  cursor: pointer;
 }
 
 /**
  * HEADER
  */
-input {
-  background-color: transparent;
-  border: solid 1px;
-  padding: 0.2em 0.4em;
-}
 .options {
   display: flex;
   justify-content: space-between;
   margin: 0.5em 0;
 }
-button {
-  cursor: pointer;
-  display: inline-block;
-  overflow: hidden;
-  user-select: none;
-  font: inherit;
-  -webkit-tap-highlight-color: transparent;
-  vertical-align: middle;
-  box-shadow: none;
-  background-color: transparent;
-  border: none;
-  outline: 0;
-  text-decoration: none;
-  color: inherit;
-  padding: 0;
-  text-align: start;
-}
 .options * {
-  text-decoration: none;
   padding: 0.5em;
-  text-transform: uppercase;
   border-radius: 2px;
+  text-transform: uppercase;
 }
 
 /**
@@ -72,24 +74,9 @@ button {
   white-space: nowrap;
   font-size: 1.2em;
   line-height: 1.9;
-  font-weight: bolder;
+}
+.ext:not(:last-child) {
   border-bottom: 1px solid #88888833;
-  padding-inline-end: var(--margin);
-}
-
-.ext:last-child {
-  border-bottom: none;
-}
-.ext.disabled .extName {
-  font-weight: normal;
-  filter: grayscale(60%);
-  opacity: 0.5;
-}
-.ext.disabled .extOptions {
-  display: none;
-}
-.ext.disabled + .disabled {
-  margin-top: 0;
 }
 .ext.type-development {
   color: #4170C3;
@@ -101,49 +88,31 @@ button {
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: bold;
+}
+.disabled .extName {
+  font-weight: normal;
+  filter: grayscale(60%);
+  opacity: 0.5;
 }
 .ext img {
   width: 16px;
   height: 16px;
   vertical-align: -3px;
 }
-.extIcon {
+.extName img {
   padding: 0 var(--margin);
 }
-.ext > *:not(:first-child) {
+.ext > :not(.extName) {
   padding: 0 0.3em;
   opacity: 0.2;
   flex-shrink: 0;
 }
+.ext > :last-child:not(.extName) {
+  margin-inline-end: var(--margin);
+}
 .ext:hover > * {
   opacity: 1;
-}
-a:hover,
-button:hover {
-  background-color: #ecf0f1;
-  cursor: pointer;
-}
-
-/**
- * BUTTON ICONS
- */
-.ext :before {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  vertical-align: -3px;
-}
-.extOptions:before {
-  content: url(icons/options.svg);
-}
-.extMore:before {
-  content: url(icons/ellipsis.svg);
-}
-.extUrl:before {
-  content: url(icons/globe.svg);
-}
-.extUninstall:before {
-  content: url(icons/bin.svg);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -158,24 +127,21 @@ button:hover {
     z-index: -1;
     border: solid 1px #595a5e;
   }
+
   body {
     background-color: #292a2d;
     color: #e8eaed;
-  }
-  input {
-    color: inherit;
-    background-color: transparent;
-    border: solid 1px;
-    padding: 0.2em 0.4em;
   }
 
   a:hover,
   button:hover {
     background-color: #c4d7dc38;
   }
-  .ext :before {
+
+  .ext :not(.extName) img {
     filter: brightness(1.6);
   }
+
   .ext.type-development {
       color: #83acf5;
   }

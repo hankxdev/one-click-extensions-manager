@@ -12,7 +12,7 @@
 	const getI18N = chrome.i18n.getMessage;
 	const url = installType === 'normal' ? `https://chrome.google.com/webstore/detail/${id}` : homepageUrl;
 
-	function onExtensionClick() {
+	function toggleExtension() {
 		const wasEnabled = enabled;
 
 		undoStack.do(toggle => {
@@ -43,19 +43,29 @@
 	}
 </script>
 
-<li class:disabled={!enabled} class="ext type-{installType}" id={id}>
-	<button type="button" class="extName" on:click={onExtensionClick} on:contextmenu>
-		<img class="extIcon" alt="" src={getIcon(icons, 16)}>{name}
+<li class:disabled={!enabled} class="ext type-{installType}">
+	<button type="button" class="extName" on:click={toggleExtension} on:contextmenu>
+		<img alt="" src={getIcon(icons, 16)}>{name}
 	</button>
 
-	{#if optionsUrl}
-		<a class='extOptions' href='chrome://extensions/?options={id}' title={getI18N('gotoOpt')} target='_blank'></a>
-	{/if}
-	{#if showExtras}
-		{#if url}
-			<a class="extUrl" href={url} title={getI18N('openUrl')} target="_blank"></a>
+	{#if enabled}
+		{#if optionsUrl}
+			<a href='chrome://extensions/?options={id}' title={getI18N('gotoOpt')} target="_blank">
+				<img src="icons/options.svg" alt="">
+			</a>
 		{/if}
-		<a class="extMore" href="chrome://extensions/?id={id}" title="See in Chrome’s extensions page" target="_blank"></a>
-		<button type="button" class="extUninstall" title={getI18N('uninstall')} on:click={onUninstallClick}></button>
+		{#if showExtras}
+			{#if url}
+				<a href={url} title={getI18N('openUrl')} target="_blank">
+					<img src="icons/globe.svg" alt="">
+				</a>
+			{/if}
+			<a href="chrome://extensions/?id={id}" title="See in Chrome’s extensions page" target="_blank">
+				<img src="icons/ellipsis.svg" alt="">
+			</a>
+			<button type="button" title={getI18N('uninstall')} on:click={onUninstallClick}>
+				<img src="icons/bin.svg" alt="">
+			</button>
+		{/if}
 	{/if}
 </li>
