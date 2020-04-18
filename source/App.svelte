@@ -1,0 +1,92 @@
+<script>
+	import {onMount} from 'svelte';
+	import Extension from './Extension.svelte';
+	import openInTab from './lib/open-in-tab';
+	import UndoStack from './lib/undo-stack';
+
+	const getI18N = browser.i18n.getMessage;
+	const undoStack = new UndoStack(window);
+
+	const myid = getI18N('@@extension_id');
+	let extensions = [];
+	let searchValue = '';
+
+	// Show all buttons when it's not in a popup #32
+	let showExtras = new URLSearchParams(window.location.search).get('type') !== 'popup';
+	let showInfoMessage = !localStorage.getItem('undo-info-message');
+
+	$: {
+		const keywords = searchValue.toLowerCase().split(' ').filter(s => s.length);
+		for (const extension of extensions) {
+			extension.shown = keywords.every(word => extension.indexedName.includes(word));
+		}
+
+		extensions = extensions; // Signals to Svelte that the content was updated
+	}
+
+	function hideInfoMessage() {
+		localStorage.setItem('undo-info-message', 1);
+		showInfoMessage = false;
+	}
+
+	function toggleAll(enable) {
+		const affectedExtensions = extensions.filter(extension => enable !== extension.enabled);
+
+		undoStack.do(toggle => {
+			for (const extension of affectedExtensions) {
+				extension.enabled = enable ? toggle : !toggle;
+				browser.management.setEnabled(extension.id, extension.enabled);
+			}
+
+			extensions = extensions; // Signals to Svelte that the content was updated
+		});
+	}
+
+	onMount(async () => {
+		extensions = (await browser.management.getAll())
+			.filter(({type, id}) => type === 'extension' && id !== myid)
+			.sort((a, b) => {
+				if (a.enabled === b.enabled) {
+					return a.name.localeCompare(b.name); // Sort by name
+				}
+
+				return a.enabled < b.enabled ? 1 : -1; // Sort by state
+			})
+			.map(extension => {
+				extension.shown = true;
+				extension.indexedName = extension.name.toLowerCase();
+				return extension;
+			});
+
+		// Update list on uninstall
+		browser.management.onUninstalled.addListener(deleted => {
+			extensions = extensions.filter(({id}) => id !== deleted);
+		});
+	});
+
+	// Show extra buttons on right click on the name
+	function onContextMenu(event) {
+		showExtras = true;
+		event.preventDefault();
+	}
+</script>
+
+<main>
+	{#if showInfoMessage}
+		<p>{getI18N('undoInfoMsg')} <a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a></p>
+	{/if}
+	<!-- svelte-ignore a11y-autofocus -->
+	<input autofocus placeholder={getI18N('searchTxt')} bind:value={searchValue}>
+	<div class="options">
+		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
+		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
+		<a href="chrome://extensions" on:click={openInTab}>{getI18N('extensionPage')}</a>
+	</div>
+	<ul id="ext-list">
+		{#each extensions as extension (extension.id)}
+			{#if extension.shown}
+				<Extension {...extension} bind:enabled={extension.enabled} bind:showExtras on:contextmenu|once={onContextMenu} {undoStack}/>
+			{/if}
+		{/each}
+	</ul>
+</main>

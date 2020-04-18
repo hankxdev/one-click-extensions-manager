@@ -52,5 +52,5 @@ Temporary Items
 
 #deploy stuff
 node_modules/
+deploy/
 distribution/
-web-ext-artifacts/
