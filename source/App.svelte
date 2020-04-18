@@ -1,6 +1,7 @@
 <script>
 	import {onMount} from 'svelte';
 	import Extension from './Extension.svelte';
+	import openInTab from './lib/open-in-tab';
 	import UndoStack from './lib/undo-stack';
 
 	const undoStack = new UndoStack(window);
@@ -34,9 +35,6 @@
 	}
 
 	onMount(async () => {
-		searchField.focus();
-		window.scrollTo(0, 0); // Fix overscroll caused by autofocus
-
 		extensions = (await browser.management.getAll())
 			.filter(({type, id}) => type === 'extension' && id !== myid)
 			.sort((a, b) => {
@@ -78,11 +76,12 @@
 	{#if showInfoMessage}
 		<p>{getI18N('undoInfoMsg')} <a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a></p>
 	{/if}
-	<input bind:this={searchField} placeholder={getI18N('searchTxt')} bind:value={searchValue} on:input={onSearchInput}>
+	<!-- svelte-ignore a11y-autofocus -->
+	<input autofocus bind:this={searchField} placeholder={getI18N('searchTxt')} bind:value={searchValue} on:input={onSearchInput}>
 	<div class="options">
 		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
 		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
-		<a href="chrome://extensions">{getI18N('extensionPage')}</a>
+		<a href="chrome://extensions" on:click={openInTab}>{getI18N('extensionPage')}</a>
 	</div>
 	<ul id="extList">
 		{#each extensions as extension (extension.id)}

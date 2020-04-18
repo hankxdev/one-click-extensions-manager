@@ -1,4 +1,6 @@
 <script>
+	import openInTab from './lib/open-in-tab';
+
 	export let id;
 	export let name;
 	export let enabled;
@@ -50,7 +52,7 @@
 
 	{#if enabled}
 		{#if optionsUrl}
-			<a href='chrome://extensions/?options={id}' title={getI18N('gotoOpt')} target="_blank">
+			<a href='chrome://extensions/?options={id}' title={getI18N('gotoOpt')} on:click={openInTab}>
 				<img src="icons/options.svg" alt="">
 			</a>
 		{/if}
@@ -60,7 +62,7 @@
 					<img src="icons/globe.svg" alt="">
 				</a>
 			{/if}
-			<a href="chrome://extensions/?id={id}" title="See in Chrome’s extensions page" target="_blank">
+			<a href="chrome://extensions/?id={id}" title="See in Chrome’s extensions page" on:click={openInTab}>
 				<img src="icons/ellipsis.svg" alt="">
 			</a>
 			<button type="button" title={getI18N('uninstall')} on:click={onUninstallClick}>
