@@ -1,32 +1,26 @@
 {
-  "extName": {
-    "message": "One Click менеджер расширений"
-  },
-  "extDesc": {
-    "message": "Управление расширение одним щелчком мыши."
-  },
-  "clkEnable": {
-    "message": "Нажмите, чтобы включить это расширение"
-  },
-  "clkDisable": {
-    "message": "Нажмите, чтобы отключить это расширение"
-  },
-  "extensionPage": {
-    "message": "Больше ..."
-  },
-  "disAll": {
-    "message": "Отключить все расширения"
-  },
-  "searchTxt": {
-    "message": "Поиск расширений"
-  },
-  "gotoOpt": {
-    "message": "Перейти на страницу настроек"
-  },
-  "uninstall": {
-    "message": "Удалить это расширение"
-  },
-  "enableAll": {
-    "message": "Enable all"
-  }
+	"disAll": {
+		"message": "Отключить все расширения"
+	},
+	"enableAll": {
+		"message": "Enable all"
+	},
+	"extDesc": {
+		"message": "Управление расширение одним щелчком мыши."
+	},
+	"extName": {
+		"message": "One Click менеджер расширений"
+	},
+	"extensionPage": {
+		"message": "Больше…"
+	},
+	"gotoOpt": {
+		"message": "Перейти на страницу настроек"
+	},
+	"searchTxt": {
+		"message": "Поиск расширений"
+	},
+	"uninstall": {
+		"message": "Удалить это расширение"
+	}
 }

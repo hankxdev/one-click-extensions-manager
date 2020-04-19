@@ -1,32 +1,26 @@
 {
-  "extName": {
-    "message": "Gestionnaire d'extensions à un clic"
-  },
-  "extDesc": {
-    "message": "Gérer votre extension en un seul clic."
-  },
-  "clkEnable": {
-    "message": "Cliquer pour activer cette extension"
-  },
-  "clkDisable": {
-    "message": "Cliquez pour désactiver cette extension"
-  },
-  "extensionPage": {
-    "message": "Plus ..."
-  },
-  "disAll": {
-    "message": "Désactiver toutes les extensions"
-  },
-  "searchTxt": {
-    "message": "Rechercher les extensions"
-  },
-  "gotoOpt": {
-    "message": "Aller à la page des options"
-  },
-  "uninstall": {
-    "message": "Désinstaller cette extension"
-  },
-  "enableAll": {
-    "message": "Enable all"
-  }
+	"disAll": {
+		"message": "Désactiver toutes"
+	},
+	"enableAll": {
+		"message": "Désactiver toutes"
+	},
+	"extDesc": {
+		"message": "Gérer votre extension en un seul clic."
+	},
+	"extName": {
+		"message": "Gestionnaire d‘extensions à un clic"
+	},
+	"extensionPage": {
+		"message": "Plus…"
+	},
+	"gotoOpt": {
+		"message": "Aller à la page des options"
+	},
+	"searchTxt": {
+		"message": "Rechercher les extensions…"
+	},
+	"uninstall": {
+		"message": "Désinstaller"
+	}
 }
