@@ -5,12 +5,6 @@
   "extDesc": {
     "message": "1回のクリックで広告表示オプションを管理する。"
   },
-  "clkEnable": {
-    "message": "この拡張機能を有効にするにはクリックしてください"
-  },
-  "clkDisable": {
-    "message": "この拡張機能を無効にするにはクリックしてください"
-  },
   "extensionPage": {
     "message": "その他…"
   },

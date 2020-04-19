@@ -5,12 +5,6 @@
   "extDesc": {
     "message": "Guarda, attiva, disattiva, rimuovi le tue estensioni facilmente."
   },
-  "clkEnable": {
-    "message": "Clicca per attivare quest’estensione"
-  },
-  "clkDisable": {
-    "message": "Clicca per disattivare quest’estensione"
-  },
   "extensionPage": {
     "message": "Altro…"
   },

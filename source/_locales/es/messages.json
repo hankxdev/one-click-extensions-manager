@@ -5,12 +5,6 @@
   "extDesc": {
     "message": "Ver, activar, desactivar y eliminar tus extensiones con facilidad."
   },
-  "clkEnable": {
-    "message": "Clic para activar esta extensión"
-  },
-  "clkDisable": {
-    "message": "Clic para desactivar esta extensión"
-  },
   "extensionPage": {
     "message": "Más…"
   },

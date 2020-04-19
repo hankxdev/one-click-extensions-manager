@@ -5,12 +5,6 @@
   "extDesc": {
     "message": "一键管理所有扩展，快速激活、禁用插件。"
   },
-  "clkEnable": {
-    "message": "单击以启用该扩展"
-  },
-  "clkDisable": {
-    "message": "单击以禁用该扩展"
-  },
   "extensionPage": {
     "message": "更多"
   },

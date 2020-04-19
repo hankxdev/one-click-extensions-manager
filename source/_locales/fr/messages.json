@@ -5,12 +5,6 @@
   "extDesc": {
     "message": "Gérer votre extension en un seul clic."
   },
-  "clkEnable": {
-    "message": "Cliquer pour activer cette extension"
-  },
-  "clkDisable": {
-    "message": "Cliquez pour désactiver cette extension"
-  },
   "extensionPage": {
     "message": "Plus…"
   },

@@ -90,7 +90,7 @@
 	<div class="options">
 		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
 		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
-		<a href="chrome://extensions" on:click={openInTab}>{getI18N('extensionPage')}</a>
+		<a href="chrome://extensions" on:click={openInTab} title={getI18N('manage')}>{getI18N('extensionPage')}</a>
 	</div>
 	<ul id="ext-list">
 		{#each extensions as extension (extension.id)}

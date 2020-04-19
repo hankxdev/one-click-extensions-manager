@@ -5,12 +5,6 @@
   "extDesc": {
     "message": "Verwalte einfach deine Erweiterungen: auflisten, entfernen, ein- und ausschalten."
   },
-  "clkEnable": {
-    "message": "Klicken um die Erweiterung einzuschalten."
-  },
-  "clkDisable": {
-    "message": "Klicken um die Erweiterung auszuschalten."
-  },
   "extensionPage": {
     "message": "Mehr…"
   },
