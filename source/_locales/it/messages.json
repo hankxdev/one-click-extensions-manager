@@ -1,26 +1,26 @@
 {
-  "disAll": {
-    "message": "Disattiva tutte"
-  },
-  "enableAll": {
-    "message": "Attiva tutte"
-  },
-  "extDesc": {
-    "message": "Guarda, attiva, disattiva, rimuovi le tue estensioni facilmente."
-  },
-  "extName": {
-    "message": "One Click Extensions Manager"
-  },
-  "extensionPage": {
-    "message": "Altro…"
-  },
-  "gotoOpt": {
-    "message": "Vai alle impostazioni"
-  },
-  "searchTxt": {
-    "message": "Cerca per nome…"
-  },
-  "uninstall": {
-    "message": "Disinstalla"
-  }
+	"disAll": {
+		"message": "Disattiva tutte"
+	},
+	"enableAll": {
+		"message": "Attiva tutte"
+	},
+	"extDesc": {
+		"message": "Guarda, attiva, disattiva, rimuovi le tue estensioni facilmente."
+	},
+	"extName": {
+		"message": "One Click Extensions Manager"
+	},
+	"extensionPage": {
+		"message": "Altro…"
+	},
+	"gotoOpt": {
+		"message": "Vai alle impostazioni"
+	},
+	"searchTxt": {
+		"message": "Cerca per nome…"
+	},
+	"uninstall": {
+		"message": "Disinstalla"
+	}
 }

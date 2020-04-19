@@ -1,38 +1,38 @@
 {
-  "disAll": {
-    "message": "Alle ausschalten"
-  },
-  "enableAll": {
-    "message": "Alle einschalten"
-  },
-  "extDesc": {
-    "message": "Verwalte einfach deine Erweiterungen: auflisten, entfernen, ein- und ausschalten."
-  },
-  "extName": {
-    "message": "One-Click Erweiterungsmanager"
-  },
-  "extensionPage": {
-    "message": "Mehr…"
-  },
-  "gotoOpt": {
-    "message": "Einstellungen…"
-  },
-  "hideInfoMsg": {
-    "message": "Diesen Hinweis ausblenden."
-  },
-  "manage": {
-    "message": "Im Erweiterungsmanager anzeigen…"
-  },
-  "openUrl": {
-    "message": "Im Chrome Web Store anzeigen…"
-  },
-  "searchTxt": {
-    "message": "Nach Name suchen…"
-  },
-  "undoInfoMsg": {
-    "message": "Du kannst deine letzte Aktionen rückgäng machen oder wiederherstellen. Dies funktioniert aber nur solange wie dieser Popup-Dialog geöffnet ist. Drücke dazu <kbd>Strg+z</kbd> unter Windows und <kbd>cmd+z</kbd> unter macOS, <kbd>super+z</kbd> unter Ubuntu."
-  },
-  "uninstall": {
-    "message": "Erweiterung entfernen…"
-  }
+	"disAll": {
+		"message": "Alle ausschalten"
+	},
+	"enableAll": {
+		"message": "Alle einschalten"
+	},
+	"extDesc": {
+		"message": "Verwalte einfach deine Erweiterungen: auflisten, entfernen, ein- und ausschalten."
+	},
+	"extName": {
+		"message": "One-Click Erweiterungsmanager"
+	},
+	"extensionPage": {
+		"message": "Mehr…"
+	},
+	"gotoOpt": {
+		"message": "Einstellungen…"
+	},
+	"hideInfoMsg": {
+		"message": "Diesen Hinweis ausblenden."
+	},
+	"manage": {
+		"message": "Im Erweiterungsmanager anzeigen…"
+	},
+	"openUrl": {
+		"message": "Im Chrome Web Store anzeigen…"
+	},
+	"searchTxt": {
+		"message": "Nach Name suchen…"
+	},
+	"undoInfoMsg": {
+		"message": "Du kannst deine letzte Aktionen rückgäng machen oder wiederherstellen. Dies funktioniert aber nur solange wie dieser Popup-Dialog geöffnet ist. Drücke dazu <kbd>Strg+z</kbd> unter Windows und <kbd>cmd+z</kbd> unter macOS, <kbd>super+z</kbd> unter Ubuntu."
+	},
+	"uninstall": {
+		"message": "Erweiterung entfernen…"
+	}
 }

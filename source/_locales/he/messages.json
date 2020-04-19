@@ -1,38 +1,38 @@
 {
-  "disAll": {
-    "message": "להשבית את כל התוספים"
-  },
-  "enableAll": {
-    "message": "לאפשר הכל"
-  },
-  "extDesc": {
-    "message": "צפו, הפעילו / השביתו או הסירו תוספים בקלות"
-  },
-  "extName": {
-    "message": "One Click Extensions Manager"
-  },
-  "extensionPage": {
-    "message": "עוד…"
-  },
-  "gotoOpt": {
-    "message": "אפשרויות נוספות"
-  },
-  "hideInfoMsg": {
-    "message": "להסתיר"
-  },
-  "manage": {
-    "message": "לניהול התוסף"
-  },
-  "openUrl": {
-    "message": "לעמוד התוסף בחנות"
-  },
-  "searchTxt": {
-    "message": "חיפוש תוסף לפי שם"
-  },
-  "undoInfoMsg": {
-    "message": "ניתן לבטל או לבצע מחדש פעולות עד לסגירת החלון באמצעות <kbd>ctrl+z</kbd> ב - windows, <kbd>cmd+z</kbd> ב - macOS או <kbd>super+z</kbd> ב Ubuntu."
-  },
-  "uninstall": {
-    "message": "להסיר את התוסף"
-  }
+	"disAll": {
+		"message": "להשבית את כל התוספים"
+	},
+	"enableAll": {
+		"message": "לאפשר הכל"
+	},
+	"extDesc": {
+		"message": "צפו, הפעילו / השביתו או הסירו תוספים בקלות"
+	},
+	"extName": {
+		"message": "One Click Extensions Manager"
+	},
+	"extensionPage": {
+		"message": "עוד…"
+	},
+	"gotoOpt": {
+		"message": "אפשרויות נוספות"
+	},
+	"hideInfoMsg": {
+		"message": "להסתיר"
+	},
+	"manage": {
+		"message": "לניהול התוסף"
+	},
+	"openUrl": {
+		"message": "לעמוד התוסף בחנות"
+	},
+	"searchTxt": {
+		"message": "חיפוש תוסף לפי שם"
+	},
+	"undoInfoMsg": {
+		"message": "ניתן לבטל או לבצע מחדש פעולות עד לסגירת החלון באמצעות <kbd>ctrl+z</kbd> ב - windows, <kbd>cmd+z</kbd> ב - macOS או <kbd>super+z</kbd> ב Ubuntu."
+	},
+	"uninstall": {
+		"message": "להסיר את התוסף"
+	}
 }
