@@ -1,38 +1,38 @@
 {
-  "extName": {
-    "message": "One Click Extensions Manager"
+  "disAll": {
+    "message": "Disable all"
+  },
+  "enableAll": {
+    "message": "Enable all"
   },
   "extDesc": {
     "message": "View, enable, disable, remove your extensions with ease."
   },
+  "extName": {
+    "message": "One Click Extensions Manager"
+  },
   "extensionPage": {
     "message": "More…"
-  },
-  "disAll": {
-    "message": "Disable all"
-  },
-  "searchTxt": {
-    "message": "Search by name…"
   },
   "gotoOpt": {
     "message": "Go to options page"
   },
-  "uninstall": {
-    "message": "Uninstall"
-  },
-  "undoInfoMsg": {
-    "message": "You can undo and redo your last action until you close this popup. Press <kbd>ctrl+z</kbd> on Windows and <kbd>cmd+z</kbd> on macOS, <kbd>super+z</kbd> on Ubuntu."
-  },
   "hideInfoMsg": {
     "message": "Hide this"
-  },
-  "openUrl": {
-    "message": "See on the Chrome Web Store"
   },
   "manage": {
     "message": "See in Chrome’s extensions page"
   },
-  "enableAll": {
-    "message": "Enable all"
+  "openUrl": {
+    "message": "See on the Chrome Web Store"
+  },
+  "searchTxt": {
+    "message": "Search by name…"
+  },
+  "undoInfoMsg": {
+    "message": "You can undo and redo your last action until you close this popup. Press <kbd>ctrl+z</kbd> on Windows and <kbd>cmd+z</kbd> on macOS, <kbd>super+z</kbd> on Ubuntu."
+  },
+  "uninstall": {
+    "message": "Uninstall"
   }
 }

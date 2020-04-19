@@ -1,38 +1,38 @@
 {
-  "extName": {
-    "message": "One Click Extensions Manager"
+  "disAll": {
+    "message": "להשבית את כל התוספים"
+  },
+  "enableAll": {
+    "message": "לאפשר הכל"
   },
   "extDesc": {
     "message": "צפו, הפעילו / השביתו או הסירו תוספים בקלות"
   },
+  "extName": {
+    "message": "One Click Extensions Manager"
+  },
   "extensionPage": {
     "message": "עוד…"
-  },
-  "disAll": {
-    "message": "להשבית את כל התוספים"
-  },
-  "searchTxt": {
-    "message": "חיפוש תוסף לפי שם"
   },
   "gotoOpt": {
     "message": "אפשרויות נוספות"
   },
-  "uninstall": {
-    "message": "להסיר את התוסף"
-  },
-  "undoInfoMsg": {
-    "message": "ניתן לבטל או לבצע מחדש פעולות עד לסגירת החלון באמצעות <kbd>ctrl+z</kbd> ב - windows, <kbd>cmd+z</kbd> ב - macOS או <kbd>super+z</kbd> ב Ubuntu."
-  },
   "hideInfoMsg": {
     "message": "להסתיר"
-  },
-  "openUrl": {
-    "message": "לעמוד התוסף בחנות"
   },
   "manage": {
     "message": "לניהול התוסף"
   },
-  "enableAll": {
-    "message": "לאפשר הכל"
+  "openUrl": {
+    "message": "לעמוד התוסף בחנות"
+  },
+  "searchTxt": {
+    "message": "חיפוש תוסף לפי שם"
+  },
+  "undoInfoMsg": {
+    "message": "ניתן לבטל או לבצע מחדש פעולות עד לסגירת החלון באמצעות <kbd>ctrl+z</kbd> ב - windows, <kbd>cmd+z</kbd> ב - macOS או <kbd>super+z</kbd> ב Ubuntu."
+  },
+  "uninstall": {
+    "message": "להסיר את התוסף"
   }
 }
