@@ -62,7 +62,7 @@
 					<img src="icons/globe.svg" alt="">
 				</a>
 			{/if}
-			<a href="chrome://extensions/?id={id}" title="See in Chrome’s extensions page" on:click={openInTab}>
+			<a href="chrome://extensions/?id={id}" title={getI18N('manage')} on:click={openInTab}>
 				<img src="icons/ellipsis.svg" alt="">
 			</a>
 			<button type="button" title={getI18N('uninstall')} on:click={onUninstallClick}>
