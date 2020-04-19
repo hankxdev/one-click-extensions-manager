@@ -18,13 +18,13 @@
     "message": "Disable all"
   },
   "searchTxt": {
-    "message": "Search by name..."
+    "message": "Search by name…"
   },
   "gotoOpt": {
     "message": "Go to options page"
   },
   "uninstall": {
-    "message": "Uninstall this extension"
+    "message": "Uninstall"
   },
   "undoInfoMsg": {
     "message": "You can undo and redo your last action until you close this popup. Press <kbd>ctrl+z</kbd> on Windows and <kbd>cmd+z</kbd> on macOS, <kbd>super+z</kbd> on Ubuntu."

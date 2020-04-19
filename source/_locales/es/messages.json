@@ -18,13 +18,13 @@
     "message": "Desactivar todas"
   },
   "searchTxt": {
-    "message": "Búscar por nombre..."
+    "message": "Buscar por nombre…"
   },
   "gotoOpt": {
     "message": "Ir a la página de opciones"
   },
   "uninstall": {
-    "message": "Eliminar esta extensión"
+    "message": "Eliminar"
   },
   "undoInfoMsg": {
     "message": "Puedes deshacer y rehacer tu última acción hasta que cierres esta ventana. Presiona <kbd>ctrl+z</kbd> en Windows y <kbd>cmd+z</kbd> en macOS, <kbd>super+z</kbd> en Ubuntu."

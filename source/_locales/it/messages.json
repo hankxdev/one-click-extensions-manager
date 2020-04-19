@@ -18,15 +18,15 @@
     "message": "Disattiva tutte"
   },
   "searchTxt": {
-    "message": "Cerca per nome..."
+    "message": "Cerca per nome…"
   },
   "gotoOpt": {
     "message": "Vai alle impostazioni"
   },
   "uninstall": {
-    "message": "Disinstalla quest’estensione"
+    "message": "Disinstalla"
   },
   "enableAll": {
-    "message": "Enable all"
+    "message": "Attiva tutte"
   }
 }

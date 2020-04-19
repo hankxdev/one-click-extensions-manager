@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Gestionnaire d'extensions à un clic"
+    "message": "Gestionnaire d‘extensions à un clic"
   },
   "extDesc": {
     "message": "Gérer votre extension en un seul clic."
@@ -12,21 +12,21 @@
     "message": "Cliquez pour désactiver cette extension"
   },
   "extensionPage": {
-    "message": "Plus ..."
+    "message": "Plus…"
   },
   "disAll": {
-    "message": "Désactiver toutes les extensions"
+    "message": "Désactiver toutes"
   },
   "searchTxt": {
-    "message": "Rechercher les extensions"
+    "message": "Rechercher les extensions…"
   },
   "gotoOpt": {
     "message": "Aller à la page des options"
   },
   "uninstall": {
-    "message": "Désinstaller cette extension"
+    "message": "Désinstaller"
   },
   "enableAll": {
-    "message": "Enable all"
+    "message": "Désactiver toutes"
   }
 }
