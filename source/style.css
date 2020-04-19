@@ -8,6 +8,9 @@ body {
 	width: 400px;
 	margin: auto;
 	padding: var(--margin);
+
+	/* stylelint-disable-next-line value-keyword-case */
+	direction: __MSG_@@bidi_dir__;
 }
 
 body[data-type='popup'] {
