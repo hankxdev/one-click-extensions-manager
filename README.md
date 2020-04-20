@@ -10,14 +10,28 @@ It only requires the `management` permission.
 
 Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/one-click-extension-manag/pbgjpgbpljobkekbhnnmlikbbfhbhmem)
 
-## Internationalization(i18n)
+## Internationalization (i18n)
 
-We enabled multiple languages for this extension. But most of them are translated from English by Google translator.
-Except Chinese Simplified.
+It's available in 11 languages:
 
-Welcome to help us translate it.
+- English
+- Chinese (Simplified)
+- Chinese (Traditional)
+- Italian
+- Spanish
+- German
+- French
+- Korean
+- Russian
+- Japanese
+- Hebrew
 
-There are only 14 sentences needed to be translated. You can find them in `src/_locals/en/message.json`.
+You can suggest improvements or new languages using the [web-ext-translator](https://lusito.github.io/web-ext-translator/) web tool:
+
+1. Visit https://lusito.github.io/web-ext-translator/
+2. Click the GitHub icon on the top left corner
+3. Enter `https://github.com/hankxdev/one-click-extensions-manager`
+4. Make changes and submit them to this repo
 
 ## License
 
