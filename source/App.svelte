@@ -86,7 +86,7 @@
 		<p>{getI18N('undoInfoMsg')} <a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a></p>
 	{/if}
 	<!-- svelte-ignore a11y-autofocus -->
-	<input autofocus placeholder={getI18N('searchTxt')} bind:value={searchValue}>
+	<input autofocus placeholder={getI18N('searchTxt')} bind:value={searchValue} type="search">
 	<div class="options">
 		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
 		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
