@@ -1,0 +1,50 @@
+{
+	"disAll": {
+		"message": "Tümü devre dışı",
+		"hash": "a9f66d43cfde31fd3cd61c3627eec653"
+	},
+	"enableAll": {
+		"message": "Tümü etkin",
+		"hash": "bff1a5f49fdf6aef0eff0315299dea83"
+	},
+	"extDesc": {
+		"message": "Uzantılarınızı kolayca görüntüleyin, etkinleştirin, devre dışı bırakın, kaldırın.",
+		"hash": "557ac2dd0ce9b4249f7dc37868bcfccf"
+	},
+	"extName": {
+		"message": "Bir-Tık Uzantı Yöneticisi",
+		"hash": "9f7e3f659272f7b34a4073ddd8e29658"
+	},
+	"extensionPage": {
+		"message": "Daha fazla…",
+		"hash": "65700a81f7671d1536e3cd98104e4be6"
+	},
+	"gotoOpt": {
+		"message": "Ayarlar sayfasına git",
+		"hash": "512c610fec5ae0c3b0d8ad20c7eb8e1e"
+	},
+	"hideInfoMsg": {
+		"message": "Bunu gizle",
+		"hash": "814f376f8a44776d5b80020e1327d173"
+	},
+	"manage": {
+		"message": "Chrome’un uzantılar sayfasında gör",
+		"hash": "af28f432bfd20a06c7f37885d5ff08d5"
+	},
+	"openUrl": {
+		"message": "Chrome Web Mağazası’nda gör",
+		"hash": "267c757b3d04f13998e21a006bc6f1cd"
+	},
+	"searchTxt": {
+		"message": "İsimle ara",
+		"hash": "1220702106584c8c90c0f41c486a3e0b"
+	},
+	"undoInfoMsg": {
+		"message": "Bu pencere kapanıncaya kadar son işleminizi geri ya da ileri alabilirsiniz. Windows’ta <kbd>ctrl+z</kbd>’ye, macOS’te <kbd>cmd+z</kbd>’ye ve Ubuntu’da <kbd>super+z</kbd>’ye basın.",
+		"hash": "4105b6ebe6d3c7badf1a2bf9d425ddbb"
+	},
+	"uninstall": {
+		"message": "Kaldır",
+		"hash": "6c51642469a9fec1b394358b0a2ada5b"
+	}
+}
