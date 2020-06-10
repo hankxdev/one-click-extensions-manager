@@ -1,0 +1,26 @@
+{
+	"disAll": {
+		"message": "모든 확장 기능 사용 중지"
+	},
+	"enableAll": {
+		"message": "Enable all"
+	},
+	"extDesc": {
+		"message": "한 번의 클릭으로 광고 확장 관리."
+	},
+	"extName": {
+		"message": "원 클릭 확장 관리자"
+	},
+	"extensionPage": {
+		"message": "More…"
+	},
+	"gotoOpt": {
+		"message": "옵션 페이지로 이동"
+	},
+	"searchTxt": {
+		"message": "확장 기능 검색"
+	},
+	"uninstall": {
+		"message": "이 확장 기능을 제거하십시오"
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name": "__MSG_extName__",
+	"description": "__MSG_extDesc__",
+	"version": "20.3.16.1532",
+	"manifest_version": 2,
+	"homepage_url": "https://github.com/HangYang/one-click-extensions-manager",
+	"default_locale": "en",
+	"permissions": ["management"],
+	"icons": {
+		"16": "logo.png",
+		"128": "logo.png"
+	},
+	"browser_action": {
+		"default_icon": "logo.png",
+		"default_popup": "index.html?type=popup"
+	},
+	"options_ui": {
+		"page": "index.html"
+	}
+}

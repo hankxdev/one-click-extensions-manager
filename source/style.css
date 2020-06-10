@@ -1,0 +1,174 @@
+/* RESETS */
+:root {
+	--margin: 8px;
+	--ext-icon-margin: 0.3em;
+}
+
+body {
+	width: 400px;
+	margin: auto;
+	padding: var(--margin);
+
+	/* stylelint-disable-next-line value-keyword-case */
+	direction: __MSG_@@bidi_dir__;
+}
+
+body[data-type='popup'] {
+	width: 320px;
+}
+
+input {
+	box-sizing: border-box;
+	width: 100%;
+	font: inherit;
+	background-color: transparent;
+	color: inherit;
+	border: solid 1px;
+	padding: 0.2em 0.4em;
+}
+
+a {
+	outline: 0;
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	outline: 0;
+	border: none;
+	cursor: pointer;
+	font: inherit;
+	background: none;
+	color: inherit;
+	text-align: start;
+}
+
+a:hover,
+.keyboard-navigation a:focus,
+button:hover,
+.keyboard-navigation button:focus {
+	background-color: #ecf0f1;
+	cursor: pointer;
+}
+
+/**
+ * HEADER
+ */
+.options {
+	display: flex;
+	justify-content: space-between;
+	margin: 0.5em 0;
+}
+
+.options * {
+	padding: 0.5em;
+	border-radius: 2px;
+	text-transform: uppercase;
+}
+
+/**
+ * LIST
+ */
+#ext-list {
+	margin: 0 calc(var(--margin) * -1);
+	padding: 0;
+	list-style: none;
+}
+
+.ext {
+	display: flex;
+	white-space: nowrap;
+	font-size: 1.2em;
+	line-height: 1.9;
+}
+
+.ext:not(:last-child) {
+	border-bottom: 1px solid #8883;
+}
+
+.ext.type-development {
+	color: #4170c3;
+}
+
+.ext.type-admin {
+	color: #c32700;
+}
+
+.ext-name {
+	flex-grow: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: bold;
+}
+
+.disabled .ext-name {
+	font-weight: normal;
+	filter: grayscale(60%);
+	opacity: 0.5;
+}
+
+.ext img {
+	width: 16px;
+	height: 16px;
+	vertical-align: -3px;
+}
+
+.ext-name img {
+	padding: 0 var(--margin);
+}
+
+.ext > :not(.ext-name) {
+	padding: 0 0.3em;
+	opacity: 0.2;
+	flex-shrink: 0;
+}
+
+.ext > :last-child:not(.ext-name) {
+	margin-inline-end: var(--margin);
+}
+
+.ext:hover > *,
+.keyboard-navigation .ext:focus-within > * {
+	opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+	/* Border around improves contrast */
+	[data-type='popup'] body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		z-index: -1;
+		border: solid 1px #595a5e;
+	}
+
+	body {
+		background-color: #292a2d;
+		color: #e8eaed;
+	}
+
+	a:hover,
+	.keyboard-navigation a:focus,
+	button:hover,
+	.keyboard-navigation button:focus {
+		background-color: #c4d7dc38;
+	}
+
+	.ext :not(.ext-name) img {
+		filter: brightness(1.6);
+	}
+
+	.ext.type-development {
+		color: #83acf5;
+	}
+
+	.ext.type-admin {
+		color: #ffa38d;
+	}
+}

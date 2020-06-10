@@ -1,0 +1,38 @@
+{
+	"disAll": {
+		"message": "Desactivar todas"
+	},
+	"enableAll": {
+		"message": "Activar todas"
+	},
+	"extDesc": {
+		"message": "Ver, activar, desactivar y eliminar tus extensiones con facilidad."
+	},
+	"extName": {
+		"message": "Administrador de extensión de un clic"
+	},
+	"extensionPage": {
+		"message": "Más…"
+	},
+	"gotoOpt": {
+		"message": "Ir a la página de opciones"
+	},
+	"hideInfoMsg": {
+		"message": "Ocultar esto"
+	},
+	"manage": {
+		"message": "Ver en la página de extensiones de Chrome"
+	},
+	"openUrl": {
+		"message": "Ver en Chrome Web Store"
+	},
+	"searchTxt": {
+		"message": "Buscar por nombre…"
+	},
+	"undoInfoMsg": {
+		"message": "Puedes deshacer y rehacer tu última acción hasta que cierres esta ventana. Presiona <kbd>ctrl+z</kbd> en Windows y <kbd>cmd+z</kbd> en macOS, <kbd>super+z</kbd> en Ubuntu."
+	},
+	"uninstall": {
+		"message": "Eliminar"
+	}
+}

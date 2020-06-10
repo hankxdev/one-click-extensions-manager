@@ -1,0 +1,26 @@
+{
+	"disAll": {
+		"message": "すべての拡張機能を無効にする"
+	},
+	"enableAll": {
+		"message": "Enable all"
+	},
+	"extDesc": {
+		"message": "1回のクリックで広告表示オプションを管理する。"
+	},
+	"extName": {
+		"message": "ワンクリックエクステンションマネージャー"
+	},
+	"extensionPage": {
+		"message": "その他…"
+	},
+	"gotoOpt": {
+		"message": "オプションページに移動"
+	},
+	"searchTxt": {
+		"message": "拡張機能を検索する"
+	},
+	"uninstall": {
+		"message": "この拡張機能をアンインストールする"
+	}
+}

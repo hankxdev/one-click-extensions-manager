@@ -1,0 +1,32 @@
+{
+	"disAll": {
+		"message": "全部禁用"
+	},
+	"enableAll": {
+		"message": "全部启用"
+	},
+	"extDesc": {
+		"message": "一键管理所有扩展，快速激活、禁用插件。"
+	},
+	"extName": {
+		"message": "快捷扩展管理"
+	},
+	"extensionPage": {
+		"message": "更多"
+	},
+	"gotoOpt": {
+		"message": "打开设置页面"
+	},
+	"hideInfoMsg": {
+		"message": "知道了"
+	},
+	"searchTxt": {
+		"message": "搜寻扩展"
+	},
+	"undoInfoMsg": {
+		"message": "在关闭这个窗口前你可以撤销你的操作。 <br>在Windows中按 <kbd>ctrl+z</kbd> macOS中按<kbd>cmd+z</kbd>Linux中按<kbd>super+z</kbd>。"
+	},
+	"uninstall": {
+		"message": "卸载这个扩展"
+	}
+}
