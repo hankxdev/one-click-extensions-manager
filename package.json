@@ -7,7 +7,6 @@
 		"lint:css": "stylelint 'source/*.css'",
 		"lint:js": "eslint source --ext svelte",
 		"release:cws": "webstore upload --source=distribution --auto-publish",
-		"release:amo": "web-ext-submit --source-dir distribution",
 		"release": "VER=$(daily-version) run-s build version release:*",
 		"test": "run-p 'lint:*' build",
 		"version": "dot-json distribution/manifest.json version $VER",
