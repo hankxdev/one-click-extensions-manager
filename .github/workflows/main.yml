@@ -1,3 +1,4 @@
+# Copied from https://github.com/notlmn/browser-extension-template/blob/master/.github/workflows/deployment.yml
 name: Deployment
 
 on:
@@ -15,21 +16,14 @@ jobs:
 
   Version:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.daily-version.outputs.version }}
+      created: ${{ steps.daily-version.outputs.created }}
     steps:
       - uses: actions/checkout@v2
-      - uses: fregante/setup-git-token@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create tag if necessary
-        if: github.event_name == 'schedule'
-        run: |
-          git fetch --tags
-          if [[ $(git tag -l --points-at HEAD) = '' ]]; then
-            echo '::set-output name=created::yes'
-            export VER=$(npx daily-version)
-            git tag $VER -m $VER
-            git push origin $VER
-          fi
+      - uses: fregante/daily-version-action@v1
+        name: Create tag if necessary
+        id: daily-version
 
   Build:
     needs: Version
@@ -40,39 +34,33 @@ jobs:
     - run: npm install
     - run: npm test
     - name: Update extension’s meta
+      env:
+        VER: ${{ needs.Version.outputs.version }}
       run: |
-        export VER=$(echo "$GITHUB_REF" | sed -e 's/refs\/tags\///')
         echo https://github.com/$GITHUB_REPOSITORY/tree/$VER > distribution/SOURCE_URL
         npm run version
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v2
       with:
-        name: built-extension
         path: distribution
 
-  For Chrome:
+  Chrome:
     needs: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v1
-      with:
-        name: built-extension
-        path: distribution
-    - run: cd distribution && npx chrome-webstore-upload-cli upload --auto-publish
+    - uses: actions/download-artifact@v2
+    - run: cd artifact && npx chrome-webstore-upload-cli@1 upload --auto-publish
       env:
         EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
 
-  For Firefox:
+  Firefox:
     needs: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v1
-      with:
-        name: built-extension
-        path: distribution
-    - run: cd distribution && npx web-ext-submit
+    - uses: actions/download-artifact@v2
+    - run: cd artifact && npx web-ext-submit@4
       env:
         WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
         WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
