@@ -3,7 +3,7 @@ name: Deployment
 
 on:
   schedule:
-    - cron: '22 3 * * 4' # Every Thursday at 3:22 https://crontab.guru/#22_3_*_*_4
+    - cron: '22 14 * * 3' # At 14:22 on Wednesday https://crontab.guru/#22_14_*_*_3
   push:
     tags:
       - "20.*"
