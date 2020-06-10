@@ -54,13 +54,3 @@ jobs:
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-
-  Firefox:
-    needs: Build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/download-artifact@v2
-    - run: cd artifact && npx web-ext-submit@4
-      env:
-        WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
-        WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
