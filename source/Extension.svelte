@@ -49,9 +49,7 @@
 	<button type="button" class="ext-name" on:click={toggleExtension} on:contextmenu>
 		<img alt="" src={getIcon(icons, 16)}>{name}
 	</button>
-
-	{#if enabled}
-		{#if optionsUrl}
+		{#if  showExtras || (optionsUrl && enabled)}
 			<a href='chrome://extensions/?options={id}' title={getI18N('gotoOpt')} on:click={openInTab}>
 				<img src="icons/options.svg" alt="">
 			</a>
@@ -69,5 +67,4 @@
 				<img src="icons/bin.svg" alt="">
 			</button>
 		{/if}
-	{/if}
 </li>
