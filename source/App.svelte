@@ -71,12 +71,12 @@
 		});
 	});
 
-	// Show extra buttons on right click on the name
+	// Toggle extra buttons on right click on the name
 	let onContextMenu;
-	$: onContextMenu = showExtras ? () => {} : (event => {
-		showExtras = true;
+	$: onContextMenu = event => {
+		showExtras = !showExtras;
 		event.preventDefault();
-	});
+	};
 </script>
 
 <svelte:window on:keydown={keyboardNavigationHandler}/>

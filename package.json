@@ -67,6 +67,7 @@
 		"dot-json": "^1.2.0",
 		"eslint": "^6.8.0",
 		"eslint-plugin-svelte3": "^2.7.3",
+		"husky": "^4.2.5",
 		"npm-run-all": "^4.1.5",
 		"rollup": "^2.6.1",
 		"rollup-plugin-copy-glob": "^0.3.1",
@@ -77,5 +78,10 @@
 		"svelte": "^3.20.1",
 		"web-ext": "^4.1.0",
 		"xo": "^0.29.1"
+	},
+	"husky":{
+		"hooks":{
+			"pre-commit": "npm run fix"
+		}
 	}
 }
