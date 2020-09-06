@@ -6,7 +6,7 @@
 		"message": "全部启用"
 	},
 	"extDesc": {
-		"message": "一键管理所有扩展，快速激活、禁用插件。"
+		"message": "一键管理所有扩展，快速激活、禁用、卸载插件。"
 	},
 	"extName": {
 		"message": "快捷扩展管理"
@@ -21,7 +21,7 @@
 		"message": "知道了"
 	},
 	"searchTxt": {
-		"message": "搜寻扩展"
+		"message": "查找扩展"
 	},
 	"undoInfoMsg": {
 		"message": "在关闭这个窗口前你可以撤销你的操作。 <br>在Windows中按 <kbd>ctrl+z</kbd> macOS中按<kbd>cmd+z</kbd>Linux中按<kbd>super+z</kbd>。"
