@@ -6,10 +6,8 @@
 		"lint": "run-p lint:*",
 		"lint:css": "stylelint 'source/*.css'",
 		"lint:js": "eslint source --ext svelte",
-		"release:cws": "webstore upload --source=distribution --auto-publish",
-		"release": "VER=$(daily-version) run-s build version release:*",
-		"test": "run-p 'lint:*' build",
-		"version": "dot-json distribution/manifest.json version $VER",
+ 		"release:chrome": "cd distribution && webstore upload --auto-publish",
+		"test": "run-p lint:* build",
 		"watch": "rollup --config --watch"
 	},
 	"eslintConfig": {
