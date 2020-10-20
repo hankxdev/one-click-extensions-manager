@@ -27,7 +27,7 @@ jobs:
         if: steps.daily-version.outputs.created
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          exclude: '^Meta|^Document|^Readme|^Lint'
+          exclude: true
 
   Submit:
     needs: Version
