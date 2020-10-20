@@ -1,56 +1,53 @@
-# Copied from https://github.com/notlmn/browser-extension-template/blob/master/.github/workflows/deployment.yml
-name: Deployment
+# Copied from https://github.com/notlmn/browser-extension-template/blob/master/.github/workflows/release.yml
+name: Release
 
 on:
+  workflow_dispatch:
+  # You can manually trigger a deployment on GitHub.com
+  # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
   schedule:
-    - cron: '22 14 * * 3' # At 14:22 on Wednesday https://crontab.guru/#22_14_*_*_3
-  push:
-    tags:
-      - "20.*"
-      - "21.*"
-      - "22.*"
-      - "23.*"
-      - "24.*"
+    - cron: '22 14 * * 3'
 
 jobs:
-
   Version:
-    runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.daily-version.outputs.version }}
       created: ${{ steps.daily-version.outputs.created }}
+      version: ${{ steps.daily-version.outputs.version }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 20
+      - run: npm install
+      - run: npm test
       - uses: fregante/daily-version-action@v1
         name: Create tag if necessary
         id: daily-version
+      - uses: notlmn/release-with-changelog@v3
+        if: steps.daily-version.outputs.created
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exclude: '^Meta|^Document|^Readme|^Lint'
 
-  Build:
+  Submit:
     needs: Version
-    if: github.event_name == 'push' || needs.Version.outputs.created
+    if: github.event_name == 'workflow_dispatch' || needs.Build.outputs.created
+    strategy:
+      matrix:
+        command:
+          - firefox
+          - chrome
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: npm install
-    - run: npm test
-    - name: Update extension’s meta
-      env:
-        VER: ${{ needs.Version.outputs.version }}
-      run: |
-        echo https://github.com/$GITHUB_REPOSITORY/tree/$VER > distribution/SOURCE_URL.txt
-        npm run version
-    - uses: actions/upload-artifact@v2
-      with:
-        path: distribution
-
-  Chrome:
-    needs: Build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/download-artifact@v2
-    - run: cd artifact && npx chrome-webstore-upload-cli@1 upload --auto-publish
-      env:
-        EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-        REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+      - run: npm install
+      - run: npm run build
+      - name: Update extension’s meta
+        run: npx dot-json distribution/manifest.json version ${{ steps.daily-version.outputs.version }}
+      - run: npm run release:${{ matrix.command }}
+        env:
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
