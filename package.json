@@ -78,10 +78,5 @@
 		"svelte": "^3.20.1",
 		"web-ext": "^4.1.0",
 		"xo": "^0.29.1"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm run fix"
-		}
 	}
 }
