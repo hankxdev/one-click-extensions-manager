@@ -9,8 +9,7 @@
 	export let optionsUrl;
 	export let icons;
 	export let showExtras;
-	export let undoStack;
-
+  export let undoStack;
 	const getI18N = browser.i18n.getMessage;
 	const url = installType === 'normal' ? `https://chrome.google.com/webstore/detail/${id}` : homepageUrl;
 
@@ -42,15 +41,15 @@
 
 		// Fallback icon
 		return 'icons/puzzle.svg';
-	}
+  }
 </script>
 
 <li class:disabled={!enabled} class="ext type-{installType}">
 	<button type="button" class="ext-name" on:click={toggleExtension} on:contextmenu>
 		<img alt="" src={getIcon(icons, 16)}>{name}
 	</button>
-		{#if  showExtras || (optionsUrl && enabled)}
-			<a href='chrome://extensions/?options={id}' title={getI18N('gotoOpt')} on:click={openInTab}>
+		{#if optionsUrl && enabled}
+			<a href="{optionsUrl}" title={getI18N('gotoOpt')} on:click={openInTab}>
 				<img src="icons/options.svg" alt="">
 			</a>
 		{/if}

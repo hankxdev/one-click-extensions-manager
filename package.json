@@ -72,15 +72,15 @@
 		"rollup": "^2.6.1",
 		"rollup-plugin-copy-glob": "^0.3.1",
 		"rollup-plugin-livereload": "^1.2.0",
-		"rollup-plugin-svelte": "^5.2.1",
+		"rollup-plugin-svelte": "^6.1.1",
 		"stylelint": "^13.3.2",
 		"stylelint-config-xo": "^0.16.1",
 		"svelte": "^3.20.1",
 		"web-ext": "^4.1.0",
 		"xo": "^0.29.1"
 	},
-	"husky":{
-		"hooks":{
+	"husky": {
+		"hooks": {
 			"pre-commit": "npm run fix"
 		}
 	}
