@@ -107,7 +107,7 @@ button:hover,
 .disabled .ext-name {
 	font-weight: normal;
 	filter: grayscale(60%);
-	opacity: 0.5;
+	opacity: 50%;
 }
 
 .ext img {
@@ -122,7 +122,7 @@ button:hover,
 
 .ext > :not(.ext-name) {
 	padding: 0 0.3em;
-	opacity: 0.2;
+	opacity: 20%;
 	flex-shrink: 0;
 }
 
@@ -132,7 +132,7 @@ button:hover,
 
 .ext:hover > *,
 .keyboard-navigation .ext:focus-within > * {
-	opacity: 1;
+	opacity: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
