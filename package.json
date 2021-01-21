@@ -5,23 +5,29 @@
 		"fix": "run-p 'lint:* -- --fix'",
 		"lint": "run-p lint:*",
 		"lint:css": "stylelint 'source/*.css'",
-		"lint:js": "eslint source --ext svelte",
+		"lint:js": "xo",
 		"release:chrome": "cd distribution && webstore upload --auto-publish",
 		"test": "run-p lint:* build",
 		"watch": "rollup --config --watch"
 	},
-	"eslintConfig": {
-		"env": {
-			"browser": true,
-			"webextensions": true
-		},
-		"plugins": [
-			"svelte3",
-			"unicorn"
+	"xo": {
+		"envs": [
+			"browser",
+			"webextensions"
 		],
-		"extends": [
-			"xo/browser",
-			"plugin:unicorn/recommended"
+		"overrides": [
+			{
+				"files": [
+					"**/*.svelte"
+				],
+				"processor": "svelte3/svelte3"
+			}
+		],
+		"extensions": [
+			"svelte"
+		],
+		"plugins": [
+			"svelte3"
 		],
 		"rules": {
 			"import/extensions": [
@@ -40,16 +46,8 @@
 				}
 			],
 			"no-new": "off",
-			"unicorn/filename-case": "off"
-		},
-		"overrides": [
-			{
-				"files": "**/*.svelte",
-				"processor": "svelte3/svelte3"
-			}
-		],
-		"globals": {
-			"chrome": "off"
+			"unicorn/filename-case": "off",
+			"import/no-mutable-exports": "off"
 		}
 	},
 	"stylelint": {
@@ -63,8 +61,6 @@
 		"chrome-webstore-upload-cli": "^1.2.0",
 		"daily-version": "^2.0.0",
 		"dot-json": "^1.2.1",
-		"eslint": "^7.16.0",
-		"eslint-plugin-svelte3": "^3.0.0",
 		"husky": "^4.3.6",
 		"npm-run-all": "^4.1.5",
 		"rollup": "^2.35.1",

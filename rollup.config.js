@@ -5,7 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 
 const production = !process.env.ROLLUP_WATCH;
 
-export default {
+const config = {
 	input: 'source/main.js',
 	output: {
 		sourcemap: !production,
@@ -39,3 +39,5 @@ export default {
 		!production && livereload('distribution')
 	]
 };
+
+export default config;
