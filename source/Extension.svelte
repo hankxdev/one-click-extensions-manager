@@ -1,5 +1,5 @@
 <script>
-	import openInTab from './lib/open-in-tab';
+	import openInTab from './lib/open-in-tab.js';
 
 	export let id;
 	export let name;
