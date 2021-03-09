@@ -1,8 +1,8 @@
 <script>
 	import {onMount} from 'svelte';
 	import Extension from './Extension.svelte';
-	import openInTab from './lib/open-in-tab';
-	import UndoStack from './lib/undo-stack';
+	import openInTab from './lib/open-in-tab.js';
+	import UndoStack from './lib/undo-stack.js';
 
 	const getI18N = browser.i18n.getMessage;
 	const undoStack = new UndoStack(window);
