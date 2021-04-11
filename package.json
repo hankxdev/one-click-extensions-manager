@@ -6,7 +6,6 @@
 		"lint": "run-p lint:*",
 		"lint:css": "stylelint 'source/*.css'",
 		"lint:js": "xo",
-		"release:chrome": "cd distribution && webstore upload --auto-publish",
 		"test": "run-p lint:* build",
 		"watch": "rollup --config --watch"
 	},
@@ -51,9 +50,6 @@
 	},
 	"devDependencies": {
 		"@rollup/plugin-node-resolve": "^11.2.0",
-		"chrome-webstore-upload-cli": "^1.2.1",
-		"daily-version": "^2.0.0",
-		"dot-json": "^1.2.2",
 		"eslint-plugin-svelte3": "^3.1.2",
 		"husky": "^4.3.8",
 		"npm-run-all": "^4.1.5",
@@ -64,7 +60,6 @@
 		"stylelint": "^13.12.0",
 		"stylelint-config-xo": "^0.20.0",
 		"svelte": "^3.35.0",
-		"web-ext": "^5.5.0",
 		"xo": "^0.38.2"
 	},
 	"husky": {
