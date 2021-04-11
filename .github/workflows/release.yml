@@ -1,12 +1,12 @@
 env: {}
 
-# DO NOT EDIT BELOW, USE: npx ghat fregante/ghatemplates/webext --set 'on.schedule=[{"cron": "22 14 * * 3"}]' --set 'jobs.Submit.strategy.matrix.command=["chrome"]'
+# FILE GENERATED WITH: npx ghat fregante/ghatemplates/webext
+# SOURCE: https://github.com/fregante/ghatemplates
+# OPTIONS: {"exclude":["on.schedule"],"set":["jobs.Submit.strategy.matrix.command=[\"chrome\"]"]}
 
 name: Release
 on:
   workflow_dispatch: null
-  schedule:
-    - cron: 22 14 * * 3
 jobs:
   Version:
     outputs:
