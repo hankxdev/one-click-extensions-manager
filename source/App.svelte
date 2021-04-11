@@ -83,7 +83,7 @@
 
 <main>
 	{#if showInfoMessage}
-		<p>{getI18N('undoInfoMsg')} <a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a></p>
+		<p>{@html getI18N('undoInfoMsg')} <a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a></p>
 	{/if}
 	<!-- svelte-ignore a11y-autofocus -->
 	<input autofocus placeholder={getI18N('searchTxt')} bind:value={searchValue} type="search">
