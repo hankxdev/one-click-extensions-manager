@@ -27,7 +27,7 @@ const config = {
 			{
 				files: 'source/**/!(*.js|*.svelte)',
 				dest: 'distribution',
-			}
+			},
 		], {
 			watch: process.env.ROLLUP_WATCH,
 		}),

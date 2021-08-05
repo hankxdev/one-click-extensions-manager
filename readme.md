@@ -1,6 +1,6 @@
 <img src="screencast.gif" align="right" alt="">
 
-# <img src="source/logo.png" width="45" align="left"> One Click Extension Manager
+## <img src="source/logo.png" width="30" align="left"> One Click Extension Manager
 
 A simple Chrome extension to manage your Chrome extensions.
 
