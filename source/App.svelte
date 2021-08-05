@@ -4,7 +4,7 @@
 	import openInTab from './lib/open-in-tab.js';
 	import UndoStack from './lib/undo-stack.js';
 
-	const getI18N = browser.i18n.getMessage;
+	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
 
 	const myid = getI18N('@@extension_id');
@@ -42,7 +42,7 @@
 		undoStack.do(toggle => {
 			for (const extension of affectedExtensions) {
 				extension.enabled = enable ? toggle : !toggle;
-				browser.management.setEnabled(extension.id, extension.enabled);
+				chrome.management.setEnabled(extension.id, extension.enabled);
 			}
 
 			extensions = extensions; // Signals to Svelte that the content was updated
@@ -50,7 +50,7 @@
 	}
 
 	onMount(async () => {
-		extensions = (await browser.management.getAll())
+		extensions = (await chrome.management.getAll())
 			.filter(({type, id}) => type === 'extension' && id !== myid)
 			.sort((a, b) => {
 				if (a.enabled === b.enabled) {
@@ -66,7 +66,7 @@
 			});
 
 		// Update list on uninstall
-		browser.management.onUninstalled.addListener(deleted => {
+		chrome.management.onUninstalled.addListener(deleted => {
 			extensions = extensions.filter(({id}) => id !== deleted);
 		});
 	});

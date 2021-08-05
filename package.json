@@ -50,9 +50,6 @@
 	"stylelint": {
 		"extends": "stylelint-config-xo"
 	},
-	"dependencies": {
-		"webextension-polyfill": "^0.8.0"
-	},
 	"devDependencies": {
 		"husky": "^4.3.8",
 		"@rollup/plugin-node-resolve": "^13.0.4",

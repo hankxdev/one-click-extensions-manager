@@ -11,7 +11,7 @@
 	export let showExtras;
 	export let undoStack;
 
-	const getI18N = browser.i18n.getMessage;
+	const getI18N = chrome.i18n.getMessage;
 	const url = installType === 'normal' ? `https://chrome.google.com/webstore/detail/${id}` : homepageUrl;
 
 	function toggleExtension() {
@@ -19,12 +19,12 @@
 
 		undoStack.do(toggle => {
 			enabled = toggle !== wasEnabled;
-			browser.management.setEnabled(id, enabled);
+			chrome.management.setEnabled(id, enabled);
 		});
 	}
 
 	function onUninstallClick() {
-		browser.management.uninstall(id);
+		chrome.management.uninstall(id);
 	}
 
 	function getIcon(icons, size = 16) {

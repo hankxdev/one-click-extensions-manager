@@ -27,11 +27,7 @@ const config = {
 			{
 				files: 'source/**/!(*.js|*.svelte)',
 				dest: 'distribution',
-			},
-			{
-				files: 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js',
-				dest: 'distribution',
-			},
+			}
 		], {
 			watch: process.env.ROLLUP_WATCH,
 		}),
