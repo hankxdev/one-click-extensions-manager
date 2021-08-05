@@ -1,7 +1,7 @@
 import App from './App.svelte';
 
 new App({
-	target: document.body
+	target: document.body,
 });
 
 // Move to App.svelte once this is supported: https://github.com/sveltejs/svelte/issues/3105

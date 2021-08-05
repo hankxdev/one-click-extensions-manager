@@ -53,9 +53,14 @@ jobs:
             chrome)
               cd $DIRECTORY && npx chrome-webstore-upload-cli@1 upload --auto-publish
               ;;
+            firefox)
+              cd $DIRECTORY && npx web-ext-submit@6
+              ;;
           esac
         env:
           EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}

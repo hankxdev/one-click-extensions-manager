@@ -10,34 +10,34 @@ const config = {
 	output: {
 		sourcemap: !production,
 		format: 'iife',
-		dir: 'distribution'
+		dir: 'distribution',
 	},
 	plugins: [
 		svelte({
 			compilerOptions: {
 				// Enable run-time checks when not in production
-				dev: !production
-			}
+				dev: !production,
+			},
 		}),
 		resolve({
 			browser: true,
-			dedupe: ['svelte']
+			dedupe: ['svelte'],
 		}),
 		copy([
 			{
 				files: 'source/**/!(*.js|*.svelte)',
-				dest: 'distribution'
+				dest: 'distribution',
 			},
 			{
 				files: 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js',
-				dest: 'distribution'
-			}
+				dest: 'distribution',
+			},
 		], {
-			watch: process.env.ROLLUP_WATCH
+			watch: process.env.ROLLUP_WATCH,
 		}),
 
-		!production && livereload('distribution')
-	]
+		!production && livereload('distribution'),
+	],
 };
 
 export default config;
