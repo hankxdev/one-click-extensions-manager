@@ -18,6 +18,6 @@
 		"page": "index.html"
 	},
 	"commands": {
-		"_execute_browser_action": {}
+		"_execute_action": {}
 	}
 }
