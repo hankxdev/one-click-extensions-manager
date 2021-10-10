@@ -10,9 +10,18 @@
 	export let icons;
 	export let showExtras;
 	export let undoStack;
+export let updateUrl;
 
 	const getI18N = chrome.i18n.getMessage;
-	const url = installType === 'normal' ? `https://chrome.google.com/webstore/detail/${id}` : homepageUrl;
+const url = generateHomeURL();
+
+function generateHomeURL() {
+		const chromeWebStorUrl = 'https://chrome.google.com/webstore/detail/';
+		const edgeWebStoreUrl = 'https://microsoftedge.microsoft.com/addons/detail/';
+		// Edge extension's update url starts with https://edge.microsoft.com
+		const isEdge = updateUrl.indexOf('https://edge.microsoft.com') === 0;
+		return installType === 'normal' ? (isEdge ? edgeWebStoreUrl : chromeWebStorUrl) + id : homepageUrl;
+}
 
 	function toggleExtension() {
 		const wasEnabled = enabled;
