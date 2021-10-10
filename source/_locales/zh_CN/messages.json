@@ -28,5 +28,11 @@
 	},
 	"uninstall": {
 		"message": "卸载这个扩展"
+	},
+  "manage": {
+		"message": "在浏览器的扩展管理页面中查看"
+	},
+	"openUrl": {
+		"message": "打开此扩展的主页或应用商店链接"
 	}
 }
