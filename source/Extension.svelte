@@ -23,7 +23,8 @@
 		}
 
 		return updateUrl.startsWith('https://edge.microsoft.com')
-			? edgeWebStoreUrl : chromeWebStoreUrl;
+			? edgeWebStoreUrl
+			: chromeWebStoreUrl;
 	}
 
 	function toggleExtension() {
@@ -58,25 +59,38 @@
 </script>
 
 <li class:disabled={!enabled} class="ext type-{installType}">
-	<button type="button" class="ext-name" on:click={toggleExtension} on:contextmenu>
-		<img alt="" src={getIcon(icons, 16)}>{name}
+	<button
+		type="button"
+		class="ext-name"
+		on:click={toggleExtension}
+		on:contextmenu
+	>
+		<img alt="" src={getIcon(icons, 16)} />{name}
 	</button>
-		{#if optionsUrl && enabled}
-			<a href={optionsUrl} title={getI18N('gotoOpt')} on:click={openInTab}>
-				<img src="icons/options.svg" alt="">
+	{#if optionsUrl && enabled}
+		<a href={optionsUrl} title={getI18N('gotoOpt')} on:click={openInTab}>
+			<img src="icons/options.svg" alt="" />
+		</a>
+	{/if}
+	{#if showExtras}
+		{#if url}
+			<a href={url} title={getI18N('openUrl')} target="_blank">
+				<img src="icons/globe.svg" alt="" />
 			</a>
 		{/if}
-		{#if showExtras}
-			{#if url}
-				<a href={url} title={getI18N('openUrl')} target="_blank">
-					<img src="icons/globe.svg" alt="">
-				</a>
-			{/if}
-			<a href="chrome://extensions/?id={id}" title={getI18N('manage')} on:click={openInTab}>
-				<img src="icons/ellipsis.svg" alt="">
-			</a>
-			<button type="button" title={getI18N('uninstall')} on:click={onUninstallClick}>
-				<img src="icons/bin.svg" alt="">
-			</button>
-		{/if}
+		<a
+			href="chrome://extensions/?id={id}"
+			title={getI18N('manage')}
+			on:click={openInTab}
+		>
+			<img src="icons/ellipsis.svg" alt="" />
+		</a>
+		<button
+			type="button"
+			title={getI18N('uninstall')}
+			on:click={onUninstallClick}
+		>
+			<img src="icons/bin.svg" alt="" />
+		</button>
+	{/if}
 </li>
