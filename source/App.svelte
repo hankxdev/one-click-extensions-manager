@@ -1,5 +1,6 @@
 <script>
 	import {onMount} from 'svelte';
+	import chromeP from 'webext-polyfill-kinda';
 	import Extension from './Extension.svelte';
 	import openInTab from './lib/open-in-tab.js';
 	import UndoStack from './lib/undo-stack.js';
@@ -58,7 +59,7 @@
 	}
 
 	onMount(async () => {
-		extensions = (await chrome.management.getAll())
+		extensions = (await chromeP.management.getAll())
 			.filter(({type, id}) => type === 'extension' && id !== myid)
 			.sort((a, b) => {
 				if (a.enabled === b.enabled) {

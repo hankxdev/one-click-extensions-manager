@@ -77,5 +77,8 @@
 				"chromium"
 			]
 		}
+	},
+	"dependencies": {
+		"webext-polyfill-kinda": "^0.1.1"
 	}
 }
