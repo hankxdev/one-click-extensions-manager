@@ -5,23 +5,33 @@
 		"fix": "run-p 'lint:* -- --fix'",
 		"lint": "run-p lint:*",
 		"lint:css": "stylelint 'source/*.css'",
-		"lint:js": "xo",
+		"lint:js": "eslint . --ext .svelte,.js",
+		"format": "prettier . --write",
 		"test": "run-p lint:* build",
 		"watch": "rollup --config --watch"
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "npm run fix"
+			"pre-commit": "npm run fix && npm run format"
 		}
 	},
-	"xo": {
-		"envs": [
-			"browser",
-			"webextensions"
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"webextensions": true
+		},
+		"plugins": [
+			"svelte3",
+			"unicorn"
 		],
-		"extensions": [
-			"svelte"
+		"extends": [
+			"xo",
+			"plugin:unicorn/recommended",
+			"prettier"
 		],
+		"rules": {
+			"no-new": "off"
+		},
 		"overrides": [
 			{
 				"files": [
@@ -29,40 +39,36 @@
 				],
 				"processor": "svelte3/svelte3"
 			}
-		],
-		"plugins": [
-			"svelte3"
-		],
-		"rules": {
-			"no-multiple-empty-lines": [
-				"error",
-				{
-					"max": 1,
-					"maxBOF": 2,
-					"maxEOF": 1
-				}
-			],
-			"import/no-mutable-exports": "off",
-			"no-new": "off",
-			"node/prefer-global/process": "off"
-		}
+		]
 	},
 	"stylelint": {
+		"plugins": [
+			"stylelint-prettier"
+		],
+		"rules": {
+			"prettier/prettier": true
+		},
 		"extends": "stylelint-config-xo"
 	},
 	"devDependencies": {
+		"@rollup/plugin-node-resolve": "^13.0.5",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-config-xo": "^0.39.0",
+		"eslint-plugin-svelte3": "^3.2.1",
+		"eslint-plugin-unicorn": "^36.0.0",
 		"husky": "^4.3.8",
-		"@rollup/plugin-node-resolve": "^13.0.4",
-		"eslint-plugin-svelte3": "^3.2.0",
 		"npm-run-all": "^4.1.5",
-		"rollup": "^2.56.0",
-		"rollup-plugin-copy-glob": "^0.3.1",
+		"prettier": "^2.4.1",
+		"prettier-plugin-svelte": "^2.4.0",
+		"rollup": "^2.58.0",
+		"rollup-plugin-copy-glob": "^0.3.2",
 		"rollup-plugin-livereload": "^2.0.5",
 		"rollup-plugin-svelte": "^7.1.0",
 		"stylelint": "^13.13.1",
 		"stylelint-config-xo": "^0.20.0",
-		"svelte": "^3.42.1",
-		"xo": "^0.45.0"
+		"stylelint-prettier": "^1.2.0",
+		"svelte": "^3.43.1"
 	},
 	"webExt": {
 		"sourceDir": "distribution",

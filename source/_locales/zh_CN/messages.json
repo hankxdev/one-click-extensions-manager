@@ -29,7 +29,7 @@
 	"uninstall": {
 		"message": "卸载这个扩展"
 	},
-  "manage": {
+	"manage": {
 		"message": "在浏览器的扩展管理页面中查看"
 	},
 	"openUrl": {

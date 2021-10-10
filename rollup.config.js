@@ -23,14 +23,17 @@ const config = {
 			browser: true,
 			dedupe: ['svelte'],
 		}),
-		copy([
+		copy(
+			[
+				{
+					files: 'source/**/!(*.js|*.svelte)',
+					dest: 'distribution',
+				},
+			],
 			{
-				files: 'source/**/!(*.js|*.svelte)',
-				dest: 'distribution',
-			},
-		], {
-			watch: process.env.ROLLUP_WATCH,
-		}),
+				watch: process.env.ROLLUP_WATCH,
+			}
+		),
 
 		!production && livereload('distribution'),
 	],

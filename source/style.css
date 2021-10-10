@@ -8,7 +8,7 @@ body {
 	width: 400px;
 	margin: auto;
 	padding: var(--margin);
-	direction: __MSG_@@bidi_dir__;
+	direction: auto;
 }
 
 body[data-type='popup'] {

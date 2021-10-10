@@ -12,13 +12,19 @@
 	let searchValue = '';
 
 	// Show all buttons when it's not in a popup #32
-	let showExtras = new URLSearchParams(window.location.search).get('type') !== 'popup';
+	let showExtras =
+		new URLSearchParams(window.location.search).get('type') !== 'popup';
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 
 	$: {
-		const keywords = searchValue.toLowerCase().split(' ').filter(s => s.length);
+		const keywords = searchValue
+			.toLowerCase()
+			.split(' ')
+			.filter(s => s.length);
 		for (const extension of extensions) {
-			extension.shown = keywords.every(word => extension.indexedName.includes(word));
+			extension.shown = keywords.every(word =>
+				extension.indexedName.includes(word)
+			);
 		}
 
 		extensions = extensions; // Signals to Svelte that the content was updated
@@ -37,7 +43,9 @@
 	}
 
 	function toggleAll(enable) {
-		const affectedExtensions = extensions.filter(extension => enable !== extension.enabled);
+		const affectedExtensions = extensions.filter(
+			extension => enable !== extension.enabled
+		);
 
 		undoStack.do(toggle => {
 			for (const extension of affectedExtensions) {
@@ -79,23 +87,39 @@
 	};
 </script>
 
-<svelte:window on:keydown={keyboardNavigationHandler}/>
+<svelte:window on:keydown={keyboardNavigationHandler} />
 
 <main>
 	{#if showInfoMessage}
-		<p>{@html getI18N('undoInfoMsg')} <a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a></p>
+		<p>
+			{@html getI18N('undoInfoMsg')}
+			<a href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a>
+		</p>
 	{/if}
 	<!-- svelte-ignore a11y-autofocus -->
-	<input autofocus placeholder={getI18N('searchTxt')} bind:value={searchValue} type="search">
+	<input
+		autofocus
+		placeholder={getI18N('searchTxt')}
+		bind:value={searchValue}
+		type="search"
+	/>
 	<div class="options">
 		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
 		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
-		<a href="chrome://extensions" on:click={openInTab} title={getI18N('manage')}>{getI18N('extensionPage')}</a>
+		<a href="chrome://extensions" on:click={openInTab} title={getI18N('manage')}
+			>{getI18N('extensionPage')}</a
+		>
 	</div>
 	<ul id="ext-list">
 		{#each extensions as extension (extension.id)}
 			{#if extension.shown}
-				<Extension {...extension} bind:enabled={extension.enabled} bind:showExtras on:contextmenu={onContextMenu} {undoStack}/>
+				<Extension
+					{...extension}
+					bind:enabled={extension.enabled}
+					bind:showExtras
+					on:contextmenu={onContextMenu}
+					{undoStack}
+				/>
 			{/if}
 		{/each}
 	</ul>
