@@ -1,10 +1,10 @@
 {
 	"disAll": {
-		"message": "Tümü devre dışı",
+		"message": "Tümünü devre dışı bırak",
 		"hash": "a9f66d43cfde31fd3cd61c3627eec653"
 	},
 	"enableAll": {
-		"message": "Tümü etkin",
+		"message": "Tümü etkinleştir",
 		"hash": "bff1a5f49fdf6aef0eff0315299dea83"
 	},
 	"extDesc": {
