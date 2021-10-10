@@ -11,8 +11,9 @@ It only requires the `management` permission.
 [link-chrome]: https://chrome.google.com/webstore/detail/one-click-extension-manag/pbgjpgbpljobkekbhnnmlikbbfhbhmem 'Version published on Chrome Web Store'
 [link-firefox]: https://addons.mozilla.org/en-US/firefox/addon/npm-hub/ 'Version published on Mozilla Add-ons'
 [link-safari]: https://apps.apple.com/app/npmhub/id1542090429 'Version published on the Mac App Store'
+[link-edge]: https://microsoftedge.microsoft.com/addons/detail/one-click-extensions-mana/jdodenbllldnoogfmbmmgpieafbnaogm 'Version published on Edge Web Stroe'
 
-[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="48" alt="Chrome" valign="middle">][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/pbgjpgbpljobkekbhnnmlikbbfhbhmem.svg?label=%20">][link-chrome] also compatible with [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/edge/edge.svg" width="24" alt="Edge" valign="middle">][link-chrome] [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/opera/opera.svg" width="24" alt="Opera" valign="middle">][link-chrome]
+[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="48" alt="Chrome" valign="middle">][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/pbgjpgbpljobkekbhnnmlikbbfhbhmem.svg?label=%20">][link-chrome] also compatible with [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/edge/edge.svg" width="24" alt="Edge" valign="middle">][link-edge] [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/opera/opera.svg" width="24" alt="Opera" valign="middle">][link-chrome]
 
 ## Internationalization (i18n)
 
