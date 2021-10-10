@@ -10,7 +10,10 @@ export default class UndoStack {
 	}
 
 	_keyboardEventListener(event) {
-		if (event.keyCode === this._Z_KEY && (this._isWin ? event.ctrlKey : event.metaKey)) {
+		if (
+			event.keyCode === this._Z_KEY &&
+			(this._isWin ? event.ctrlKey : event.metaKey)
+		) {
 			if (event.shiftKey) {
 				this.redo();
 			} else {
