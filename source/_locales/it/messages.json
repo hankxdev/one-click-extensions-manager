@@ -1,26 +1,50 @@
 {
 	"disAll": {
-		"message": "Disattiva tutte"
+		"message": "Disattiva tutte",
+		"hash": "a9f66d43cfde31fd3cd61c3627eec653"
 	},
 	"enableAll": {
-		"message": "Attiva tutte"
+		"message": "Attiva tutte",
+		"hash": "bff1a5f49fdf6aef0eff0315299dea83"
 	},
 	"extDesc": {
-		"message": "Guarda, attiva, disattiva, rimuovi le tue estensioni facilmente."
+		"message": "Guarda, attiva, disattiva, rimuovi le tue estensioni facilmente.",
+		"hash": "557ac2dd0ce9b4249f7dc37868bcfccf"
 	},
 	"extName": {
-		"message": "One Click Extensions Manager"
+		"message": "One Click Extensions Manager",
+		"hash": "9f7e3f659272f7b34a4073ddd8e29658"
 	},
 	"extensionPage": {
-		"message": "Altro…"
+		"message": "Altro…",
+		"hash": "65700a81f7671d1536e3cd98104e4be6"
 	},
 	"gotoOpt": {
-		"message": "Vai alle impostazioni"
+		"message": "Vai alle impostazioni",
+		"hash": "512c610fec5ae0c3b0d8ad20c7eb8e1e"
+	},
+	"hideInfoMsg": {
+		"message": "Ok",
+		"hash": "814f376f8a44776d5b80020e1327d173"
+	},
+	"manage": {
+		"message": "Apri la pagina delle estensioni",
+		"hash": "8eabf58f7231431f0184129019963b9b"
+	},
+	"openUrl": {
+		"message": "Apri il Chrome Web Store",
+		"hash": "54c9abfc9842db7d4a2c0b692d15140c"
 	},
 	"searchTxt": {
-		"message": "Cerca per nome…"
+		"message": "Cerca per nome…",
+		"hash": "1220702106584c8c90c0f41c486a3e0b"
+	},
+	"undoInfoMsg": {
+		"message": "Puoi annullare e ripetere la tua ultima azione finché non chiusi questo popup. Premi <kbd>ctrl+z</kbd> su Windows, <kbd>cmd+z</kbd> su macOS o <kbd>super+z</kbd> on Ubuntu.",
+		"hash": "4c9adc1bb6418b3ecbc77f3ddda22a70"
 	},
 	"uninstall": {
-		"message": "Disinstalla"
+		"message": "Disinstalla",
+		"hash": "6c51642469a9fec1b394358b0a2ada5b"
 	}
 }
