@@ -13,7 +13,9 @@ It only requires the `management` permission.
 [link-safari]: https://apps.apple.com/app/npmhub/id1542090429 'Version published on the Mac App Store'
 [link-edge]: https://microsoftedge.microsoft.com/addons/detail/one-click-extensions-mana/jdodenbllldnoogfmbmmgpieafbnaogm 'Version published on Edge Web Stroe'
 
-[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="48" alt="Chrome" valign="middle">][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/pbgjpgbpljobkekbhnnmlikbbfhbhmem.svg?label=%20">][link-chrome] also compatible with [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/edge/edge.svg" width="24" alt="Edge" valign="middle">][link-edge] [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/opera/opera.svg" width="24" alt="Opera" valign="middle">][link-chrome]
+[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="48" alt="Chrome" valign="middle">][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/pbgjpgbpljobkekbhnnmlikbbfhbhmem.svg?label=%20">][link-chrome]
+
+[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/edge/edge.svg" width="48" alt="Edge" valign="middle">][link-edge] [<img valign="middle" src="https://img.shields.io/badge/dynamic/json?add-on&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjdodenbllldnoogfmbmmgpieafbnaogm&label=%20">][link-edge]
 
 ## Internationalization (i18n)
 
