@@ -36,10 +36,9 @@ It's available in 12 languages:
 
 You can suggest improvements or new languages using the [web-ext-translator](https://lusito.github.io/web-ext-translator/) web tool:
 
-1. Visit https://lusito.github.io/web-ext-translator/
-2. Click the GitHub icon on the top left corner
-3. Enter `https://github.com/hankxdev/one-click-extensions-manager`
-4. Make changes and submit them to this repo
+1. Visit https://lusito.github.io/web-ext-translator/?gh=https://github.com/hankxdev/one-click-extensions-manager
+2. Make changes to your language
+3. Open a PR on this repo to submit your changes
 
 ## License
 
