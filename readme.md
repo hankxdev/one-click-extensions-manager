@@ -17,21 +17,22 @@ It only requires the `management` permission.
 
 [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/edge/edge.svg" width="48" alt="Edge" valign="middle">][link-edge] [<img valign="middle" src="https://img.shields.io/badge/dynamic/json?add-on&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjdodenbllldnoogfmbmmgpieafbnaogm&label=%20">][link-edge]
 
-## Internationalization (i18n)
+## Internationalization
 
-It's available in 11 languages:
+It's available in 12 languages:
 
-- English
-- Chinese (Simplified)
-- Chinese (Traditional)
-- Italian
-- Spanish
-- German
-- French
-- Korean
-- Russian
-- Japanese
-- Hebrew
+- English (United States)
+- 中文 (简体)
+- 中文 (繁體)
+- italiano
+- Deutsch
+- Español
+- français
+- עברית
+- 日本語
+- 한국어
+- русский
+- Türkçe
 
 You can suggest improvements or new languages using the [web-ext-translator](https://lusito.github.io/web-ext-translator/) web tool:
 
