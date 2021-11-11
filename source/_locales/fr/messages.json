@@ -1,26 +1,50 @@
 {
 	"disAll": {
-		"message": "Désactiver toutes"
+		"message": "Désactiver toutes les extensions",
+		"hash": "a9f66d43cfde31fd3cd61c3627eec653"
 	},
 	"enableAll": {
-		"message": "Désactiver toutes"
+		"message": "Activer toutes les extensions",
+		"hash": "bff1a5f49fdf6aef0eff0315299dea83"
 	},
 	"extDesc": {
-		"message": "Gérer votre extension en un seul clic."
+		"message": "Gérer votre extension en un seul clic.",
+		"hash": "557ac2dd0ce9b4249f7dc37868bcfccf"
 	},
 	"extName": {
-		"message": "Gestionnaire d‘extensions à un clic"
+		"message": "Gestionnaire d‘extensions à un clic",
+		"hash": "9f7e3f659272f7b34a4073ddd8e29658"
 	},
 	"extensionPage": {
-		"message": "Plus…"
+		"message": "Plus…",
+		"hash": "65700a81f7671d1536e3cd98104e4be6"
 	},
 	"gotoOpt": {
-		"message": "Aller à la page des options"
+		"message": "Aller à la page des options",
+		"hash": "512c610fec5ae0c3b0d8ad20c7eb8e1e"
+	},
+	"hideInfoMsg": {
+		"message": "Cacher cela",
+		"hash": "814f376f8a44776d5b80020e1327d173"
+	},
+	"manage": {
+		"message": "Voir dans la page des extensions",
+		"hash": "8eabf58f7231431f0184129019963b9b"
+	},
+	"openUrl": {
+		"message": "Voir sur le Web Store",
+		"hash": "54c9abfc9842db7d4a2c0b692d15140c"
 	},
 	"searchTxt": {
-		"message": "Rechercher les extensions…"
+		"message": "Rechercher les extensions…",
+		"hash": "1220702106584c8c90c0f41c486a3e0b"
+	},
+	"undoInfoMsg": {
+		"message": "Vous pouvez annuler et refaire votre dernière action jusqu'à ce que vous fermiez cette fenêtre contextuelle. Appuyez sur <kbd>ctrl+z</kbd> sur Windows et <kbd>cmd+z</kbd> sur macOS, <kbd>super+z</kbd> sur Ubuntu.",
+		"hash": "4105b6ebe6d3c7badf1a2bf9d425ddbb"
 	},
 	"uninstall": {
-		"message": "Désinstaller"
+		"message": "Désinstaller",
+		"hash": "6c51642469a9fec1b394358b0a2ada5b"
 	}
 }
