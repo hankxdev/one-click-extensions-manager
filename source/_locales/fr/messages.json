@@ -46,7 +46,5 @@
 	"uninstall": {
 		"message": "Désinstaller",
 		"hash": "6c51642469a9fec1b394358b0a2ada5b"
-	},
-
-	"__WET_LOCALE__": { "message": "fr" }
+	}
 }
