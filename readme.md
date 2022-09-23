@@ -42,4 +42,4 @@ You can suggest improvements or new languages using the [web-ext-translator](htt
 
 ## License
 
-MIT © [Hank Yang](https://momane.com/), [Federico Brigante](https://github.com/bfred-it/)
+MIT © [Hank Yang](https://momane.com/), [Federico Brigante](https://fregante.com/)
