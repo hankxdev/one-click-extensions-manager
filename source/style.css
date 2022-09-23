@@ -2,6 +2,7 @@
 :root {
 	--margin: 8px;
 	--ext-icon-margin: 0.3em;
+	color-scheme: light dark;
 }
 
 body {
@@ -18,10 +19,6 @@ body[data-type='popup'] {
 input {
 	box-sizing: border-box;
 	width: 100%;
-	font: inherit;
-	background-color: transparent;
-	color: inherit;
-	border: solid 1px;
 	padding: 0.2em 0.4em;
 }
 
