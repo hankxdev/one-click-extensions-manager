@@ -59,7 +59,8 @@
 	}
 
 	onMount(async () => {
-		extensions = (await chromeP.management.getAll())
+		const allExtensions = await chromeP.management.getAll();
+		extensions = allExtensions
 			.filter(({type, id}) => type === 'extension' && id !== myid)
 			.sort((a, b) => {
 				if (a.enabled === b.enabled) {

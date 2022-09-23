@@ -51,24 +51,24 @@
 		"extends": "stylelint-config-xo"
 	},
 	"devDependencies": {
-		"@rollup/plugin-node-resolve": "^13.0.5",
-		"eslint": "^7.32.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-config-xo": "^0.39.0",
-		"eslint-plugin-svelte3": "^3.2.1",
-		"eslint-plugin-unicorn": "^36.0.0",
+		"@rollup/plugin-node-resolve": "^14.1.0",
+		"eslint": "^8.23.1",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-config-xo": "^0.42.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"eslint-plugin-unicorn": "^43.0.2",
 		"husky": "^4.3.8",
 		"npm-run-all": "^4.1.5",
-		"prettier": "^2.4.1",
-		"prettier-plugin-svelte": "^2.4.0",
-		"rollup": "^2.58.0",
+		"prettier": "^2.7.1",
+		"prettier-plugin-svelte": "^2.7.0",
+		"rollup": "^2.79.1",
 		"rollup-plugin-copy-glob": "^0.3.2",
 		"rollup-plugin-livereload": "^2.0.5",
 		"rollup-plugin-svelte": "^7.1.0",
-		"stylelint": "^13.13.1",
-		"stylelint-config-xo": "^0.20.0",
-		"stylelint-prettier": "^1.2.0",
-		"svelte": "^3.43.1"
+		"stylelint": "^14.12.1",
+		"stylelint-config-xo": "^0.21.0",
+		"stylelint-prettier": "^2.0.0",
+		"svelte": "^3.50.1"
 	},
 	"webExt": {
 		"sourceDir": "distribution",
@@ -79,6 +79,6 @@
 		}
 	},
 	"dependencies": {
-		"webext-polyfill-kinda": "^0.1.1"
+		"webext-polyfill-kinda": "^0.10.0"
 	}
 }
