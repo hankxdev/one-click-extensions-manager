@@ -40,7 +40,7 @@
 		"hash": "1220702106584c8c90c0f41c486a3e0b"
 	},
 	"undoInfoMsg": {
-		"message": "在關閉這個窗口前你可以撤銷你的操作。 <br>在Windows中按<kbd>ctrl+z</kbd>macOS中按<kbd>cmd+z</kbd>Linux中按<kbd>super+z</kbd>。",
+		"message": "在關閉這個窗口前你可以撤銷你的操作。 <br>在 Windows 或 Ubuntu 中按<kbd>ctrl+z</kbd>, macOS 中按<kbd>cmd+z</kbd>。",
 		"hash": "4105b6ebe6d3c7badf1a2bf9d425ddbb"
 	},
 	"uninstall": {
