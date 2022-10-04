@@ -30,7 +30,7 @@
 		"message": "Search by name…"
 	},
 	"undoInfoMsg": {
-		"message": "You can undo and redo your last action until you close this popup. Press <kbd>ctrl+z</kbd> on Windows and <kbd>cmd+z</kbd> on macOS, <kbd>super+z</kbd> on Ubuntu."
+		"message": "You can undo and redo your last action until you close this popup. Press <kbd>ctrl+z</kbd> on Windows or Ubuntu,  and <kbd>cmd+z</kbd> on macOS."
 	},
 	"uninstall": {
 		"message": "Uninstall"

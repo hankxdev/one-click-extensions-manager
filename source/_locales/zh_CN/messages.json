@@ -18,13 +18,13 @@
 		"message": "打开设置页面"
 	},
 	"hideInfoMsg": {
-		"message": "知道了"
+		"message": "隐藏此信息"
 	},
 	"searchTxt": {
 		"message": "查找扩展"
 	},
 	"undoInfoMsg": {
-		"message": "在关闭这个窗口前你可以撤销你的操作。 <br>在Windows中按 <kbd>ctrl+z</kbd> macOS中按<kbd>cmd+z</kbd>Linux中按<kbd>super+z</kbd>。"
+		"message": "在关闭这个窗口前你可以撤销你的操作。 在 Windows 或 Ubuntu 中按 <kbd>Ctrl+Z</kbd>, macOS 中按<kbd>CMD+Z</kbd>."
 	},
 	"uninstall": {
 		"message": "卸载这个扩展"

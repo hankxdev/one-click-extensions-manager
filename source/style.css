@@ -65,6 +65,14 @@ button:hover,
 }
 
 /**
+* HIDE MESSAGE
+*/
+
+.hide-action {
+	border-bottom: 1px #2b2c2c dotted;
+}
+
+/**
  * LIST
  */
 #ext-list {
