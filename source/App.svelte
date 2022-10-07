@@ -95,7 +95,9 @@
 	{#if showInfoMessage}
 		<p>
 			{@html getI18N('undoInfoMsg')}
-			<a class="hide-action" href="#hide" on:click={hideInfoMessage}>{getI18N('hideInfoMsg')}</a>
+			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
+				>{getI18N('hideInfoMsg')}</a
+			>
 		</p>
 	{/if}
 	<!-- svelte-ignore a11y-autofocus -->
