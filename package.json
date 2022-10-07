@@ -30,7 +30,8 @@
 			"prettier"
 		],
 		"rules": {
-			"no-new": "off"
+			"no-new": "off",
+			"no-bitwise": "off"
 		},
 		"overrides": [
 			{
