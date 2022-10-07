@@ -1,18 +1,19 @@
 export default class UndoStack {
+	_undoStack = [];
+	_redoStack = [];
+	_Z_KEY = 90;
+	_isWin = navigator.userAgent.match(/win/i);
+
 	constructor(element) {
-		this._undoStack = [];
-		this._redoStack = [];
-		this._Z_KEY = 90;
-		this._isWin = navigator.userAgent.match(/win/i);
 		if (element) {
 			element.addEventListener(
 				'keydown',
-				this._keyboardEventListener.bind(this)
+				this.#keyboardEventListener
 			);
 		}
 	}
 
-	_keyboardEventListener(event) {
+	#keyboardEventListener = (event) => {
 		if (
 			event.keyCode === this._Z_KEY &&
 			(this._isWin ? event.ctrlKey : event.metaKey)
