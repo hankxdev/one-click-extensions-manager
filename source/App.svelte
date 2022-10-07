@@ -38,6 +38,7 @@
 	}
 
 	function keyboardNavigationHandler(event) {
+		// eslint-disable-next-line unicorn/prefer-switch -- Unreadable
 		if (event.key === 'Tab') {
 			showExtras = true;
 		} else if (event.key === 'ArrowDown') {
