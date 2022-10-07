@@ -4,6 +4,7 @@
 	import Extension from './Extension.svelte';
 	import openInTab from './lib/open-in-tab.js';
 	import UndoStack from './lib/undo-stack.js';
+	import {focusNext, focusPrevious} from './lib/focus-next.js';
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
@@ -38,9 +39,18 @@
 
 	function keyboardNavigationHandler(event) {
 		if (event.key === 'Tab') {
-			document.body.classList.add('keyboard-navigation');
 			showExtras = true;
+		} else if (event.key === 'ArrowDown') {
+			focusNext('.ext-name, [type="search"]');
+			event.preventDefault();
+		} else if (event.key === 'ArrowUp') {
+			focusPrevious('.ext-name, [type="search"]');
+			event.preventDefault();
+		} else {
+			return
 		}
+
+		document.body.classList.add('keyboard-navigation');
 	}
 
 	function toggleAll(enable) {
