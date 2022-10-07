@@ -6,14 +6,11 @@ export default class UndoStack {
 
 	constructor(element) {
 		if (element) {
-			element.addEventListener(
-				'keydown',
-				this.#keyboardEventListener
-			);
+			element.addEventListener('keydown', this.#keyboardEventListener);
 		}
 	}
 
-	#keyboardEventListener = (event) => {
+	#keyboardEventListener = event => {
 		if (
 			event.keyCode === this._Z_KEY &&
 			(this._isWin ? event.ctrlKey : event.metaKey)
@@ -24,7 +21,7 @@ export default class UndoStack {
 				this.undo();
 			}
 		}
-	}
+	};
 
 	undo() {
 		const functions = this._undoStack.pop();
