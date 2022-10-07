@@ -5,7 +5,7 @@ export default class UndoStack {
 		this._Z_KEY = 90;
 		this._isWin = navigator.userAgent.match(/win/i);
 		if (element) {
-			element.addEventListener('keydown', this._keyboardEventListener);
+			element.addEventListener('keydown', this._keyboardEventListener.bind(this));
 		}
 	}
 
