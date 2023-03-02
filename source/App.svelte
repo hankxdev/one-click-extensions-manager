@@ -48,7 +48,7 @@
 			focusPrevious('.ext-name, [type="search"]');
 			event.preventDefault();
 		} else {
-			return
+			return;
 		}
 
 		document.body.classList.add('keyboard-navigation');
