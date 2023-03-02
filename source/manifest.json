@@ -6,7 +6,7 @@
 	"homepage_url": "https://github.com/hankxdev/one-click-extensions-manager",
 	"default_locale": "en",
 	"permissions": ["management"],
-	"minimum_chrome_version": "74",
+	"minimum_chrome_version": "110",
 	"icons": {
 		"16": "logo.png",
 		"128": "logo.png"
