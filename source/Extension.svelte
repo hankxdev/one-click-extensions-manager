@@ -74,7 +74,7 @@
 	{/if}
 	{#if showExtras}
 		{#if url}
-			<a href={url} title={getI18N('openUrl')} target="_blank">
+			<a href={url} title={getI18N('openUrl')} target="_blank" rel="noreferrer">
 				<img src="icons/globe.svg" alt="" />
 			</a>
 		{/if}

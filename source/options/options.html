@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="UTF-8" />
+<title>One Click Extension Manager options</title>
+<style>
+	@import './webext-base.css';
+	input[type='text'] {
+		border: solid 1px;
+		border-radius: 2px;
+	}
+	label {
+		display: block;
+	}
+	#width {
+		width: 5em;
+	}
+</style>
+<form id="options-form">
+	<p>
+		<label for="showButtons">Show buttons</label>
+		<select name="showButtons" id="showButtons">
+			<option value="on-demand">On demand (default)</option>
+			<option value="always">Always</option>
+		</select>
+	</p>
+	<p>
+		<label for="width"
+			>List width <small>(CSS value or leave empty)</small></label
+		>
+		<input type="text" name="width" id="width" placeholder="400px" />
+	</p>
+</form>
+<hr />
+<p>
+	You can more information on
+	<a href="https://github.com/hankxdev/one-click-extensions-manager">
+		our GitHub repo</a
+	>. If you find this useful, consider supporting its development by
+	<a href="https://github.com/sponsors/fregante">donating on GitHub</a>.
+</p>
+<p>
+	Made with 🍕 by <a href="https://fregante.com">fregante</a> and
+	<a href="https://momane.com/">Hank Yang</a>.
+</p>
+<script type="module" src="options.js"></script>

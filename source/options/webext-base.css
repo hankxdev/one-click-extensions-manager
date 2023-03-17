@@ -1,0 +1,137 @@
+/* Vendored until a better build is added */
+
+/*! https://npm.im/webext-base-css */
+
+/* Firefox only: @-moz-document */
+/* Firefox only: var(--in-content-*) */
+/* Chrome only: -webkit-hyphens */
+/* Safari only: _::-webkit-full-page-media */
+
+/* webpackIgnore: true */
+@import url('chrome://global/skin/in-content/common.css')
+(min--moz-device-pixel-ratio: 0); /* Firefox-only */
+
+:root {
+	--background-color-for-chrome: #292a2d;
+	max-width: 700px;
+	margin: auto;
+}
+
+body {
+	--body-margin-h: 8px;
+	margin-left: var(--body-margin-h);
+	margin-right: var(--body-margin-h);
+}
+
+/* Selector matches Firefox’ */
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='text'],
+input[type='url'],
+input:not([type]),
+textarea {
+	display: block;
+	box-sizing: border-box;
+	margin-left: 0;
+	width: 100%;
+	resize: vertical;
+	-moz-tab-size: 4 !important;
+	tab-size: 4 !important;
+}
+
+input[type='checkbox'] {
+	vertical-align: -0.15em;
+}
+
+@supports (not (-webkit-hyphens: none)) and (not (-moz-appearance: none)) and
+	(list-style-type: '*') {
+	textarea:focus {
+		/* Inexplicably missing from Chrome’s input style https://github.com/chromium/chromium/blob/6bea0557fe/extensions/renderer/resources/extension.css#L287 */
+		border-color: #4d90fe;
+		transition: border-color 200ms;
+	}
+}
+
+hr {
+	margin-right: calc(-1 * var(--body-margin-h));
+	margin-left: calc(-1 * var(--body-margin-h));
+	border: none;
+	border-bottom: 1px solid #aaa4;
+}
+
+img {
+	vertical-align: middle;
+}
+
+_::-webkit-full-page-media,
+_:future,
+:root {
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif,
+		'Apple Color Emoji';
+}
+
+_::-webkit-full-page-media,
+_:future,
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='text'],
+input[type='url'],
+input:not([type]),
+textarea {
+	border: solid 1px #888;
+	padding: 0.4em;
+	font: inherit;
+	-webkit-appearance: none;
+}
+
+@-moz-document url-prefix('') {
+	:root, /* Visible on a options_page */
+	body {
+		--body-margin-h: 6px; /* Must be a variable so <hr>’s margin is changed too */ /* Visible on a options_page and options_ui */
+		color: var(--in-content-page-color);
+
+		/* Also supports dark themes in Firefox */
+		/* !important is to override the dark-mode setting for Chrome below */
+		background-color: var(--in-content-box-background) !important;
+		min-height: 250px; /* Without this there’s a white space at the bottom in dark mode */
+	}
+
+	body > * {
+		margin-left: var(--body-margin-h);
+		margin-right: var(--body-margin-h);
+	}
+
+	input[type='checkbox'] {
+		vertical-align: -0.4em;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+		background-color: var(--background-color-for-chrome);
+	}
+
+	body,
+	h3 {
+		/* Chrome #3 */
+		color: var(--in-content-page-color, #e8eaed);
+	}
+
+	a {
+		color: var(--in-content-link-color, #8ab4f8);
+	}
+
+	input[type='number'],
+	input[type='password'],
+	input[type='search'],
+	input[type='text'],
+	input[type='url'],
+	input:not([type]),
+	textarea {
+		color: inherit;
+		background-color: transparent;
+	}
+}

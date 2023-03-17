@@ -1,3 +1,4 @@
+import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy-glob';
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
@@ -6,10 +7,13 @@ import livereload from 'rollup-plugin-livereload';
 const production = !process.env.ROLLUP_WATCH;
 
 const config = {
-	input: 'source/main.js',
+	input: {
+		main: 'source/main.js',
+		'options/options': 'source/options/options.js',
+	},
 	output: {
 		sourcemap: !production,
-		format: 'iife',
+		format: 'es',
 		dir: 'distribution',
 	},
 	plugins: [
@@ -19,6 +23,7 @@ const config = {
 				dev: !production,
 			},
 		}),
+		commonjs(),
 		resolve({
 			browser: true,
 			dedupe: ['svelte'],
