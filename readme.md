@@ -1,6 +1,9 @@
+## <img src="source/logo.png" width="30" align="left"> One Click Extension Manager
+
 <img src="screencast.gif" align="right" alt="">
 
-## <img src="source/logo.png" width="30" align="left"> One Click Extension Manager
+<!-- Text wrap helper; Without this, the text can be squished in 40px next to the image -->
+![](https://user-images.githubusercontent.com/1402241/226161439-960aebe9-cad1-4d4d-a59a-f007db2abfa3.png)
 
 A _very simple_ Chrome extension to manage your Chrome extensions.
 
