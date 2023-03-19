@@ -1,4 +1,5 @@
 <script>
+	import optionsStorage from './options-storage.js';
 	import {onMount} from 'svelte';
 	import chromeP from 'webext-polyfill-kinda';
 	import Extension from './Extension.svelte';
@@ -13,11 +14,20 @@
 	let extensions = [];
 	let searchValue = '';
 
-	// Show all buttons when it's not in a popup #32
-	let showExtras =
-		new URLSearchParams(window.location.search).get('type') !== 'popup';
+	const options = optionsStorage.getAll();
+	let showExtras = false;
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 
+	options.then(({showButtons, width}) => {
+		if (showButtons === 'always') {
+			showExtras = true;
+		}
+
+		if (width.trim()) {
+			const cleanWidth = /[a-z]/i.test(width) ? width : width.trim() + 'px';
+			document.body.style.width = cleanWidth;
+		}
+	});
 	$: {
 		const keywords = searchValue
 			.toLowerCase()

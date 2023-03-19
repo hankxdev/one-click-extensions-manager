@@ -5,7 +5,7 @@
 	"manifest_version": 3,
 	"homepage_url": "https://github.com/hankxdev/one-click-extensions-manager",
 	"default_locale": "en",
-	"permissions": ["management"],
+	"permissions": ["management", "storage"],
 	"minimum_chrome_version": "110",
 	"icons": {
 		"16": "logo.png",
@@ -16,7 +16,7 @@
 		"default_popup": "index.html?type=popup"
 	},
 	"options_ui": {
-		"page": "index.html"
+		"page": "options/options.html"
 	},
 	"commands": {
 		"_execute_action": {}
