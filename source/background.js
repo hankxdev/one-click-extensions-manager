@@ -7,6 +7,7 @@ async function updatePopup() {
 	chrome.action.setPopup({popup: position === 'popup' ? defaultPopup : ''});
 }
 
+// TODO: https://github.com/fregante/webext-options-sync/issues/63
 chrome.storage.onChanged.addListener(async (changes, areaName) => {
 	if (areaName === 'sync' && 'options' in changes) {
 		updatePopup();
@@ -15,19 +16,22 @@ chrome.storage.onChanged.addListener(async (changes, areaName) => {
 
 // Must be registered on the top level
 chrome.action.onClicked.addListener(async () => {
-	const {position, width} = await optionsStorage.getAll();
-	const widthNumber = width === '' ? 400 : Number(width);
-	const heightNumber = 600;
+	let {position, width} = await optionsStorage.getAll();
+	width = width === '' ? 400 : Number.parseInt(width, 10); // Must be an integer
+	const height = 600;
 	if (position === 'popup') {
 		return;
 	}
 
 	if (position === 'window') {
+		const currentWindow = await chrome.windows.getCurrent();
 		await chrome.windows.create({
 			type: 'popup',
 			url: chrome.runtime.getURL('index.html?type=window'),
-			width: widthNumber,
-			height: heightNumber,
+			width,
+			height,
+			top: currentWindow.top + Math.round((currentWindow.height - height) / 2),
+			left: currentWindow.left + Math.round((currentWindow.width - width) / 2),
 		});
 		return;
 	}
