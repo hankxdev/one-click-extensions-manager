@@ -18,6 +18,10 @@
 	"options_ui": {
 		"page": "options/options.html"
 	},
+	"background": {
+		"service_worker": "background.js",
+		"type": "module"
+	},
 	"commands": {
 		"_execute_action": {}
 	}

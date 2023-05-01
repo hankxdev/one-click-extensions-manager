@@ -16,6 +16,15 @@ body[data-type='popup'] {
 	width: 320px;
 }
 
+body[data-type='tab'],
+body[data-type='window'] {
+	width: auto;
+}
+
+body[data-type='tab'] {
+	max-width: 800px;
+}
+
 input {
 	box-sizing: border-box;
 	width: 100%;

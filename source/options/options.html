@@ -4,6 +4,7 @@
 <title>One Click Extension Manager options</title>
 <style>
 	@import './webext-base.css';
+	input[type='number'],
 	input[type='text'] {
 		border: solid 1px;
 		border-radius: 2px;
@@ -20,15 +21,23 @@
 </style>
 <form id="options-form">
 	<p>
+		<label for="position">Position</label>
+		<select name="position" id="position">
+			<option value="popup">Menu (default)</option>
+			<option value="window">Popup window</option>
+			<option value="tab">Tab</option>
+		</select>
+	</p>
+	<p>
 		<label for="showButtons">Show buttons</label>
 		<select name="showButtons" id="showButtons">
-			<option value="on-demand">On demand (default)</option>
+			<option value="on-demand">On right click (default)</option>
 			<option value="always">Always</option>
 		</select>
 	</p>
 	<p>
 		<label for="width"
-			>List width <small>(CSS value or leave empty)</small></label
+			>List width <small>(in pixels, or leave empty)</small></label
 		>
 		<input type="text" name="width" id="width" placeholder="400px" />
 	</p>

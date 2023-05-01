@@ -23,9 +23,8 @@
 			showExtras = true;
 		}
 
-		if (width.trim()) {
-			const cleanWidth = /[a-z]/i.test(width) ? width : width.trim() + 'px';
-			document.body.style.width = cleanWidth;
+		if (new URLSearchParams(location.search).get('type') !== 'window') {
+			document.body.style.width = (width || 400) + 'px';
 		}
 	});
 	$: {
