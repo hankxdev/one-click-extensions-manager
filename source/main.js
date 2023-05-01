@@ -1,5 +1,5 @@
 import App from './App.svelte';
-import positionWindow from './lib/position-window';
+import fitWindow from './lib/fit-window';
 
 new App({
 	target: document.body,
@@ -8,5 +8,5 @@ new App({
 const type = new URLSearchParams(location.search).get('type');
 document.body.dataset.type = type;
 if (type === 'window') {
-	positionWindow();
+	fitWindow();
 }

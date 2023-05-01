@@ -5,6 +5,6 @@ function fitWindowToContentHeight() {
 	window.resizeTo(window.outerWidth, height);
 }
 
-export default function positionWindow() {
+export default function fitWindow() {
 	new ResizeObserver(fitWindowToContentHeight).observe(document.body);
 }
