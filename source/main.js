@@ -10,3 +10,10 @@ document.body.dataset.type = type;
 if (type === 'window') {
 	fitWindow();
 }
+
+chrome.runtime.sendMessage('thisTownIsTooSmallForTheTwoOfUs');
+chrome.runtime.onMessage.addListener((message) => {
+	if (message === 'thisTownIsTooSmallForTheTwoOfUs') {
+		window.close()
+	}
+});
