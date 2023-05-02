@@ -10,6 +10,7 @@ const config = {
 	input: {
 		main: 'source/main.js',
 		'options/options': 'source/options/options.js',
+		background: 'source/background.js',
 	},
 	output: {
 		sourcemap: !production,

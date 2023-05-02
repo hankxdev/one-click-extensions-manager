@@ -1,8 +1,12 @@
 import App from './App.svelte';
+import fitWindow from './lib/fit-window';
 
 new App({
 	target: document.body,
 });
 
-// Move to App.svelte once this is supported: https://github.com/sveltejs/svelte/issues/3105
-document.body.dataset.type = new URLSearchParams(location.search).get('type');
+const type = new URLSearchParams(location.search).get('type');
+document.body.dataset.type = type;
+if (type === 'window') {
+	fitWindow();
+}
