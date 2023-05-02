@@ -1,16 +1,9 @@
-import optionsStorage from './options-storage';
-
-const defaultPopup = chrome.runtime.getManifest().action.default_popup;
-
-async function updatePopup() {
-	const {position} = await optionsStorage.getAll();
-	chrome.action.setPopup({popup: position === 'popup' ? defaultPopup : ''});
-}
+import optionsStorage, {matchOptions} from './options-storage';
 
 // TODO: https://github.com/fregante/webext-options-sync/issues/63
 chrome.storage.onChanged.addListener(async (changes, areaName) => {
 	if (areaName === 'sync' && 'options' in changes) {
-		updatePopup();
+		matchOptions();
 	}
 });
 
@@ -41,4 +34,4 @@ chrome.action.onClicked.addListener(async () => {
 	}
 });
 
-updatePopup();
+matchOptions();

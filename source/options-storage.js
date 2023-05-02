@@ -23,3 +23,10 @@ const optionsStorage = new OptionsSync({
 });
 
 export default optionsStorage;
+
+const defaultPopup = chrome.runtime.getManifest().action.default_popup;
+
+export async function matchOptions() {
+	const {position} = await optionsStorage.getAll();
+	chrome.action.setPopup({popup: position === 'popup' ? defaultPopup : ''});
+}
