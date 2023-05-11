@@ -30,6 +30,6 @@
 		"message": "You can undo and redo your last action until you close this popup. Press <kbd>ctrl+z</kbd> on Windows or Ubuntu,  and <kbd>cmd+z</kbd> on macOS."
 	},
 	"uninstall": {
-		"message": "Remove"
+		"message": "Remove from Chrome"
 	}
 }
