@@ -59,18 +59,17 @@ button:hover,
 }
 
 /**
- * HEADER
- */
-.options {
+* HEADER
+*/
+.header {
 	display: flex;
-	justify-content: space-between;
-	margin: 0.5em 0;
+	gap: 0.5em;
+	margin-bottom: 0.5em;
 }
 
-.options * {
-	padding: 0.5em;
-	border-radius: 2px;
-	text-transform: uppercase;
+.header-burger {
+	flex-shrink: 1;
+	width: 1.3em;
 }
 
 /**

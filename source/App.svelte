@@ -3,7 +3,6 @@
 	import {onMount} from 'svelte';
 	import chromeP from 'webext-polyfill-kinda';
 	import Extension from './Extension.svelte';
-	import openInTab from './lib/open-in-tab.js';
 	import UndoStack from './lib/undo-stack.js';
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 
@@ -17,6 +16,7 @@
 	const options = optionsStorage.getAll();
 	let showExtras = false;
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
+	let userClickedHideInfoMessage = false; // "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
 
 	options.then(({showButtons, width}) => {
 		if (showButtons === 'always') {
@@ -44,6 +44,7 @@
 	function hideInfoMessage() {
 		localStorage.setItem('undo-info-message', 1);
 		showInfoMessage = false;
+		userClickedHideInfoMessage = true;
 	}
 
 	function keyboardNavigationHandler(event) {
@@ -107,12 +108,30 @@
 		showExtras = !showExtras;
 		event.preventDefault();
 	};
+
+	function handleBurger() {
+		switch (this.value) {
+			case 'enable':
+				toggleAll(true);
+				showInfoMessage = true
+				break;
+			case 'disable':
+					toggleAll(false);
+					showInfoMessage = true
+				break;
+			case 'extensions':
+				chrome.tabs.create({url: 'chrome://extensions'});
+				break;
+			default:
+		}
+
+		this.value = ''; // Reset the select. PreventDefault doesn't work
+	}
 </script>
 
 <svelte:window on:keydown={keyboardNavigationHandler} />
-
 <main>
-	{#if showInfoMessage}
+	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p>
 			{@html getI18N('undoInfoMsg')}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
@@ -120,19 +139,20 @@
 			>
 		</p>
 	{/if}
-	<!-- svelte-ignore a11y-autofocus -->
-	<input
-		autofocus
-		placeholder={getI18N('searchTxt')}
-		bind:value={searchValue}
-		type="search"
-	/>
-	<div class="options">
-		<button on:click={() => toggleAll(false)}>{getI18N('disAll')}</button>
-		<button on:click={() => toggleAll(true)}>{getI18N('enableAll')}</button>
-		<a href="chrome://extensions" on:click={openInTab} title={getI18N('manage')}
-			>{getI18N('extensionPage')}</a
-		>
+	<div class="header">
+		<!-- svelte-ignore a11y-autofocus -->
+		<input
+			autofocus
+			placeholder={getI18N('searchTxt')}
+			bind:value={searchValue}
+			type="search"
+		/>
+		<select class="header-burger" on:change={handleBurger}>
+			<option value="">…</option>
+			<option value="extensions">{getI18N('manage')}</option>
+			<option value="disable">{getI18N('disAll')}</option>
+			<option value="enable">{getI18N('enableAll')}</option>
+		</select>
 	</div>
 	<ul id="ext-list">
 		{#each extensions as extension (extension.id)}
