@@ -25,6 +25,12 @@ body[data-type='tab'] {
 	max-width: 800px;
 }
 
+main {
+	gap: 1em;
+	display: flex;
+	flex-direction: column;
+}
+
 input {
 	box-sizing: border-box;
 	width: 100%;
@@ -59,12 +65,11 @@ button:hover,
 }
 
 /**
-* HEADER
-*/
+ * HEADER
+ */
 .header {
 	display: flex;
 	gap: 0.5em;
-	margin-bottom: 0.5em;
 }
 
 .header-burger {
@@ -73,8 +78,14 @@ button:hover,
 }
 
 /**
-* HIDE MESSAGE
-*/
+ * HIDE MESSAGE
+ */
+.notice {
+	background: #8882;
+	margin: 0;
+	padding: 0.6em;
+	border-radius: 0.5em;
+}
 
 .hide-action {
 	border-bottom: 1px #2b2c2c dotted;

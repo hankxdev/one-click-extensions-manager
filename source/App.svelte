@@ -138,7 +138,7 @@
 <svelte:window on:keydown={keyboardNavigationHandler} />
 <main>
 	{#if showInfoMessage && !userClickedHideInfoMessage}
-		<p>
+		<p class="notice">
 			{@html getI18N('undoInfoMsg')}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
