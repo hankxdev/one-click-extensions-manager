@@ -111,17 +111,23 @@
 
 	function handleBurger() {
 		switch (this.value) {
-			case 'enable':
+			case 'enable': {
 				toggleAll(true);
-				showInfoMessage = true
+				showInfoMessage = true;
 				break;
-			case 'disable':
-					toggleAll(false);
-					showInfoMessage = true
+			}
+
+			case 'disable': {
+				toggleAll(false);
+				showInfoMessage = true;
 				break;
-			case 'extensions':
+			}
+
+			case 'extensions': {
 				chrome.tabs.create({url: 'chrome://extensions'});
 				break;
+			}
+
 			default:
 		}
 
