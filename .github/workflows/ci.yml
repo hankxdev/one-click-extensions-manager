@@ -5,6 +5,16 @@ on:
   - push
 
 jobs:
+  Format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+      - run: npm ci
+      - run: npx prettier . --check
+
   Lint:
     runs-on: ubuntu-latest
     steps:
