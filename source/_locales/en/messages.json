@@ -11,9 +11,6 @@
 	"extName": {
 		"message": "One Click Extensions Manager"
 	},
-	"extensionPage": {
-		"message": "More…"
-	},
 	"gotoOpt": {
 		"message": "Go to options page"
 	},
@@ -21,7 +18,7 @@
 		"message": "Hide this"
 	},
 	"manage": {
-		"message": "See in the extensions page"
+		"message": "Open the Extensions page"
 	},
 	"openUrl": {
 		"message": "See on the Web Store"
@@ -33,6 +30,6 @@
 		"message": "You can undo and redo your last action until you close this popup. Press <kbd>ctrl+z</kbd> on Windows or Ubuntu,  and <kbd>cmd+z</kbd> on macOS."
 	},
 	"uninstall": {
-		"message": "Uninstall"
+		"message": "Remove from Chrome"
 	}
 }

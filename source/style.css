@@ -25,6 +25,12 @@ body[data-type='tab'] {
 	max-width: 800px;
 }
 
+main {
+	gap: 1em;
+	display: flex;
+	flex-direction: column;
+}
+
 input {
 	box-sizing: border-box;
 	width: 100%;
@@ -61,21 +67,25 @@ button:hover,
 /**
  * HEADER
  */
-.options {
+.header {
 	display: flex;
-	justify-content: space-between;
-	margin: 0.5em 0;
+	gap: 0.5em;
 }
 
-.options * {
-	padding: 0.5em;
-	border-radius: 2px;
-	text-transform: uppercase;
+.header-burger {
+	flex-shrink: 1;
+	width: 1.3em;
 }
 
 /**
-* HIDE MESSAGE
-*/
+ * HIDE MESSAGE
+ */
+.notice {
+	background: #8882;
+	margin: 0;
+	padding: 0.6em;
+	border-radius: 0.5em;
+}
 
 .hide-action {
 	border-bottom: 1px #2b2c2c dotted;

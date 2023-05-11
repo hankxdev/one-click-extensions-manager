@@ -15,10 +15,6 @@
 		"message": "Gestionnaire d‘extensions à un clic",
 		"hash": "9f7e3f659272f7b34a4073ddd8e29658"
 	},
-	"extensionPage": {
-		"message": "Plus…",
-		"hash": "65700a81f7671d1536e3cd98104e4be6"
-	},
 	"gotoOpt": {
 		"message": "Aller à la page des options",
 		"hash": "512c610fec5ae0c3b0d8ad20c7eb8e1e"

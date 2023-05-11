@@ -20,6 +20,10 @@ export default class UndoStack {
 			} else {
 				this.undo();
 			}
+
+			// Without this, it will also undo the filter input field.
+			// That's never useful, so it's best to never allow nor exclude it.
+			event.preventDefault();
 		}
 	};
 
