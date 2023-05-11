@@ -12,8 +12,8 @@ if (type === 'window') {
 }
 
 chrome.runtime.sendMessage('thisTownIsTooSmallForTheTwoOfUs');
-chrome.runtime.onMessage.addListener(message => {
+chrome.runtime.onMessage.addListener((message) => {
 	if (message === 'thisTownIsTooSmallForTheTwoOfUs') {
-		window.close();
+		window.close()
 	}
 });
