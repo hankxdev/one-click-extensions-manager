@@ -128,6 +128,11 @@
 				break;
 			}
 
+			case 'global-options': {
+				chrome.runtime.openOptionsPage();
+				break;
+			}
+
 			default:
 		}
 
@@ -158,6 +163,7 @@
 			<option value="extensions">{getI18N('manage')}</option>
 			<option value="disable">{getI18N('disAll')}</option>
 			<option value="enable">{getI18N('enableAll')}</option>
+			<option value="global-options">{getI18N('gotoOpt')}</option>
 		</select>
 	</div>
 	<ul id="ext-list">
