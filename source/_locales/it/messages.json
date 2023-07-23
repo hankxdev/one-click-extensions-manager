@@ -16,7 +16,7 @@
 		"hash": "9f7e3f659272f7b34a4073ddd8e29658"
 	},
 	"gotoOpt": {
-		"message": "Vai alle impostazioni",
+		"message": "Opzioni…",
 		"hash": "512c610fec5ae0c3b0d8ad20c7eb8e1e"
 	},
 	"hideInfoMsg": {
@@ -24,7 +24,7 @@
 		"hash": "814f376f8a44776d5b80020e1327d173"
 	},
 	"manage": {
-		"message": "Apri pagina delle estensioni",
+		"message": "Pagina delle estensioni",
 		"hash": "8eabf58f7231431f0184129019963b9b"
 	},
 	"openUrl": {
