@@ -152,7 +152,7 @@ button:hover,
 	margin-inline-end: var(--margin);
 }
 
-/* Don't use .ext:hover */
+/* Don't use .ext:hover https://github.com/hankxdev/one-click-extensions-manager/pull/109 */
 .ext:has(:hover) > *,
 .keyboard-navigation .ext:focus-within > * {
 	opacity: 100%;
