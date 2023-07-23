@@ -152,7 +152,8 @@ button:hover,
 	margin-inline-end: var(--margin);
 }
 
-.ext:hover > *,
+/* Don't use .ext:hover */
+.ext:has(:hover) > *,
 .keyboard-navigation .ext:focus-within > * {
 	opacity: 100%;
 }
