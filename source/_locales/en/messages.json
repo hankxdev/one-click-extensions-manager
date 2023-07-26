@@ -12,13 +12,13 @@
 		"message": "One Click Extensions Manager"
 	},
 	"gotoOpt": {
-		"message": "Go to options page"
+		"message": "Options…"
 	},
 	"hideInfoMsg": {
 		"message": "Hide this"
 	},
 	"manage": {
-		"message": "Open the Extensions page"
+		"message": "Extensions page…"
 	},
 	"openUrl": {
 		"message": "See on the Web Store"
