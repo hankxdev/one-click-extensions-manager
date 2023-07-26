@@ -103,10 +103,13 @@
 	});
 
 	// Toggle extra buttons on right click on the name
+	// After the first click, allow the native context menu
 	let onContextMenu;
 	$: onContextMenu = event => {
-		showExtras = !showExtras;
-		event.preventDefault();
+		if (!showExtras) {
+			showExtras = true;
+			event.preventDefault();
+		}
 	};
 
 	function handleBurger() {
@@ -173,7 +176,7 @@
 					{...extension}
 					bind:enabled={extension.enabled}
 					bind:showExtras
-					on:contextmenu={onContextMenu}
+					on:contextmenu|once={onContextMenu}
 					{undoStack}
 				/>
 			{/if}
