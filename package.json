@@ -80,7 +80,7 @@
 	},
 	"dependencies": {
 		"webext-base-css": "^1.4.3",
-		"webext-options-sync": "^4.2.0",
+		"webext-options-sync": "^4.2.1",
 		"webext-polyfill-kinda": "^1.0.2"
 	}
 }
