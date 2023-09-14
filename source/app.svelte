@@ -2,7 +2,7 @@
 	import optionsStorage from './options-storage.js';
 	import {onMount} from 'svelte';
 	import chromeP from 'webext-polyfill-kinda';
-	import Extension from './Extension.svelte';
+	import Extension from './extension.svelte';
 	import UndoStack from './lib/undo-stack.js';
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 
