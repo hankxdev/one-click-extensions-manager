@@ -38,7 +38,7 @@ const config = {
 			],
 			{
 				watch: process.env.ROLLUP_WATCH,
-			}
+			},
 		),
 
 		!production && livereload('distribution'),
