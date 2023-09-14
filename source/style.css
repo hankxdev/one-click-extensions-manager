@@ -163,10 +163,7 @@ button:hover,
 	[data-type='popup'] body::before {
 		content: '';
 		position: fixed;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
+		inset: 0;
 		z-index: -1;
 		border: solid 1px #595a5e;
 	}

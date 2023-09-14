@@ -2,7 +2,7 @@
 	import optionsStorage from './options-storage.js';
 	import {onMount} from 'svelte';
 	import chromeP from 'webext-polyfill-kinda';
-	import Extension from './Extension.svelte';
+	import Extension from './extension.svelte';
 	import UndoStack from './lib/undo-stack.js';
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 
@@ -38,7 +38,8 @@
 			);
 		}
 
-		extensions = extensions; // Signals to Svelte that the content was updated
+		// eslint-disable-next-line no-self-assign -- Signals to Svelte that the content was updated
+		extensions = extensions;
 	}
 
 	function hideInfoMessage() {
@@ -75,7 +76,8 @@
 				chrome.management.setEnabled(extension.id, extension.enabled);
 			}
 
-			extensions = extensions; // Signals to Svelte that the content was updated
+			// eslint-disable-next-line no-self-assign -- Signals to Svelte that the content was updated
+			extensions = extensions;
 		});
 	}
 
