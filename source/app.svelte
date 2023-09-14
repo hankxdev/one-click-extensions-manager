@@ -38,7 +38,8 @@
 			);
 		}
 
-		extensions = extensions; // Signals to Svelte that the content was updated
+		// eslint-disable-next-line no-self-assign -- Signals to Svelte that the content was updated
+		extensions = extensions;
 	}
 
 	function hideInfoMessage() {
@@ -75,7 +76,8 @@
 				chrome.management.setEnabled(extension.id, extension.enabled);
 			}
 
-			extensions = extensions; // Signals to Svelte that the content was updated
+			// eslint-disable-next-line no-self-assign -- Signals to Svelte that the content was updated
+			extensions = extensions;
 		});
 	}
 
