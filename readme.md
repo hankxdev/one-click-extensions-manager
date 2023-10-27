@@ -28,19 +28,19 @@ It's available in 12 languages:
 - English (United States)
 - 中文 (简体)
 - 中文 (繁體)
-- italiano
+- Italiano
 - Deutsch
 - Español
-- français
+- Français
 - עברית
 - 日本語
 - 한국어
 - русский
 - Türkçe
 
-You can suggest improvements or new languages using the [web-ext-translator](https://lusito.github.io/web-ext-translator/) web tool:
+You can suggest improvements or new languages using the `web-ext-translator` web tool:
 
-1. Visit https://lusito.github.io/web-ext-translator/?gh=https://github.com/hankxdev/one-click-extensions-manager
+1. Visit https://lusito.github.io/web-ext-translator/?gh=https://github.com/hankxdev/one-click-extensions-manager/tree/main
 2. Make changes to your language
 3. Open a PR on this repo to submit your changes
 
