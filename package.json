@@ -88,9 +88,6 @@
 	"webExt": {
 		"sourceDir": "distribution",
 		"run": {
-			"startUrl": [
-				"chrome://extensions/?options=aknaajkpkdhfnbdfopjlkpkmajdckgfk"
-			],
 			"target": [
 				"chromium"
 			]

@@ -37,5 +37,6 @@ chrome.action.onClicked.addListener(async () => {
 
 matchOptions();
 
-// DEVELOPMENT MODE: uncomment this so the tab will reopen on extension reload
-// chrome.tabs.create({url:'chrome-extension://aknaajkpkdhfnbdfopjlkpkmajdckgfk/index.html?type=tab'})
+if (process.env.NODE_ENV === 'development') {
+	chrome.tabs.create({url: `${appUrl}?type=tab`});
+}
