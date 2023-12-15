@@ -1,5 +1,10 @@
 <script>
 	import openInTab from './lib/open-in-tab.js';
+	import globeIcon from 'url:./icons/globe.svg';
+	import binIcon from 'url:./icons/bin.svg';
+	import ellipsisIcon from 'url:./icons/ellipsis.svg';
+	import optionsIcon from 'url:./icons/options.svg';
+	import puzzleIcon from 'url:./icons/puzzle.svg';
 
 	export let id;
 	export let name;
@@ -54,7 +59,7 @@
 		}
 
 		// Fallback icon
-		return 'icons/puzzle.svg';
+		return puzzleIcon;
 	}
 </script>
 
@@ -69,13 +74,13 @@
 	</button>
 	{#if optionsUrl && enabled}
 		<a href={optionsUrl} title={getI18N('gotoOpt')} on:click={openInTab}>
-			<img src="icons/options.svg" alt="" />
+			<img src={optionsIcon} alt="" />
 		</a>
 	{/if}
 	{#if showExtras}
 		{#if url}
 			<a href={url} title={getI18N('openUrl')} target="_blank" rel="noreferrer">
-				<img src="icons/globe.svg" alt="" />
+				<img src={globeIcon} alt="" />
 			</a>
 		{/if}
 		<a
@@ -83,14 +88,14 @@
 			title={getI18N('manage')}
 			on:click={openInTab}
 		>
-			<img src="icons/ellipsis.svg" alt="" />
+			<img src={ellipsisIcon} alt="" />
 		</a>
 		<button
 			type="button"
 			title={getI18N('uninstall')}
 			on:click={onUninstallClick}
 		>
-			<img src="icons/bin.svg" alt="" />
+			<img src={binIcon} alt="" />
 		</button>
 	{/if}
 </li>

@@ -88,6 +88,9 @@
 	"webExt": {
 		"sourceDir": "distribution",
 		"run": {
+			"startUrl": [
+				"chrome://extensions/?options=pbgjpgbpljobkekbhnnmlikbbfhbhmem"
+			],
 			"target": [
 				"chromium"
 			]
