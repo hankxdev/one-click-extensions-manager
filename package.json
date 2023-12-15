@@ -89,7 +89,7 @@
 		"sourceDir": "distribution",
 		"run": {
 			"startUrl": [
-				"chrome://extensions/?options=pbgjpgbpljobkekbhnnmlikbbfhbhmem"
+				"chrome://extensions/?options=aknaajkpkdhfnbdfopjlkpkmajdckgfk"
 			],
 			"target": [
 				"chromium"
