@@ -1,5 +1,6 @@
 {
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"build": "parcel build --no-cache --no-content-hash",
 		"fix": "run-p 'lint:* -- --fix'",
@@ -11,7 +12,6 @@
 		"watch": "parcel watch --no-cache --no-content-hash --no-hmr",
 		"prepare": "husky install"
 	},
-	"type": "module",
 	"eslintConfig": {
 		"env": {
 			"browser": true,
@@ -27,10 +27,10 @@
 			"prettier"
 		],
 		"rules": {
-			"unicorn/prefer-top-level-await": "off",
+			"no-bitwise": "off",
 			"no-inner-declarations": "off",
 			"no-new": "off",
-			"no-bitwise": "off"
+			"unicorn/prefer-top-level-await": "off"
 		},
 		"overrides": [
 			{
@@ -46,6 +46,11 @@
 			"stylelint-config-xo",
 			"stylelint-config-prettier"
 		]
+	},
+	"dependencies": {
+		"webext-base-css": "^1.4.3",
+		"webext-options-sync": "^4.2.1",
+		"webext-polyfill-kinda": "^1.0.2"
 	},
 	"devDependencies": {
 		"@parcel/config-webextension": "^2.10.3",
@@ -67,22 +72,8 @@
 		"svelte": "^4.2.8",
 		"svelte-eslint-parser": "^0.33.0"
 	},
-	"webExt": {
-		"sourceDir": "distribution",
-		"run": {
-			"target": [
-				"chromium"
-			]
-		}
-	},
-	"dependencies": {
-		"webext-base-css": "^1.4.3",
-		"webext-options-sync": "^4.2.1",
-		"webext-polyfill-kinda": "^1.0.2"
-	},
-	"alias": {
-		"svelte/why": "https://github.com/orlov-vo/parcel-transformer-svelte/issues/37",
-		"svelte/internal": "./node_modules/svelte/src/runtime/internal/index.js"
+	"@parcel/resolver-default": {
+		"packageExports": true
 	},
 	"targets": {
 		"main": false,
@@ -92,6 +83,14 @@
 			},
 			"source": "source/manifest.json",
 			"distDir": "./distribution"
+		}
+	},
+	"webExt": {
+		"sourceDir": "distribution",
+		"run": {
+			"target": [
+				"chromium"
+			]
 		}
 	}
 }
