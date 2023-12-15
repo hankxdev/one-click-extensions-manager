@@ -1,14 +1,14 @@
 {
 	"private": true,
 	"scripts": {
-		"build": "rollup --config",
+		"build": "parcel build --no-cache --no-content-hash",
 		"fix": "run-p 'lint:* -- --fix'",
 		"lint": "run-p lint:*",
 		"lint:css": "stylelint 'source/*.css'",
 		"lint:js": "eslint . --ext .svelte,.js",
 		"format": "prettier . --write",
 		"test": "run-p lint:* build",
-		"watch": "rollup --config --watch",
+		"watch": "parcel watch --no-cache --no-content-hash --no-hmr",
 		"prepare": "husky install"
 	},
 	"type": "module",
@@ -48,8 +48,7 @@
 		]
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^25.0.4",
-		"@rollup/plugin-node-resolve": "^15.2.1",
+		"@parcel/config-webextension": "^2.10.3",
 		"@types/chrome": "^0.0.246",
 		"eslint": "^8.49.0",
 		"eslint-config-prettier": "^9.0.0",
@@ -58,16 +57,14 @@
 		"eslint-plugin-unicorn": "^48.0.1",
 		"husky": "^8.0.3",
 		"npm-run-all": "^4.1.5",
+		"parcel": "^2.10.3",
+		"parcel-transformer-svelte": "^1.2.3",
 		"prettier": "^3.0.3",
 		"prettier-plugin-svelte": "^3.0.3",
-		"rollup": "^3.29.1",
-		"rollup-plugin-copy-glob": "^0.3.2",
-		"rollup-plugin-livereload": "^2.0.5",
-		"rollup-plugin-svelte": "^7.1.6",
 		"stylelint": "^15.10.3",
 		"stylelint-config-prettier": "^9.0.5",
 		"stylelint-config-xo": "^0.22.0",
-		"svelte": "^4.2.0",
+		"svelte": "^4.2.8",
 		"svelte-eslint-parser": "^0.33.0"
 	},
 	"webExt": {
@@ -82,5 +79,19 @@
 		"webext-base-css": "^1.4.3",
 		"webext-options-sync": "^4.2.1",
 		"webext-polyfill-kinda": "^1.0.2"
+	},
+	"alias": {
+		"svelte/why": "https://github.com/orlov-vo/parcel-transformer-svelte/issues/37",
+		"svelte/internal": "./node_modules/svelte/src/runtime/internal/index.js"
+	},
+	"targets": {
+		"main": false,
+		"default": {
+			"engines": {
+				"browsers": "Chrome 110"
+			},
+			"source": "source/manifest.json",
+			"distDir": "./distribution"
+		}
 	}
 }

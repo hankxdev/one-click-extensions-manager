@@ -54,3 +54,4 @@ Temporary Items
 node_modules/
 deploy/
 distribution/
+.parcel-cache
