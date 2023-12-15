@@ -1,5 +1,14 @@
 import optionsStorage, {matchOptions} from './options-storage';
-import appUrl from 'url:./index.html';
+
+const appUrl = chrome.runtime.getURL(
+	chrome.runtime.getManifest().actions.default_popup,
+);
+
+function getUrlWithType(type) {
+	const url = new URL(appUrl);
+	url.searchParams.set('type', type);
+	return url.href;
+}
 
 // TODO: https://github.com/fregante/webext-options-sync/issues/63
 chrome.storage.onChanged.addListener(async (changes, areaName) => {
@@ -16,7 +25,7 @@ chrome.action.onClicked.addListener(async () => {
 	}
 
 	if (position === 'tab') {
-		chrome.tabs.create({url: `${appUrl}?type=tab`});
+		chrome.tabs.create({url: getUrlWithType('tab')});
 		return;
 	}
 
@@ -26,7 +35,7 @@ chrome.action.onClicked.addListener(async () => {
 		const currentWindow = await chrome.windows.getCurrent();
 		await chrome.windows.create({
 			type: 'popup',
-			url: `${appUrl}?type=window`,
+			url: getUrlWithType('window'),
 			width,
 			height,
 			top: currentWindow.top + Math.round((currentWindow.height - height) / 2),
@@ -38,5 +47,5 @@ chrome.action.onClicked.addListener(async () => {
 matchOptions();
 
 if (process.env.NODE_ENV === 'development') {
-	chrome.tabs.create({url: `${appUrl}?type=tab`});
+	chrome.tabs.create({url: getUrlWithType('tab')});
 }
