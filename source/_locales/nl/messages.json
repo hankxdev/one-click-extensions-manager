@@ -1,0 +1,48 @@
+{
+	"disAll": {
+		"message": "Alles uitschakelen",
+		"hash": "a9f66d43cfde31fd3cd61c3627eec653"
+	},
+	"enableAll": {
+		"message": "Alles inschakelen",
+		"hash": "bff1a5f49fdf6aef0eff0315299dea83"
+	},
+	"extDesc": {
+		"message": "Bekijk, schakel in en uit of verwijder je extensie met gemak.",
+		"hash": "557ac2dd0ce9b4249f7dc37868bcfccf"
+	},
+	"extName": {
+		"message": "One Click Extensions Manager",
+		"hash": "9f7e3f659272f7b34a4073ddd8e29658"
+	},
+	"gotoOpt": {
+		"message": "Opties…",
+		"hash": "0912d504999e2cb4f65b37eddb39b7a7"
+	},
+	"hideInfoMsg": {
+		"message": "Verberg dit",
+		"hash": "814f376f8a44776d5b80020e1327d173"
+	},
+	"manage": {
+		"message": "Extensie pagina…",
+		"hash": "a93cc3eb11188cfa36bc2639e0f5ea89"
+	},
+	"openUrl": {
+		"message": "Bekijk op de Web Store",
+		"hash": "54c9abfc9842db7d4a2c0b692d15140c"
+	},
+	"searchTxt": {
+		"message": "Zoek op naam…",
+		"hash": "1220702106584c8c90c0f41c486a3e0b"
+	},
+	"undoInfoMsg": {
+		"message": "Je kan je laatste actie ongedaan maken of opnieuw uitvoeren totdat je deze popup sluit. Druk op <kbd>ctrl+z</kbd> op Windows of Ubuntu,  en <kbd>cmd+z</kbd> op MacOS.",
+		"hash": "b8be6c1fc88c7e6042b054effb2c6981"
+	},
+	"uninstall": {
+		"message": "Verwijderen uit Chrome",
+		"hash": "a04a561e0b5c8b0210a17382781cabd1"
+	},
+
+	"__WET_LOCALE__": { "message": "nl" }
+}
