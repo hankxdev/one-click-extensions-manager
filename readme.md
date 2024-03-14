@@ -37,6 +37,7 @@ It's available in 12 languages:
 - 한국어
 - русский
 - Türkçe
+- Nederlands
 
 You can suggest improvements or new languages using the `web-ext-translator` web tool:
 
