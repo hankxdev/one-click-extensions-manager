@@ -3,6 +3,7 @@
 
 	export let id;
 	export let name;
+	export let short_name;
 	export let enabled;
 	export let installType;
 	export let homepageUrl;
@@ -65,7 +66,7 @@
 		on:click={toggleExtension}
 		on:contextmenu
 	>
-		<img alt="" src={getIcon(icons, 16)} />{name}
+		<img alt="" src={getIcon(icons, 16)} />{short_name ?? name}
 	</button>
 	{#if optionsUrl && enabled}
 		<a href={optionsUrl} title={getI18N('gotoOpt')} on:click={openInTab}>
