@@ -27,7 +27,7 @@
 		"message": "Buscar por nombre…"
 	},
 	"undoInfoMsg": {
-		"message": "Puedes deshacer y rehacer tu última acción hasta que cierres esta ventana. Presiona <kbd>Ctrl+Z</kbd>"
+		"message": "Puedes deshacer (con <kbd>Ctrl+Z</kbd>) y rehacer tu última acción hasta que cierres esta ventana."
 	},
 	"uninstall": {
 		"message": "Eliminar"

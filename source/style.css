@@ -43,6 +43,10 @@ a {
 	text-decoration: none;
 }
 
+kbd {
+	font-family: system-ui, monospace;
+}
+
 button {
 	display: inline-block;
 	padding: 0;

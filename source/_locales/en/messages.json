@@ -27,7 +27,7 @@
 		"message": "Search by name…"
 	},
 	"undoInfoMsg": {
-		"message": "You can undo and redo your last action until you close this popup. Press <kbd>Ctrl+Z</kbd>"
+		"message": "You can undo (with <kbd>Ctrl+Z</kbd>) and redo your last action until you close this popup."
 	},
 	"uninstall": {
 		"message": "Remove from Chrome"
