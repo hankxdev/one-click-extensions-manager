@@ -36,7 +36,7 @@
 		"hash": "1220702106584c8c90c0f41c486a3e0b"
 	},
 	"undoInfoMsg": {
-		"message": "Je kan je laatste actie ongedaan maken of opnieuw uitvoeren totdat je deze popup sluit. Druk op <kbd>ctrl+z</kbd> op Windows of Ubuntu,  en <kbd>cmd+z</kbd> op MacOS.",
+		"message": "Je kan je laatste actie ongedaan maken of opnieuw uitvoeren totdat je deze popup sluit. Druk op <kbd>Ctrl+Z</kbd>",
 		"hash": "b8be6c1fc88c7e6042b054effb2c6981"
 	},
 	"uninstall": {

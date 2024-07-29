@@ -27,7 +27,7 @@
 		"message": "Nach Name suchen…"
 	},
 	"undoInfoMsg": {
-		"message": "Du kannst deine letzte Aktionen rückgäng machen oder wiederherstellen. Dies funktioniert aber nur solange wie dieser Popup-Dialog geöffnet ist. Drücke dazu <kbd>Strg+z</kbd> unter Windows und <kbd>cmd+z</kbd> unter macOS, <kbd>super+z</kbd> unter Ubuntu."
+		"message": "Du kannst deine letzte Aktionen rückgäng machen oder wiederherstellen. Dies funktioniert aber nur solange wie dieser Popup-Dialog geöffnet ist. Drücke dazu <kbd>Strg+Z</kbd>"
 	},
 	"uninstall": {
 		"message": "Erweiterung entfernen…"

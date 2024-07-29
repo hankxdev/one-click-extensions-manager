@@ -27,7 +27,7 @@
 		"message": "Buscar por nombre…"
 	},
 	"undoInfoMsg": {
-		"message": "Puedes deshacer y rehacer tu última acción hasta que cierres esta ventana. Presiona <kbd>ctrl+z</kbd> en Windows y <kbd>cmd+z</kbd> en macOS, <kbd>super+z</kbd> en Ubuntu."
+		"message": "Puedes deshacer y rehacer tu última acción hasta que cierres esta ventana. Presiona <kbd>Ctrl+Z</kbd>"
 	},
 	"uninstall": {
 		"message": "Eliminar"

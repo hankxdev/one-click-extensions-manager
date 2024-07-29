@@ -8,6 +8,8 @@
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
+	// Replace the whole kbd because some locales don't call it "ctrl"
+	const replaceKbdOnMac = (string) => navigator.platform.includes('Mac') ? string.replace(/<kbd>(.*?)<\/kbd>/g, '<kbd>⌘Z</kbd>') : string;
 
 	const myid = getI18N('@@extension_id');
 	let extensions = [];
@@ -149,7 +151,7 @@
 <main>
 	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p class="notice">
-			{@html getI18N('undoInfoMsg')}
+			{@html replaceKbdOnMac(getI18N('undoInfoMsg'))}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>
