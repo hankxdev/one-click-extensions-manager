@@ -5,9 +5,8 @@ new App({
 	target: document.body,
 });
 
-const type = new URLSearchParams(location.search).get('type');
-document.documentElement.dataset.type = type;
-if (type === 'window') {
+const autoFit = new URLSearchParams(location.search).has('auto-fit');
+if (autoFit) {
 	fitWindow();
 }
 
