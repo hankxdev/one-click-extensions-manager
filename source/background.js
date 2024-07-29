@@ -19,6 +19,10 @@ chrome.action.onClicked.addListener(async () => {
 		return;
 	}
 
+	if (position === 'sidebar') {
+		return;
+	}
+
 	if (position === 'window') {
 		width = width === '' ? 400 : Number.parseInt(width, 10); // Must be an integer
 		const height = 600;

@@ -6,7 +6,7 @@ new App({
 });
 
 const type = new URLSearchParams(location.search).get('type');
-document.body.dataset.type = type;
+document.documentElement.dataset.type = type;
 if (type === 'window') {
 	fitWindow();
 }

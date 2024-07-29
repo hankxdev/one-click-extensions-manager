@@ -29,4 +29,10 @@ const defaultPopup = chrome.runtime.getManifest().action.default_popup;
 export async function matchOptions() {
 	const {position} = await optionsStorage.getAll();
 	chrome.action.setPopup({popup: position === 'popup' ? defaultPopup : ''});
+
+	const inSidebar = position === 'sidebar';
+	chrome.sidePanel.setOptions({enabled: inSidebar});
+	chrome.sidePanel.setPanelBehavior({
+		openPanelOnActionClick: inSidebar,
+	});
 }
