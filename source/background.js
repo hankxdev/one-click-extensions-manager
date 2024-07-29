@@ -10,16 +10,11 @@ chrome.storage.onChanged.addListener(async (changes, areaName) => {
 // Must be registered on the top level
 chrome.action.onClicked.addListener(async () => {
 	let {position, width} = await optionsStorage.getAll();
-	if (position === 'popup') {
-		return;
-	}
+
+	// 'popup' and 'sidebar' are handled by the browser
 
 	if (position === 'tab') {
 		chrome.tabs.create({url: chrome.runtime.getURL('index.html?type=tab')});
-		return;
-	}
-
-	if (position === 'sidebar') {
 		return;
 	}
 
