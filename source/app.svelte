@@ -82,6 +82,12 @@
 	}
 
 	onMount(async () => {
+		function fillInTheBlanks(extension) {
+				extension.shown = true;
+				extension.indexedName = extension.name.toLowerCase();
+				return extension;
+			}
+
 		const allExtensions = await chromeP.management.getAll();
 		extensions = allExtensions
 			.filter(({type, id}) => type === 'extension' && id !== myid)
@@ -92,15 +98,17 @@
 
 				return a.enabled < b.enabled ? 1 : -1; // Sort by state
 			})
-			.map(extension => {
-				extension.shown = true;
-				extension.indexedName = extension.name.toLowerCase();
-				return extension;
-			});
+			.map(extension => fillInTheBlanks(extension));
 
-		// Update list on uninstall
+		// Update list on global events
 		chrome.management.onUninstalled.addListener(deleted => {
 			extensions = extensions.filter(({id}) => id !== deleted);
+		});
+		chrome.management.onInstalled.addListener(installed => {
+			if (installed.type === 'extension') {
+				// Place new extension at the top
+				extensions = [fillInTheBlanks(installed), ...extensions];
+			}
 		});
 	});
 
