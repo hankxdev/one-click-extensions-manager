@@ -18,16 +18,12 @@
 	ul {
 		padding-left: 1em;
 	}
+	p:has([value='tab']:checked, [value='sidebar']:checked)
+		~ p:has(label[for='width']) {
+		display: none;
+	}
 </style>
 <form id="options-form">
-	<p>
-		<label for="position">Position</label>
-		<select name="position" id="position">
-			<option value="popup">Menu (default)</option>
-			<option value="window">Popup window</option>
-			<option value="tab">Tab</option>
-		</select>
-	</p>
 	<p>
 		<label for="showButtons">Show buttons</label>
 		<select name="showButtons" id="showButtons">
@@ -36,9 +32,16 @@
 		</select>
 	</p>
 	<p>
-		<label for="width"
-			>List width <small>(in pixels, or leave empty)</small></label
-		>
+		<label for="position">Position</label>
+		<select name="position" id="position">
+			<option value="popup">Menu (default)</option>
+			<option value="window">Popup window</option>
+			<option value="tab">Tab</option>
+			<option value="sidebar">Sidebar</option>
+		</select>
+	</p>
+	<p>
+		<label for="width"> Width <small>(in pixels)</small> </label>
 		<input type="text" name="width" id="width" placeholder="400" />
 	</p>
 </form>

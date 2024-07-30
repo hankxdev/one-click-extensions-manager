@@ -18,13 +18,13 @@
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 	let userClickedHideInfoMessage = false; // "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
 
-	options.then(({showButtons, width}) => {
+	options.then(({showButtons, width, position}) => {
 		if (showButtons === 'always') {
 			showExtras = true;
 		}
 
-		if (new URLSearchParams(location.search).get('type') !== 'window') {
-			document.body.style.width = (width || 400) + 'px';
+		if (position === 'popup' || position === 'window') {
+			document.documentElement.style.width = (width || 400) + 'px';
 		}
 	});
 	$: {

@@ -6,23 +6,11 @@
 }
 
 body {
-	width: 400px;
+	width: auto;
 	margin: auto;
+	max-width: 800px;
 	padding: var(--margin);
 	direction: auto;
-}
-
-body[data-type='popup'] {
-	width: 320px;
-}
-
-body[data-type='tab'],
-body[data-type='window'] {
-	width: auto;
-}
-
-body[data-type='tab'] {
-	max-width: 800px;
 }
 
 main {
@@ -159,15 +147,6 @@ button:hover,
 }
 
 @media (prefers-color-scheme: dark) {
-	/* Border around improves contrast */
-	[data-type='popup'] body::before {
-		content: '';
-		position: fixed;
-		inset: 0;
-		z-index: -1;
-		border: solid 1px #595a5e;
-	}
-
 	body {
 		background-color: #292a2d;
 		color: #e8eaed;
