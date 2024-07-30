@@ -24,7 +24,7 @@
 		}
 
 		if (position === 'popup' || position === 'window') {
-			document.documentElement.style.width = (width || 400) + 'px';
+			document.documentElement.style.width = `${width || 400}px`;
 		}
 	});
 	$: {
@@ -119,13 +119,12 @@
 
 	// Toggle extra buttons on right click on the name
 	// After the first click, allow the native context menu
-	let onContextMenu;
-	$: onContextMenu = event => {
+	function onContextMenu(event) {
 		if (!showExtras) {
 			showExtras = true;
 			event.preventDefault();
 		}
-	};
+	}
 
 	function handleBurger() {
 		switch (this.value) {
@@ -162,6 +161,7 @@
 <main>
 	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p class="notice">
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
 			{@html UndoStack.replaceKbdOnMac(getI18N('undoInfoMsg'))}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a

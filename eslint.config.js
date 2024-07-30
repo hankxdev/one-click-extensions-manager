@@ -1,9 +1,9 @@
 import antfu from '@antfu/eslint-config';
 
 export default antfu({
+	svelte: true,
 	stylistic: {
 		indent: 'tab',
-		quotes: 'single', // or 'double'
 	},
 
 	languageOptions: {
@@ -17,6 +17,12 @@ export default antfu({
 		'import/order': 'off',
 		'jsonc/object-curly-spacing': 'off',
 		'style/semi': ['error', 'always'],
+		'svelte/html-quotes': [
+			'error',
+			{
+				prefer: 'double',
+			},
+		],
 		'style/arrow-parens': 'off',
 		'style/object-curly-spacing': 'off',
 
@@ -25,5 +31,6 @@ export default antfu({
 		'style/indent': 'off',
 		'style/operator-linebreak': 'off',
 		'style/quote-props': 'off',
+		'svelte/indent': 'off',
 	},
 });
