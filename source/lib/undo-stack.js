@@ -4,14 +4,11 @@ export default class UndoStack {
 	static isMac = navigator.platform.includes('Mac');
 	static replaceKbdOnMac = string =>
 		UndoStack.isMac
-			? // Some locales don't call it "ctrl"
-				string.replace(/(?<=>)[a-z]+\+z/i, '⌘Z')
+			? string.replace(/(?<=>)[a-z]+\+z/i, '⌘Z') // Some locales don't call it "ctrl"
 			: string;
 
 	constructor(element) {
-		if (element) {
-			element.addEventListener('keydown', this.#keyboardEventListener);
-		}
+		element?.addEventListener('keydown', this.#keyboardEventListener);
 	}
 
 	#keyboardEventListener = event => {

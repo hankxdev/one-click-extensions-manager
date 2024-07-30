@@ -5,7 +5,6 @@ export default antfu({
 	stylistic: {
 		indent: 'tab',
 	},
-
 	languageOptions: {
 		globals: {
 			chrome: true,

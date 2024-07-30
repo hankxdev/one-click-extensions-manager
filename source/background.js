@@ -1,4 +1,4 @@
-import optionsStorage, {matchOptions} from './options-storage';
+import optionsStorage, {matchOptions} from './options-storage.js';
 
 // TODO: https://github.com/fregante/webext-options-sync/issues/63
 chrome.storage.onChanged.addListener(async (changes, areaName) => {
