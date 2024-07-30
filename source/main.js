@@ -1,6 +1,7 @@
 import App from './app.svelte';
 import fitWindow from './lib/fit-window';
 
+// eslint-disable-next-line no-new -- Tell this to Svelte
 new App({
 	target: document.body,
 });

@@ -24,7 +24,7 @@
 		}
 
 		if (position === 'popup' || position === 'window') {
-			document.documentElement.style.width = (width || 400) + 'px';
+			document.documentElement.style.width = `${width || 400}px`;
 		}
 	});
 	$: {
@@ -34,13 +34,12 @@
 			.filter(s => s.length);
 		for (const extension of extensions) {
 			extension.shown = keywords.every(word =>
-				extension.indexedName.includes(word)
+				extension.indexedName.includes(word),
 			);
 		}
 
 		extensions = extensions;
 	}
-
 
 	function fillInTheBlanks(extension) {
 		extension.shown = true;
@@ -55,17 +54,23 @@
 	}
 
 	function keyboardNavigationHandler(event) {
-		// eslint-disable-next-line unicorn/prefer-switch -- Unreadable
-		if (event.key === 'Tab') {
-			showExtras = true;
-		} else if (event.key === 'ArrowDown') {
-			focusNext('.ext-name, [type="search"]');
-			event.preventDefault();
-		} else if (event.key === 'ArrowUp') {
-			focusPrevious('.ext-name, [type="search"]');
-			event.preventDefault();
-		} else {
-			return;
+		switch (event.key) {
+			case 'Tab':
+				showExtras = true;
+				break;
+
+			case 'ArrowDown':
+				focusNext('.ext-name, [type="search"]');
+				event.preventDefault();
+				break;
+
+			case 'ArrowUp':
+				focusPrevious('.ext-name, [type="search"]');
+				event.preventDefault();
+				break;
+
+			default:
+				return;
 		}
 
 		document.body.classList.add('keyboard-navigation');
@@ -73,7 +78,7 @@
 
 	function toggleAll(enable) {
 		const affectedExtensions = extensions.filter(
-			extension => enable !== extension.enabled
+			extension => enable !== extension.enabled,
 		);
 
 		undoStack.do(toggle => {
@@ -120,13 +125,12 @@
 
 	// Toggle extra buttons on right click on the name
 	// After the first click, allow the native context menu
-	let onContextMenu;
-	$: onContextMenu = event => {
+	function onContextMenu(event) {
 		if (!showExtras) {
 			showExtras = true;
 			event.preventDefault();
 		}
-	};
+	}
 
 	function handleBurger() {
 		switch (this.value) {
@@ -163,6 +167,7 @@
 <main>
 	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p class="notice">
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
 			{@html UndoStack.replaceKbdOnMac(getI18N('undoInfoMsg'))}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
