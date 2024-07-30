@@ -21,7 +21,7 @@
 		"message": "查找扩展"
 	},
 	"undoInfoMsg": {
-		"message": "在关闭这个窗口前你可以撤销你的操作。 在 Windows 或 Ubuntu 中按 <kbd>Ctrl+Z</kbd>, macOS 中按<kbd>CMD+Z</kbd>."
+		"message": "在关闭这个窗口前你可以撤销你的操作。 中按 <kbd>Ctrl+Z</kbd>。"
 	},
 	"uninstall": {
 		"message": "卸载这个扩展"

@@ -163,7 +163,7 @@
 <main>
 	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p class="notice">
-			{@html getI18N('undoInfoMsg')}
+			{@html UndoStack.replaceKbdOnMac(getI18N('undoInfoMsg'))}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>

@@ -36,7 +36,7 @@
 		"hash": "1220702106584c8c90c0f41c486a3e0b"
 	},
 	"undoInfoMsg": {
-		"message": "Bu pencere kapanıncaya kadar son işleminizi geri ya da ileri alabilirsiniz. Windows’ta <kbd>ctrl+z</kbd>’ye, macOS’te <kbd>cmd+z</kbd>’ye.",
+		"message": "Bu pencere kapanıncaya kadar son işleminizi geri ya da ileri alabilirsiniz. <kbd>Ctrl+Z</kbd>’ye.",
 		"hash": "4105b6ebe6d3c7badf1a2bf9d425ddbb"
 	},
 	"uninstall": {

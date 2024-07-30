@@ -36,7 +36,7 @@
 		"hash": "1220702106584c8c90c0f41c486a3e0b"
 	},
 	"undoInfoMsg": {
-		"message": "Puoi annullare e ripetere la tua ultima azione finché non chiudi questo popup. Premi <kbd>ctrl+z</kbd> su Windows, <kbd>cmd+z</kbd> su macOS o <kbd>super+z</kbd> on Ubuntu.",
+		"message": "Puoi annullare (con <kbd>Ctrl+Z</kbd>) e ripetere la tua ultima azione finché non chiudi questo popup.",
 		"hash": "4c9adc1bb6418b3ecbc77f3ddda22a70"
 	},
 	"uninstall": {
