@@ -42,6 +42,14 @@
 		extensions = extensions;
 	}
 
+
+	function fillInTheBlanks(extension) {
+				extension.shown = true;
+				extension.indexedName = extension.name.toLowerCase();
+				return extension;
+			}
+
+
 	function hideInfoMessage() {
 		localStorage.setItem('undo-info-message', 1);
 		showInfoMessage = false;
@@ -82,12 +90,6 @@
 	}
 
 	onMount(async () => {
-		function fillInTheBlanks(extension) {
-				extension.shown = true;
-				extension.indexedName = extension.name.toLowerCase();
-				return extension;
-			}
-
 		const allExtensions = await chromeP.management.getAll();
 		extensions = allExtensions
 			.filter(({type, id}) => type === 'extension' && id !== myid)
