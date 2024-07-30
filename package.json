@@ -12,8 +12,7 @@
 		"lint:js": "eslint .",
 		"format": "prettier . --write",
 		"test": "run-p lint:* build",
-		"watch": "rollup --config --watch",
-		"prepare": "husky install"
+		"watch": "rollup --config --watch"
 	},
 	"stylelint": {
 		"extends": [
@@ -30,20 +29,19 @@
 		"@antfu/eslint-config": "^2.24.0",
 		"@rollup/plugin-commonjs": "^26.0.1",
 		"@rollup/plugin-node-resolve": "^15.2.3",
-		"@types/chrome": "^0.0.268",
-		"eslint": "^8.57.0",
+		"@types/chrome": "^0.0.269",
+		"eslint": "^9.8.0",
 		"eslint-plugin-svelte": "^2.43.0",
-		"husky": "^9.1.0",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^3.3.3",
 		"prettier-plugin-svelte": "^3.2.6",
-		"rollup": "^4.18.1",
+		"rollup": "^4.19.1",
 		"rollup-plugin-copy-glob": "^0.3.2",
 		"rollup-plugin-livereload": "^2.0.5",
 		"rollup-plugin-svelte": "^7.2.2",
-		"stylelint": "^15.10.3",
+		"stylelint": "^16.8.1",
 		"stylelint-config-prettier": "^9.0.5",
-		"stylelint-config-xo": "^0.22.0",
+		"stylelint-config-xo": "^1.0.2",
 		"svelte": "^4.2.18"
 	},
 	"webExt": {

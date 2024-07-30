@@ -1,6 +1,11 @@
 import antfu from '@antfu/eslint-config';
 
 export default antfu({
+
+  "env": {
+    "browser": true,
+    "node": true
+  },
 	svelte: true,
 	stylistic: {
 		indent: 'tab',
