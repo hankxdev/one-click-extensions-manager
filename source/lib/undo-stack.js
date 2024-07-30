@@ -4,8 +4,8 @@ export default class UndoStack {
 	static isMac = navigator.platform.includes('Mac');
 	static replaceKbdOnMac = string =>
 		UndoStack.isMac
-			? // Some locales don't call it "ctrl"
-				string.replace(/(?<=>)[a-z]+\+z/i, '⌘Z')
+			// Some locales don't call it "ctrl"
+			? string.replace(/(?<=>)[a-z]+\+z/i, '⌘Z')
 			: string;
 
 	constructor(element) {
@@ -16,8 +16,8 @@ export default class UndoStack {
 
 	#keyboardEventListener = event => {
 		if (
-			event.code === 'KeyZ' &&
-			(UndoStack._isMac ? event.metaKey : event.ctrlKey)
+			event.code === 'KeyZ'
+			&& (UndoStack._isMac ? event.metaKey : event.ctrlKey)
 		) {
 			if (event.shiftKey) {
 				this.redo();

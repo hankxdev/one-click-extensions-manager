@@ -1,4 +1,4 @@
-import process from "node:process";
+import process from 'node:process';
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy-glob';
 import svelte from 'rollup-plugin-svelte';
@@ -9,9 +9,9 @@ const production = !process.env.ROLLUP_WATCH;
 
 const config = {
 	input: {
-		main: 'source/main.js',
+		'main': 'source/main.js',
 		'options/options': 'source/options/options.js',
-		background: 'source/background.js',
+		'background': 'source/background.js',
 	},
 	output: {
 		sourcemap: !production,
