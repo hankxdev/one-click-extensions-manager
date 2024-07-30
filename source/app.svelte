@@ -54,17 +54,23 @@
 	}
 
 	function keyboardNavigationHandler(event) {
-		// eslint-disable-next-line unicorn/prefer-switch -- Unreadable
-		if (event.key === 'Tab') {
-			showExtras = true;
-		} else if (event.key === 'ArrowDown') {
-			focusNext('.ext-name, [type="search"]');
-			event.preventDefault();
-		} else if (event.key === 'ArrowUp') {
-			focusPrevious('.ext-name, [type="search"]');
-			event.preventDefault();
-		} else {
-			return;
+		switch (event.key) {
+			case 'Tab':
+				showExtras = true;
+				break;
+
+			case 'ArrowDown':
+				focusNext('.ext-name, [type="search"]');
+				event.preventDefault();
+				break;
+
+			case 'ArrowUp':
+				focusPrevious('.ext-name, [type="search"]');
+				event.preventDefault();
+				break;
+
+			default:
+				return;
 		}
 
 		document.body.classList.add('keyboard-navigation');
