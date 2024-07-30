@@ -41,7 +41,7 @@
 		"rollup-plugin-svelte": "^7.2.2",
 		"stylelint": "^15.10.3",
 		"stylelint-config-prettier": "^9.0.5",
-		"stylelint-config-xo": "^1.0.2",
+		"stylelint-config-xo": "^0.22.0",
 		"svelte": "^4.2.18"
 	},
 	"webExt": {
