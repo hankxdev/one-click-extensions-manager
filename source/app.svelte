@@ -98,11 +98,9 @@
 
 		// Update list on global events
 		chrome.management.onUninstalled.addListener(deleted => {
-			console.log({extensions});
 			extensions = extensions.filter(({id}) => id !== deleted);
 		});
 		chrome.management.onInstalled.addListener(installed => {
-			console.log({extensions});
 			if (installed.type === 'extension') {
 				// Place new extension at the top
 				extensions = [fillInTheBlanks(installed), ...extensions];
