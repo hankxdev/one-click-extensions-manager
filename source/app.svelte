@@ -34,13 +34,12 @@
 			.filter(s => s.length);
 		for (const extension of extensions) {
 			extension.shown = keywords.every(word =>
-				extension.indexedName.includes(word)
+				extension.indexedName.includes(word),
 			);
 		}
 
 		extensions = extensions;
 	}
-
 
 	function fillInTheBlanks(extension) {
 		extension.shown = true;
@@ -73,7 +72,7 @@
 
 	function toggleAll(enable) {
 		const affectedExtensions = extensions.filter(
-			extension => enable !== extension.enabled
+			extension => enable !== extension.enabled,
 		);
 
 		undoStack.do(toggle => {

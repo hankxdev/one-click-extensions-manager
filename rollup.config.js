@@ -9,9 +9,9 @@ const production = !process.env.ROLLUP_WATCH;
 
 const config = {
 	input: {
-		'main': 'source/main.js',
+		main: 'source/main.js',
 		'options/options': 'source/options/options.js',
-		'background': 'source/background.js',
+		background: 'source/background.js',
 	},
 	output: {
 		sourcemap: !production,

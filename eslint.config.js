@@ -12,12 +12,18 @@ export default antfu({
 		},
 	},
 	rules: {
-		'style/semi': ['error', 'always'],
 		'no-self-assign': 'off',
 		'no-console': 'off',
 		'import/order': 'off',
 		'jsonc/object-curly-spacing': 'off',
+		'style/semi': ['error', 'always'],
 		'style/arrow-parens': 'off',
 		'style/object-curly-spacing': 'off',
+
+		// Prettier conflicts
+		'style/brace-style': 'off',
+		'style/indent': 'off',
+		'style/operator-linebreak': 'off',
+		'style/quote-props': 'off',
 	},
 });

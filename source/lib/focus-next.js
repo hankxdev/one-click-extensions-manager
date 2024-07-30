@@ -8,8 +8,8 @@ function focus(selector, next) {
 	for (const item of items) {
 		const position = activeElement.compareDocumentPosition(item);
 		if (
-			position
-			& (next
+			position &
+			(next
 				? Node.DOCUMENT_POSITION_FOLLOWING
 				: Node.DOCUMENT_POSITION_PRECEDING)
 		) {
