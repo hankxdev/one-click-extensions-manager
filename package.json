@@ -30,6 +30,7 @@
 			"no-bitwise": "off",
 			"no-inner-declarations": "off",
 			"no-new": "off",
+			"no-self-assign": "off",
 			"unicorn/prefer-top-level-await": "off"
 		},
 		"overrides": [

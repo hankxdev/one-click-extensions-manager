@@ -38,7 +38,6 @@
 			);
 		}
 
-		// eslint-disable-next-line no-self-assign -- Signals to Svelte that the content was updated
 		extensions = extensions;
 	}
 
