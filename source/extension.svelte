@@ -32,8 +32,7 @@
 		const wasEnabled = enabled;
 
 		undoStack.do(toggle => {
-			enabled = toggle !== wasEnabled;
-			chrome.management.setEnabled(id, enabled);
+			chrome.management.setEnabled(id, toggle !== wasEnabled);
 		});
 	}
 

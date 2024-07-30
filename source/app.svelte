@@ -38,8 +38,14 @@
 			);
 		}
 
-		// eslint-disable-next-line no-self-assign -- Signals to Svelte that the content was updated
 		extensions = extensions;
+	}
+
+
+	function fillInTheBlanks(extension) {
+		extension.shown = true;
+		extension.indexedName = extension.name.toLowerCase();
+		return extension;
 	}
 
 	function hideInfoMessage() {
@@ -72,12 +78,8 @@
 
 		undoStack.do(toggle => {
 			for (const extension of affectedExtensions) {
-				extension.enabled = enable ? toggle : !toggle;
-				chrome.management.setEnabled(extension.id, extension.enabled);
+				chrome.management.setEnabled(extension.id, enable ? toggle : !toggle);
 			}
-
-			// eslint-disable-next-line no-self-assign -- Signals to Svelte that the content was updated
-			extensions = extensions;
 		});
 	}
 
@@ -92,15 +94,27 @@
 
 				return a.enabled < b.enabled ? 1 : -1; // Sort by state
 			})
-			.map(extension => {
-				extension.shown = true;
-				extension.indexedName = extension.name.toLowerCase();
-				return extension;
-			});
+			.map(extension => fillInTheBlanks(extension));
 
-		// Update list on uninstall
+		// Update list on global events
 		chrome.management.onUninstalled.addListener(deleted => {
 			extensions = extensions.filter(({id}) => id !== deleted);
+		});
+		chrome.management.onInstalled.addListener(installed => {
+			if (installed.type === 'extension') {
+				// Place new extension at the top
+				extensions = [fillInTheBlanks(installed), ...extensions];
+			}
+		});
+		chrome.management.onEnabled.addListener(updated => {
+			const extension = extensions.find(({id}) => id === updated.id);
+			extension.enabled = true;
+			extensions = extensions;
+		});
+		chrome.management.onDisabled.addListener(updated => {
+			const extension = extensions.find(({id}) => id === updated.id);
+			extension.enabled = false;
+			extensions = extensions;
 		});
 	});
 
