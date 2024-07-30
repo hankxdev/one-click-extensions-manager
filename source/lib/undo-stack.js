@@ -21,7 +21,8 @@ export default class UndoStack {
 		) {
 			if (event.shiftKey) {
 				this.redo();
-			} else {
+			}
+			else {
 				this.undo();
 			}
 
@@ -38,7 +39,8 @@ export default class UndoStack {
 			const [toggleFunction, undoFunction] = functions;
 			(undoFunction || toggleFunction)(false);
 			this._redoStack.push(functions);
-		} else {
+		}
+		else {
 			console.warn('UndoStack: nothing to undo');
 		}
 	}
@@ -50,7 +52,8 @@ export default class UndoStack {
 			const [doFunction] = functions;
 			doFunction(true);
 			this._undoStack.push(functions);
-		} else {
+		}
+		else {
 			console.warn('UndoStack: nothing to redo');
 		}
 	}
