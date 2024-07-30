@@ -1,46 +1,19 @@
 {
-	"private": true,
 	"type": "module",
+	"private": true,
+	"engines": {
+		"node": ">=22"
+	},
 	"scripts": {
 		"build": "rollup --config",
 		"fix": "run-p 'lint:* -- --fix' format",
 		"lint": "run-p lint:*",
 		"lint:css": "stylelint 'source/*.css'",
-		"lint:js": "eslint . --ext .svelte,.js",
+		"lint:js": "eslint .",
 		"format": "prettier . --write",
 		"test": "run-p lint:* build",
 		"watch": "rollup --config --watch",
 		"prepare": "husky install"
-	},
-	"eslintConfig": {
-		"env": {
-			"browser": true,
-			"webextensions": true
-		},
-		"plugins": [
-			"svelte",
-			"unicorn"
-		],
-		"extends": [
-			"xo",
-			"plugin:unicorn/recommended",
-			"prettier"
-		],
-		"rules": {
-			"no-bitwise": "off",
-			"no-inner-declarations": "off",
-			"no-new": "off",
-			"no-self-assign": "off",
-			"unicorn/prefer-top-level-await": "off"
-		},
-		"overrides": [
-			{
-				"files": [
-					"*.svelte"
-				],
-				"parser": "svelte-eslint-parser"
-			}
-		]
 	},
 	"stylelint": {
 		"extends": [
@@ -54,14 +27,10 @@
 		"webext-polyfill-kinda": "^1.0.2"
 	},
 	"devDependencies": {
+		"@antfu/eslint-config": "^2.24.0",
 		"@rollup/plugin-commonjs": "^26.0.1",
 		"@rollup/plugin-node-resolve": "^15.2.3",
 		"@types/chrome": "^0.0.268",
-		"eslint": "^8.49.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-config-xo": "^0.45.0",
-		"eslint-plugin-svelte": "^2.42.0",
-		"eslint-plugin-unicorn": "^54.0.0",
 		"husky": "^9.1.0",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^3.3.3",
@@ -73,11 +42,7 @@
 		"stylelint": "^15.10.3",
 		"stylelint-config-prettier": "^9.0.5",
 		"stylelint-config-xo": "^0.22.0",
-		"svelte": "^4.2.18",
-		"svelte-eslint-parser": "^0.40.0"
-	},
-	"engines": {
-		"node": ">=22"
+		"svelte": "^4.2.18"
 	},
 	"webExt": {
 		"sourceDir": "distribution",

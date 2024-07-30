@@ -1,3 +1,4 @@
+import process from "node:process";
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy-glob';
 import svelte from 'rollup-plugin-svelte';
