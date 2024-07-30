@@ -8,7 +8,6 @@
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
-	// Replace the whole kbd because some locales don't call it "ctrl"
 
 	const myid = getI18N('@@extension_id');
 	let extensions = [];

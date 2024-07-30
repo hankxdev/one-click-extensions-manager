@@ -4,7 +4,8 @@ export default class UndoStack {
 	static isMac = navigator.platform.includes('Mac');
 	static replaceKbdOnMac = string =>
 		UndoStack.isMac
-			? string.replaceAll(/<kbd>(.*?)<\/kbd>/g, '<kbd>⌘Z</kbd>')
+			// Some locales don't call it "ctrl"
+			? string.replace(/(?<=>)[a-z]+\+z/i, '⌘Z')
 			: string;
 
 	constructor(element) {
