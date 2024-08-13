@@ -61,12 +61,21 @@ button:hover,
  */
 .header {
 	display: flex;
-	gap: 0.5em;
+	position: sticky;
+	top: 1em;
+	z-index: 10;
+	justify-content: space-between;
+	align-items: center;
+	background: inherit;
 }
 
 .header-burger {
-	flex-shrink: 1;
-	width: 1.3em;
+	position: absolute;
+	right: 0;
+	width: 1.5rem;
+	height: 1.5rem;
+	cursor: pointer;
+	text-align: center;
 }
 
 /**
