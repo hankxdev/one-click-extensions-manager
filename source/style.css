@@ -62,20 +62,14 @@ button:hover,
 .header {
 	display: flex;
 	position: sticky;
-	top: 1em;
-	z-index: 10;
-	justify-content: space-between;
-	align-items: center;
-	background: inherit;
+	z-index: 100;
+	top: var(--margin);
+	outline: solid var(--margin) #2b2c2c;
 }
 
 .header-burger {
-	position: absolute;
-	right: 0;
-	width: 1.5rem;
-	height: 1.5rem;
-	cursor: pointer;
-	text-align: center;
+	flex-shrink: 1;
+	width: 1.3em;
 }
 
 /**
