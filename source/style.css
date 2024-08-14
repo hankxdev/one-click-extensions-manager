@@ -2,6 +2,7 @@
 :root {
 	--margin: 8px;
 	--ext-icon-margin: 0.3em;
+	--background-color: light-dark(#fff, #292a2d);
 	color-scheme: light dark;
 }
 
@@ -11,6 +12,7 @@ body {
 	max-width: 800px;
 	padding: var(--margin);
 	direction: auto;
+	background-color: var(--background-color);
 }
 
 main {
@@ -61,7 +63,11 @@ button:hover,
  */
 .header {
 	display: flex;
+	position: sticky;
 	gap: 0.5em;
+	z-index: 100;
+	top: var(--margin);
+	outline: solid var(--margin) var(--background-color);
 }
 
 .header-burger {
@@ -152,7 +158,6 @@ button:hover,
 
 @media (prefers-color-scheme: dark) {
 	body {
-		background-color: #292a2d;
 		color: #e8eaed;
 	}
 
