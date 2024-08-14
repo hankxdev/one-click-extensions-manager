@@ -64,7 +64,7 @@ button:hover,
 	position: sticky;
 	z-index: 100;
 	top: var(--margin);
-	outline: solid var(--margin) #2b2c2c;
+	outline: solid var(--margin) light-dark(#fff, #292a2d);
 }
 
 .header-burger {
