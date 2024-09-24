@@ -1,10 +1,10 @@
 <script>
-	import optionsStorage from './options-storage.js';
 	import {onMount} from 'svelte';
 	import chromeP from 'webext-polyfill-kinda';
 	import Extension from './extension.svelte';
-	import UndoStack from './lib/undo-stack.js';
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
+	import UndoStack from './lib/undo-stack.js';
+	import optionsStorage from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
