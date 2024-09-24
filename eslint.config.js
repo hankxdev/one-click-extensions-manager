@@ -4,6 +4,7 @@ export default antfu({
 	svelte: true,
 	stylistic: {
 		indent: 'tab',
+		semi: 'always',
 	},
 	languageOptions: {
 		globals: {
@@ -13,9 +14,7 @@ export default antfu({
 	rules: {
 		'no-self-assign': 'off',
 		'no-console': 'off',
-		'import/order': 'off',
 		'jsonc/object-curly-spacing': 'off',
-		'style/semi': ['error', 'always'],
 		'svelte/html-quotes': [
 			'error',
 			{
