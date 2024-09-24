@@ -1,9 +1,9 @@
 import process from 'node:process';
 import commonjs from '@rollup/plugin-commonjs';
-import copy from 'rollup-plugin-copy-glob';
-import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
+import copy from 'rollup-plugin-copy-glob';
 import livereload from 'rollup-plugin-livereload';
+import svelte from 'rollup-plugin-svelte';
 
 const production = !process.env.ROLLUP_WATCH;
 
