@@ -34,7 +34,10 @@
 	function trimName(name) {
 		return name
 			.replace(/[-:—|].+$/, '')
-			.replace(/(extension|chrome extension|browser extension|for chrome|for google chrome)$/i, '');
+			.replace(
+				/(extension|chrome extension|browser extension|for chrome|for google chrome)$/i,
+				'',
+			);
 	}
 
 	function toggleExtension() {
