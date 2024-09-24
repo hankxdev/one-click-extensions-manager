@@ -4,7 +4,7 @@ export default antfu({
 	svelte: true,
 	stylistic: {
 		indent: 'tab',
-		semi: 'always',
+		semi: true,
 	},
 	languageOptions: {
 		globals: {
