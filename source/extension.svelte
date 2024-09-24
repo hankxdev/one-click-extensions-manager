@@ -17,6 +17,8 @@
 	const chromeWebStoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
 	const edgeWebStoreUrl = `https://microsoftedge.microsoft.com/addons/detail/${id}`;
 	const url = generateHomeURL();
+	// The browser will still fill the "short name" with "name" if missing
+	const realName = trimName(shortName ?? name);
 
 	function generateHomeURL() {
 		if (installType !== 'normal') {
@@ -26,6 +28,13 @@
 		return updateUrl.startsWith('https://edge.microsoft.com')
 			? edgeWebStoreUrl
 			: chromeWebStoreUrl;
+	}
+
+	// https://github.com/hankxdev/one-click-extensions-manager/issues/152
+	function trimName(name) {
+		return name
+			.replace(/[-:—|].+$/, '')
+			.replace(/(extension|chrome extension|browser extension|for chrome|for google chrome)$/i, '');
 	}
 
 	function toggleExtension() {
@@ -65,7 +74,7 @@
 		on:click={toggleExtension}
 		on:contextmenu
 	>
-		<img alt="" src={getIcon(icons, 16)} />{shortName ?? name}
+		<img alt="" src={getIcon(icons, 16)} />{realName}
 	</button>
 	{#if optionsUrl && enabled}
 		<a href={optionsUrl} title={getI18N('gotoOpt')} on:click={openInTab}>
