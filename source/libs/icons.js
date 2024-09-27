@@ -6,15 +6,15 @@ export default function pickBestIcon(icons, size = 16) {
 		return 'icons/puzzle.svg';
 	}
 
-	const largestToSmallest = icons.toSorted((a, b) => b.size - a.size);
+	const smallestToLargest = icons.toSorted((a, b) => a.size - b.size);
 
 	// Find the smallest icon that is larger than the requested size
-	for (const icon of largestToSmallest) {
+	for (const icon of smallestToLargest) {
 		if (icon.size >= size) {
 			return icon.url;
 		}
 	}
 
 	// If it's not available (e.g. requested 32, available only 16), get the largest one
-	return largestToSmallest[0].url;
+	return smallestToLargest.at(-1).url;
 }
