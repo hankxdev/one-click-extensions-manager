@@ -3,7 +3,9 @@ import trimName from './trim-name.js';
 
 it('preserves regular names', () => {
 	expect(trimName('Regular name')).toBe('Regular name');
-	expect(trimName('One-click extension manager')).toBe('One-click extension manager');
+	expect(trimName('One-click extension manager')).toBe(
+		'One-click extension manager',
+	);
 });
 
 it('trims punctuation', () => {
@@ -13,7 +15,7 @@ it('trims punctuation', () => {
 	expect(trimName('French semicolon : Do things')).toBe('French semicolon');
 });
 
-it ('trims keywords', () => {
+it('trims keywords', () => {
 	expect(trimName('Cake Search Extension')).toBe('Cake Search');
 	expect(trimName('Coconuts for Chrome')).toBe('Coconuts');
 	expect(trimName('Electric Fans for Google Chrome')).toBe('Electric Fans');
