@@ -49,13 +49,12 @@
 
 		if (icons) {
 			// Get a large icon closest to the desired size
-			for (const icon of icons.reverse()) {
+			for (const icon of icons.toReversed()) {
 				if (icon.size >= size) {
 					return icon.url;
 				}
 			}
 		}
-
 		// Fallback icon
 		return 'icons/puzzle.svg';
 	}
