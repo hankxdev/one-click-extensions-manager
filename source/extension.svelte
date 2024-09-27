@@ -68,9 +68,9 @@
 		// Fallback icon
 		return 'icons/puzzle.svg';
 	}
-  
+
 	function sortIconBySize(a, b) {
-		return a.size - b.size;
+		return b.size - a.size;
 	}
 
 </script>
