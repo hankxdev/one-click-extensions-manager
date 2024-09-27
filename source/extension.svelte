@@ -1,5 +1,6 @@
 <script>
 	// Silence warnings https://github.com/sveltejs/svelte/issues/4652#issuecomment-1666893821
+	// eslint-disable-next-line no-unused-expressions
 	$$restProps;
 
 	import openInTab from './lib/open-in-tab.js';
