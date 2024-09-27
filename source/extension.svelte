@@ -10,9 +10,9 @@
 	export let enabled;
 	export let installType;
 	export let homepageUrl;
-	export let updateUrl;
+	export let updateUrl; // Optional
 	export let optionsUrl;
-	export let icons;
+	export let icons; // Optional
 	export let showExtras;
 	export let undoStack;
 
@@ -28,7 +28,7 @@
 			return homepageUrl;
 		}
 
-		return updateUrl.startsWith('https://edge.microsoft.com')
+		return updateUrl?.startsWith('https://edge.microsoft.com')
 			? edgeWebStoreUrl
 			: chromeWebStoreUrl;
 	}
