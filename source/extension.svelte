@@ -57,20 +57,15 @@
 		size *= window.devicePixelRatio;
 
 		if (icons) {
-			const sortedIcons = icons.sort(sortIconBySize);
 			// Get a large icon closest to the desired size
-			for (const icon of sortedIcons) {
+			for (const icon of icons.toReversed()) {
 				if (icon.size >= size) {
 					return icon.url;
 				}
 			}
+			// Fallback icon
+			return 'icons/puzzle.svg';
 		}
-		// Fallback icon
-		return 'icons/puzzle.svg';
-	}
-
-	function sortIconBySize(a, b) {
-		return b.size - a.size;
 	}
 </script>
 
