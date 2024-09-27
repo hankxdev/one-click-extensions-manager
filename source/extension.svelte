@@ -33,7 +33,7 @@
 	// https://github.com/hankxdev/one-click-extensions-manager/issues/152
 	function trimName(name) {
 		return name
-			.replace(/[-:—|].+$/, '')
+			.replace(/(:| [-|—]) .+$/, '')
 			.replace(
 				/(extension|chrome extension|browser extension|for chrome|for google chrome)$/i,
 				'',
