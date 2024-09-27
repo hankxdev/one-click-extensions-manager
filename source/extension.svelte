@@ -63,9 +63,9 @@
 					return icon.url;
 				}
 			}
-			// Fallback icon
-			return 'icons/puzzle.svg';
 		}
+		// Fallback icon
+		return 'icons/puzzle.svg';
 	}
 </script>
 
