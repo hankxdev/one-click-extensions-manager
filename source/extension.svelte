@@ -13,9 +13,9 @@
 	export let enabled;
 	export let installType;
 	export let homepageUrl;
-	export let updateUrl; // Optional
+	export let updateUrl = undefined; // eslint-disable-line no-undef-init -- Optional svelte property
 	export let optionsUrl;
-	export let icons; // Optional
+	export let icons = undefined; // eslint-disable-line no-undef-init -- Optional svelte property
 	export let showExtras;
 	export let undoStack;
 
