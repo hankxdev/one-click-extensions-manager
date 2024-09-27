@@ -1,5 +1,6 @@
 <script>
 	import openInTab from './lib/open-in-tab.js';
+	import trimName from './lib/trim-name.js';
 
 	export let id;
 	export let name;
@@ -28,16 +29,6 @@
 		return updateUrl.startsWith('https://edge.microsoft.com')
 			? edgeWebStoreUrl
 			: chromeWebStoreUrl;
-	}
-
-	// https://github.com/hankxdev/one-click-extensions-manager/issues/152
-	function trimName(name) {
-		return name
-			.replace(/(:| [-|—]) .+$/, '')
-			.replace(
-				/(extension|chrome extension|browser extension|for chrome|for google chrome)$/i,
-				'',
-			);
 	}
 
 	function toggleExtension() {
