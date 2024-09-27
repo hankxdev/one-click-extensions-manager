@@ -1,4 +1,8 @@
 <script>
+	// Silence warnings https://github.com/sveltejs/svelte/issues/4652#issuecomment-1666893821
+	// eslint-disable-next-line no-unused-expressions
+	$$restProps;
+
 	import openInTab from './lib/open-in-tab.js';
 	import trimName from './lib/trim-name.js';
 
@@ -8,9 +12,9 @@
 	export let enabled;
 	export let installType;
 	export let homepageUrl;
-	export let updateUrl;
+	export let updateUrl; // Optional
 	export let optionsUrl;
-	export let icons;
+	export let icons; // Optional
 	export let showExtras;
 	export let undoStack;
 
@@ -26,7 +30,7 @@
 			return homepageUrl;
 		}
 
-		return updateUrl.startsWith('https://edge.microsoft.com')
+		return updateUrl?.startsWith('https://edge.microsoft.com')
 			? edgeWebStoreUrl
 			: chromeWebStoreUrl;
 	}
