@@ -72,7 +72,6 @@
 	function sortIconBySize(a, b) {
 		return b.size - a.size;
 	}
-
 </script>
 
 <li class:disabled={!enabled} class="ext type-{installType}">
