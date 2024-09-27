@@ -9,7 +9,8 @@
 		"fix": "run-p 'lint -- --fix' format",
 		"lint": "eslint .",
 		"format": "prettier . --write",
-		"test": "run-p lint build",
+		"test": "run-p lint build unit",
+		"unit": "node --test",
 		"watch": "rollup --config --watch"
 	},
 	"dependencies": {

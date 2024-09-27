@@ -2,6 +2,7 @@ import antfu from '@antfu/eslint-config';
 
 export default antfu({
 	svelte: true,
+	test: false,
 	stylistic: {
 		indent: 'tab',
 		semi: true,
