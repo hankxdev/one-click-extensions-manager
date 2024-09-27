@@ -1,4 +1,7 @@
 <script>
+	// Silence warnings https://github.com/sveltejs/svelte/issues/4652#issuecomment-1666893821
+	$$restProps;
+
 	import openInTab from './lib/open-in-tab.js';
 
 	export let id;
