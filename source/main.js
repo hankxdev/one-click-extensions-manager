@@ -1,5 +1,6 @@
 import App from './app.svelte';
 import fitWindow from './lib/fit-window.js';
+import preventMultipleWindows from './lib/single-window.js';
 
 // eslint-disable-next-line no-new -- Tell this to Svelte
 new App({
@@ -11,11 +12,4 @@ if (autoFit) {
 	fitWindow();
 }
 
-chrome.runtime.sendMessage('thisTownIsTooSmallForTheTwoOfUs').catch(() => {
-	// No other windows open, good!
-});
-chrome.runtime.onMessage.addListener(message => {
-	if (message === 'thisTownIsTooSmallForTheTwoOfUs') {
-		window.close();
-	}
-});
+preventMultipleWindows();

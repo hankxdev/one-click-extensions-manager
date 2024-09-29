@@ -5,6 +5,7 @@
 
 	import openInTab from './lib/open-in-tab.js';
 	import trimName from './lib/trim-name.js';
+	import pickBestIcon from './libs/icons.js';
 
 	export let id;
 	export let name;
@@ -12,9 +13,9 @@
 	export let enabled;
 	export let installType;
 	export let homepageUrl;
-	export let updateUrl; // Optional
+	export let updateUrl = undefined; // eslint-disable-line no-undef-init -- Optional svelte property
 	export let optionsUrl;
-	export let icons; // Optional
+	export let icons = undefined; // eslint-disable-line no-undef-init -- Optional svelte property
 	export let showExtras;
 	export let undoStack;
 
@@ -46,22 +47,6 @@
 	function onUninstallClick() {
 		chrome.management.uninstall(id);
 	}
-
-	function getIcon(icons, size = 16) {
-		// Get retina size if necessary
-		size *= window.devicePixelRatio;
-
-		if (icons) {
-			// Get a large icon closest to the desired size
-			for (const icon of icons.toReversed()) {
-				if (icon.size >= size) {
-					return icon.url;
-				}
-			}
-		}
-		// Fallback icon
-		return 'icons/puzzle.svg';
-	}
 </script>
 
 <li class:disabled={!enabled} class="ext type-{installType}">
@@ -71,7 +56,7 @@
 		on:click={toggleExtension}
 		on:contextmenu
 	>
-		<img alt="" src={getIcon(icons, 16)} />{realName}
+		<img alt="" src={pickBestIcon(icons, 16)} />{realName}
 	</button>
 	{#if optionsUrl && enabled}
 		<a href={optionsUrl} title={getI18N('gotoOpt')} on:click={openInTab}>
