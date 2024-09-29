@@ -15,8 +15,7 @@
 	},
 	"dependencies": {
 		"webext-base-css": "^1.4.4",
-		"webext-options-sync": "^4.2.4",
-		"webext-polyfill-kinda": "^1.0.2"
+		"webext-options-sync": "^4.2.4"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^3.7.1",
