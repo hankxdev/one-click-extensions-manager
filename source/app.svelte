@@ -1,15 +1,14 @@
 <script>
 	import {onMount} from 'svelte';
-	import chromeP from 'webext-polyfill-kinda';
 	import Extension from './extension.svelte';
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
+	import prepareExtensionList from './lib/prepare-extension-list.js';
 	import UndoStack from './lib/undo-stack.js';
 	import optionsStorage from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
 
-	const myid = getI18N('@@extension_id');
 	let extensions = [];
 	let searchValue = '';
 
@@ -39,12 +38,6 @@
 		}
 
 		extensions = extensions;
-	}
-
-	function fillInTheBlanks(extension) {
-		extension.shown = true;
-		extension.indexedName = extension.name.toLowerCase();
-		return extension;
 	}
 
 	function hideInfoMessage() {
@@ -88,39 +81,50 @@
 		});
 	}
 
+	function handleUninstalled(deleted) {
+		extensions = extensions.filter(({id}) => id !== deleted);
+	}
+
+	async function handleInstalled(installed) {
+		if (installed.type === 'extension') {
+			extensions = prepareExtensionList(await chrome.management.getAll());
+		}
+	}
+
+	function handleEnabled(updated) {
+		const extension = extensions.find(({id}) => id === updated.id);
+		extension.enabled = true;
+		extensions = extensions;
+	}
+
+	function handleDisabled(updated) {
+		const extension = extensions.find(({id}) => id === updated.id);
+		extension.enabled = false;
+		extensions = extensions;
+	}
+
+	async function prepare() {
+		extensions = prepareExtensionList(await chrome.management.getAll());
+	}
+
 	onMount(async () => {
-		const allExtensions = await chromeP.management.getAll();
-		extensions = allExtensions
-			.filter(({type, id}) => type === 'extension' && id !== myid)
-			.sort((a, b) => {
-				if (a.enabled === b.enabled) {
-					return a.name.localeCompare(b.name); // Sort by name
-				}
+		await prepare();
 
-				return a.enabled < b.enabled ? 1 : -1; // Sort by state
-			})
-			.map(extension => fillInTheBlanks(extension));
+		// Add listeners
+		chrome.management.onUninstalled.addListener(handleUninstalled);
+		chrome.management.onInstalled.addListener(handleInstalled);
+		chrome.management.onEnabled.addListener(handleEnabled);
+		chrome.management.onDisabled.addListener(handleDisabled);
+		window.addEventListener('blur', prepare);
 
-		// Update list on global events
-		chrome.management.onUninstalled.addListener(deleted => {
-			extensions = extensions.filter(({id}) => id !== deleted);
-		});
-		chrome.management.onInstalled.addListener(installed => {
-			if (installed.type === 'extension') {
-				// Place new extension at the top
-				extensions = [fillInTheBlanks(installed), ...extensions];
-			}
-		});
-		chrome.management.onEnabled.addListener(updated => {
-			const extension = extensions.find(({id}) => id === updated.id);
-			extension.enabled = true;
-			extensions = extensions;
-		});
-		chrome.management.onDisabled.addListener(updated => {
-			const extension = extensions.find(({id}) => id === updated.id);
-			extension.enabled = false;
-			extensions = extensions;
-		});
+		// Cleanup function
+		return () => {
+			chrome.management.onUninstalled.removeListener(handleUninstalled);
+			chrome.management.onInstalled.removeListener(handleInstalled);
+			chrome.management.onEnabled.removeListener(handleEnabled);
+			chrome.management.onDisabled.removeListener(handleDisabled);
+			window.removeEventListener('blur', prepare);
+		};
 	});
 
 	// Toggle extra buttons on right click on the name
