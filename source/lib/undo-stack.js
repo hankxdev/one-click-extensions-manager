@@ -14,7 +14,7 @@ export default class UndoStack {
 	#keyboardEventListener = event => {
 		if (
 			event.code === 'KeyZ' &&
-			(UndoStack._isMac ? event.metaKey : event.ctrlKey)
+			(UndoStack.isMac ? event.metaKey : event.ctrlKey)
 		) {
 			if (event.shiftKey) {
 				this.redo();
