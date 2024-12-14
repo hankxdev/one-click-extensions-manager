@@ -10,19 +10,21 @@
 
 body {
 	/* Must be on body because both browsers have `font-size: 75%` here */
-	font: 16px/1.5 system-ui, sans-serif;
+	font:
+		16px/1.5 system-ui,
+		sans-serif;
 }
 
 select,
 textarea,
 input:where(
-	[type='number'],
-	[type='password'],
-	[type='search'],
-	[type='text'],
-	[type='url'],
-	:not([type])
-) {
+		[type='number'],
+		[type='password'],
+		[type='search'],
+		[type='text'],
+		[type='url'],
+		:not([type])
+	) {
 	box-sizing: border-box;
 	font: inherit;
 	line-height: 2;
@@ -30,13 +32,13 @@ input:where(
 
 textarea,
 input:where(
-	[type='number'],
-	[type='password'],
-	[type='search'],
-	[type='text'],
-	[type='url'],
-	:not([type])
-):not([size]) {
+		[type='number'],
+		[type='password'],
+		[type='search'],
+		[type='text'],
+		[type='url'],
+		:not([type])
+	):not([size]) {
 	width: 100%;
 }
 
@@ -98,12 +100,6 @@ kbd {
 .text-monospace,
 .monospace-field {
 	/* Same as GitHub style for `code` */
-	font-family:
-		ui-monospace,
-		SFMono-Regular,
-		'SF Mono',
-		Menlo,
-		Consolas,
-		'Liberation Mono',
-		monospace !important;
+	font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+		'Liberation Mono', monospace !important;
 }
