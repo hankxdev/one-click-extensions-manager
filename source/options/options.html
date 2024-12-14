@@ -4,16 +4,12 @@
 <title>One Click Extension Manager options</title>
 <style>
 	@import './webext-base.css';
-	input[type='number'],
-	input[type='text'] {
-		border: solid 1px;
-		border-radius: 2px;
-	}
 	label {
 		display: block;
 	}
-	#width {
-		width: 5em;
+	select {
+		line-height: 2;
+		height: 2.4em; /* Match the height of the input */
 	}
 	ul {
 		padding-left: 1em;
@@ -21,6 +17,15 @@
 	p:has([value='tab']:checked, [value='sidebar']:checked)
 		~ p:has(label[for='width']) {
 		display: none;
+	}
+
+	/* TODO: Drop after https://github.com/fregante/webext-base-css/issues/18 */
+	hr {
+		--body-margin-h: 8px;
+		margin-right: calc(-1 * var(--body-margin-h));
+		margin-left: calc(-1 * var(--body-margin-h));
+		border: none;
+		border-bottom: 1px solid #aaa4;
 	}
 </style>
 <form id="options-form">
@@ -42,7 +47,7 @@
 	</p>
 	<p>
 		<label for="width"> Width <small>(in pixels)</small> </label>
-		<input type="text" name="width" id="width" placeholder="400" />
+		<input type="text" name="width" id="width" placeholder="400" size="5" />
 	</p>
 </form>
 <hr />
