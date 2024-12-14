@@ -14,21 +14,21 @@
 		"watch": "rollup --config --watch"
 	},
 	"dependencies": {
-		"webext-base-css": "^1.4.4",
-		"webext-options-sync": "^4.2.4"
+		"webext-base-css": "^2.0.1",
+		"webext-options-sync": "^4.3.0"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "^3.7.1",
-		"@rollup/plugin-commonjs": "^28.0.0",
+		"@antfu/eslint-config": "^3.11.2",
+		"@rollup/plugin-commonjs": "^28.0.1",
 		"@rollup/plugin-node-resolve": "^15.3.0",
-		"@types/chrome": "^0.0.271",
-		"eslint": "^9.11.1",
-		"eslint-plugin-svelte": "^2.44.0",
-		"npm-run-all2": "^6.2.3",
-		"prettier": "^3.3.3",
-		"prettier-plugin-svelte": "^3.2.6",
-		"rollup": "^4.22.4",
-		"rollup-plugin-copy-glob": "^0.3.2",
+		"@types/chrome": "^0.0.287",
+		"eslint": "^9.16.0",
+		"eslint-plugin-svelte": "^2.46.1",
+		"npm-run-all2": "^7.0.1",
+		"prettier": "^3.4.2",
+		"prettier-plugin-svelte": "^3.3.2",
+		"rollup": "^4.28.1",
+		"rollup-plugin-copy-glob": "^0.4.1",
 		"rollup-plugin-livereload": "^2.0.5",
 		"rollup-plugin-svelte": "^7.2.2",
 		"svelte": "^4.2.19"
