@@ -1,0 +1,48 @@
+{
+	"disAll": {
+		"message": "Wyłącz wszystko",
+		"hash": "a9f66d43cfde31fd3cd61c3627eec653"
+	},
+	"enableAll": {
+		"message": "Włącz wszystko",
+		"hash": "bff1a5f49fdf6aef0eff0315299dea83"
+	},
+	"extDesc": {
+		"message": "Z łatwością przeglądaj, włączaj, wyłączaj i usuwaj swoje rozszerzenia.",
+		"hash": "557ac2dd0ce9b4249f7dc37868bcfccf"
+	},
+	"extName": {
+		"message": "One Click Extensions Manager",
+		"hash": "9f7e3f659272f7b34a4073ddd8e29658"
+	},
+	"gotoOpt": {
+		"message": "Opcje...",
+		"hash": "0912d504999e2cb4f65b37eddb39b7a7"
+	},
+	"hideInfoMsg": {
+		"message": "Ukryj to",
+		"hash": "814f376f8a44776d5b80020e1327d173"
+	},
+	"manage": {
+		"message": "Strona rozszerzenia",
+		"hash": "a93cc3eb11188cfa36bc2639e0f5ea89"
+	},
+	"openUrl": {
+		"message": "Zobacz na stronie sklepu internetowego.",
+		"hash": "54c9abfc9842db7d4a2c0b692d15140c"
+	},
+	"searchTxt": {
+		"message": "Wyszukuj po nazwie",
+		"hash": "1220702106584c8c90c0f41c486a3e0b"
+	},
+	"undoInfoMsg": {
+		"message": "Możesz cofnąć (za pomocą <kbd>Ctrl+Z</kbd>) i powtórzyć ostatnią czynność, dopóki nie zamkniesz tego okna.",
+		"hash": "8044307e478d0cedbc81a0cba56f601d"
+	},
+	"uninstall": {
+		"message": "Usuń z Chrome",
+		"hash": "a04a561e0b5c8b0210a17382781cabd1"
+	},
+
+	"__WET_LOCALE__": {"message": "pl"}
+}
