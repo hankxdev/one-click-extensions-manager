@@ -23,7 +23,7 @@ It only requires the `management` permission.
 
 ## Internationalization
 
-It's available in 12 languages:
+It's available in several languages:
 
 - English (United States)
 - 中文 (简体)
