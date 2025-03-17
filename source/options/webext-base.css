@@ -6,6 +6,7 @@
 	color-scheme: light dark;
 	max-width: 700px;
 	margin: auto;
+	background: var(--background-color);
 }
 
 body {
@@ -79,10 +80,11 @@ kbd {
 }
 
 /* Firefox-only style */
+/* stylelint-disable-next-line at-rule-no-vendor-prefix */
 @-moz-document url-prefix('') {
 	@media (prefers-color-scheme: dark) {
 		:root {
-			background-color: #23222b;
+			--background-color: #23222b;
 		}
 	}
 }
@@ -92,7 +94,7 @@ kbd {
 	@media (prefers-color-scheme: dark) {
 		:root {
 			/* Safari iOS has a black background */
-			background-color: #1e1e1e;
+			--background-color: #1e1e1e;
 		}
 	}
 }
@@ -103,4 +105,37 @@ kbd {
 	font-family:
 		ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
 		monospace !important;
+}
+
+:root.webext-base-css-modal {
+	background: light-dark(#6e9d9f, #194041);
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+
+	body {
+		max-width: 500px;
+		border-radius: 8px;
+		padding: 8px;
+		background: var(--background-color, light-dark(#fff, #1e1e1e));
+		box-shadow:
+			0.3px 2.8px 2.2px rgb(0 0 0 / 2%),
+			0.8px 6.7px 5.3px rgb(0 0 0 / 2.8%),
+			1.5px 12.5px 10px rgb(0 0 0 / 3.5%),
+			2.7px 22.3px 17.9px rgb(0 0 0 / 4.2%),
+			5px 41.8px 33.4px rgb(0 0 0 / 5%),
+			12px 100px 80px rgb(0 0 0 / 7%);
+	}
+
+	body > :first-child {
+		margin-top: 0;
+	}
+
+	body > :last-child {
+		margin-bottom: 0;
+	}
+
+	hr {
+		margin-inline: -8px;
+	}
 }

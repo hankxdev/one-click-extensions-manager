@@ -1,76 +1,88 @@
 <!doctype html>
-<meta charset="UTF-8" />
-<base target="_blank" />
-<title>One Click Extension Manager options</title>
-<style>
-	@import './webext-base.css';
-	label {
-		display: block;
-	}
-	select {
-		line-height: 2;
-		height: 2.4em; /* Match the height of the input */
-	}
-	ul {
-		padding-left: 1em;
-	}
-	p:has([value='tab']:checked, [value='sidebar']:checked)
-		~ p:has(label[for='width']) {
-		display: none;
-	}
-
-	/* TODO: Drop after https://github.com/fregante/webext-base-css/issues/18 */
-	hr {
-		--body-margin-h: 8px;
-		margin-right: calc(-1 * var(--body-margin-h));
-		margin-left: calc(-1 * var(--body-margin-h));
-		border: none;
-		border-bottom: 1px solid #aaa4;
-	}
-</style>
-<form id="options-form">
+<html class="webext-base-css-modal">
+	<meta charset="UTF-8" />
+	<base target="_blank" />
+	<title>One Click Extension Manager options</title>
+	<style>
+		@import './webext-base.css';
+		body {
+			padding: 20px !important;
+		}
+		hr {
+			--body-margin-h: 20px;
+		}
+		h1 {
+			font-weight: 100;
+			line-height: 1;
+		}
+		label {
+			display: block;
+		}
+		select {
+			line-height: 2;
+			height: 2.4em; /* Match the height of the input */
+		}
+		ul {
+			padding-left: 1em;
+		}
+		p:has([value='tab']:checked, [value='sidebar']:checked)
+			~ p:has(label[for='width']) {
+			display: none;
+		}
+		/* TODO: Drop after https://github.com/fregante/webext-base-css/issues/18 */
+		hr {
+			--body-margin-h: 8px;
+			margin-right: calc(-1 * var(--body-margin-h));
+			margin-left: calc(-1 * var(--body-margin-h));
+			border: none;
+			border-bottom: 1px solid #aaa4;
+		}
+	</style>
+	<script type="module" defer src="options.js"></script>
+	<h1>One-Click Extensions Manager</h1>
+	<form id="options-form">
+		<p>
+			<label for="showButtons">Show buttons</label>
+			<select name="showButtons" id="showButtons">
+				<option value="on-demand">On right click (default)</option>
+				<option value="always">Always</option>
+			</select>
+		</p>
+		<p>
+			<label for="position">Position</label>
+			<select name="position" id="position">
+				<option value="popup">Menu (default)</option>
+				<option value="window">Popup window</option>
+				<option value="tab">Tab</option>
+				<option value="sidebar">Sidebar</option>
+			</select>
+		</p>
+		<p>
+			<label for="width"> Width <small>(in pixels)</small> </label>
+			<input type="text" name="width" id="width" placeholder="400" size="5" />
+		</p>
+	</form>
+	<hr />
 	<p>
-		<label for="showButtons">Show buttons</label>
-		<select name="showButtons" id="showButtons">
-			<option value="on-demand">On right click (default)</option>
-			<option value="always">Always</option>
-		</select>
+		If you find this useful, consider supporting its development by donating or
+		leaving a review.
 	</p>
+	<ul>
+		<li>
+			<a
+				href="https://chrome.google.com/webstore/detail/one-click-extensions-mana/pbgjpgbpljobkekbhnnmlikbbfhbhmem/reviews"
+				>Reviews</a
+			>
+		</li>
+		<li><a href="https://github.com/sponsors/fregante">Donations</a></li>
+		<li>
+			<a href="https://github.com/hankxdev/one-click-extensions-manager"
+				>Open source on GitHub</a
+			>
+		</li>
+	</ul>
 	<p>
-		<label for="position">Position</label>
-		<select name="position" id="position">
-			<option value="popup">Menu (default)</option>
-			<option value="window">Popup window</option>
-			<option value="tab">Tab</option>
-			<option value="sidebar">Sidebar</option>
-		</select>
+		Made by <a href="https://fregante.com">fregante</a> 🇮🇹 and
+		<a href="https://momane.com/">Hank Yang</a> 🇨🇳
 	</p>
-	<p>
-		<label for="width"> Width <small>(in pixels)</small> </label>
-		<input type="text" name="width" id="width" placeholder="400" size="5" />
-	</p>
-</form>
-<hr />
-<p>
-	If you find this useful, consider supporting its development by donating or
-	leaving a review.
-</p>
-<ul>
-	<li>
-		<a
-			href="https://chrome.google.com/webstore/detail/one-click-extensions-mana/pbgjpgbpljobkekbhnnmlikbbfhbhmem/reviews"
-			>Reviews</a
-		>
-	</li>
-	<li><a href="https://github.com/sponsors/fregante">Donations</a></li>
-	<li>
-		<a href="https://github.com/hankxdev/one-click-extensions-manager"
-			>Open source on GitHub</a
-		>
-	</li>
-</ul>
-<p>
-	Made by <a href="https://fregante.com">fregante</a> 🇮🇹 and
-	<a href="https://momane.com/">Hank Yang</a> 🇨🇳
-</p>
-<script type="module" src="options.js"></script>
+</html>
