@@ -38,6 +38,8 @@ It's available in 12 languages:
 - русский
 - Türkçe
 - Nederlands
+- Polski
+- Latviešu
 
 You can suggest improvements or new languages using the `web-ext-translator` web tool:
 
