@@ -4,10 +4,12 @@
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 	import prepareExtensionList from './lib/prepare-extension-list.js';
 	import UndoStack from './lib/undo-stack.js';
+	import {CustomNameManager} from './lib/custom-name-manager.js';
 	import optionsStorage from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
+	const customNameManager = new CustomNameManager();
 
 	let extensions = [];
 	let searchValue = '';
@@ -32,9 +34,12 @@
 			.split(' ')
 			.filter(s => s.length);
 		for (const extension of extensions) {
-			extension.shown = keywords.every(word =>
-				extension.indexedName.includes(word),
-			);
+			extension.shown = keywords.every(word => {
+				return (
+					extension.indexedName.includes(word) ||
+					extension.customName?.toLowerCase().includes(word)
+				);
+			});
 		}
 
 		extensions = extensions;
@@ -87,7 +92,7 @@
 
 	async function handleInstalled(installed) {
 		if (installed.type === 'extension') {
-			extensions = prepareExtensionList(await chrome.management.getAll());
+			await prepare();
 		}
 	}
 
@@ -103,8 +108,41 @@
 		extensions = extensions;
 	}
 
+	async function handleNameChange(event) {
+		const {id, editName, action} = event.detail;
+		const extension = extensions.find(ext => ext.id === id);
+
+		if (extension) {
+			if (action === 'save') {
+				const newName = await customNameManager.saveCustomName(
+					id,
+					editName,
+					extension,
+				);
+				extension.customName = newName;
+			} else if (action === 'reset') {
+				await customNameManager.resetToOriginalName(id);
+				extension.customName = '';
+			}
+
+			extension.hasCustomName = customNameManager.hasCustomName(extension.id);
+
+			extensions = extensions;
+		}
+	}
+
 	async function prepare() {
-		extensions = prepareExtensionList(await chrome.management.getAll());
+		await customNameManager.loadCustomNames();
+
+		const allExtensions = await chrome.management.getAll();
+		const preparedExtensions = prepareExtensionList(allExtensions);
+
+		for (const extension of preparedExtensions) {
+			extension.customName = customNameManager.getCustomName(extension.id);
+			extension.hasCustomName = customNameManager.hasCustomName(extension.id);
+		}
+
+		extensions = preparedExtensions;
 	}
 
 	onMount(async () => {
@@ -117,7 +155,6 @@
 		chrome.management.onDisabled.addListener(handleDisabled);
 		window.addEventListener('blur', prepare);
 
-		// Cleanup function
 		return () => {
 			chrome.management.onUninstalled.removeListener(handleUninstalled);
 			chrome.management.onInstalled.removeListener(handleInstalled);
@@ -201,6 +238,8 @@
 					{...extension}
 					bind:enabled={extension.enabled}
 					bind:showExtras
+					bind:hasCustomName={extension.hasCustomName}
+					on:nameChange={handleNameChange}
 					on:contextmenu|once={onContextMenu}
 					{undoStack}
 				/>

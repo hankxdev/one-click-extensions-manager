@@ -36,3 +36,29 @@ export async function matchOptions() {
 		openPanelOnActionClick: inSidebar,
 	});
 }
+
+export async function getCustomNames() {
+	const {customNames} = await optionsStorage.getAll();
+	return customNames || {};
+}
+
+export async function setCustomName(extensionId, customName) {
+	const customNames = await getCustomNames();
+
+	if (customName && customName.trim()) {
+		customNames[extensionId] = customName.trim();
+	} else {
+		delete customNames[extensionId];
+	}
+
+	await optionsStorage.set({customNames});
+}
+
+export async function removeCustomName(extensionId) {
+	const customNames = await getCustomNames();
+
+	if (customNames[extensionId]) {
+		delete customNames[extensionId];
+		await optionsStorage.set({customNames});
+	}
+}

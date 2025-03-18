@@ -31,5 +31,11 @@
 	},
 	"openUrl": {
 		"message": "打开此扩展的主页或应用商店链接"
+	},
+	"editName": {
+		"message": "编辑扩展名称"
+	},
+	"resetName": {
+		"message": "恢复扩展名称"
 	}
 }

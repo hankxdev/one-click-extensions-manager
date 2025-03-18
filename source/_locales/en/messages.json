@@ -31,5 +31,11 @@
 	},
 	"uninstall": {
 		"message": "Remove from Chrome"
+	},
+	"editName": {
+		"message": "Edit extension name"
+	},
+	"resetName": {
+		"message": "Reset to original extension name"
 	}
 }
