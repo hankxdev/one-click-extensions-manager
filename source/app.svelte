@@ -70,6 +70,7 @@
 	}
 
 	function toggleAll(enable) {
+		console.log(`toggleAll called with enable: ${enable}`);
 		const affectedExtensions = extensions.filter(
 			extension => enable !== extension.enabled,
 		);
@@ -137,6 +138,7 @@
 	}
 
 	function handleBurger() {
+		console.log(`handleBurger called with value: ${this.value}`);
 		switch (this.value) {
 			case 'enable': {
 				toggleAll(true);
