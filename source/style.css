@@ -3,6 +3,10 @@
 	--margin: 8px;
 	--ext-icon-margin: 0.3em;
 	--background-color: light-dark(#fff, #292a2d);
+	--hover-color: #ecf0f1;
+	--pinned-color:  #4a9b682e;
+	--development-color: #4170c3;
+	--admin-color: #c32700;
 	color-scheme: light dark;
 }
 
@@ -54,7 +58,7 @@ a:hover,
 .keyboard-navigation a:focus,
 button:hover,
 .keyboard-navigation button:focus {
-	background-color: #ecf0f1;
+	background-color: var(--hover-color);
 	cursor: pointer;
 }
 
@@ -110,16 +114,16 @@ button:hover,
 }
 
 .ext.type-development {
-	color: #4170c3;
+	color: var(--development-color)
 }
 
 .ext.type-admin {
-	color: #c32700;
+	color: var(--admin-color)
 }
 
-.ext.pinned {
-	border-left: 3px solid #ffc107;
-	position: relative;
+/* Separate pinned extensions from the rest. Don't apply if they're *all* pinned */
+.ext.pinned:nth-last-child(1 of .pinned).ext:not(:last-child) {
+	border-bottom: 5px solid var(--pinned-color);
 }
 
 .ext-name {
@@ -165,28 +169,12 @@ button:hover,
 @media (prefers-color-scheme: dark) {
 	body {
 		color: #e8eaed;
-	}
-
-	a:hover,
-	.keyboard-navigation a:focus,
-	button:hover,
-	.keyboard-navigation button:focus {
-		background-color: #c4d7dc38;
+		--development-color: #83acf5;
+		--admin-color: #ffa38d;
+		--hover-color: #c4d7dc38;
 	}
 
 	.ext :not(.ext-name) img {
 		filter: brightness(1.6);
-	}
-
-	.ext.type-development {
-		color: #83acf5;
-	}
-
-	.ext.type-admin {
-		color: #ffa38d;
-	}
-
-	.ext.pinned {
-		border-left: 3px solid #ffc107;
 	}
 }

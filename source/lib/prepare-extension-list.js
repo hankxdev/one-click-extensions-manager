@@ -1,3 +1,5 @@
+import optionsStorage from '../options-storage';
+
 function fillInTheBlanks(extension, isPinned = false) {
 	extension.shown = true;
 	extension.indexedName = extension.name.toLowerCase();
@@ -5,10 +7,9 @@ function fillInTheBlanks(extension, isPinned = false) {
 	return extension;
 }
 
-export default function prepareExtensionList(
-	extensions,
-	pinnedExtensions = [],
-) {
+export default async function prepareExtensionList(extensions) {
+	const {pinnedExtensions} = await optionsStorage.getAll();
+
 	return extensions
 		.filter(({type, id}) => type === 'extension' && id !== chrome.runtime.id)
 		.sort((a, b) => {
@@ -17,7 +18,7 @@ export default function prepareExtensionList(
 
 			// First sort by pinned status
 			if (aPinned !== bPinned) {
-				return bPinned ? 1 : -1; // Pinned extensions come first
+				return bPinned ? 1 : -1; // Pinned extensions first
 			}
 
 			// If both are pinned or both are not pinned, sort by enabled status
@@ -25,7 +26,7 @@ export default function prepareExtensionList(
 				return a.name.localeCompare(b.name); // Sort by name
 			}
 
-			return a.enabled < b.enabled ? 1 : -1; // Sort by state
+			return a.enabled < b.enabled ? 1 : -1; // Enabled extensions first
 		})
 		.map(extension =>
 			fillInTheBlanks(extension, pinnedExtensions.includes(extension.id)),

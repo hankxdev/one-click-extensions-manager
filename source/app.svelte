@@ -4,17 +4,13 @@
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 	import prepareExtensionList from './lib/prepare-extension-list.js';
 	import UndoStack from './lib/undo-stack.js';
-	import optionsStorage, {
-		getPinnedExtensions,
-		togglePin,
-	} from './options-storage.js';
+	import optionsStorage, {togglePin} from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
 
 	let extensions = [];
 	let searchValue = '';
-	let pinnedExtensions = [];
 
 	const options = optionsStorage.getAll();
 	let showExtras = false;
@@ -91,11 +87,7 @@
 
 	async function handleInstalled(installed) {
 		if (installed.type === 'extension') {
-			pinnedExtensions = await getPinnedExtensions();
-			extensions = prepareExtensionList(
-				await chrome.management.getAll(),
-				pinnedExtensions,
-			);
+			extensions = await prepareExtensionList(await chrome.management.getAll());
 		}
 	}
 
@@ -112,11 +104,7 @@
 	}
 
 	async function prepare() {
-		pinnedExtensions = await getPinnedExtensions();
-		extensions = prepareExtensionList(
-			await chrome.management.getAll(),
-			pinnedExtensions,
-		);
+		extensions = await prepareExtensionList(await chrome.management.getAll());
 	}
 
 	async function handlePin(extensionId) {
