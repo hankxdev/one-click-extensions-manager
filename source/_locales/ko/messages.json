@@ -19,5 +19,11 @@
 	},
 	"uninstall": {
 		"message": "이 확장 기능을 제거하십시오"
+	},
+	"pinText": {
+		"message": "상단에 고정"
+	},
+	"unpinText": {
+		"message": "상단에서 고정 해제"
 	}
 }

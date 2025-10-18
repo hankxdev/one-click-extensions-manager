@@ -117,11 +117,17 @@ button:hover,
 	color: #c32700;
 }
 
+.ext.pinned {
+	border-left: 3px solid #ffc107;
+	position: relative;
+}
+
 .ext-name {
 	flex-grow: 1;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	font-weight: bold;
+	position: relative;
 }
 
 .disabled .ext-name {
@@ -178,5 +184,9 @@ button:hover,
 
 	.ext.type-admin {
 		color: #ffa38d;
+	}
+
+	.ext.pinned {
+		border-left: 3px solid #ffc107;
 	}
 }

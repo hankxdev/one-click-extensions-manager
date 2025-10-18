@@ -4,13 +4,17 @@
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 	import prepareExtensionList from './lib/prepare-extension-list.js';
 	import UndoStack from './lib/undo-stack.js';
-	import optionsStorage from './options-storage.js';
+	import optionsStorage, {
+		getPinnedExtensions,
+		togglePin,
+	} from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
 
 	let extensions = [];
 	let searchValue = '';
+	let pinnedExtensions = [];
 
 	const options = optionsStorage.getAll();
 	let showExtras = false;
@@ -87,7 +91,11 @@
 
 	async function handleInstalled(installed) {
 		if (installed.type === 'extension') {
-			extensions = prepareExtensionList(await chrome.management.getAll());
+			pinnedExtensions = await getPinnedExtensions();
+			extensions = prepareExtensionList(
+				await chrome.management.getAll(),
+				pinnedExtensions,
+			);
 		}
 	}
 
@@ -104,7 +112,17 @@
 	}
 
 	async function prepare() {
-		extensions = prepareExtensionList(await chrome.management.getAll());
+		pinnedExtensions = await getPinnedExtensions();
+		extensions = prepareExtensionList(
+			await chrome.management.getAll(),
+			pinnedExtensions,
+		);
+	}
+
+	async function handlePin(extensionId) {
+		const wasPinned = await togglePin(extensionId);
+		await prepare(); // Refresh the list to show new order
+		return wasPinned;
 	}
 
 	onMount(async () => {
@@ -202,6 +220,7 @@
 					bind:enabled={extension.enabled}
 					bind:showExtras
 					on:contextmenu|once={onContextMenu}
+					on:pin={() => handlePin(extension.id)}
 					{undoStack}
 				/>
 			{/if}

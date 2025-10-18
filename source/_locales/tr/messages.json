@@ -42,5 +42,11 @@
 	"uninstall": {
 		"message": "Kaldır",
 		"hash": "6c51642469a9fec1b394358b0a2ada5b"
+	},
+	"pinText": {
+		"message": "Üste sabitle"
+	},
+	"unpinText": {
+		"message": "Üstten çıkar"
 	}
 }

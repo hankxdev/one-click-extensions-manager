@@ -42,5 +42,11 @@
 	"uninstall": {
 		"message": "Rimuovi",
 		"hash": "6c51642469a9fec1b394358b0a2ada5b"
+	},
+	"pinText": {
+		"message": "Fissa in alto"
+	},
+	"unpinText": {
+		"message": "Rimuovi dalla parte superiore"
 	}
 }

@@ -43,6 +43,12 @@
 		"message": "Noņemt šo paplašinājumu",
 		"hash": "a04a561e0b5c8b0210a17382781cabd1"
 	},
+	"pinText": {
+		"message": "Piespraust augšā"
+	},
+	"unpinText": {
+		"message": "Atspraust no augšas"
+	},
 
 	"__WET_LOCALE__": {"message": "lv"}
 }

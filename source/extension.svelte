@@ -3,9 +3,10 @@
 	// eslint-disable-next-line no-unused-expressions
 	$$restProps;
 
+	import {createEventDispatcher} from 'svelte';
+	import pickBestIcon from './lib/icons.js';
 	import openInTab from './lib/open-in-tab.js';
 	import trimName from './lib/trim-name.js';
-	import pickBestIcon from './libs/icons.js';
 
 	export let id;
 	export let name;
@@ -18,6 +19,7 @@
 	export let icons = undefined; // eslint-disable-line no-undef-init -- Optional svelte property
 	export let showExtras;
 	export let undoStack;
+	export let isPinned = false;
 
 	const getI18N = chrome.i18n.getMessage;
 	const chromeWebStoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
@@ -36,7 +38,15 @@
 			: chromeWebStoreUrl;
 	}
 
-	function toggleExtension() {
+	const dispatch = createEventDispatcher();
+
+	function toggleExtension(event) {
+		// Check if Ctrl/Cmd is held down for pinning
+		if (event.ctrlKey || event.metaKey) {
+			dispatch('pin');
+			return;
+		}
+
 		const wasEnabled = enabled;
 
 		undoStack.do(toggle => {
@@ -49,12 +59,19 @@
 	}
 </script>
 
-<li class:disabled={!enabled} class="ext type-{installType}">
+<li
+	class:disabled={!enabled}
+	class:pinned={isPinned}
+	class="ext type-{installType}"
+>
 	<button
 		type="button"
 		class="ext-name"
 		on:click={toggleExtension}
 		on:contextmenu
+		title={isPinned
+			? `${getI18N('unpinText') || 'Unpin'} (Ctrl/Cmd+Click)`
+			: `${getI18N('pinText') || 'Pin'} (Ctrl/Cmd+Click)`}
 	>
 		<img alt="" src={pickBestIcon(icons, 16)} />{realName}
 	</button>
