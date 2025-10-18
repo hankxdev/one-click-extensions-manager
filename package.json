@@ -18,22 +18,22 @@
 		"webext-options-sync": "^4.3.0"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "^4.10.1",
+		"@antfu/eslint-config": "^6.0.0",
 		"@rollup/plugin-commonjs": "^28.0.8",
 		"@rollup/plugin-node-resolve": "^16.0.3",
-		"@types/chrome": "^0.0.309",
+		"@types/chrome": "^0.1.24",
 		"@web/rollup-plugin-copy": "^0.5.1",
-		"eslint": "^9.22.0",
-		"eslint-plugin-svelte": "^3.3.0",
-		"npm-run-all2": "^7.0.2",
-		"prettier": "^3.5.3",
-		"prettier-plugin-svelte": "^3.3.3",
-		"rollup": "^4.36.0",
+		"eslint": "^9.38.0",
+		"eslint-plugin-svelte": "^3.12.4",
+		"npm-run-all2": "^8.0.4",
+		"prettier": "^3.6.2",
+		"prettier-plugin-svelte": "^3.4.0",
+		"rollup": "^4.52.5",
 		"rollup-plugin-cleanup": "^3.2.1",
 		"rollup-plugin-delete": "^3.0.1",
 		"rollup-plugin-livereload": "^2.0.5",
 		"rollup-plugin-svelte": "^7.2.3",
-		"svelte": "^4.2.19"
+		"svelte": "^4.2.20"
 	},
 	"webExt": {
 		"sourceDir": "distribution",
