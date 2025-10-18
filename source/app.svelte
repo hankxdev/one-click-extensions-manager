@@ -15,9 +15,9 @@
 
 	const options = optionsStorage.getAll();
 	let showExtras = false;
+	let showStickyInfoMessage = !localStorage.getItem('sticky-info-message');
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 	let userClickedHideInfoMessage = false; // "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
-	let showStickyInfoMessage = !localStorage.getItem('sticky-info-message');
 
 	options.then(({showButtons, width, position}) => {
 		if (showButtons === 'always') {
@@ -43,13 +43,13 @@
 	}
 
 	function hideInfoMessage() {
-		localStorage.setItem('undo-info-message', 1);
+		localStorage.setItem('undo-info-message', Date.now());
 		showInfoMessage = false;
 		userClickedHideInfoMessage = true;
 	}
 
 	function hideStickyInfoMessage() {
-		localStorage.setItem('sticky-info-message', 1);
+		localStorage.setItem('sticky-info-message', Date.now());
 		showStickyInfoMessage = false;
 	}
 
@@ -94,7 +94,7 @@
 
 	async function handleInstalled(installed) {
 		if (installed.type === 'extension') {
-			extensions = await prepareExtensionList(await chrome.management.getAll());
+			prepare();
 		}
 	}
 
@@ -194,7 +194,7 @@
 	{#if showStickyInfoMessage}
 		<p class="notice">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
-			{@html getI18N('stickyInfoMsg')}
+			{@html replaceModifierIfMac(getI18N('stickyInfoMsg'), "")}
 			<a class="hide-action" href="#hide" on:click={hideStickyInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>
