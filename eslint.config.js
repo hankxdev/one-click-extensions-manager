@@ -16,6 +16,7 @@ export default antfu({
 		'no-self-assign': 'off',
 		'no-console': 'off',
 		'jsonc/object-curly-spacing': 'off',
+		'import/no-mutable-exports': 'off',
 		'svelte/html-quotes': [
 			'error',
 			{

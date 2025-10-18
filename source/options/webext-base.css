@@ -19,13 +19,13 @@ body {
 select,
 textarea,
 input:where(
-		[type='number'],
-		[type='password'],
-		[type='search'],
-		[type='text'],
-		[type='url'],
-		:not([type])
-	) {
+	[type='number'],
+	[type='password'],
+	[type='search'],
+	[type='text'],
+	[type='url'],
+	:not([type])
+) {
 	box-sizing: border-box;
 	font: inherit;
 	line-height: 2;
