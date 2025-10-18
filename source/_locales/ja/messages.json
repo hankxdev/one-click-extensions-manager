@@ -15,13 +15,13 @@
 		"message": "オプションページに移動"
 	},
 	"hideInfoMsg": {
-		"message": "Hide this"
+		"message": "これを非表示"
 	},
 	"manage": {
-		"message": "Extensions page…"
+		"message": "拡張機能ページ…"
 	},
 	"openUrl": {
-		"message": "See on the Web Store"
+		"message": "ウェブストアで見る"
 	},
 	"searchTxt": {
 		"message": "拡張機能を検索する"
@@ -30,7 +30,7 @@
 		"message": "拡張機能を <kbd>Ctrl+クリック</kbd> すると、リストの上部に固定できます。"
 	},
 	"undoInfoMsg": {
-		"message": "You can undo (with <kbd>Ctrl+Z</kbd>) and redo your last action until you close this popup."
+		"message": "このポップアップを閉じるまで、<kbd>Ctrl+Z</kbd>で最後のアクションを元に戻したり、やり直したりできます。"
 	},
 	"uninstall": {
 		"message": "この拡張機能をアンインストールする"

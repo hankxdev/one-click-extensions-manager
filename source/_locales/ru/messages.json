@@ -15,13 +15,13 @@
 		"message": "Перейти на страницу настроек"
 	},
 	"hideInfoMsg": {
-		"message": "Hide this"
+		"message": "Скрыть это"
 	},
 	"manage": {
-		"message": "Extensions page…"
+		"message": "Страница расширений…"
 	},
 	"openUrl": {
-		"message": "See on the Web Store"
+		"message": "Посмотреть в Web Store"
 	},
 	"searchTxt": {
 		"message": "Поиск расширений"
@@ -30,7 +30,7 @@
 		"message": "Вы можете нажать <kbd>Ctrl+Клик</kbd> на расширения, чтобы закрепить их вверху списка."
 	},
 	"undoInfoMsg": {
-		"message": "You can undo (with <kbd>Ctrl+Z</kbd>) and redo your last action until you close this popup."
+		"message": "Вы можете отменить (с помощью <kbd>Ctrl+Z</kbd>) и повторить последнее действие до закрытия этого всплывающего окна."
 	},
 	"uninstall": {
 		"message": "Удалить это расширение"
