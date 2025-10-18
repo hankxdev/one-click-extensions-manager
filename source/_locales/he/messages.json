@@ -31,5 +31,11 @@
 	},
 	"uninstall": {
 		"message": "להסיר את התוסף"
+	},
+	"pinText": {
+		"message": "להצמיד למעלה"
+	},
+	"unpinText": {
+		"message": "לבטל הצמדה מלמעלה"
 	}
 }

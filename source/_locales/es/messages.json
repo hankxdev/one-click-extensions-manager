@@ -31,5 +31,11 @@
 	},
 	"uninstall": {
 		"message": "Eliminar"
+	},
+	"pinText": {
+		"message": "Fijar arriba"
+	},
+	"unpinText": {
+		"message": "Desfijar de arriba"
 	}
 }

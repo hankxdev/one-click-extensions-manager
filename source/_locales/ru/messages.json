@@ -19,5 +19,11 @@
 	},
 	"uninstall": {
 		"message": "Удалить это расширение"
+	},
+	"pinText": {
+		"message": "Закрепить сверху"
+	},
+	"unpinText": {
+		"message": "Открепить сверху"
 	}
 }

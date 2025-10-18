@@ -31,5 +31,11 @@
 	},
 	"uninstall": {
 		"message": "Erweiterung entfernen…"
+	},
+	"pinText": {
+		"message": "An oberer Position anheften"
+	},
+	"unpinText": {
+		"message": "Von oberer Position lösen"
 	}
 }

@@ -43,6 +43,12 @@
 		"message": "Usuń z Chrome",
 		"hash": "a04a561e0b5c8b0210a17382781cabd1"
 	},
+	"pinText": {
+		"message": "Przypnij na górze"
+	},
+	"unpinText": {
+		"message": "Odepnij od góry"
+	},
 
 	"__WET_LOCALE__": {"message": "pl"}
 }
