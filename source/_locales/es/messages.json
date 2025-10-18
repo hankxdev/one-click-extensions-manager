@@ -26,6 +26,9 @@
 	"searchTxt": {
 		"message": "Buscar por nombre…"
 	},
+	"stickyInfoMsg": {
+		"message": "Puedes hacer <kbd>Ctrl+Clic</kbd> en las extensiones para fijarlas/desfijarlas en la parte superior de la lista."
+	},
 	"undoInfoMsg": {
 		"message": "Puedes deshacer (con <kbd>Ctrl+Z</kbd>) y rehacer tu última acción hasta que cierres esta ventana."
 	},

@@ -17,6 +17,7 @@
 	let showExtras = false;
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 	let userClickedHideInfoMessage = false; // "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
+	let showStickyInfoMessage = !localStorage.getItem('sticky-info-message');
 
 	options.then(({showButtons, width, position}) => {
 		if (showButtons === 'always') {
@@ -45,6 +46,11 @@
 		localStorage.setItem('undo-info-message', 1);
 		showInfoMessage = false;
 		userClickedHideInfoMessage = true;
+	}
+
+	function hideStickyInfoMessage() {
+		localStorage.setItem('sticky-info-message', 1);
+		showStickyInfoMessage = false;
 	}
 
 	function keyboardNavigationHandler(event) {
@@ -181,6 +187,15 @@
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
 			{@html replaceModifierIfMac(getI18N('undoInfoMsg'), 'z')}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
+				>{getI18N('hideInfoMsg')}</a
+			>
+		</p>
+	{/if}
+	{#if showStickyInfoMessage}
+		<p class="notice">
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
+			{@html replaceModifierIfMac(getI18N('stickyInfoMsg'), '')}
+			<a class="hide-action" href="#hide" on:click={hideStickyInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>
 		</p>

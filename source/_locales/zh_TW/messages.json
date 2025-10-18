@@ -35,6 +35,9 @@
 		"message": "搜尋擴展",
 		"hash": "1220702106584c8c90c0f41c486a3e0b"
 	},
+	"stickyInfoMsg": {
+		"message": "您可以按 <kbd>Ctrl+點擊</kbd> 擴展來將它們釘選/取消釘選到列表頂部。"
+	},
 	"undoInfoMsg": {
 		"message": "在關閉這個窗口前你可以撤銷你的操作。 中按<kbd>Ctrl+Z</kbd>。",
 		"hash": "4105b6ebe6d3c7badf1a2bf9d425ddbb"
