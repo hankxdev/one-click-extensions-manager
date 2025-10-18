@@ -1,20 +1,17 @@
 <script>
 	import {onMount} from 'svelte';
 	import Extension from './extension.svelte';
+	import {replaceModifierIfMac} from './lib/cmd-key.js';
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 	import prepareExtensionList from './lib/prepare-extension-list.js';
 	import UndoStack from './lib/undo-stack.js';
-	import optionsStorage, {
-		getPinnedExtensions,
-		togglePin,
-	} from './options-storage.js';
+	import optionsStorage, {togglePin} from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
 
 	let extensions = [];
 	let searchValue = '';
-	let pinnedExtensions = [];
 
 	const options = optionsStorage.getAll();
 	let showExtras = false;
@@ -91,11 +88,7 @@
 
 	async function handleInstalled(installed) {
 		if (installed.type === 'extension') {
-			pinnedExtensions = await getPinnedExtensions();
-			extensions = prepareExtensionList(
-				await chrome.management.getAll(),
-				pinnedExtensions,
-			);
+			extensions = await prepareExtensionList(await chrome.management.getAll());
 		}
 	}
 
@@ -112,11 +105,7 @@
 	}
 
 	async function prepare() {
-		pinnedExtensions = await getPinnedExtensions();
-		extensions = prepareExtensionList(
-			await chrome.management.getAll(),
-			pinnedExtensions,
-		);
+		extensions = await prepareExtensionList(await chrome.management.getAll());
 	}
 
 	async function handlePin(extensionId) {
@@ -190,7 +179,7 @@
 	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p class="notice">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
-			{@html UndoStack.replaceKbdOnMac(getI18N('undoInfoMsg'))}
+			{@html replaceModifierIfMac(getI18N('undoInfoMsg'), 'z')}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>

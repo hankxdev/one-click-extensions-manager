@@ -69,9 +69,6 @@
 		class="ext-name"
 		on:click={toggleExtension}
 		on:contextmenu
-		title={isPinned
-			? `${getI18N('unpinText') || 'Unpin'} (Ctrl/Cmd+Click)`
-			: `${getI18N('pinText') || 'Pin'} (Ctrl/Cmd+Click)`}
 	>
 		<img alt="" src={pickBestIcon(icons, 16)} />{realName}
 	</button>

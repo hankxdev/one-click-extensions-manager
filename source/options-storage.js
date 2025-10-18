@@ -49,16 +49,6 @@ export async function togglePin(extensionId) {
 	return index === -1; // Return true if pinned, false if unpinned
 }
 
-export async function isPinned(extensionId) {
-	const options = await optionsStorage.getAll();
-	return options.pinnedExtensions.includes(extensionId);
-}
-
-export async function getPinnedExtensions() {
-	const options = await optionsStorage.getAll();
-	return options.pinnedExtensions;
-}
-
 const defaultPopup = chrome.runtime.getManifest().action.default_popup;
 
 export async function matchOptions() {
