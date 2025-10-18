@@ -31,11 +31,5 @@
 	},
 	"uninstall": {
 		"message": "Remove from Chrome"
-	},
-	"pinText": {
-		"message": "Pin to top"
-	},
-	"unpinText": {
-		"message": "Unpin from top"
 	}
 }

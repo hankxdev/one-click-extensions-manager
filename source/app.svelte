@@ -4,6 +4,7 @@
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 	import prepareExtensionList from './lib/prepare-extension-list.js';
 	import UndoStack from './lib/undo-stack.js';
+	import {replaceModifierIfMac} from './lib/cmd-key.js';
 	import optionsStorage, {togglePin} from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
@@ -178,7 +179,7 @@
 	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p class="notice">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
-			{@html UndoStack.replaceKbdOnMac(getI18N('undoInfoMsg'))}
+			{@html replaceModifierIfMac(getI18N('undoInfoMsg'))}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>

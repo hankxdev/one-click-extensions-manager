@@ -43,12 +43,6 @@
 		"message": "Verwijderen uit Chrome",
 		"hash": "a04a561e0b5c8b0210a17382781cabd1"
 	},
-	"pinText": {
-		"message": "Vastmaken aan bovenkant"
-	},
-	"unpinText": {
-		"message": "Losmaken van bovenkant"
-	},
 
 	"__WET_LOCALE__": {"message": "nl"}
 }

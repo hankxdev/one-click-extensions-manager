@@ -19,11 +19,5 @@
 	},
 	"uninstall": {
 		"message": "この拡張機能をアンインストールする"
-	},
-	"pinText": {
-		"message": "上部に固定"
-	},
-	"unpinText": {
-		"message": "上部から固定解除"
 	}
 }

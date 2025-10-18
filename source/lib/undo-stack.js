@@ -1,12 +1,8 @@
+import {isHoldingModifier} from './cmd-key.js';
+
 export default class UndoStack {
 	_undoStack = [];
 	_redoStack = [];
-	static isMac = navigator.platform.includes('Mac');
-	static replaceKbdOnMac = string =>
-		UndoStack.isMac
-			? string.replace(/(?<=>)[a-z]+\+z/i, '⌘Z') // Some locales don't call it "ctrl"
-			: string;
-
 	constructor(element) {
 		element?.addEventListener('keydown', this.#keyboardEventListener);
 	}
@@ -14,7 +10,7 @@ export default class UndoStack {
 	#keyboardEventListener = event => {
 		if (
 			event.code === 'KeyZ' &&
-			(UndoStack.isMac ? event.metaKey : event.ctrlKey)
+			isHoldingModifier(event)
 		) {
 			if (event.shiftKey) {
 				this.redo();

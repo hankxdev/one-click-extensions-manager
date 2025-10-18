@@ -4,7 +4,7 @@
 	--ext-icon-margin: 0.3em;
 	--background-color: light-dark(#fff, #292a2d);
 	--hover-color: #ecf0f1;
-	--pinned-color:  #4a9b682e;
+	--pinned-color: #4a9b682e;
 	--development-color: #4170c3;
 	--admin-color: #c32700;
 	color-scheme: light dark;
@@ -114,11 +114,11 @@ button:hover,
 }
 
 .ext.type-development {
-	color: var(--development-color)
+	color: var(--development-color);
 }
 
 .ext.type-admin {
-	color: var(--admin-color)
+	color: var(--admin-color);
 }
 
 /* Separate pinned extensions from the rest. Don't apply if they're *all* pinned */

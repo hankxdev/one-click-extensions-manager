@@ -42,11 +42,5 @@
 	"uninstall": {
 		"message": "卸載這個擴展",
 		"hash": "6c51642469a9fec1b394358b0a2ada5b"
-	},
-	"pinText": {
-		"message": "釘選到頂部"
-	},
-	"unpinText": {
-		"message": "從頂部取消釘選"
 	}
 }
