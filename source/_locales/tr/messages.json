@@ -44,6 +44,6 @@
 		"hash": "6c51642469a9fec1b394358b0a2ada5b"
 	},
 	"stickyInfoMsg": {
-		"message": "Uzantıları listenin en üstüne sabitlemek/sabitlemeyi kaldırmak için <kbd>Ctrl+Tıklama</kbd> yapabilirsiniz."
+		"message": "Uzantıları listenin en üstüne sabitlemek için <kbd>Ctrl+Tıklama</kbd> yapabilirsiniz."
 	}
 }
