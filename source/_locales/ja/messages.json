@@ -14,11 +14,23 @@
 	"gotoOpt": {
 		"message": "オプションページに移動"
 	},
+	"hideInfoMsg": {
+		"message": "Hide this"
+	},
+	"manage": {
+		"message": "Extensions page…"
+	},
+	"openUrl": {
+		"message": "See on the Web Store"
+	},
 	"searchTxt": {
 		"message": "拡張機能を検索する"
 	},
 	"stickyInfoMsg": {
 		"message": "拡張機能を <kbd>Ctrl+クリック</kbd> すると、リストの上部に固定できます。"
+	},
+	"undoInfoMsg": {
+		"message": "You can undo (with <kbd>Ctrl+Z</kbd>) and redo your last action until you close this popup."
 	},
 	"uninstall": {
 		"message": "この拡張機能をアンインストールする"

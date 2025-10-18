@@ -14,11 +14,23 @@
 	"gotoOpt": {
 		"message": "옵션 페이지로 이동"
 	},
+	"hideInfoMsg": {
+		"message": "Hide this"
+	},
+	"manage": {
+		"message": "Extensions page…"
+	},
+	"openUrl": {
+		"message": "See on the Web Store"
+	},
 	"searchTxt": {
 		"message": "확장 기능 검색"
 	},
 	"stickyInfoMsg": {
 		"message": "확장 프로그램을 <kbd>Ctrl+클릭</kbd>하여 목록 상단에 고정할 수 있습니다."
+	},
+	"undoInfoMsg": {
+		"message": "You can undo (with <kbd>Ctrl+Z</kbd>) and redo your last action until you close this popup."
 	},
 	"uninstall": {
 		"message": "이 확장 기능을 제거하십시오"

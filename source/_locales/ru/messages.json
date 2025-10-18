@@ -14,11 +14,23 @@
 	"gotoOpt": {
 		"message": "Перейти на страницу настроек"
 	},
+	"hideInfoMsg": {
+		"message": "Hide this"
+	},
+	"manage": {
+		"message": "Extensions page…"
+	},
+	"openUrl": {
+		"message": "See on the Web Store"
+	},
 	"searchTxt": {
 		"message": "Поиск расширений"
 	},
 	"stickyInfoMsg": {
 		"message": "Вы можете нажать <kbd>Ctrl+Клик</kbd> на расширения, чтобы закрепить их вверху списка."
+	},
+	"undoInfoMsg": {
+		"message": "You can undo (with <kbd>Ctrl+Z</kbd>) and redo your last action until you close this popup."
 	},
 	"uninstall": {
 		"message": "Удалить это расширение"
