@@ -179,7 +179,7 @@
 	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p class="notice">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
-			{@html replaceModifierIfMac(getI18N('undoInfoMsg'))}
+			{@html replaceModifierIfMac(getI18N('undoInfoMsg'), 'z')}
 			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>
