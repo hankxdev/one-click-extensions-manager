@@ -194,7 +194,7 @@
 	{#if showStickyInfoMessage}
 		<p class="notice">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
-			{@html replaceModifierIfMac(getI18N('stickyInfoMsg'), "")}
+			{@html replaceModifierIfMac(getI18N('stickyInfoMsg'), '')}
 			<a class="hide-action" href="#hide" on:click={hideStickyInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>
