@@ -8,10 +8,7 @@ export default class UndoStack {
 	}
 
 	#keyboardEventListener = event => {
-		if (
-			event.code === 'KeyZ' &&
-			isHoldingModifier(event)
-		) {
+		if (event.code === 'KeyZ' && isHoldingModifier(event)) {
 			if (event.shiftKey) {
 				this.redo();
 			} else {
