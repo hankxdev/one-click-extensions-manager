@@ -1,10 +1,10 @@
 <script>
 	import {onMount} from 'svelte';
 	import Extension from './extension.svelte';
+	import {replaceModifierIfMac} from './lib/cmd-key.js';
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 	import prepareExtensionList from './lib/prepare-extension-list.js';
 	import UndoStack from './lib/undo-stack.js';
-	import {replaceModifierIfMac} from './lib/cmd-key.js';
 	import optionsStorage, {togglePin} from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
