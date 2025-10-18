@@ -14,11 +14,23 @@
 	"gotoOpt": {
 		"message": "オプションページに移動"
 	},
+	"hideInfoMsg": {
+		"message": "これを非表示"
+	},
+	"manage": {
+		"message": "拡張機能ページ…"
+	},
+	"openUrl": {
+		"message": "ウェブストアで見る"
+	},
 	"searchTxt": {
 		"message": "拡張機能を検索する"
 	},
 	"stickyInfoMsg": {
 		"message": "拡張機能を <kbd>Ctrl+クリック</kbd> すると、リストの上部に固定できます。"
+	},
+	"undoInfoMsg": {
+		"message": "このポップアップを閉じるまで、<kbd>Ctrl+Z</kbd>で最後のアクションを元に戻したり、やり直したりできます。"
 	},
 	"uninstall": {
 		"message": "この拡張機能をアンインストールする"
