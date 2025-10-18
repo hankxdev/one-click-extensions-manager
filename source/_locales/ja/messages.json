@@ -17,6 +17,9 @@
 	"searchTxt": {
 		"message": "拡張機能を検索する"
 	},
+	"stickyInfoMsg": {
+		"message": "拡張機能を <kbd>Ctrl+クリック</kbd> すると、リストの上部に固定できます。"
+	},
 	"uninstall": {
 		"message": "この拡張機能をアンインストールする"
 	}

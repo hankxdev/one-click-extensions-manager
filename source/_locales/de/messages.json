@@ -26,6 +26,9 @@
 	"searchTxt": {
 		"message": "Nach Name suchen…"
 	},
+	"stickyInfoMsg": {
+		"message": "Du kannst <kbd>Strg+Klick</kbd> auf Erweiterungen verwenden, um sie am oberen Ende der Liste anzuheften."
+	},
 	"undoInfoMsg": {
 		"message": "Du kannst deine letzte Aktionen rückgäng machen oder wiederherstellen. Dies funktioniert aber nur solange wie dieser Popup-Dialog geöffnet ist. Drücke dazu <kbd>Strg+Z</kbd>."
 	},

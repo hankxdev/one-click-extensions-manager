@@ -26,6 +26,9 @@
 	"searchTxt": {
 		"message": "חיפוש תוסף לפי שם"
 	},
+	"stickyInfoMsg": {
+		"message": "אתה יכול לעשות <kbd>Ctrl+לחיצה</kbd> על תוספים כדי להצמיד שלהם לראש הרשימה."
+	},
 	"undoInfoMsg": {
 		"message": "ניתן לבטל או לבצע מחדש פעולות עד לסגירת החלון באמצעות <kbd>Ctrl+Z</kbd>."
 	},

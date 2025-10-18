@@ -35,6 +35,9 @@
 		"message": "Wyszukuj po nazwie",
 		"hash": "1220702106584c8c90c0f41c486a3e0b"
 	},
+	"stickyInfoMsg": {
+		"message": "Możesz użyć <kbd>Ctrl+Kliknięcie</kbd> na rozszerzenia, aby przypiąć je na górze listy."
+	},
 	"undoInfoMsg": {
 		"message": "Możesz cofnąć (za pomocą <kbd>Ctrl+Z</kbd>) i powtórzyć ostatnią czynność, dopóki nie zamkniesz tego okna.",
 		"hash": "8044307e478d0cedbc81a0cba56f601d"

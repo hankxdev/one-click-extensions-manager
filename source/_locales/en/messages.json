@@ -26,6 +26,9 @@
 	"searchTxt": {
 		"message": "Search by name…"
 	},
+	"stickyInfoMsg": {
+		"message": "You can <kbd>Ctrl+Click</kbd> on extensions to stick them to the top of the list."
+	},
 	"undoInfoMsg": {
 		"message": "You can undo (with <kbd>Ctrl+Z</kbd>) and redo your last action until you close this popup."
 	},

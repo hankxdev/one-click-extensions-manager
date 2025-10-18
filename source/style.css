@@ -123,7 +123,7 @@ button:hover,
 
 /* Separate pinned extensions from the rest. Don't apply if they're *all* pinned */
 .ext.pinned:nth-last-child(1 of .pinned).ext:not(:last-child) {
-	border-bottom: 5px solid var(--pinned-color);
+	border-bottom-width: 5px;
 }
 
 .ext-name {
@@ -151,13 +151,14 @@ button:hover,
 }
 
 .ext > :not(.ext-name) {
-	padding: 0 0.3em;
+	padding-inline: 0.3em;
 	opacity: 20%;
 	flex-shrink: 0;
 }
 
 .ext > :last-child:not(.ext-name) {
-	margin-inline-end: var(--margin);
+	/* Adjust the padding of the right-most columm to optically align the icons with the burger */
+	padding-inline: calc(var(--margin) + 1px);
 }
 
 /* Don't use .ext:hover https://github.com/hankxdev/one-click-extensions-manager/pull/109 */

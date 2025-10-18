@@ -35,6 +35,9 @@
 		"message": "Rechercher les extensions…",
 		"hash": "1220702106584c8c90c0f41c486a3e0b"
 	},
+	"stickyInfoMsg": {
+		"message": "Vous pouvez faire <kbd>Ctrl+Clic</kbd> sur les extensions pour les épingler en haut de la liste."
+	},
 	"undoInfoMsg": {
 		"message": "Vous pouvez annuler et refaire votre dernière action jusqu'à ce que vous fermiez cette fenêtre contextuelle. Appuyez sur <kbd>Ctrl+Z</kbd>.",
 		"hash": "4105b6ebe6d3c7badf1a2bf9d425ddbb"

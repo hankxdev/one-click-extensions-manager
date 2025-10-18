@@ -35,6 +35,9 @@
 		"message": "Meklēt pēc nosaukuma…",
 		"hash": "1220702106584c8c90c0f41c486a3e0b"
 	},
+	"stickyInfoMsg": {
+		"message": "Jūs varat izmantot <kbd>Ctrl+Klikšķis</kbd> uz paplašinājumiem, lai tos piespraustu saraksta augšpusē."
+	},
 	"undoInfoMsg": {
 		"message": "Jūs varat atsaukt (ar <kbd>Ctrl+Z</kbd>) un atcelt savu pēdējo darbību, līdz aizverat šo uznirstošo logu.",
 		"hash": "8044307e478d0cedbc81a0cba56f601d"

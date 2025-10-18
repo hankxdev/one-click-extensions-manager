@@ -20,6 +20,9 @@
 	"searchTxt": {
 		"message": "查找扩展"
 	},
+	"stickyInfoMsg": {
+		"message": "您可以按 <kbd>Ctrl+点击</kbd> 扩展来将它们钉选到列表顶部。"
+	},
 	"undoInfoMsg": {
 		"message": "在关闭这个窗口前你可以撤销你的操作。 中按 <kbd>Ctrl+Z</kbd>。"
 	},
