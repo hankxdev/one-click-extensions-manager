@@ -70,7 +70,7 @@ jobs:
       - name: Create zip for Edge store
         working-directory: artifact
         run: zip -r extension.zip ./*
-      - run: npx edge-webstore-upload@latest upload extension.zip
+      - run: npx edge-webstore-upload@latest workflow extension.zip
         working-directory: artifact
         env:
           CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
