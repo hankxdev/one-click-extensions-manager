@@ -209,7 +209,7 @@
 			type="search"
 		/>
 		<select class="header-burger" on:change={handleBurger}>
-			<option value="">…</option>
+			<option value=""></option>
 			<option value="options">{getI18N('gotoOpt')}</option>
 			<option value="extensions">{getI18N('manage')}</option>
 			<option value="disable">{getI18N('disAll')}</option>
