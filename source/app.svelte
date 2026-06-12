@@ -184,8 +184,7 @@
 		const pins = new Set(pinnedExtensions);
 
 		const pinned = !pins.delete(extensionId);
-		if (pinned)
-pins.add(extensionId);
+		if (pinned) pins.add(extensionId);
 
 		await optionsStorage.set({pinnedExtensions: [...pins]});
 		return pinned;
