@@ -24,7 +24,10 @@
 	const options = optionsStorage.getAll();
 
 	options.then(({showButtons, width, position}) => {
-		if (showButtons === 'always') showExtras = true;
+		if (showButtons === 'always') {
+			showExtras = true;
+		}
+
 		if (position === 'popup' || position === 'window') {
 			document.documentElement.style.width = `${width || 400}px`;
 		}
@@ -81,7 +84,10 @@
 	}
 
 	function toggleAll(enable) {
-		const affectedExtensions = extensions.filter(ext => enable !== ext.enabled);
+		const affectedExtensions = extensions.filter(
+			extension => enable !== extension.enabled,
+		);
+
 		undoStack.do(toggle => {
 			for (const extension of affectedExtensions) {
 				chrome.management.setEnabled(extension.id, enable ? toggle : !toggle);
@@ -94,7 +100,9 @@
 	}
 
 	async function handleInstalled(installed) {
-		if (installed.type === 'extension') prepare();
+		if (installed.type === 'extension') {
+			prepare();
+		}
 	}
 
 	function handleEnabled(updated) {
@@ -113,7 +121,7 @@
 
 	async function handlePin(extensionId) {
 		const wasPinned = await togglePin(extensionId);
-		await prepare();
+		await prepare(); // Refresh the list to show new order
 		return wasPinned;
 	}
 

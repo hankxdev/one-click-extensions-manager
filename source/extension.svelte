@@ -32,7 +32,10 @@
 	const realName = $derived(trimName(shortName ?? name));
 
 	function generateHomeURL() {
-		if (installType !== 'normal') return homepageUrl;
+		if (installType !== 'normal') {
+			return homepageUrl;
+		}
+
 		return updateUrl?.startsWith('https://edge.microsoft.com')
 			? edgeWebStoreUrl
 			: chromeWebStoreUrl;
