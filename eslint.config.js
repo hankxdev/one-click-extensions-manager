@@ -34,19 +34,11 @@ export default defineConfig([
 			},
 		},
 		rules: {
-			'no-self-assign': 'off',
 			'no-console': 'off',
 			'jsdoc/require-param': 'off',
-			'jsonc/object-curly-spacing': 'off',
-			'import/no-mutable-exports': 'off',
-			'style/arrow-parens': 'off',
-			'style/object-curly-spacing': 'off',
-
-			// Prettier conflicts
-			'style/brace-style': 'off',
-			'style/indent': 'off',
-			'style/operator-linebreak': 'off',
-			'style/quote-props': 'off',
+			'@html-eslint/attrs-newline': 'off',
+			'@html-eslint/no-extra-spacing-tags': 'off',
+			'@html-eslint/require-closing-tags': 'off',
 		},
 	},
 	eslintConfigPrettier,
