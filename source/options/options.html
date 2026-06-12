@@ -38,11 +38,9 @@
 			margin: 0;
 		}
 
-		/* TODO: Drop after https://github.com/fregante/webext-base-css/issues/18 */
-		hr {
-			--body-margin-h: 8px;
-			margin-right: calc(-1 * var(--body-margin-h));
-			margin-left: calc(-1 * var(--body-margin-h));
+		/* TODO: Extract https://github.com/fregante/webext-base-css/issues/22 */
+		:root.webext-base-css-modal hr {
+			margin-inline: calc(-1 * var(--body-margin-h));
 			border: none;
 			border-bottom: 1px solid #aaa4;
 		}
