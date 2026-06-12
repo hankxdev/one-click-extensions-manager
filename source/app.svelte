@@ -10,14 +10,18 @@
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(globalThis);
 
-	let extensions = [];
-	let searchValue = '';
+	let extensions = $state([]);
+	let searchValue = $state('');
+	let showExtras = $state(false);
+	let showStickyInfoMessage = $state(
+		!localStorage.getItem('sticky-info-message'),
+	);
+	let showInfoMessage = $state(!localStorage.getItem('undo-info-message'));
+
+	// "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
+	let userClickedHideInfoMessage = $state(false);
 
 	const options = optionsStorage.getAll();
-	let showExtras = false;
-	let showStickyInfoMessage = !localStorage.getItem('sticky-info-message');
-	let showInfoMessage = !localStorage.getItem('undo-info-message');
-	let userClickedHideInfoMessage = false; // "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
 
 	options.then(({showButtons, width, position}) => {
 		if (showButtons === 'always') {
@@ -28,7 +32,8 @@
 			document.documentElement.style.width = `${width || 400}px`;
 		}
 	});
-	$: {
+
+	$effect(() => {
 		const keywords = searchValue
 			.toLowerCase()
 			.split(' ')
@@ -38,9 +43,7 @@
 				extension.indexedName.includes(word),
 			);
 		}
-
-		extensions = extensions;
-	}
+	});
 
 	function hideInfoMessage() {
 		localStorage.setItem('undo-info-message', Date.now());
@@ -105,13 +108,11 @@
 	function handleEnabled(updated) {
 		const extension = extensions.find(({id}) => id === updated.id);
 		extension.enabled = true;
-		extensions = extensions;
 	}
 
 	function handleDisabled(updated) {
 		const extension = extensions.find(({id}) => id === updated.id);
 		extension.enabled = false;
-		extensions = extensions;
 	}
 
 	async function prepare() {
@@ -153,8 +154,9 @@
 		}
 	}
 
-	function handleBurger() {
-		switch (this.value) {
+	function handleBurger(event) {
+		const select = event.currentTarget;
+		switch (select.value) {
 			case 'enable': {
 				toggleAll(true);
 				showInfoMessage = true;
@@ -180,17 +182,17 @@
 			default:
 		}
 
-		this.value = ''; // Reset the select. PreventDefault doesn't work
+		select.value = ''; // Reset the select. PreventDefault doesn't work
 	}
 </script>
 
-<svelte:window on:keydown={keyboardNavigationHandler} />
+<svelte:window onkeydown={keyboardNavigationHandler} />
 <main>
 	{#if showInfoMessage && !userClickedHideInfoMessage}
 		<p class="notice">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
 			{@html replaceModifierIfMac(getI18N('undoInfoMsg'), 'z')}
-			<a class="hide-action" href="#hide" on:click={hideInfoMessage}
+			<a class="hide-action" href="#hide" onclick={hideInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>
 		</p>
@@ -199,20 +201,20 @@
 		<p class="notice">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -- Static -->
 			{@html replaceModifierIfMac(getI18N('stickyInfoMsg'), '')}
-			<a class="hide-action" href="#hide" on:click={hideStickyInfoMessage}
+			<a class="hide-action" href="#hide" onclick={hideStickyInfoMessage}
 				>{getI18N('hideInfoMsg')}</a
 			>
 		</p>
 	{/if}
 	<div class="header">
-		<!-- svelte-ignore a11y-autofocus -->
+		<!-- svelte-ignore a11y_autofocus -->
 		<input
 			autofocus
 			placeholder={getI18N('searchTxt')}
 			bind:value={searchValue}
 			type="search"
 		/>
-		<select class="header-burger" on:change={handleBurger}>
+		<select class="header-burger" onchange={handleBurger}>
 			<option value=""></option>
 			<option value="options">{getI18N('gotoOpt')}</option>
 			<option value="extensions">{getI18N('manage')}</option>
@@ -227,8 +229,8 @@
 					{...extension}
 					bind:enabled={extension.enabled}
 					bind:showExtras
-					on:contextmenu|once={onContextMenu}
-					on:pin={() => handlePin(extension.id)}
+					oncontextmenu={onContextMenu}
+					onpin={() => handlePin(extension.id)}
 					{undoStack}
 				/>
 			{/if}
