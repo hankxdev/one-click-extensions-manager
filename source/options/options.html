@@ -29,6 +29,15 @@
 			~ p:has(label[for='width']) {
 			display: none;
 		}
+		fieldset {
+			border: none;
+			padding: 0;
+			margin-block: 1em;
+		}
+		legend {
+			margin: 0;
+		}
+
 		/* TODO: Drop after https://github.com/fregante/webext-base-css/issues/18 */
 		hr {
 			--body-margin-h: 8px;
@@ -41,22 +50,38 @@
 	<script type="module" defer src="options.js"></script>
 	<h1>One-Click Extensions Manager</h1>
 	<form id="options-form" method="get">
-		<p>
-			<label for="position">Location</label>
-			<select id="position" name="position">
-				<option value="popup">Menu (default)</option>
-				<option value="window">Popup window</option>
-				<option value="tab">Tab</option>
-				<option value="sidebar">Sidebar</option>
-			</select>
-		</p>
-		<p>
-			<label for="showButtons">Show buttons</label>
-			<select id="showButtons" name="showButtons">
-				<option value="on-demand">On right click (default)</option>
-				<option value="always">Always</option>
-			</select>
-		</p>
+		<fieldset>
+			<legend>Location</legend>
+			<label>
+				<input type="radio" checked name="position" value="popup" />
+				Menu (default)
+			</label>
+			<label>
+				<input type="radio" name="position" value="window" />
+				Popup window
+			</label>
+			<label>
+				<input type="radio" name="position" value="tab" />
+				Tab
+			</label>
+			<label>
+				<input type="radio" name="position" value="sidebar" />
+				Sidebar
+			</label>
+		</fieldset>
+
+		<fieldset>
+			<legend>Show buttons</legend>
+			<label>
+				<input type="radio" checked name="showButtons" value="on-demand" />
+				On right click (default)
+			</label>
+			<label>
+				<input type="radio" name="showButtons" value="always" />
+				Always
+			</label>
+		</fieldset>
+
 		<p>
 			<label for="width">Width <small>(in pixels)</small> </label>
 			<input id="width" type="text" name="width" placeholder="400" size="5" />
