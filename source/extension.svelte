@@ -21,8 +21,12 @@
 	} = $props();
 
 	const getI18N = chrome.i18n.getMessage;
-	const chromeWebStoreUrl = $derived(`https://chrome.google.com/webstore/detail/${id}`);
-	const edgeWebStoreUrl = $derived(`https://microsoftedge.microsoft.com/addons/detail/${id}`);
+	const chromeWebStoreUrl = $derived(
+		`https://chrome.google.com/webstore/detail/${id}`,
+	);
+	const edgeWebStoreUrl = $derived(
+		`https://microsoftedge.microsoft.com/addons/detail/${id}`,
+	);
 	const url = $derived(generateHomeURL());
 	// The browser will still fill the "short name" with "name" if missing
 	const realName = $derived(trimName(shortName ?? name));
