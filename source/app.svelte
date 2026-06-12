@@ -13,7 +13,9 @@
 	let extensions = $state([]);
 	let searchValue = $state('');
 	let showExtras = $state(false);
-	let showStickyInfoMessage = $state(!localStorage.getItem('sticky-info-message'));
+	let showStickyInfoMessage = $state(
+		!localStorage.getItem('sticky-info-message'),
+	);
 	let showInfoMessage = $state(!localStorage.getItem('undo-info-message'));
 	let userClickedHideInfoMessage = $state(false);
 
@@ -27,9 +29,14 @@
 	});
 
 	$effect(() => {
-		const keywords = searchValue.toLowerCase().split(' ').filter(s => s.length);
+		const keywords = searchValue
+			.toLowerCase()
+			.split(' ')
+			.filter(s => s.length);
 		for (const extension of extensions) {
-			extension.shown = keywords.every(word => extension.indexedName.includes(word));
+			extension.shown = keywords.every(word =>
+				extension.indexedName.includes(word),
+			);
 		}
 	});
 
@@ -50,18 +57,24 @@
 				showExtras = true;
 				break;
 			}
+
 			case 'ArrowDown': {
 				focusNext('.ext-name, [type="search"]');
 				event.preventDefault();
 				break;
 			}
+
 			case 'ArrowUp': {
 				focusPrevious('.ext-name, [type="search"]');
 				event.preventDefault();
 				break;
 			}
-			default: return;
+
+			default: {
+				return;
+			}
 		}
+
 		document.body.classList.add('keyboard-navigation');
 	}
 
@@ -135,21 +148,26 @@
 				showInfoMessage = true;
 				break;
 			}
+
 			case 'disable': {
 				toggleAll(false);
 				showInfoMessage = true;
 				break;
 			}
+
 			case 'extensions': {
 				chrome.tabs.create({url: 'chrome://extensions'});
 				break;
 			}
+
 			case 'options': {
 				chrome.runtime.openOptionsPage();
 				break;
 			}
+
 			default:
 		}
+
 		select.value = '';
 	}
 </script>
@@ -197,7 +215,7 @@
 					{...extension}
 					bind:enabled={extension.enabled}
 					bind:showExtras
-					oncontextmenu_once={onContextMenu}
+					oncontextmenu={onContextMenu}
 					onpin={() => handlePin(extension.id)}
 					{undoStack}
 				/>

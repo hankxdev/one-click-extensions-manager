@@ -3,7 +3,7 @@
 	import openInTab from './lib/open-in-tab.js';
 	import trimName from './lib/trim-name.js';
 
-	let {
+	const {
 		id,
 		name,
 		shortName,
@@ -17,8 +17,7 @@
 		undoStack,
 		isPinned = false,
 		onpin,
-		oncontextmenu_once,
-		...restProps
+		oncontextmenu,
 	} = $props();
 
 	const getI18N = chrome.i18n.getMessage;
@@ -39,7 +38,7 @@
 	function handleContextMenu(event) {
 		if (!contextMenuFired) {
 			contextMenuFired = true;
-			oncontextmenu_once?.(event);
+			oncontextmenu?.(event);
 		}
 	}
 
