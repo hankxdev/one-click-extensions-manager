@@ -26,19 +26,6 @@ const optionsStorage = new OptionsSync({
 
 export default optionsStorage;
 
-const defaultPopup = chrome.runtime.getManifest().action.default_popup;
-
-export async function matchOptions() {
-	const {position} = await optionsStorage.getAll();
-	chrome.action.setPopup({popup: position === 'popup' ? defaultPopup : ''});
-
-	const inSidebar = position === 'sidebar';
-	chrome.sidePanel.setOptions({enabled: inSidebar});
-	chrome.sidePanel.setPanelBehavior({
-		openPanelOnActionClick: inSidebar,
-	});
-}
-
 export async function togglePin(extensionId) {
 	const {pinnedExtensions} = await optionsStorage.getAll();
 	const pins = new Set(pinnedExtensions);
@@ -50,4 +37,17 @@ export async function togglePin(extensionId) {
 
 	await optionsStorage.set({pinnedExtensions: [...pins]});
 	return pinned;
+}
+
+const defaultPopup = chrome.runtime.getManifest().action.default_popup;
+
+export async function matchOptions() {
+	const {position} = await optionsStorage.getAll();
+	chrome.action.setPopup({popup: position === 'popup' ? defaultPopup : ''});
+
+	const inSidebar = position === 'sidebar';
+	chrome.sidePanel.setOptions({enabled: inSidebar});
+	chrome.sidePanel.setPanelBehavior({
+		openPanelOnActionClick: inSidebar,
+	});
 }
