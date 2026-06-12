@@ -8,7 +8,7 @@ async function loadModuleWithPlatform(platform) {
 		configurable: true,
 	});
 	// Dynamic import with a cache-busting query so module-level detection is re-evaluated.
-	const url = new URL(`./cmd-key.js?cb=${Date.now()}`, import.meta.url);
+	const url = new URL(`cmd-key.js?cb=${Date.now()}`, import.meta.url);
 	return import(url.href);
 }
 

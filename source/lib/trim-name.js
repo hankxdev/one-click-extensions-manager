@@ -2,9 +2,9 @@
 export default function trimName(name) {
 	const trimmed = name
 		// Only trim names if the punctuation is surrounded by spaces, except for colons, which don't need a preceding space
-		.replace(/( ?:| [-|—]) .+$/, '')
+		.replace(/(?: ?:| (?:-|—)) .+$/v, '')
 		.replace(
-			/(extension|chrome extension|browser extension|for chrome|for google chrome)$/i,
+			/(?:extension|chrome extension|browser extension|for chrome|for google chrome)$/iv,
 			'',
 		)
 		.trim();

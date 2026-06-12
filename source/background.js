@@ -1,8 +1,8 @@
 import optionsStorage, {matchOptions} from './options-storage.js';
 
-// TODO: https://github.com/fregante/webext-options-sync/issues/63
-chrome.storage.onChanged.addListener(async (changes, areaName) => {
-	if (areaName === 'sync' && 'options' in changes) {
+matchOptions();
+optionsStorage.onChanged((current, old) => {
+	if (old.position !== current.position) {
 		matchOptions();
 	}
 });
@@ -32,8 +32,6 @@ chrome.action.onClicked.addListener(async () => {
 		});
 	}
 });
-
-matchOptions();
 
 // DEVELOPMENT MODE: uncomment this so the tab will reopen on extension reload
 // chrome.tabs.create({url: chrome.runtime.getURL('index.html')});
