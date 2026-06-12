@@ -20,6 +20,7 @@ const optionsStorage = new OptionsSync({
 
 			options.width = Number.isNaN(width) ? '' : width;
 		},
+		OptionsSync.migrations.removeUnused,
 	],
 });
 
