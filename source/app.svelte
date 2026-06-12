@@ -182,7 +182,7 @@
 			default:
 		}
 
-		select.value = '';
+		select.value = ''; // Reset the select. PreventDefault doesn't
 	}
 </script>
 
