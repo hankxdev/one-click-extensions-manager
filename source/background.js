@@ -1,8 +1,8 @@
 import optionsStorage, {matchOptions} from './options-storage.js';
 
 matchOptions();
-optionsStorage.onChanged(changes => {
-	if ('position' in changes) {
+optionsStorage.onChanged((current, old) => {
+	if (old.position !== current.position) {
 		matchOptions();
 	}
 });
