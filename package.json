@@ -14,6 +14,7 @@
 		"watch": "tsdown --watch"
 	},
 	"dependencies": {
+		"svelte": "^4.2.20",
 		"webext-base-css": "^2.1.0",
 		"webext-options-sync": "^4.3.0"
 	},
@@ -28,7 +29,6 @@
 		"prettier-plugin-svelte": "^3.4.0",
 		"rollup": "^4.52.5",
 		"rollup-plugin-svelte": "^7.2.3",
-		"svelte": "^4.2.20",
 		"tsdown": "^0.22.2"
 	},
 	"webExt": {

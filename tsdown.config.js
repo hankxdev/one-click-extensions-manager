@@ -1,5 +1,6 @@
 import svelte from 'rollup-plugin-svelte';
 import {defineConfig} from 'tsdown';
+import pkg from './package.json' with {type: "json"};
 
 export default defineConfig({
 	entry: {
@@ -7,14 +8,13 @@ export default defineConfig({
 		'options/options': 'source/options/options.js',
 		background: 'source/background.js',
 	},
+	deps: {onlyBundle: Object.keys(pkg.dependencies)},
 	outDir: 'distribution',
 	format: 'es',
 	clean: true,
 	platform: 'browser',
 	copy: [
-		{from: 'source/**/*', to: 'distribution'},
-		'!source/**/*.js',
-		'!source/**/*.svelte',
+		{from: 'source/**/*.!(test.js|js|svelte)', to: 'distribution', flatten: false},
 	],
 	plugins: [svelte()],
 });
