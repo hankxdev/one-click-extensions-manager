@@ -6,6 +6,7 @@ const optionsStorage = new OptionsSync({
 		showButtons: 'on-demand', // Or 'always'
 		width: '',
 		pinnedExtensions: [], // Array of pinned extension IDs
+		name: 'short',
 	},
 	migrations: [
 		options => {

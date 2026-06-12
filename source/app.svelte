@@ -4,6 +4,7 @@
 	import {replaceModifierIfMac} from './lib/cmd-key.js';
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 	import prepareExtensionList from './lib/prepare-extension-list.js';
+	import trimName from './lib/trim-name.js';
 	import UndoStack from './lib/undo-stack.js';
 	import optionsStorage, {togglePin} from './options-storage.js';
 
@@ -18,8 +19,9 @@
 	let showStickyInfoMessage = !localStorage.getItem('sticky-info-message');
 	let showInfoMessage = !localStorage.getItem('undo-info-message');
 	let userClickedHideInfoMessage = false; // "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
+	let shortName = true;
 
-	options.then(({showButtons, width, position}) => {
+	options.then(({showButtons, width, position, name}) => {
 		if (showButtons === 'always') {
 			showExtras = true;
 		}
@@ -27,6 +29,8 @@
 		if (position === 'popup' || position === 'window') {
 			document.documentElement.style.width = `${width || 400}px`;
 		}
+
+		shortName = name === 'short';
 	});
 	$: {
 		const keywords = searchValue
@@ -221,6 +225,10 @@
 			{#if extension.shown}
 				<Extension
 					{...extension}
+					name={// The browser will still fill the "short name" with "name" if missing
+					shortName
+						? trimName(extension.shortName ?? extension.name)
+						: extension.name}
 					bind:enabled={extension.enabled}
 					bind:showExtras
 					on:contextmenu|once={onContextMenu}

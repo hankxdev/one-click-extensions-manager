@@ -6,11 +6,9 @@
 	import {createEventDispatcher} from 'svelte';
 	import pickBestIcon from './lib/icons.js';
 	import openInTab from './lib/open-in-tab.js';
-	import trimName from './lib/trim-name.js';
 
 	export let id;
 	export let name;
-	export let shortName;
 	export let enabled;
 	export let installType;
 	export let homepageUrl;
@@ -25,8 +23,6 @@
 	const chromeWebStoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
 	const edgeWebStoreUrl = `https://microsoftedge.microsoft.com/addons/detail/${id}`;
 	const url = generateHomeURL();
-	// The browser will still fill the "short name" with "name" if missing
-	const realName = trimName(shortName ?? name);
 
 	function generateHomeURL() {
 		if (installType !== 'normal') {
@@ -70,7 +66,7 @@
 		on:click={toggleExtension}
 		on:contextmenu
 	>
-		<img alt="" src={pickBestIcon(icons, 16)} />{realName}
+		<img alt="" src={pickBestIcon(icons, 16)} />{name}
 	</button>
 	{#if optionsUrl && enabled}
 		<a href={optionsUrl} title={getI18N('gotoOpt')} on:click={openInTab}>
