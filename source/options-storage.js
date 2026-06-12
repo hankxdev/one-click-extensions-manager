@@ -5,7 +5,7 @@ const optionsStorage = new OptionsSync({
 		position: 'popup',
 		showButtons: 'on-demand', // Or 'always'
 		width: '',
-		pinnedExtensions: [], // Array of pinned extension IDs
+		pinnedExtensions: [],
 	},
 	migrations: [
 		options => {
@@ -20,33 +20,23 @@ const optionsStorage = new OptionsSync({
 
 			options.width = Number.isNaN(width) ? '' : width;
 		},
-		// Migration to add pinnedExtensions if it doesn't exist
-		options => {
-			if (!options.pinnedExtensions) {
-				options.pinnedExtensions = [];
-			}
-		},
+		OptionsSync.migrations.removeUnused,
 	],
 });
 
 export default optionsStorage;
 
-// Helper functions for managing pinned extensions
 export async function togglePin(extensionId) {
-	const options = await optionsStorage.getAll();
-	const pinnedExtensions = [...options.pinnedExtensions];
-	const index = pinnedExtensions.indexOf(extensionId);
+	const {pinnedExtensions} = await optionsStorage.getAll();
+	const pins = new Set(pinnedExtensions);
 
-	if (index > -1) {
-		// Unpin
-		pinnedExtensions.splice(index, 1);
-	} else {
-		// Pin
-		pinnedExtensions.push(extensionId);
+	const pinned = !pins.delete(extensionId);
+	if (pinned) {
+		pins.add(extensionId);
 	}
 
-	await optionsStorage.set({pinnedExtensions});
-	return index === -1; // Return true if pinned, false if unpinned
+	await optionsStorage.set({pinnedExtensions: [...pins]});
+	return pinned;
 }
 
 const defaultPopup = chrome.runtime.getManifest().action.default_popup;
