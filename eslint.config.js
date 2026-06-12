@@ -7,31 +7,20 @@ import {defineConfig, globalIgnores, includeIgnoreFile} from 'eslint/config';
 const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url));
 
 export default defineConfig([
-	includeIgnoreFile(gitignorePath, {gitignoreResolution: true}),
+	includeIgnoreFile(gitignorePath),
 	globalIgnores(['package-lock.json']),
-	...eslintConfigXo({
-		browser: true,
-	}),
+	...eslintConfigXo({browser: true}),
 	{
 		files: ['**/*.svelte'],
-		plugins: {svelte: sveltePlugin},
 		extends: [sveltePlugin.configs['flat/recommended']],
-		languageOptions: {
-			parserOptions: {
-				parser: '@typescript-eslint/parser',
-			},
-		},
 		rules: {
-			// Incompatible with svelte
 			'unicorn/prefer-top-level-await': 'off',
 			'import-x/no-mutable-exports': 'off',
 		},
 	},
 	{
 		languageOptions: {
-			globals: {
-				chrome: 'readonly',
-			},
+			globals: {chrome: 'readonly'},
 		},
 		rules: {
 			'no-console': 'off',
