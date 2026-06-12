@@ -24,6 +24,7 @@
 	const chromeWebStoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
 	const edgeWebStoreUrl = `https://microsoftedge.microsoft.com/addons/detail/${id}`;
 	const url = generateHomeURL();
+	// The browser will still fill the "short name" with "name" if missing
 	const realName = trimName(shortName ?? name);
 
 	function generateHomeURL() {
@@ -43,6 +44,7 @@
 	}
 
 	function toggleExtension(event) {
+		// Check if Ctrl/Cmd is held down for pinning
 		if (event.ctrlKey || event.metaKey) {
 			onpin?.();
 			return;

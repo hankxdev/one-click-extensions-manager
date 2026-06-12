@@ -17,6 +17,8 @@
 		!localStorage.getItem('sticky-info-message'),
 	);
 	let showInfoMessage = $state(!localStorage.getItem('undo-info-message'));
+
+	// "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
 	let userClickedHideInfoMessage = $state(false);
 
 	const options = optionsStorage.getAll();
@@ -118,12 +120,14 @@
 	onMount(async () => {
 		await prepare();
 
+		// Add listeners
 		chrome.management.onUninstalled.addListener(handleUninstalled);
 		chrome.management.onInstalled.addListener(handleInstalled);
 		chrome.management.onEnabled.addListener(handleEnabled);
 		chrome.management.onDisabled.addListener(handleDisabled);
 		window.addEventListener('blur', prepare);
 
+		// Cleanup function
 		return () => {
 			chrome.management.onUninstalled.removeListener(handleUninstalled);
 			chrome.management.onInstalled.removeListener(handleInstalled);
@@ -133,6 +137,8 @@
 		};
 	});
 
+	// Toggle extra buttons on right click on the name
+	// After the first click, allow the native context menu
 	function onContextMenu(event) {
 		if (!showExtras) {
 			showExtras = true;
