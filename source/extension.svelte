@@ -10,9 +10,9 @@
 		enabled = $bindable(),
 		installType,
 		homepageUrl,
-		updateUrl = undefined,
+		updateUrl,
 		optionsUrl,
-		icons = undefined,
+		icons,
 		showExtras = $bindable(),
 		undoStack,
 		isPinned = false,
@@ -21,11 +21,11 @@
 	} = $props();
 
 	const getI18N = chrome.i18n.getMessage;
-	const chromeWebStoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
-	const edgeWebStoreUrl = `https://microsoftedge.microsoft.com/addons/detail/${id}`;
-	const url = generateHomeURL();
+	const chromeWebStoreUrl = $derived(`https://chrome.google.com/webstore/detail/${id}`);
+	const edgeWebStoreUrl = $derived(`https://microsoftedge.microsoft.com/addons/detail/${id}`);
+	const url = $derived(generateHomeURL());
 	// The browser will still fill the "short name" with "name" if missing
-	const realName = trimName(shortName ?? name);
+	const realName = $derived(trimName(shortName ?? name));
 
 	function generateHomeURL() {
 		if (installType !== 'normal') return homepageUrl;
