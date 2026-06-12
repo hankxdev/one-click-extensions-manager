@@ -37,3 +37,16 @@ export async function matchOptions() {
 		openPanelOnActionClick: inSidebar,
 	});
 }
+
+export async function togglePin(extensionId) {
+	const {pinnedExtensions} = await optionsStorage.getAll();
+	const pins = new Set(pinnedExtensions);
+
+	const pinned = !pins.delete(extensionId);
+	if (pinned) {
+		pins.add(extensionId);
+	}
+
+	await optionsStorage.set({pinnedExtensions: [...pins]});
+	return pinned;
+}

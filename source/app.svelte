@@ -5,7 +5,7 @@
 	import {focusNext, focusPrevious} from './lib/focus-next.js';
 	import prepareExtensionList from './lib/prepare-extension-list.js';
 	import UndoStack from './lib/undo-stack.js';
-	import optionsStorage from './options-storage.js';
+	import optionsStorage, {togglePin} from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
 	const undoStack = new UndoStack(window);
@@ -177,17 +177,6 @@
 		}
 
 		this.value = ''; // Reset the select. PreventDefault doesn't work
-	}
-
-	async function togglePin(extensionId) {
-		const {pinnedExtensions} = await optionsStorage.getAll();
-		const pins = new Set(pinnedExtensions);
-
-		const pinned = !pins.delete(extensionId);
-		if (pinned) pins.add(extensionId);
-
-		await optionsStorage.set({pinnedExtensions: [...pins]});
-		return pinned;
 	}
 </script>
 
