@@ -7,7 +7,7 @@ new App({
 	target: document.body,
 });
 
-const autoFit = new URLSearchParams(location.search).has('auto-fit');
+const autoFit = new URLSearchParams(globalThis.location.search).has('auto-fit');
 if (autoFit) {
 	fitWindow();
 }

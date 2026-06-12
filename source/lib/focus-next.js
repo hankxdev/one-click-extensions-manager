@@ -8,6 +8,7 @@ function focus(selector, next) {
 	for (const item of items) {
 		const position = activeElement.compareDocumentPosition(item);
 		if (
+			// eslint-disable-next-line no-bitwise
 			position &
 			(next
 				? Node.DOCUMENT_POSITION_FOLLOWING

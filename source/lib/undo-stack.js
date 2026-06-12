@@ -3,6 +3,7 @@ import {isHoldingModifier} from './cmd-key.js';
 export default class UndoStack {
 	_undoStack = [];
 	_redoStack = [];
+
 	constructor(element) {
 		element?.addEventListener('keydown', this.#keyboardEventListener);
 	}

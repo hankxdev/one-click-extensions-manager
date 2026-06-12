@@ -1,4 +1,4 @@
-import optionsStorage from '../options-storage';
+import optionsStorage from '../options-storage.js';
 
 function fillInTheBlanks(extension, isPinned = false) {
 	extension.shown = true;
@@ -12,7 +12,7 @@ export default async function prepareExtensionList(extensions) {
 
 	return extensions
 		.filter(({type, id}) => type === 'extension' && id !== chrome.runtime.id)
-		.sort((a, b) => {
+		.toSorted((a, b) => {
 			const aPinned = pinnedExtensions.includes(a.id);
 			const bPinned = pinnedExtensions.includes(b.id);
 
