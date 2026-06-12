@@ -8,7 +8,7 @@
 	import optionsStorage, {togglePin} from './options-storage.js';
 
 	const getI18N = chrome.i18n.getMessage;
-	const undoStack = new UndoStack(window);
+	const undoStack = new UndoStack(globalThis);
 
 	let extensions = [];
 	let searchValue = '';
@@ -55,22 +55,26 @@
 
 	function keyboardNavigationHandler(event) {
 		switch (event.key) {
-			case 'Tab':
+			case 'Tab': {
 				showExtras = true;
 				break;
+			}
 
-			case 'ArrowDown':
+			case 'ArrowDown': {
 				focusNext('.ext-name, [type="search"]');
 				event.preventDefault();
 				break;
+			}
 
-			case 'ArrowUp':
+			case 'ArrowUp': {
 				focusPrevious('.ext-name, [type="search"]');
 				event.preventDefault();
 				break;
+			}
 
-			default:
+			default: {
 				return;
+			}
 		}
 
 		document.body.classList.add('keyboard-navigation');

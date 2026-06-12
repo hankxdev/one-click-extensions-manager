@@ -1,37 +1,53 @@
-import antfu from '@antfu/eslint-config';
+import {fileURLToPath} from 'node:url';
+import eslintConfigXo from 'eslint-config-xo';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import sveltePlugin from 'eslint-plugin-svelte';
+import {defineConfig, globalIgnores, includeIgnoreFile} from 'eslint/config';
 
-export default antfu({
-	svelte: true,
-	test: false,
-	stylistic: {
-		indent: 'tab',
-		semi: true,
-	},
-	languageOptions: {
-		globals: {
-			chrome: true,
+const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url));
+
+export default defineConfig([
+	includeIgnoreFile(gitignorePath, {gitignoreResolution: true}),
+	globalIgnores(['package-lock.json']),
+	...eslintConfigXo({
+		browser: true,
+	}),
+	{
+		files: ['**/*.svelte'],
+		plugins: {svelte: sveltePlugin},
+		extends: [sveltePlugin.configs['flat/recommended']],
+		languageOptions: {
+			parserOptions: {
+				parser: '@typescript-eslint/parser',
+			},
+		},
+		rules: {
+			// Incompatible with svelte
+			'unicorn/prefer-top-level-await': 'off',
+			'import-x/no-mutable-exports': 'off',
 		},
 	},
-	rules: {
-		'no-self-assign': 'off',
-		'no-console': 'off',
-		'jsonc/object-curly-spacing': 'off',
-		'import/no-mutable-exports': 'off',
-		'svelte/html-quotes': [
-			'error',
-			{
-				prefer: 'double',
+	{
+		languageOptions: {
+			globals: {
+				chrome: 'readonly',
 			},
-		],
-		'style/arrow-parens': 'off',
-		'style/object-curly-spacing': 'off',
+		},
+		rules: {
+			'no-self-assign': 'off',
+			'no-console': 'off',
+			'jsdoc/require-param': 'off',
+			'jsonc/object-curly-spacing': 'off',
+			'import/no-mutable-exports': 'off',
+			'style/arrow-parens': 'off',
+			'style/object-curly-spacing': 'off',
 
-		// Prettier conflicts
-		'style/brace-style': 'off',
-		'style/indent': 'off',
-		'style/operator-linebreak': 'off',
-		'style/quote-props': 'off',
-		'svelte/indent': 'off',
-		'antfu/if-newline': 'off',
+			// Prettier conflicts
+			'style/brace-style': 'off',
+			'style/indent': 'off',
+			'style/operator-linebreak': 'off',
+			'style/quote-props': 'off',
+		},
 	},
-});
+	eslintConfigPrettier,
+]);

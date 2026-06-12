@@ -1,6 +1,5 @@
 import assert from 'node:assert';
 import it from 'node:test';
-
 import trimName from './trim-name.js';
 
 it('preserves regular names', () => {

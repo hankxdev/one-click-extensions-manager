@@ -1,7 +1,7 @@
 <!doctype html>
-<html class="webext-base-css-modal">
-	<meta charset="UTF-8" />
-	<base target="_blank" />
+<html class="webext-base-css-modal" lang="en">
+	<meta charset="UTF-8">
+	<base target="_blank">
 	<title>One Click Extension Manager options</title>
 	<style>
 		@import './webext-base.css';
@@ -40,10 +40,10 @@
 	</style>
 	<script type="module" defer src="options.js"></script>
 	<h1>One-Click Extensions Manager</h1>
-	<form id="options-form">
+	<form id="options-form" method="get">
 		<p>
 			<label for="position">Location</label>
-			<select name="position" id="position">
+			<select id="position" name="position">
 				<option value="popup">Menu (default)</option>
 				<option value="window">Popup window</option>
 				<option value="tab">Tab</option>
@@ -52,17 +52,23 @@
 		</p>
 		<p>
 			<label for="showButtons">Show buttons</label>
-			<select name="showButtons" id="showButtons">
+			<select id="showButtons" name="showButtons">
 				<option value="on-demand">On right click (default)</option>
 				<option value="always">Always</option>
 			</select>
 		</p>
 		<p>
 			<label for="width">Width <small>(in pixels)</small> </label>
-			<input type="text" name="width" id="width" placeholder="400" size="5" />
+			<input
+				id="width"
+				type="text"
+				name="width"
+				placeholder="400"
+				size="5"
+			>
 		</p>
 	</form>
-	<hr />
+	<hr>
 	<p>
 		If you find this useful, consider supporting its development by donating or
 		leaving a review.
