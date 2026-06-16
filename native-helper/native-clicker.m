@@ -54,6 +54,54 @@ static BOOL ContainsTarget(AXUIElementRef element, NSString *target) {
 	return [text rangeOfString:target options:NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch].location != NSNotFound;
 }
 
+static NSString *ElementText(AXUIElementRef element) {
+	NSMutableString *text = [NSMutableString string];
+	for (id attribute in @[
+		(__bridge NSString *)kAXDescriptionAttribute,
+		(__bridge NSString *)kAXTitleAttribute,
+		(__bridge NSString *)kAXValueAttribute,
+		(__bridge NSString *)kAXHelpAttribute,
+	]) {
+		NSString *part = StringAttribute(element, (__bridge CFStringRef)attribute);
+		if (part.length > 0) {
+			[text appendString:part];
+			[text appendString:@"\n"];
+		}
+	}
+
+	return [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+static BOOL IsMenuExtensionActionButton(AXUIElementRef element) {
+	NSString *role = StringAttribute(element, kAXRoleAttribute);
+	if (![role isEqualToString:@"AXButton"]) {
+		return NO;
+	}
+
+	NSString *text = ElementText(element);
+	return !(
+		[text hasPrefix:@"Pin "] ||
+		[text hasPrefix:@"Unpin "] ||
+		[text hasPrefix:@"More options for "]
+	);
+}
+
+static BOOL HasExactTargetAttribute(AXUIElementRef element, NSString *target) {
+	for (id attribute in @[
+		(__bridge NSString *)kAXDescriptionAttribute,
+		(__bridge NSString *)kAXTitleAttribute,
+		(__bridge NSString *)kAXValueAttribute,
+		(__bridge NSString *)kAXHelpAttribute,
+	]) {
+		NSString *part = [StringAttribute(element, (__bridge CFStringRef)attribute) stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		if ([part compare:target options:NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch] == NSOrderedSame) {
+			return YES;
+		}
+	}
+
+	return NO;
+}
+
 static BOOL ClickElement(AXUIElementRef element) {
 	CFTypeRef positionValue = NULL;
 	CFTypeRef sizeValue = NULL;
@@ -102,6 +150,15 @@ static BOOL ClickElement(AXUIElementRef element) {
 	}
 
 	return AXUIElementPerformAction(element, kAXPressAction) == kAXErrorSuccess;
+}
+
+static BOOL IsToolbarControl(AXUIElementRef element) {
+	NSString *role = StringAttribute(element, kAXRoleAttribute);
+	NSString *subrole = StringAttribute(element, kAXSubroleAttribute);
+	return (
+		([role isEqualToString:@"AXButton"] || [role isEqualToString:@"AXPopUpButton"] || [role isEqualToString:@"AXMenuButton"]) &&
+		![subrole isEqualToString:@"AXTabButton"]
+	);
 }
 
 static BOOL ScrollElement(AXUIElementRef element, int32_t delta) {
@@ -157,6 +214,24 @@ static BOOL ScrollElement(AXUIElementRef element, int32_t delta) {
 	return YES;
 }
 
+static void PressEscapeKey(void) {
+	CGEventRef down = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)53, true);
+	CGEventRef up = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)53, false);
+	if (down != NULL && up != NULL) {
+		CGEventPost(kCGHIDEventTap, down);
+		usleep(40 * 1000);
+		CGEventPost(kCGHIDEventTap, up);
+	}
+
+	if (down != NULL) {
+		CFRelease(down);
+	}
+
+	if (up != NULL) {
+		CFRelease(up);
+	}
+}
+
 static BOOL ClickToolbarItem(AXUIElementRef element, NSString *target, NSInteger depth, BOOL insideToolbar) {
 	if (depth > 12) {
 		return NO;
@@ -164,7 +239,10 @@ static BOOL ClickToolbarItem(AXUIElementRef element, NSString *target, NSInteger
 
 	NSString *role = StringAttribute(element, kAXRoleAttribute);
 	BOOL nowInsideToolbar = insideToolbar || [role isEqualToString:@"AXToolbar"];
-	if (nowInsideToolbar && ContainsTarget(element, target) && ClickElement(element)) {
+	BOOL targetMatches = [target isEqualToString:@"Extensions"]
+		? HasExactTargetAttribute(element, target)
+		: ContainsTarget(element, target);
+	if (nowInsideToolbar && IsToolbarControl(element) && targetMatches && ClickElement(element)) {
 		return YES;
 	}
 
@@ -182,12 +260,30 @@ static BOOL ClickTextItem(AXUIElementRef element, NSString *target, NSInteger de
 		return NO;
 	}
 
-	if (ContainsTarget(element, target) && ClickElement(element)) {
+	for (id child in ChildrenOfElement(element)) {
+		if (ClickTextItem((__bridge AXUIElementRef)child, target, depth + 1)) {
+			return YES;
+		}
+	}
+
+	if (IsMenuExtensionActionButton(element) && ContainsTarget(element, target) && ClickElement(element)) {
+		return YES;
+	}
+
+	return NO;
+}
+
+static BOOL TreeContainsTarget(AXUIElementRef element, NSString *target, NSInteger depth) {
+	if (depth > 12) {
+		return NO;
+	}
+
+	if (ContainsTarget(element, target)) {
 		return YES;
 	}
 
 	for (id child in ChildrenOfElement(element)) {
-		if (ClickTextItem((__bridge AXUIElementRef)child, target, depth + 1)) {
+		if (TreeContainsTarget((__bridge AXUIElementRef)child, target, depth + 1)) {
 			return YES;
 		}
 	}
@@ -244,7 +340,10 @@ static NSArray *MenuWindowsOfApplication(AXUIElementRef application) {
 	NSMutableArray *menuWindows = [NSMutableArray array];
 	for (id window in WindowsOfApplication(application)) {
 		NSString *subrole = StringAttribute((__bridge AXUIElementRef)window, kAXSubroleAttribute);
-		if (![subrole isEqualToString:@"AXStandardWindow"]) {
+		if (
+			![subrole isEqualToString:@"AXStandardWindow"] &&
+			TreeContainsTarget((__bridge AXUIElementRef)window, @"Manage Extensions", 0)
+		) {
 			[menuWindows addObject:window];
 		}
 	}
@@ -318,11 +417,8 @@ static NSString *OpenPopup(NSString *browserApp, NSArray *targets, NSString **er
 		return @"clicked pinned toolbar item";
 	}
 
-	if (ClickAnyMenuAlias(application, targets)) {
-		CFRelease(application);
-		return @"clicked existing extensions menu item";
-	}
-
+	PressEscapeKey();
+	usleep(180 * 1000);
 	if (ClickAnyToolbarAlias(application, @[@"Extensions"])) {
 		for (NSUInteger attempt = 0; attempt < 10; attempt++) {
 			usleep(150 * 1000);
