@@ -1,7 +1,6 @@
 import optionsStorage from '../options-storage.js';
 
 function fillInTheBlanks(extension, isPinned = false) {
-	extension.shown = true;
 	extension.indexedName = extension.name.toLowerCase();
 	extension.isPinned = isPinned;
 	return extension;

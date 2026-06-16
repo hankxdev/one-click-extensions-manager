@@ -69,23 +69,33 @@ cat >"$manifest_dir/com.ocem.popuphost.json" <<EOF
 }
 EOF
 
-plist_path="$HOME/Library/LaunchAgents/com.ocem.popuphost.http.plist"
+rm -f \
+	"$manifest_dir/com.one_click_extensions_manager.popup_helper.json" \
+	"$manifest_dir/com.oneclickextensionsmanager.popuphelper.json" \
+	"$manifest_dir/com.openai.ocemtest.json"
+
+label="com.ocem.popuphost.http"
+plist_path="$HOME/Library/LaunchAgents/$label.plist"
 cat >"$plist_path" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.ocem.popuphost.http</string>
+	<string>$label</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>$node_bin</string>
 		<string>$install_dir/native-http-host.mjs</string>
 	</array>
+	<key>WorkingDirectory</key>
+	<string>$install_dir</string>
 	<key>RunAtLoad</key>
 	<true/>
 	<key>KeepAlive</key>
 	<true/>
+	<key>ProcessType</key>
+	<string>Interactive</string>
 	<key>StandardOutPath</key>
 	<string>/tmp/com.ocem.popuphost.http.log</string>
 	<key>StandardErrorPath</key>
@@ -102,16 +112,45 @@ if [[ -f "$pid_file" ]]; then
 	fi
 fi
 
-nohup "$node_bin" "$install_dir/native-http-host.mjs" >/tmp/com.ocem.popuphost.http.log 2>/tmp/com.ocem.popuphost.http.err &
-echo "$!" >"$pid_file"
-
-sleep 0.8
-"$node_bin" <<'NODE'
-const response = await fetch('http://127.0.0.1:17645/health');
-if (!response.ok) {
-	throw new Error(`Health check failed with HTTP ${response.status}`);
+start_standalone_helper() {
+	nohup "$node_bin" "$install_dir/native-http-host.mjs" >/tmp/com.ocem.popuphost.http.log 2>/tmp/com.ocem.popuphost.http.err &
+	echo "$!" >"$pid_file"
+	echo "Started local helper with nohup fallback."
 }
+
+wait_for_health() {
+	"$node_bin" <<'NODE'
+const deadline = Date.now() + 5000;
+let lastError = '';
+while (Date.now() < deadline) {
+	try {
+		const response = await fetch('http://127.0.0.1:17645/health');
+		if (response.ok) {
+			process.exit(0);
+		}
+
+		lastError = `HTTP ${response.status}`;
+	} catch (error) {
+		lastError = error.message;
+	}
+
+	await new Promise(resolve => {
+		setTimeout(resolve, 250);
+	});
+}
+throw new Error(`Local helper health check failed: ${lastError}`);
 NODE
+}
+
+if command -v launchctl >/dev/null 2>&1; then
+	gui_domain="gui/$(id -u)"
+	launchctl bootout "$gui_domain" "$plist_path" >/dev/null 2>&1 || true
+	launchctl bootout "$gui_domain/$label" >/dev/null 2>&1 || true
+fi
+
+start_standalone_helper
+
+wait_for_health
 
 echo "Installed native popup helper."
 echo "Native host manifest: $manifest_dir/com.ocem.popuphost.json"

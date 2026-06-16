@@ -64,9 +64,19 @@
 		return message('extensionMenuUnavailable', 'Extension menu unavailable');
 	}
 
+	function getToggleTitle() {
+		return enabled
+			? message('disableExtension', 'Disable extension')
+			: message('enableExtension', 'Enable extension');
+	}
+
+	function canToggle() {
+		return enabled ? mayDisable : mayEnable;
+	}
+
 	function formatError(error_) {
 		if (error_ instanceof PopupHelperError) {
-			const detail = error_.details.at(-1);
+			const detail = error_.details.join(' ');
 			return detail
 				? `${message(
 						'nativeHelperOpenFailed',
@@ -149,6 +159,7 @@
 			await openNativePopup({
 				extensionId: id,
 				extensionName: realName,
+				extensionAliases: [name, shortName].filter(Boolean),
 			});
 		});
 	}
@@ -176,7 +187,18 @@
 		return action();
 	}
 
+	function isInteractiveChildEvent(event) {
+		return (
+			event.target !== event.currentTarget &&
+			Boolean(event.target.closest?.('button, a, input, select, textarea'))
+		);
+	}
+
 	function handleRowKeydown(event) {
+		if (isInteractiveChildEvent(event)) {
+			return;
+		}
+
 		if (event.key !== 'Enter' && event.key !== ' ') {
 			return;
 		}
@@ -226,17 +248,20 @@
 	>
 		<img alt="" src={pickBestIcon(icons, 16)} />{realName}
 	</button>
+	<button
+		type="button"
+		class="ext-toggle"
+		class:enabled
+		role="switch"
+		aria-checked={enabled}
+		aria-label={getToggleTitle()}
+		title={getToggleTitle()}
+		onclick={event => runSecondaryAction(event, handleToggleClick)}
+		disabled={busy || !canToggle()}
+	>
+		<span class="ext-toggle-knob"></span>
+	</button>
 	{#if showExtras}
-		<button
-			type="button"
-			title={enabled
-				? message('disableExtension', 'Disable extension')
-				: message('enableExtension', 'Enable extension')}
-			onclick={event => runSecondaryAction(event, handleToggleClick)}
-			disabled={busy || (enabled && !mayDisable)}
-		>
-			<img src="icons/power.svg" alt="" />
-		</button>
 		{#if optionsUrl && enabled}
 			<button
 				type="button"

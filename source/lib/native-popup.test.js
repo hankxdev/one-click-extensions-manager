@@ -37,6 +37,7 @@ test('uses direct native messaging when it succeeds', async () => {
 		await openNativePopup({
 			extensionId: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
 			extensionName: 'Example',
+			extensionAliases: ['Example Full Name'],
 		}),
 		{ok: true, detail: 'native'},
 	);
@@ -68,11 +69,13 @@ test('falls back to the local helper when native transports fail', async () => {
 		await openNativePopup({
 			extensionId: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
 			extensionName: 'Fallback',
+			extensionAliases: ['Fallback Long Name'],
 		}),
 		{ok: true, detail: 'local'},
 	);
 	assert.equal(calls.length, 1);
 	assert.equal(calls[0].body.extensionName, 'Fallback');
+	assert.deepEqual(calls[0].body.extensionAliases, ['Fallback Long Name']);
 });
 
 test('reports structured failures when every transport fails', async () => {

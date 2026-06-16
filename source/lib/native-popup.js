@@ -98,11 +98,16 @@ function describeError(error) {
 	return error?.message || String(error);
 }
 
-export async function openNativePopup({extensionId, extensionName}) {
+export async function openNativePopup({
+	extensionId,
+	extensionName,
+	extensionAliases = [],
+}) {
 	const payload = {
 		type: 'open-extension-popup',
 		extensionId,
 		extensionName,
+		extensionAliases,
 	};
 
 	const attempts = [

@@ -17,6 +17,16 @@
 		!localStorage.getItem('sticky-info-message'),
 	);
 	let showInfoMessage = $state(!localStorage.getItem('undo-info-message'));
+	const visibleExtensions = $derived.by(() => {
+		const keywords = searchValue
+			.toLowerCase()
+			.split(' ')
+			.filter(s => s.length);
+
+		return extensions.filter(extension =>
+			keywords.every(word => extension.indexedName.includes(word)),
+		);
+	});
 
 	// "Disable/enable all" shows the button again, unless the user clicked already "hide" in the current session
 	let userClickedHideInfoMessage = $state(false);
@@ -30,18 +40,6 @@
 
 		if (position === 'popup' || position === 'window') {
 			document.documentElement.style.width = `${width || 400}px`;
-		}
-	});
-
-	$effect(() => {
-		const keywords = searchValue
-			.toLowerCase()
-			.split(' ')
-			.filter(s => s.length);
-		for (const extension of extensions) {
-			extension.shown = keywords.every(word =>
-				extension.indexedName.includes(word),
-			);
 		}
 	});
 
@@ -85,12 +83,25 @@
 
 	function toggleAll(enable) {
 		const affectedExtensions = extensions.filter(
-			extension => enable !== extension.enabled,
+			extension =>
+				enable !== extension.enabled &&
+				(enable
+					? extension.mayEnable !== false
+					: extension.mayDisable !== false),
 		);
 
 		undoStack.do(toggle => {
 			for (const extension of affectedExtensions) {
-				chrome.management.setEnabled(extension.id, enable ? toggle : !toggle);
+				chrome.management.setEnabled(
+					extension.id,
+					enable ? toggle : !toggle,
+					() => {
+						const failure = chrome.runtime.lastError?.message;
+						if (failure) {
+							console.warn('Failed to update extension state:', failure);
+						}
+					},
+				);
 			}
 		});
 	}
@@ -107,11 +118,19 @@
 
 	function handleEnabled(updated) {
 		const extension = extensions.find(({id}) => id === updated.id);
+		if (!extension) {
+			return;
+		}
+
 		extension.enabled = true;
 	}
 
 	function handleDisabled(updated) {
 		const extension = extensions.find(({id}) => id === updated.id);
+		if (!extension) {
+			return;
+		}
+
 		extension.enabled = false;
 	}
 
@@ -211,17 +230,15 @@
 		</select>
 	</div>
 	<ul id="ext-list">
-		{#each extensions as extension (extension.id)}
-			{#if extension.shown}
-				<Extension
-					{...extension}
-					bind:enabled={extension.enabled}
-					bind:showExtras
-					oncontextmenu={onContextMenu}
-					onpin={() => handlePin(extension.id)}
-					{undoStack}
-				/>
-			{/if}
+		{#each visibleExtensions as extension (extension.id)}
+			<Extension
+				{...extension}
+				bind:enabled={extension.enabled}
+				bind:showExtras
+				oncontextmenu={onContextMenu}
+				onpin={() => handlePin(extension.id)}
+				{undoStack}
+			/>
 		{/each}
 	</ul>
 </main>

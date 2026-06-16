@@ -25,6 +25,19 @@ test('rejects invalid extension ids before reading config or automating UI', () 
 	);
 });
 
+test('rejects invalid extension aliases', () => {
+	assert.throws(
+		() =>
+			validateRequest({
+				type: 'open-extension-popup',
+				extensionId: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+				extensionName: 'Dark Reader',
+				extensionAliases: ['Dark Reader', 42],
+			}),
+		/Invalid extension aliases/v,
+	);
+});
+
 test('rejects truncated native messages with a clear error', () => {
 	const frame = frameNativeMessage({
 		type: 'open-extension-popup',

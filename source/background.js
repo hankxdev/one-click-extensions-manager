@@ -26,7 +26,10 @@ function handleNativePopupRequest(message, sender, sendResponse) {
 	if (
 		!isValidExtensionId(message.extensionId) ||
 		typeof message.extensionName !== 'string' ||
-		message.extensionName.trim() === ''
+		message.extensionName.trim() === '' ||
+		(message.extensionAliases !== undefined &&
+			(!Array.isArray(message.extensionAliases) ||
+				message.extensionAliases.some(alias => typeof alias !== 'string')))
 	) {
 		sendResponse({ok: false, error: 'Invalid extension popup request.'});
 		return false;
@@ -38,6 +41,7 @@ function handleNativePopupRequest(message, sender, sendResponse) {
 			type: 'open-extension-popup',
 			extensionId: message.extensionId,
 			extensionName: message.extensionName,
+			extensionAliases: message.extensionAliases || [],
 		},
 		response => {
 			const failure = chrome.runtime.lastError?.message;

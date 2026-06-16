@@ -151,10 +151,67 @@ button:hover,
 	padding: 0 var(--margin);
 }
 
+.ext-toggle {
+	--switch-width: 2.2em;
+	--switch-height: 1.2em;
+	--switch-padding: 0.13em;
+	align-self: center;
+	box-sizing: border-box;
+	inline-size: var(--switch-width);
+	block-size: var(--switch-height);
+	margin-inline: 0.35em;
+	padding: var(--switch-padding);
+	border-radius: 999px;
+	background: #8b949e;
+	opacity: 100%;
+	transition:
+		background-color 120ms ease,
+		opacity 120ms ease;
+}
+
+.ext-toggle.enabled {
+	background: #237a43;
+}
+
+.ext-toggle:disabled {
+	cursor: not-allowed;
+	opacity: 45%;
+}
+
+.ext-toggle:hover:not(:disabled),
+.keyboard-navigation .ext-toggle:focus-visible {
+	background: #6b7280;
+}
+
+.ext-toggle.enabled:hover:not(:disabled),
+.keyboard-navigation .ext-toggle.enabled:focus-visible {
+	background: #2f9958;
+}
+
+.ext-toggle-knob {
+	display: block;
+	inline-size: calc(var(--switch-height) - var(--switch-padding) * 2);
+	block-size: calc(var(--switch-height) - var(--switch-padding) * 2);
+	border-radius: 50%;
+	background: white;
+	box-shadow: 0 1px 2px #0005;
+	transform: translateX(0);
+	transition: transform 120ms ease;
+}
+
+.ext-toggle.enabled .ext-toggle-knob {
+	transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+}
+
 .ext > :not(.ext-name) {
 	padding-inline: 0.3em;
 	opacity: 20%;
 	flex-shrink: 0;
+}
+
+.ext > .ext-toggle {
+	padding: var(--switch-padding);
+	opacity: 100%;
 }
 
 .ext > :last-child:not(.ext-name) {

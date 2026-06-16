@@ -25,6 +25,14 @@ export function validateRequest(request) {
 	) {
 		throw new Error('Invalid extension name.');
 	}
+
+	if (
+		request.extensionAliases !== undefined &&
+		(!Array.isArray(request.extensionAliases) ||
+			request.extensionAliases.some(alias => typeof alias !== 'string'))
+	) {
+		throw new Error('Invalid extension aliases.');
+	}
 }
 
 export function readNativeMessage(input = fs.readFileSync(0)) {
@@ -56,6 +64,10 @@ function appleScriptString(value) {
 	return JSON.stringify(value);
 }
 
+function appleScriptList(values) {
+	return `{${values.map(value => appleScriptString(value)).join(', ')}}`;
+}
+
 function sanitizeAutomationError(error) {
 	return String(error)
 		.replaceAll(configPath, '<config>')
@@ -63,9 +75,24 @@ function sanitizeAutomationError(error) {
 		.trim();
 }
 
-function runAppleScript({browserApp, extensionName}) {
+function uniqueNames(names) {
+	const seen = new Set();
+	return names
+		.map(name => name.trim())
+		.filter(name => {
+			const key = name.toLowerCase();
+			if (!name || seen.has(key)) {
+				return false;
+			}
+
+			seen.add(key);
+			return true;
+		});
+}
+
+function runAppleScript({browserApp, extensionNames}) {
 	const script = `
-set targetName to ${appleScriptString(extensionName)}
+set targetNames to ${appleScriptList(extensionNames)}
 
 on pressElement(rootElement)
 	tell application "System Events"
@@ -118,6 +145,41 @@ on clickToolbarItemByDescription(rootElement, depth, wantedText, insideToolbar)
 	return false
 end clickToolbarItemByDescription
 
+on elementText(rootElement)
+	tell application "System Events"
+		set parts to {}
+		try
+			set end of parts to description of rootElement as text
+		end try
+		try
+			set end of parts to name of rootElement as text
+		end try
+		try
+			set end of parts to value of rootElement as text
+		end try
+		return parts as text
+	end tell
+end elementText
+
+on clickMenuItemByText(rootElement, depth, wantedText)
+	if depth > 12 then return false
+	set wantedString to wantedText as text
+	tell application "System Events"
+		set combinedText to my elementText(rootElement)
+		ignoring case
+			if combinedText contains wantedString then
+				if my pressElement(rootElement) then return true
+			end if
+		end ignoring
+		try
+			repeat with child in UI elements of rootElement
+				if my clickMenuItemByText(child, depth + 1, wantedString) then return true
+			end repeat
+		end try
+	end tell
+	return false
+end clickMenuItemByText
+
 on clickToolbarItemInAnyWindow(wantedText)
 	tell application "System Events"
 		tell process ${appleScriptString(browserApp)}
@@ -129,17 +191,48 @@ on clickToolbarItemInAnyWindow(wantedText)
 	return false
 end clickToolbarItemInAnyWindow
 
+on clickMenuItemInAnyWindow(wantedText)
+	tell application "System Events"
+		tell process ${appleScriptString(browserApp)}
+			repeat with browserWindow in windows
+				set subroleText to ""
+				try
+					set subroleText to subrole of browserWindow as text
+				end try
+				if subroleText is not "AXStandardWindow" then
+					if my clickMenuItemByText(browserWindow, 0, wantedText) then return true
+				end if
+			end repeat
+		end tell
+	end tell
+	return false
+end clickMenuItemInAnyWindow
+
+on clickAnyToolbarAlias(namesToTry)
+	repeat with candidateName in namesToTry
+		if my clickToolbarItemInAnyWindow(candidateName as text) then return true
+	end repeat
+	return false
+end clickAnyToolbarAlias
+
+on clickAnyMenuAlias(namesToTry)
+	repeat with candidateName in namesToTry
+		if my clickMenuItemInAnyWindow(candidateName as text) then return true
+	end repeat
+	return false
+end clickAnyMenuAlias
+
 tell application ${appleScriptString(browserApp)} to activate
 delay 0.2
 tell application "System Events"
 	tell process ${appleScriptString(browserApp)}
 		set frontmost to true
-		if my clickToolbarItemInAnyWindow(targetName) then
+		if my clickAnyToolbarAlias(targetNames) then
 			return "clicked pinned toolbar item"
 		end if
 		if my clickToolbarItemInAnyWindow("Extensions") then
 			delay 0.4
-			if my clickToolbarItemInAnyWindow(targetName) then
+			if my clickAnyMenuAlias(targetNames) then
 				return "clicked extensions menu item"
 			end if
 		end if
@@ -172,7 +265,10 @@ export function openExtensionPopup(request, config = readConfig()) {
 
 	return runAppleScript({
 		browserApp: config.browserApp || 'Brave Browser',
-		extensionName: request.extensionName.trim(),
+		extensionNames: uniqueNames([
+			request.extensionName,
+			...(request.extensionAliases || []),
+		]),
 	});
 }
 
