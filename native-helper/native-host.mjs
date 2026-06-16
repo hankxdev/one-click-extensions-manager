@@ -67,50 +67,79 @@ function runAppleScript({browserApp, extensionName}) {
 	const script = `
 set targetName to ${appleScriptString(extensionName)}
 
-on clickByDescription(rootElement, depth, wantedText)
-	if depth > 9 then return false
+on pressElement(rootElement)
+	tell application "System Events"
+		try
+			set itemPosition to position of rootElement
+			set itemSize to size of rootElement
+			click at {((item 1 of itemPosition) + ((item 1 of itemSize) / 2)), ((item 2 of itemPosition) + ((item 2 of itemSize) / 2))}
+			return true
+		end try
+		try
+			click rootElement
+			return true
+		end try
+		try
+			perform action "AXPress" of rootElement
+			return true
+		end try
+	end tell
+	return false
+end pressElement
+
+on clickToolbarItemByDescription(rootElement, depth, wantedText, insideToolbar)
+	if depth > 12 then return false
 	set wantedString to wantedText as text
 	tell application "System Events"
+		set roleText to ""
+		try
+			set roleText to role of rootElement as text
+		end try
+		set nowInsideToolbar to insideToolbar
+		if roleText is "AXToolbar" then set nowInsideToolbar to true
 		try
 			set descriptionText to description of rootElement as text
 		on error
 			set descriptionText to ""
 		end try
-		ignoring case
-			if descriptionText contains wantedString then
-				try
-					click rootElement
-					return true
-				on error
-					try
-						set itemPosition to position of rootElement
-						set itemSize to size of rootElement
-						click at {((item 1 of itemPosition) + ((item 1 of itemSize) / 2)), ((item 2 of itemPosition) + ((item 2 of itemSize) / 2))}
-						return true
-					end try
-				end try
-			end if
-		end ignoring
+		if nowInsideToolbar then
+			ignoring case
+				if descriptionText contains wantedString then
+					if my pressElement(rootElement) then return true
+				end if
+			end ignoring
+		end if
 		try
 			repeat with child in UI elements of rootElement
-				if my clickByDescription(child, depth + 1, wantedString) then return true
+				if my clickToolbarItemByDescription(child, depth + 1, wantedString, nowInsideToolbar) then return true
 			end repeat
 		end try
 	end tell
 	return false
-end clickByDescription
+end clickToolbarItemByDescription
+
+on clickToolbarItemInAnyWindow(wantedText)
+	tell application "System Events"
+		tell process ${appleScriptString(browserApp)}
+			repeat with browserWindow in windows
+				if my clickToolbarItemByDescription(browserWindow, 0, wantedText, false) then return true
+			end repeat
+		end tell
+	end tell
+	return false
+end clickToolbarItemInAnyWindow
 
 tell application ${appleScriptString(browserApp)} to activate
 delay 0.2
 tell application "System Events"
 	tell process ${appleScriptString(browserApp)}
 		set frontmost to true
-		if my clickByDescription(front window, 0, targetName) then
+		if my clickToolbarItemInAnyWindow(targetName) then
 			return "clicked pinned toolbar item"
 		end if
-		if my clickByDescription(front window, 0, "Extensions") then
+		if my clickToolbarItemInAnyWindow("Extensions") then
 			delay 0.4
-			if my clickByDescription(front window, 0, targetName) then
+			if my clickToolbarItemInAnyWindow(targetName) then
 				return "clicked extensions menu item"
 			end if
 		end if
