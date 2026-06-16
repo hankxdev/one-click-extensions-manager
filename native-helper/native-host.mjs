@@ -35,7 +35,61 @@ export function validateRequest(request) {
 	}
 }
 
-export function readNativeMessage(input = fs.readFileSync(0)) {
+function sleepSync(milliseconds) {
+	Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds);
+}
+
+function readExactBytes(fileDescriptor, length) {
+	const buffer = Buffer.alloc(length);
+	let offset = 0;
+	const deadline = Date.now() + 5000;
+
+	while (offset < length) {
+		try {
+			const bytesRead = fs.readSync(
+				fileDescriptor,
+				buffer,
+				offset,
+				length - offset,
+				null,
+			);
+			if (bytesRead === 0) {
+				break;
+			}
+
+			offset += bytesRead;
+		} catch (error) {
+			if (error.code !== 'EAGAIN' || Date.now() > deadline) {
+				throw error;
+			}
+
+			sleepSync(10);
+		}
+	}
+
+	return buffer.subarray(0, offset);
+}
+
+function readNativeMessageFromStdin() {
+	const header = readExactBytes(0, 4);
+	if (header.length < 4) {
+		throw new Error('Truncated native message header.');
+	}
+
+	const length = header.readUInt32LE(0);
+	const body = readExactBytes(0, length);
+	if (body.length < length) {
+		throw new Error('Truncated native message body.');
+	}
+
+	return JSON.parse(body.toString('utf8'));
+}
+
+export function readNativeMessage(input) {
+	if (input === undefined) {
+		return readNativeMessageFromStdin();
+	}
+
 	if (input.length < 4) {
 		throw new Error('Truncated native message header.');
 	}

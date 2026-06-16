@@ -12,11 +12,18 @@ fi
 case "$browser" in
 	brave)
 		browser_app="Brave Browser"
-		manifest_dir="$HOME/Library/Application Support/BraveSoftware/Brave-Browser/NativeMessagingHosts"
+		manifest_dirs=(
+			"$HOME/Library/Application Support/BraveSoftware/Brave-Browser/NativeMessagingHosts"
+			"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts"
+			"$HOME/Library/Application Support/Chromium/NativeMessagingHosts"
+		)
 		;;
 	chrome)
 		browser_app="Google Chrome"
-		manifest_dir="$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts"
+		manifest_dirs=(
+			"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts"
+			"$HOME/Library/Application Support/Chromium/NativeMessagingHosts"
+		)
 		;;
 	*)
 		echo "Unsupported browser: $browser" >&2
@@ -33,7 +40,7 @@ if [[ -z "$node_bin" ]]; then
 	exit 1
 fi
 
-mkdir -p "$install_dir" "$manifest_dir" "$HOME/Library/LaunchAgents"
+mkdir -p "$install_dir" "$HOME/Library/LaunchAgents" "${manifest_dirs[@]}"
 cp "$script_dir/native-host.mjs" "$install_dir/native-host.mjs"
 cp "$script_dir/native-http-host.mjs" "$install_dir/native-http-host.mjs"
 chmod 755 "$install_dir/native-host.mjs" "$install_dir/native-http-host.mjs"
@@ -57,7 +64,8 @@ cat >"$install_dir/native-host-config.json" <<EOF
 }
 EOF
 
-cat >"$manifest_dir/com.ocem.popuphost.json" <<EOF
+manifest_path="$install_dir/com.ocem.popuphost.json"
+cat >"$manifest_path" <<EOF
 {
   "name": "com.ocem.popuphost",
   "description": "One Click Extensions Manager popup opener",
@@ -69,10 +77,13 @@ cat >"$manifest_dir/com.ocem.popuphost.json" <<EOF
 }
 EOF
 
-rm -f \
-	"$manifest_dir/com.one_click_extensions_manager.popup_helper.json" \
-	"$manifest_dir/com.oneclickextensionsmanager.popuphelper.json" \
-	"$manifest_dir/com.openai.ocemtest.json"
+for manifest_dir in "${manifest_dirs[@]}"; do
+	cp "$manifest_path" "$manifest_dir/com.ocem.popuphost.json"
+	rm -f \
+		"$manifest_dir/com.one_click_extensions_manager.popup_helper.json" \
+		"$manifest_dir/com.oneclickextensionsmanager.popuphelper.json" \
+		"$manifest_dir/com.openai.ocemtest.json"
+done
 
 label="com.ocem.popuphost.http"
 plist_path="$HOME/Library/LaunchAgents/$label.plist"
@@ -153,6 +164,9 @@ start_standalone_helper
 wait_for_health
 
 echo "Installed native popup helper."
-echo "Native host manifest: $manifest_dir/com.ocem.popuphost.json"
+echo "Native host manifests:"
+for manifest_dir in "${manifest_dirs[@]}"; do
+	echo "- $manifest_dir/com.ocem.popuphost.json"
+done
 echo "Installed helper: $install_dir"
 echo "Local helper: http://127.0.0.1:17645/open-extension-popup"

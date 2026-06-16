@@ -19,7 +19,11 @@ for manifest in \
 	"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.ocem.popuphost.json" \
 	"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.one_click_extensions_manager.popup_helper.json" \
 	"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.oneclickextensionsmanager.popuphelper.json" \
-	"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.openai.ocemtest.json"
+	"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.openai.ocemtest.json" \
+	"$HOME/Library/Application Support/Chromium/NativeMessagingHosts/com.ocem.popuphost.json" \
+	"$HOME/Library/Application Support/Chromium/NativeMessagingHosts/com.one_click_extensions_manager.popup_helper.json" \
+	"$HOME/Library/Application Support/Chromium/NativeMessagingHosts/com.oneclickextensionsmanager.popuphelper.json" \
+	"$HOME/Library/Application Support/Chromium/NativeMessagingHosts/com.openai.ocemtest.json"
 do
 	rm -f "$manifest"
 done
