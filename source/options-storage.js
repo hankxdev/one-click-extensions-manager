@@ -1,16 +1,18 @@
 import OptionsSync from 'webext-options-sync';
+import {actionPopupPosition, normalizeActionPosition} from './lib/action-mode.js';
 
 const optionsStorage = new OptionsSync({
 	defaults: {
-		position: 'popup',
+		position: actionPopupPosition,
 		showButtons: 'on-demand', // Or 'always'
 		width: '',
 		pinnedExtensions: [],
 	},
 	migrations: [
 		options => {
-			if (options.position === 'tab') {
-				options.position = 'popup';
+			const position = normalizeActionPosition(options.position);
+			if (options.position !== position) {
+				options.position = position;
 			}
 		},
 		options => {
@@ -48,16 +50,13 @@ const defaultPopup = chrome.runtime.getManifest().action.default_popup;
 
 export async function matchOptions() {
 	const options = await optionsStorage.getAll();
-	const position = options.position === 'tab' ? 'popup' : options.position;
+	const position = normalizeActionPosition(options.position);
 	if (options.position !== position) {
 		await optionsStorage.set({position});
 	}
 
-	chrome.action.setPopup({popup: position === 'popup' ? defaultPopup : ''});
+	chrome.action.setPopup({popup: defaultPopup});
 
-	const inSidebar = position === 'sidebar';
-	chrome.sidePanel.setOptions({enabled: inSidebar});
-	chrome.sidePanel.setPanelBehavior({
-		openPanelOnActionClick: inSidebar,
-	});
+	chrome.sidePanel?.setOptions?.({enabled: false});
+	chrome.sidePanel?.setPanelBehavior?.({openPanelOnActionClick: false});
 }

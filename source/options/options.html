@@ -2,7 +2,7 @@
 <html class="webext-base-css-modal" lang="en">
 	<meta charset="UTF-8" />
 	<base target="_blank" />
-	<title>One Click Extension Manager options</title>
+	<title>One Click Extensions Manager V2 options</title>
 	<style>
 		@import './webext-base.css';
 		body {
@@ -25,9 +25,6 @@
 		ul {
 			padding-left: 1em;
 		}
-		p:has([value='sidebar']:checked) ~ p:has(label[for='width']) {
-			display: none;
-		}
 		fieldset {
 			border: none;
 			padding: 0;
@@ -45,23 +42,9 @@
 		}
 	</style>
 	<script type="module" defer src="options.js"></script>
-	<h1>One-Click Extensions Manager</h1>
+	<h1>One Click Extensions Manager V2</h1>
 	<form id="options-form" method="get">
-		<fieldset>
-			<legend>Location</legend>
-			<label>
-				<input type="radio" checked name="position" value="popup" />
-				Menu (default)
-			</label>
-			<label>
-				<input type="radio" name="position" value="window" />
-				Popup window
-			</label>
-			<label>
-				<input type="radio" name="position" value="sidebar" />
-				Sidebar
-			</label>
-		</fieldset>
+		<input type="hidden" name="position" value="popup" />
 
 		<fieldset>
 			<legend>Show buttons</legend>

@@ -12,8 +12,6 @@
 		mayDisable = true,
 		mayEnable = true,
 		installType,
-		homepageUrl,
-		updateUrl,
 		optionsUrl,
 		icons,
 		showExtras = $bindable(),
@@ -24,29 +22,12 @@
 	} = $props();
 
 	const getI18N = chrome.i18n.getMessage;
-	const chromeWebStoreUrl = $derived(
-		`https://chrome.google.com/webstore/detail/${id}`,
-	);
-	const edgeWebStoreUrl = $derived(
-		`https://microsoftedge.microsoft.com/addons/detail/${id}`,
-	);
-	const url = $derived(generateHomeURL());
 	// The browser will still fill the "short name" with "name" if missing
 	const realName = $derived(trimName(shortName ?? name));
 	const primaryAction = $derived(getPrimaryAction({enabled, mayEnable}));
 
 	let busy = $state(false);
 	let error = $state('');
-
-	function generateHomeURL() {
-		if (installType !== 'normal') {
-			return homepageUrl;
-		}
-
-		return updateUrl?.startsWith('https://edge.microsoft.com')
-			? edgeWebStoreUrl
-			: chromeWebStoreUrl;
-	}
 
 	function message(key, fallback) {
 		return getI18N(key) || fallback;
@@ -271,17 +252,6 @@
 			>
 				<img src="icons/options.svg" alt="" />
 			</button>
-		{/if}
-		{#if url}
-			<a
-				href={url}
-				title={getI18N('openUrl')}
-				target="_blank"
-				rel="noreferrer"
-				onclick={event => event.stopPropagation()}
-			>
-				<img src="icons/globe.svg" alt="" />
-			</a>
 		{/if}
 		<button
 			type="button"

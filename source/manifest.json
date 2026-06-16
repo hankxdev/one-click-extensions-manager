@@ -5,7 +5,7 @@
 	"manifest_version": 3,
 	"homepage_url": "https://github.com/onfire7777/one-click-extensions-manager-V2",
 	"default_locale": "en",
-	"permissions": ["management", "storage", "sidePanel", "nativeMessaging"],
+	"permissions": ["management", "storage", "nativeMessaging"],
 	"host_permissions": ["http://127.0.0.1:17645/*"],
 	"minimum_chrome_version": "110",
 	"icons": {
