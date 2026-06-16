@@ -12,6 +12,7 @@ fi
 case "$browser" in
 	brave)
 		browser_app="Brave Browser"
+		profile_path="${OCEM_BROWSER_PROFILE:-$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default}"
 		manifest_dirs=(
 			"$HOME/Library/Application Support/BraveSoftware/Brave-Browser/NativeMessagingHosts"
 			"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts"
@@ -20,6 +21,7 @@ case "$browser" in
 		;;
 	chrome)
 		browser_app="Google Chrome"
+		profile_path="${OCEM_BROWSER_PROFILE:-$HOME/Library/Application Support/Google/Chrome/Default}"
 		manifest_dirs=(
 			"$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts"
 			"$HOME/Library/Application Support/Chromium/NativeMessagingHosts"
@@ -60,7 +62,8 @@ chmod 755 "$install_dir/native-host"
 cat >"$install_dir/native-host-config.json" <<EOF
 {
   "browserApp": "$browser_app",
-  "extensionId": "$extension_id"
+  "extensionId": "$extension_id",
+  "browserProfilePath": "$profile_path"
 }
 EOF
 

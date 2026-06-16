@@ -27,6 +27,21 @@ pid_file="$helper_dir/http-host.pid"
 [[ -f "$helper_dir/native-http-host.mjs" ]] && echo "[OK] Local helper script exists" || echo "[FAIL] Missing local helper script"
 [[ -f "$plist" ]] && echo "[OK] LaunchAgent exists: $plist" || echo "[FAIL] Missing LaunchAgent: $plist"
 
+if [[ -f "$helper_dir/native-host-config.json" ]]; then
+	HELPER_CONFIG="$helper_dir/native-host-config.json" node <<'NODE' || true
+const fs = require('node:fs');
+const config = JSON.parse(fs.readFileSync(process.env.HELPER_CONFIG, 'utf8'));
+if (config.browserProfilePath) {
+	const securePreferences = `${config.browserProfilePath}/Secure Preferences`;
+	console.log(
+		fs.existsSync(securePreferences)
+			? `[OK] Browser profile preferences found: ${securePreferences}`
+			: `[WARN] Browser profile preferences missing: ${securePreferences}`,
+	);
+}
+NODE
+fi
+
 standalone_running=false
 if [[ -f "$pid_file" ]]; then
 	pid="$(cat "$pid_file" || true)"
