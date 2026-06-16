@@ -129,171 +129,6 @@ function sanitizeAutomationError(error) {
 		.trim();
 }
 
-function defaultBrowserProfilePath(browserApp) {
-	if (!process.env.HOME) {
-		return undefined;
-	}
-
-	if (browserApp === 'Google Chrome') {
-		return path.join(
-			process.env.HOME,
-			'Library/Application Support/Google/Chrome/Default',
-		);
-	}
-
-	if (browserApp === 'Chromium') {
-		return path.join(
-			process.env.HOME,
-			'Library/Application Support/Chromium/Default',
-		);
-	}
-
-	return path.join(
-		process.env.HOME,
-		'Library/Application Support/BraveSoftware/Brave-Browser/Default',
-	);
-}
-
-function extensionPreferencePaths(config) {
-	const profilePath =
-		config.browserProfilePath || defaultBrowserProfilePath(config.browserApp);
-	if (!profilePath) {
-		return [];
-	}
-
-	return [
-		path.join(profilePath, 'Secure Preferences'),
-		path.join(profilePath, 'Preferences'),
-	];
-}
-
-function readStoredExtensionManifest(extensionId, config) {
-	for (const preferencesPath of extensionPreferencePaths(config)) {
-		try {
-			const preferences = JSON.parse(
-				fs.readFileSync(preferencesPath, 'utf8'),
-			);
-			const manifest =
-				preferences.extensions?.settings?.[extensionId]?.manifest;
-			if (manifest && typeof manifest === 'object') {
-				return manifest;
-			}
-		} catch (error) {
-			if (error.code !== 'ENOENT') {
-				continue;
-			}
-		}
-	}
-
-	return undefined;
-}
-
-function isAsciiLetter(codePoint) {
-	return (
-		(codePoint >= 65 && codePoint <= 90) ||
-		(codePoint >= 97 && codePoint <= 122)
-	);
-}
-
-function isUrlSchemeCharacter(codePoint) {
-	return (
-		isAsciiLetter(codePoint) ||
-		(codePoint >= 48 && codePoint <= 57) ||
-		codePoint === 43 ||
-		codePoint === 45 ||
-		codePoint === 46
-	);
-}
-
-function hasControlCharacter(value) {
-	for (const character of value) {
-		const codePoint = character.codePointAt(0);
-		if (codePoint <= 0x1F || codePoint === 0x7F) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
-function hasUrlScheme(value) {
-	const colonIndex = value.indexOf(':');
-	if (colonIndex < 1 || !isAsciiLetter(value.codePointAt(0))) {
-		return false;
-	}
-
-	for (let index = 1; index < colonIndex; index += 1) {
-		if (!isUrlSchemeCharacter(value.codePointAt(index))) {
-			return false;
-		}
-	}
-
-	return true;
-}
-
-function normalizeExtensionPageUrl(extensionId, pagePath) {
-	if (typeof pagePath !== 'string') {
-		return undefined;
-	}
-
-	const trimmedPath = pagePath.trim();
-	if (!trimmedPath || hasControlCharacter(trimmedPath)) {
-		return undefined;
-	}
-
-	const extensionOrigin = `chrome-extension://${extensionId}/`;
-	if (trimmedPath.startsWith(extensionOrigin)) {
-		return trimmedPath;
-	}
-
-	if (hasUrlScheme(trimmedPath)) {
-		return undefined;
-	}
-
-	return `${extensionOrigin}${trimmedPath.replace(/^\/+/v, '')}`;
-}
-
-function extensionPageCandidates(manifest) {
-	const actions = [
-		manifest.action,
-		manifest.browser_action,
-		manifest.page_action,
-	];
-	const candidates = actions
-		.map(action => action?.default_popup)
-		.filter(Boolean);
-
-	if (manifest.options_ui?.page) {
-		candidates.push(manifest.options_ui.page);
-	}
-
-	if (manifest.options_page) {
-		candidates.push(manifest.options_page);
-	}
-
-	return candidates;
-}
-
-export function getExtensionLaunchUrl(request, config = readConfig()) {
-	validateRequest(request);
-	const manifest = readStoredExtensionManifest(request.extensionId, config);
-	if (!manifest) {
-		return undefined;
-	}
-
-	for (const pagePath of extensionPageCandidates(manifest)) {
-		const launchUrl = normalizeExtensionPageUrl(
-			request.extensionId,
-			pagePath,
-		);
-		if (launchUrl) {
-			return launchUrl;
-		}
-	}
-
-	return undefined;
-}
-
 function uniqueNames(names) {
 	const seen = new Set();
 	return names
@@ -476,32 +311,6 @@ error "Could not find the extension in the browser toolbar or Extensions menu."
 	return result.stdout.trim() || 'clicked extension popup';
 }
 
-function openExtensionPageWindow({browserApp, launchUrl}) {
-	const script = `
-tell application ${appleScriptString(browserApp)}
-	activate
-	set popupWindow to make new window
-	set URL of active tab of popupWindow to ${appleScriptString(launchUrl)}
-	set bounds of popupWindow to {900, 120, 1320, 780}
-	return "opened extension popup page in window"
-end tell
-`;
-	const result = spawnSync('/usr/bin/osascript', ['-e', script], {
-		encoding: 'utf8',
-		timeout: 8000,
-	});
-
-	if (result.status !== 0) {
-		throw new Error(
-			sanitizeAutomationError(
-				result.stderr || result.stdout || 'AppleScript failed.',
-			),
-		);
-	}
-
-	return result.stdout.trim() || 'opened extension popup page in window';
-}
-
 export function openExtensionPopup(request, config = readConfig()) {
 	validateRequest(request);
 	if (process.platform !== 'darwin') {
@@ -509,34 +318,13 @@ export function openExtensionPopup(request, config = readConfig()) {
 	}
 
 	const browserApp = config.browserApp || 'Brave Browser';
-	try {
-		return runAppleScript({
-			browserApp,
-			extensionNames: uniqueNames([
-				request.extensionName,
-				...(request.extensionAliases || []),
-			]),
-		});
-	} catch (clickError) {
-		const launchUrl = getExtensionLaunchUrl(request, {
-			...config,
-			browserApp,
-		});
-		if (!launchUrl) {
-			throw clickError;
-		}
-
-		try {
-			return openExtensionPageWindow({browserApp, launchUrl});
-		} catch (fallbackError) {
-			throw new Error(
-				`${clickError.message} Popup-window fallback also failed: ${
-					fallbackError.message || fallbackError
-				}`,
-				{cause: fallbackError},
-			);
-		}
-	}
+	return runAppleScript({
+		browserApp,
+		extensionNames: uniqueNames([
+			request.extensionName,
+			...(request.extensionAliases || []),
+		]),
+	});
 }
 
 function main() {
