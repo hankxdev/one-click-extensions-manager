@@ -104,6 +104,59 @@ static BOOL ClickElement(AXUIElementRef element) {
 	return AXUIElementPerformAction(element, kAXPressAction) == kAXErrorSuccess;
 }
 
+static BOOL ScrollElement(AXUIElementRef element, int32_t delta) {
+	CFTypeRef positionValue = NULL;
+	CFTypeRef sizeValue = NULL;
+	if (
+		AXUIElementCopyAttributeValue(element, kAXPositionAttribute, &positionValue) != kAXErrorSuccess ||
+		AXUIElementCopyAttributeValue(element, kAXSizeAttribute, &sizeValue) != kAXErrorSuccess ||
+		positionValue == NULL ||
+		sizeValue == NULL
+	) {
+		if (positionValue != NULL) {
+			CFRelease(positionValue);
+		}
+
+		if (sizeValue != NULL) {
+			CFRelease(sizeValue);
+		}
+
+		return NO;
+	}
+
+	CGPoint position;
+	CGSize size;
+	BOOL hasPosition = AXValueGetValue(positionValue, kAXValueCGPointType, &position);
+	BOOL hasSize = AXValueGetValue(sizeValue, kAXValueCGSizeType, &size);
+	CFRelease(positionValue);
+	CFRelease(sizeValue);
+	if (!hasPosition || !hasSize) {
+		return NO;
+	}
+
+	CGPoint point = CGPointMake(position.x + (size.width / 2), position.y + (size.height / 2));
+	CGEventRef move = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, point, kCGMouseButtonLeft);
+	CGEventRef scroll = CGEventCreateScrollWheelEvent(NULL, kCGScrollEventUnitLine, 1, delta);
+	if (move == NULL || scroll == NULL) {
+		if (move != NULL) {
+			CFRelease(move);
+		}
+
+		if (scroll != NULL) {
+			CFRelease(scroll);
+		}
+
+		return NO;
+	}
+
+	CGEventPost(kCGHIDEventTap, move);
+	usleep(30 * 1000);
+	CGEventPost(kCGHIDEventTap, scroll);
+	CFRelease(move);
+	CFRelease(scroll);
+	return YES;
+}
+
 static BOOL ClickToolbarItem(AXUIElementRef element, NSString *target, NSInteger depth, BOOL insideToolbar) {
 	if (depth > 12) {
 		return NO;
@@ -197,6 +250,45 @@ static BOOL ClickAnyMenuAlias(AXUIElementRef application, NSArray *targets) {
 		for (id window in windows) {
 			if (ClickTextItem((__bridge AXUIElementRef)window, target, 0)) {
 				return YES;
+			}
+		}
+	}
+
+	for (NSUInteger attempt = 0; attempt < 8; attempt++) {
+		BOOL scrolled = NO;
+		for (id window in windows) {
+			NSString *subrole = StringAttribute((__bridge AXUIElementRef)window, kAXSubroleAttribute);
+			if (![subrole isEqualToString:@"AXStandardWindow"]) {
+				scrolled = ScrollElement((__bridge AXUIElementRef)window, -8) || scrolled;
+			}
+		}
+
+		if (!scrolled) {
+			for (id window in windows) {
+				scrolled = ScrollElement((__bridge AXUIElementRef)window, -8) || scrolled;
+			}
+		}
+
+		if (!scrolled) {
+			break;
+		}
+
+		usleep(120 * 1000);
+		windows = WindowsOfApplication(application);
+		for (NSString *target in targets) {
+			for (id window in windows) {
+				NSString *subrole = StringAttribute((__bridge AXUIElementRef)window, kAXSubroleAttribute);
+				if (![subrole isEqualToString:@"AXStandardWindow"] && ClickTextItem((__bridge AXUIElementRef)window, target, 0)) {
+					return YES;
+				}
+			}
+		}
+
+		for (NSString *target in targets) {
+			for (id window in windows) {
+				if (ClickTextItem((__bridge AXUIElementRef)window, target, 0)) {
+					return YES;
+				}
 			}
 		}
 	}
@@ -375,7 +467,7 @@ static int RunNativeHost(NSString *executablePath) {
 			}
 		}
 
-		if (!IsTrusted(YES)) {
+		if (!IsTrusted(NO)) {
 			return WriteNativeMessage(@{
 				@"ok": @NO,
 				@"error": @"Accessibility permission is required. Grant access to native-host in System Settings > Privacy & Security > Accessibility, then try again.",
@@ -423,7 +515,7 @@ int main(int argc, const char *argv[]) {
 			return 2;
 		}
 
-		if (!IsTrusted(YES)) {
+		if (!IsTrusted(NO)) {
 			fprintf(
 				stderr,
 				"Accessibility permission is required. Grant access to native-clicker in System Settings > Privacy & Security > Accessibility, then try again.\n"

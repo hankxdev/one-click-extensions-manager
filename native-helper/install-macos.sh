@@ -47,17 +47,36 @@ cp "$script_dir/native-host.mjs" "$install_dir/native-host.mjs"
 cp "$script_dir/native-http-host.mjs" "$install_dir/native-http-host.mjs"
 chmod 755 "$install_dir/native-host.mjs" "$install_dir/native-http-host.mjs"
 
+install_if_changed() {
+	local source_path="$1"
+	local target_path="$2"
+
+	if [[ -f "$target_path" ]] && cmp -s "$source_path" "$target_path"; then
+		chmod 755 "$target_path"
+		return
+	fi
+
+	cp "$source_path" "$target_path"
+	chmod 755 "$target_path"
+}
+
 if command -v cc >/dev/null 2>&1; then
+	tmp_clicker="$install_dir/native-clicker.tmp.$$"
 	cc "$script_dir/native-clicker.m" \
 		-framework Cocoa \
 		-framework ApplicationServices \
-		-o "$install_dir/native-clicker"
-	cp "$install_dir/native-clicker" "$install_dir/native-host"
+		-o "$tmp_clicker"
+	install_if_changed "$tmp_clicker" "$install_dir/native-clicker"
+	install_if_changed "$tmp_clicker" "$install_dir/native-host"
+	rm -f "$tmp_clicker"
 else
-	cat >"$install_dir/native-host" <<EOF
+	tmp_host="$install_dir/native-host.tmp.$$"
+	cat >"$tmp_host" <<EOF
 #!/usr/bin/env bash
 exec "$node_bin" "$install_dir/native-host.mjs"
 EOF
+	install_if_changed "$tmp_host" "$install_dir/native-host"
+	rm -f "$tmp_host"
 fi
 chmod 755 "$install_dir/native-host"
 if [[ -f "$install_dir/native-clicker" ]]; then

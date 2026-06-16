@@ -31,7 +31,7 @@ The installer writes:
 The native messaging manifest restricts access to the installed manager extension ID. The local fallback server also rejects requests whose `Origin` is not that extension.
 
 If macOS reports that `osascript` is not allowed assistive access, grant Accessibility permission to the app running the helper or reinstall the helper from a terminal/Codex session that already has Accessibility permission.
-If macOS reports that `native-host` or `native-clicker` needs Accessibility access, run:
+Normal popup requests check Accessibility access silently so Brave does not show a permission prompt on every click. If macOS reports that `native-host` or `native-clicker` needs Accessibility access, run the explicit prompt command once:
 
 ```sh
 ~/.local/share/one-click-extensions-manager/native-helper/native-host --prompt
