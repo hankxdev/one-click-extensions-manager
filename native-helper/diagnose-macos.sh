@@ -23,8 +23,25 @@ pid_file="$helper_dir/http-host.pid"
 
 [[ -f "$manifest" ]] && echo "[OK] Native manifest exists: $manifest" || echo "[FAIL] Missing native manifest: $manifest"
 [[ -x "$helper_dir/native-host" ]] && echo "[OK] Native host executable exists" || echo "[FAIL] Missing native host executable"
+[[ -x "$helper_dir/native-clicker" ]] && echo "[OK] Native clicker executable exists" || echo "[FAIL] Missing native clicker executable"
 [[ -f "$helper_dir/native-host-config.json" ]] && echo "[OK] Native host config exists" || echo "[FAIL] Missing native host config"
 [[ -f "$helper_dir/native-http-host.mjs" ]] && echo "[OK] Local helper script exists" || echo "[FAIL] Missing local helper script"
+
+if [[ -x "$helper_dir/native-clicker" ]]; then
+	if "$helper_dir/native-clicker" --check >/dev/null 2>&1; then
+		echo "[OK] Native clicker has Accessibility access"
+	else
+		echo "[FAIL] Native clicker needs Accessibility access. Run: \"$helper_dir/native-clicker\" --prompt"
+	fi
+fi
+
+if [[ -x "$helper_dir/native-host" ]]; then
+	if "$helper_dir/native-host" --check >/dev/null 2>&1; then
+		echo "[OK] Native host has Accessibility access"
+	else
+		echo "[FAIL] Native host needs Accessibility access. Run: \"$helper_dir/native-host\" --prompt"
+	fi
+fi
 [[ -f "$plist" ]] && echo "[OK] LaunchAgent exists: $plist" || echo "[FAIL] Missing LaunchAgent: $plist"
 
 if [[ -f "$helper_dir/native-host-config.json" ]]; then

@@ -1,6 +1,6 @@
 # Native Popup Helper
 
-Chrome and Brave do not expose an extension API that lets one extension directly open another extension's action popup. This helper provides the practical macOS path: the manager asks a native host to click the target extension in the browser toolbar or Extensions menu. It deliberately does not open `chrome-extension://...` popup or options pages as tabs/windows; if the browser toolbar/menu cannot be automated, the helper returns a clear error instead.
+Chrome and Brave do not expose an extension API that lets one extension directly open another extension's action popup. This helper provides the practical macOS path: the manager asks a native host to click the target extension in the browser toolbar or Extensions menu. It uses a small native macOS clicker for consistent Accessibility automation and deliberately does not open `chrome-extension://...` popup or options pages as tabs/windows; if the browser toolbar/menu cannot be automated, the helper returns a clear error instead.
 
 Install for Brave:
 
@@ -31,3 +31,11 @@ The installer writes:
 The native messaging manifest restricts access to the installed manager extension ID. The local fallback server also rejects requests whose `Origin` is not that extension.
 
 If macOS reports that `osascript` is not allowed assistive access, grant Accessibility permission to the app running the helper or reinstall the helper from a terminal/Codex session that already has Accessibility permission.
+If macOS reports that `native-host` or `native-clicker` needs Accessibility access, run:
+
+```sh
+~/.local/share/one-click-extensions-manager/native-helper/native-host --prompt
+~/.local/share/one-click-extensions-manager/native-helper/native-clicker --prompt
+```
+
+Then grant access in System Settings > Privacy & Security > Accessibility and retry the extension popup.

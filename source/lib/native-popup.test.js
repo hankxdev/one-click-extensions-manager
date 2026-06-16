@@ -1,10 +1,17 @@
-import test from 'node:test';
+import test, {afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {
 	openNativePopup,
 	PopupHelperError,
 	nativeHostName,
 } from './native-popup.js';
+
+const originalFetch = globalThis.fetch;
+
+afterEach(() => {
+	globalThis.fetch = originalFetch;
+	delete globalThis.chrome;
+});
 
 function installChromeMock({nativeMessaging, runtimeMessaging}) {
 	globalThis.chrome = {
@@ -21,7 +28,7 @@ function installChromeMock({nativeMessaging, runtimeMessaging}) {
 	};
 }
 
-test('uses direct native messaging when it succeeds', async () => {
+test('uses direct native messaging before fallbacks', async () => {
 	installChromeMock({
 		nativeMessaging({hostName, payload, callback}) {
 			assert.equal(hostName, nativeHostName);
@@ -29,9 +36,12 @@ test('uses direct native messaging when it succeeds', async () => {
 			callback({ok: true, detail: 'native'});
 		},
 		runtimeMessaging() {
-			assert.fail('runtime messaging should not run after native success');
+			assert.fail('runtime messaging should not run after native messaging success');
 		},
 	});
+	globalThis.fetch = async () => {
+		assert.fail('local helper should not run after native messaging success');
+	};
 
 	assert.deepEqual(
 		await openNativePopup({

@@ -48,9 +48,11 @@ cp "$script_dir/native-http-host.mjs" "$install_dir/native-http-host.mjs"
 chmod 755 "$install_dir/native-host.mjs" "$install_dir/native-http-host.mjs"
 
 if command -v cc >/dev/null 2>&1; then
-	cc "$script_dir/native-host-launcher.c" \
-		-DOCEM_NODE_BIN="\"$node_bin\"" \
-		-o "$install_dir/native-host"
+	cc "$script_dir/native-clicker.m" \
+		-framework Cocoa \
+		-framework ApplicationServices \
+		-o "$install_dir/native-clicker"
+	cp "$install_dir/native-clicker" "$install_dir/native-host"
 else
 	cat >"$install_dir/native-host" <<EOF
 #!/usr/bin/env bash
@@ -58,6 +60,9 @@ exec "$node_bin" "$install_dir/native-host.mjs"
 EOF
 fi
 chmod 755 "$install_dir/native-host"
+if [[ -f "$install_dir/native-clicker" ]]; then
+	chmod 755 "$install_dir/native-clicker"
+fi
 
 cat >"$install_dir/native-host-config.json" <<EOF
 {
@@ -162,7 +167,16 @@ if command -v launchctl >/dev/null 2>&1; then
 	launchctl bootout "$gui_domain/$label" >/dev/null 2>&1 || true
 fi
 
-start_standalone_helper
+if command -v launchctl >/dev/null 2>&1; then
+	if launchctl bootstrap "$gui_domain" "$plist_path" >/dev/null 2>&1; then
+		launchctl kickstart -k "$gui_domain/$label" >/dev/null 2>&1 || true
+		echo "Started local helper LaunchAgent: $label"
+	else
+		start_standalone_helper
+	fi
+else
+	start_standalone_helper
+fi
 
 wait_for_health
 

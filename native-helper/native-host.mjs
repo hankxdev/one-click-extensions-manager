@@ -144,6 +144,28 @@ function uniqueNames(names) {
 		});
 }
 
+function runNativeClicker({browserApp, extensionNames}) {
+	const clickerPath = path.join(helperDirectory, 'native-clicker');
+	if (!fs.existsSync(clickerPath)) {
+		throw new Error('Native clicker is not installed.');
+	}
+
+	const result = spawnSync(clickerPath, [browserApp, JSON.stringify(extensionNames)], {
+		encoding: 'utf8',
+		timeout: 8000,
+	});
+
+	if (result.status !== 0) {
+		throw new Error(
+			sanitizeAutomationError(
+				result.stderr || result.stdout || 'Native clicker failed.',
+			),
+		);
+	}
+
+	return result.stdout.trim() || 'clicked extension popup';
+}
+
 function runAppleScript({browserApp, extensionNames}) {
 	const script = `
 set targetNames to ${appleScriptList(extensionNames)}
@@ -318,12 +340,22 @@ export function openExtensionPopup(request, config = readConfig()) {
 	}
 
 	const browserApp = config.browserApp || 'Brave Browser';
+	const extensionNames = uniqueNames([
+		request.extensionName,
+		...(request.extensionAliases || []),
+	]);
+
+	try {
+		return runNativeClicker({browserApp, extensionNames});
+	} catch (error) {
+		if (!/Native clicker is not installed/v.test(error.message)) {
+			throw error;
+		}
+	}
+
 	return runAppleScript({
 		browserApp,
-		extensionNames: uniqueNames([
-			request.extensionName,
-			...(request.extensionAliases || []),
-		]),
+		extensionNames,
 	});
 }
 
