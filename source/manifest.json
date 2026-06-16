@@ -1,9 +1,9 @@
 {
-	"name": "__MSG_extName__",
-	"description": "__MSG_extDesc__",
-	"version": "0.0.0",
+	"name": "One Click Extensions Manager V2",
+	"description": "View, use, enable, disable, and remove your extensions with popup support.",
+	"version": "2026.6.16",
 	"manifest_version": 3,
-	"homepage_url": "https://github.com/hankxdev/one-click-extensions-manager",
+	"homepage_url": "https://github.com/onfire7777/one-click-extensions-manager-V2",
 	"default_locale": "en",
 	"permissions": ["management", "storage", "sidePanel", "nativeMessaging"],
 	"host_permissions": ["http://127.0.0.1:17645/*"],
