@@ -9,6 +9,11 @@ const optionsStorage = new OptionsSync({
 	},
 	migrations: [
 		options => {
+			if (options.position === 'tab') {
+				options.position = 'popup';
+			}
+		},
+		options => {
 			let {width} = options;
 			// Ignore if unset
 			if (!width) {
@@ -42,7 +47,12 @@ export async function togglePin(extensionId) {
 const defaultPopup = chrome.runtime.getManifest().action.default_popup;
 
 export async function matchOptions() {
-	const {position} = await optionsStorage.getAll();
+	const options = await optionsStorage.getAll();
+	const position = options.position === 'tab' ? 'popup' : options.position;
+	if (options.position !== position) {
+		await optionsStorage.set({position});
+	}
+
 	chrome.action.setPopup({popup: position === 'popup' ? defaultPopup : ''});
 
 	const inSidebar = position === 'sidebar';

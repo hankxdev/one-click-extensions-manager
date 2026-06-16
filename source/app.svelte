@@ -169,16 +169,6 @@
 				break;
 			}
 
-			case 'extensions': {
-				chrome.tabs.create({url: 'chrome://extensions'});
-				break;
-			}
-
-			case 'options': {
-				chrome.runtime.openOptionsPage();
-				break;
-			}
-
 			default:
 		}
 
@@ -216,8 +206,6 @@
 		/>
 		<select class="header-burger" onchange={handleBurger}>
 			<option value=""></option>
-			<option value="options">{getI18N('gotoOpt')}</option>
-			<option value="extensions">{getI18N('manage')}</option>
 			<option value="disable">{getI18N('disAll')}</option>
 			<option value="enable">{getI18N('enableAll')}</option>
 		</select>

@@ -2,14 +2,23 @@
 	"disAll": {
 		"message": "Disable all"
 	},
+	"disableExtension": {
+		"message": "Disable extension"
+	},
 	"enableAll": {
 		"message": "Enable all"
 	},
+	"enableExtension": {
+		"message": "Enable extension"
+	},
 	"extDesc": {
-		"message": "View, enable, disable, remove your extensions with ease."
+		"message": "View, use, enable, disable, and remove your extensions with ease."
 	},
 	"extName": {
 		"message": "One Click Extensions Manager"
+	},
+	"extensionMenuUnavailable": {
+		"message": "Extension menu unavailable"
 	},
 	"gotoOpt": {
 		"message": "Options…"
@@ -23,6 +32,18 @@
 	"openUrl": {
 		"message": "See on the Web Store"
 	},
+	"openToolbarPopup": {
+		"message": "Open extension popup"
+	},
+	"nativeHelperFailed": {
+		"message": "Extension action failed."
+	},
+	"nativeHelperMissing": {
+		"message": "Native popup helper is not installed. Run native-helper/install-macos.sh from this repository."
+	},
+	"nativeHelperOpenFailed": {
+		"message": "Native popup helper could not open this extension popup."
+	},
 	"searchTxt": {
 		"message": "Search by name…"
 	},
@@ -34,5 +55,8 @@
 	},
 	"uninstall": {
 		"message": "Remove from Chrome"
+	},
+	"useExtension": {
+		"message": "Open extension popup"
 	}
 }

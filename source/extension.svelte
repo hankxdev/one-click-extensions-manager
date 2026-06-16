@@ -1,6 +1,7 @@
 <script>
+	import {getPrimaryAction} from './lib/extension-actions.js';
 	import pickBestIcon from './lib/icons.js';
-	import openInTab from './lib/open-in-tab.js';
+	import {openNativePopup, PopupHelperError} from './lib/native-popup.js';
 	import trimName from './lib/trim-name.js';
 
 	const {
@@ -8,6 +9,8 @@
 		name,
 		shortName,
 		enabled = $bindable(),
+		mayDisable = true,
+		mayEnable = true,
 		installType,
 		homepageUrl,
 		updateUrl,
@@ -30,6 +33,10 @@
 	const url = $derived(generateHomeURL());
 	// The browser will still fill the "short name" with "name" if missing
 	const realName = $derived(trimName(shortName ?? name));
+	const primaryAction = $derived(getPrimaryAction({enabled, mayEnable}));
+
+	let busy = $state(false);
+	let error = $state('');
 
 	function generateHomeURL() {
 		if (installType !== 'normal') {
@@ -41,6 +48,87 @@
 			: chromeWebStoreUrl;
 	}
 
+	function message(key, fallback) {
+		return getI18N(key) || fallback;
+	}
+
+	function getPrimaryTitle() {
+		if (primaryAction.type === 'enable') {
+			return message('enableExtension', 'Enable extension');
+		}
+
+		if (primaryAction.type === 'popup') {
+			return message('useExtension', 'Open extension popup');
+		}
+
+		return message('extensionMenuUnavailable', 'Extension menu unavailable');
+	}
+
+	function formatError(error_) {
+		if (error_ instanceof PopupHelperError) {
+			const detail = error_.details.at(-1);
+			return detail
+				? `${message(
+						'nativeHelperOpenFailed',
+						'Native popup helper could not open this extension popup.',
+					)} ${detail}`
+				: message(
+						'nativeHelperMissing',
+						'Native popup helper is not installed. Run native-helper/install-macos.sh from this repository.',
+					);
+		}
+
+		return (
+			error_?.message ||
+			message('nativeHelperFailed', 'Extension action failed.')
+		);
+	}
+
+	async function runAction(action) {
+		if (busy) {
+			return;
+		}
+
+		busy = true;
+		error = '';
+		try {
+			await action();
+		} catch (error_) {
+			error = formatError(error_);
+		} finally {
+			busy = false;
+		}
+	}
+
+	function setEnabledWithUndo(nextEnabled) {
+		const previousEnabled = enabled;
+
+		return new Promise((resolve, reject) => {
+			let pending = true;
+			undoStack.do(toggle => {
+				const targetEnabled = toggle ? nextEnabled : previousEnabled;
+				chrome.management.setEnabled(id, targetEnabled, () => {
+					const failure = chrome.runtime.lastError?.message;
+					if (!pending) {
+						if (failure) {
+							console.warn('Failed to update extension state:', failure);
+						}
+
+						return;
+					}
+
+					pending = false;
+					if (failure) {
+						reject(new Error(failure));
+						return;
+					}
+
+					resolve();
+				});
+			});
+		});
+	}
+
 	let contextMenuFired = false;
 
 	function handleContextMenu(event) {
@@ -50,61 +138,144 @@
 		}
 	}
 
-	function toggleExtension(event) {
+	function openToolbarPopup() {
+		return runAction(async () => {
+			if (!enabled) {
+				throw new Error(
+					message('extensionMenuUnavailable', 'Extension menu unavailable'),
+				);
+			}
+
+			await openNativePopup({
+				extensionId: id,
+				extensionName: realName,
+			});
+		});
+	}
+
+	function handlePrimaryAction(event) {
 		// Check if Ctrl/Cmd is held down for pinning
 		if (event.ctrlKey || event.metaKey) {
 			onpin?.();
 			return;
 		}
 
-		const wasEnabled = enabled;
-		undoStack.do(toggle => {
-			chrome.management.setEnabled(id, toggle !== wasEnabled);
-		});
+		if (primaryAction.type === 'enable') {
+			return runAction(() => setEnabledWithUndo(true));
+		}
+
+		if (primaryAction.type === 'popup') {
+			return openToolbarPopup();
+		}
+
+		error = message('extensionMenuUnavailable', 'Extension menu unavailable');
+	}
+
+	function runSecondaryAction(event, action) {
+		event.stopPropagation();
+		return action();
+	}
+
+	function handleRowKeydown(event) {
+		if (event.key !== 'Enter' && event.key !== ' ') {
+			return;
+		}
+
+		event.preventDefault();
+		return handlePrimaryAction(event);
+	}
+
+	function handleToggleClick() {
+		return runAction(() => setEnabledWithUndo(!enabled));
 	}
 
 	function onUninstallClick() {
-		chrome.management.uninstall(id);
+		return runAction(
+			() =>
+				new Promise((resolve, reject) => {
+					chrome.management.uninstall(id, () => {
+						const failure = chrome.runtime.lastError?.message;
+						if (failure) {
+							reject(new Error(failure));
+							return;
+						}
+
+						resolve();
+					});
+				}),
+		);
 	}
 </script>
 
+<!-- svelte-ignore a11y_no_noninteractive_element_to_interactive_role -->
 <li
 	class:disabled={!enabled}
 	class:pinned={isPinned}
 	class="ext type-{installType}"
+	role="button"
+	tabindex={busy ? -1 : 0}
+	onclick={handlePrimaryAction}
+	onkeydown={handleRowKeydown}
 >
 	<button
 		type="button"
 		class="ext-name"
-		onclick={toggleExtension}
 		oncontextmenu={handleContextMenu}
+		title={getPrimaryTitle()}
+		disabled={busy}
 	>
 		<img alt="" src={pickBestIcon(icons, 16)} />{realName}
 	</button>
-	{#if optionsUrl && enabled}
-		<a href={optionsUrl} title={getI18N('gotoOpt')} onclick={openInTab}>
-			<img src="icons/options.svg" alt="" />
-		</a>
-	{/if}
 	{#if showExtras}
+		<button
+			type="button"
+			title={enabled
+				? message('disableExtension', 'Disable extension')
+				: message('enableExtension', 'Enable extension')}
+			onclick={event => runSecondaryAction(event, handleToggleClick)}
+			disabled={busy || (enabled && !mayDisable)}
+		>
+			<img src="icons/power.svg" alt="" />
+		</button>
+		{#if optionsUrl && enabled}
+			<button
+				type="button"
+				title={message('openToolbarPopup', 'Open extension popup')}
+				onclick={event => runSecondaryAction(event, openToolbarPopup)}
+				disabled={busy}
+			>
+				<img src="icons/options.svg" alt="" />
+			</button>
+		{/if}
 		{#if url}
-			<a href={url} title={getI18N('openUrl')} target="_blank" rel="noreferrer">
+			<a
+				href={url}
+				title={getI18N('openUrl')}
+				target="_blank"
+				rel="noreferrer"
+				onclick={event => event.stopPropagation()}
+			>
 				<img src="icons/globe.svg" alt="" />
 			</a>
 		{/if}
-		<a
-			href="chrome://extensions/?id={id}"
-			title={getI18N('manage')}
-			onclick={openInTab}
+		<button
+			type="button"
+			title={message('openToolbarPopup', 'Open extension popup')}
+			onclick={event => runSecondaryAction(event, openToolbarPopup)}
+			disabled={busy || !enabled}
 		>
 			<img src="icons/ellipsis.svg" alt="" />
-		</a>
+		</button>
 		<button
 			type="button"
 			title={getI18N('uninstall')}
-			onclick={onUninstallClick}
+			onclick={event => runSecondaryAction(event, onUninstallClick)}
+			disabled={busy}
 		>
 			<img src="icons/bin.svg" alt="" />
 		</button>
+	{/if}
+	{#if error}
+		<p class="ext-error">{error}</p>
 	{/if}
 </li>

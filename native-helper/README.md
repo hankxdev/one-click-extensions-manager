@@ -1,0 +1,29 @@
+# Native Popup Helper
+
+Chrome and Brave do not expose an extension API that lets one extension directly open another extension's action popup. This helper provides the practical macOS path: the manager asks a native host to click the target extension in the browser toolbar or Extensions menu.
+
+Install for Brave:
+
+```sh
+bash native-helper/install-macos.sh inbopcbofedcnafadmplaamkbffefmjo brave
+```
+
+Diagnose:
+
+```sh
+bash native-helper/diagnose-macos.sh brave
+```
+
+Uninstall:
+
+```sh
+bash native-helper/uninstall-macos.sh
+```
+
+The installer writes:
+
+- Native messaging manifest: `~/Library/Application Support/BraveSoftware/Brave-Browser/NativeMessagingHosts/com.ocem.popuphost.json`
+- Helper files: `~/.local/share/one-click-extensions-manager/native-helper`
+- Local fallback server: `http://127.0.0.1:17645/open-extension-popup`
+
+The native messaging manifest restricts access to the installed manager extension ID. The local fallback server also rejects requests whose `Origin` is not that extension.
