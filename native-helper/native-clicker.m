@@ -226,6 +226,11 @@ static pid_t FindApplicationPid(NSString *browserApp) {
 static BOOL ClickAnyToolbarAlias(AXUIElementRef application, NSArray *targets) {
 	for (NSString *target in targets) {
 		for (id window in WindowsOfApplication(application)) {
+			NSString *subrole = StringAttribute((__bridge AXUIElementRef)window, kAXSubroleAttribute);
+			if (![subrole isEqualToString:@"AXStandardWindow"]) {
+				continue;
+			}
+
 			if (ClickToolbarItem((__bridge AXUIElementRef)window, target, 0, NO)) {
 				return YES;
 			}
@@ -235,15 +240,22 @@ static BOOL ClickAnyToolbarAlias(AXUIElementRef application, NSArray *targets) {
 	return NO;
 }
 
-static BOOL ClickAnyMenuAlias(AXUIElementRef application, NSArray *targets) {
-	NSArray *windows = WindowsOfApplication(application);
-	for (NSString *target in targets) {
-		for (id window in windows) {
-			NSString *subrole = StringAttribute((__bridge AXUIElementRef)window, kAXSubroleAttribute);
-			if (![subrole isEqualToString:@"AXStandardWindow"] && ClickTextItem((__bridge AXUIElementRef)window, target, 0)) {
-				return YES;
-			}
+static NSArray *MenuWindowsOfApplication(AXUIElementRef application) {
+	NSMutableArray *menuWindows = [NSMutableArray array];
+	for (id window in WindowsOfApplication(application)) {
+		NSString *subrole = StringAttribute((__bridge AXUIElementRef)window, kAXSubroleAttribute);
+		if (![subrole isEqualToString:@"AXStandardWindow"]) {
+			[menuWindows addObject:window];
 		}
+	}
+
+	return menuWindows;
+}
+
+static BOOL ClickAnyMenuAlias(AXUIElementRef application, NSArray *targets) {
+	NSArray *windows = MenuWindowsOfApplication(application);
+	if ([windows count] == 0) {
+		return NO;
 	}
 
 	for (NSString *target in targets) {
@@ -254,19 +266,10 @@ static BOOL ClickAnyMenuAlias(AXUIElementRef application, NSArray *targets) {
 		}
 	}
 
-	for (NSUInteger attempt = 0; attempt < 8; attempt++) {
+	for (NSUInteger attempt = 0; attempt < 5; attempt++) {
 		BOOL scrolled = NO;
 		for (id window in windows) {
-			NSString *subrole = StringAttribute((__bridge AXUIElementRef)window, kAXSubroleAttribute);
-			if (![subrole isEqualToString:@"AXStandardWindow"]) {
-				scrolled = ScrollElement((__bridge AXUIElementRef)window, -8) || scrolled;
-			}
-		}
-
-		if (!scrolled) {
-			for (id window in windows) {
-				scrolled = ScrollElement((__bridge AXUIElementRef)window, -8) || scrolled;
-			}
+			scrolled = ScrollElement((__bridge AXUIElementRef)window, -8) || scrolled;
 		}
 
 		if (!scrolled) {
@@ -274,16 +277,7 @@ static BOOL ClickAnyMenuAlias(AXUIElementRef application, NSArray *targets) {
 		}
 
 		usleep(120 * 1000);
-		windows = WindowsOfApplication(application);
-		for (NSString *target in targets) {
-			for (id window in windows) {
-				NSString *subrole = StringAttribute((__bridge AXUIElementRef)window, kAXSubroleAttribute);
-				if (![subrole isEqualToString:@"AXStandardWindow"] && ClickTextItem((__bridge AXUIElementRef)window, target, 0)) {
-					return YES;
-				}
-			}
-		}
-
+		windows = MenuWindowsOfApplication(application);
 		for (NSString *target in targets) {
 			for (id window in windows) {
 				if (ClickTextItem((__bridge AXUIElementRef)window, target, 0)) {
@@ -322,6 +316,11 @@ static NSString *OpenPopup(NSString *browserApp, NSArray *targets, NSString **er
 	if (ClickAnyToolbarAlias(application, targets)) {
 		CFRelease(application);
 		return @"clicked pinned toolbar item";
+	}
+
+	if (ClickAnyMenuAlias(application, targets)) {
+		CFRelease(application);
+		return @"clicked existing extensions menu item";
 	}
 
 	if (ClickAnyToolbarAlias(application, @[@"Extensions"])) {
