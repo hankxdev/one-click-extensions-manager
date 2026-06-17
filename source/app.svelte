@@ -24,6 +24,7 @@
 	];
 
 	let activeFolderId = $state(allFolderId);
+	let controlsExpanded = $state(false);
 	let deleteFolderArmed = $state(false);
 	let extensions = $state([]);
 	let filterMode = $state('all');
@@ -383,6 +384,10 @@
 			aria-pressed={organizeMode}
 			onclick={() => {
 				organizeMode = !organizeMode;
+				if (organizeMode) {
+					controlsExpanded = true;
+				}
+
 				deleteFolderArmed = false;
 			}}
 		>
@@ -414,105 +419,129 @@
 	{/if}
 
 	<section class="control-panel" aria-label="Extension controls">
-		<div class="search-row">
-			<label class="search-box">
-				<span class="search-label">Search</span>
-				<!-- svelte-ignore a11y_autofocus -->
-				<input
-					autofocus
-					placeholder={message('searchTxt', 'Search by name...')}
-					bind:value={searchValue}
-					type="search"
-				/>
-			</label>
-			{#if searchValue}
-				<button type="button" class="clear-search" onclick={clearSearch}>
-					Clear
-				</button>
-			{/if}
-		</div>
+		<button
+			type="button"
+			class="panel-summary"
+			aria-expanded={controlsExpanded}
+			aria-controls="extension-controls"
+			onclick={() => {
+				controlsExpanded = !controlsExpanded;
+			}}
+		>
+			<span>
+				<strong>Search and filters</strong>
+				<small>{visibleExtensions.length} shown</small>
+			</span>
+			<span class="dropdown-arrow" aria-hidden="true"></span>
+		</button>
 
-		<div class="status-tabs" role="tablist" aria-label="Filter by status">
-			{#each statusFilters as filter (filter.mode)}
-				<button
-					type="button"
-					role="tab"
-					class:active={filterMode === filter.mode}
-					aria-selected={filterMode === filter.mode}
-					onclick={() => {
-						filterMode = filter.mode;
-					}}
-				>
-					<span>{filter.label}</span>
-					<small>{getFilterCount(filter.mode)}</small>
-				</button>
-			{/each}
-		</div>
-
-		<div class="folder-strip" aria-label="Extension folders">
-			<button
-				type="button"
-				class:active={activeFolderId === allFolderId}
-				onclick={() => {
-					selectFolder(allFolderId);
-				}}
-			>
-				<span>All</span>
-				<small>{getFolderCount(allFolderId)}</small>
-			</button>
-			<button
-				type="button"
-				class:active={activeFolderId === noFolderId}
-				onclick={() => {
-					selectFolder(noFolderId);
-				}}
-			>
-				<span>No folder</span>
-				<small>{getFolderCount(noFolderId)}</small>
-			</button>
-			{#each folders as folder (folder.id)}
-				<button
-					type="button"
-					class:active={activeFolderId === folder.id}
-					onclick={() => {
-						selectFolder(folder.id);
-					}}
-				>
-					<span>{folder.name}</span>
-					<small>{getFolderCount(folder.id)}</small>
-				</button>
-			{/each}
-		</div>
-
-		{#if organizeMode}
-			<div class="organize-panel">
-				<form
-					class="folder-form"
-					onsubmit={event => {
-						event.preventDefault();
-						handleCreateFolder();
-					}}
-				>
-					<input
-						placeholder="New folder"
-						bind:value={newFolderName}
-						aria-label="New folder name"
-					/>
-					<button type="submit">Add</button>
-				</form>
-				<div class="bulk-actions">
-					<button type="button" onclick={() => handleBulkAction(true)}>
-						Enable all
-					</button>
-					<button type="button" onclick={() => handleBulkAction(false)}>
-						Disable all
-					</button>
-					{#if activeFolderId !== allFolderId && activeFolderId !== noFolderId}
-						<button type="button" class="danger" onclick={handleDeleteFolder}>
-							{deleteFolderArmed ? 'Confirm delete' : 'Delete folder'}
+		{#if controlsExpanded}
+			<div id="extension-controls" class="control-panel-body">
+				<div class="search-row">
+					<label class="search-box">
+						<span class="search-label">Search</span>
+						<!-- svelte-ignore a11y_autofocus -->
+						<input
+							autofocus
+							placeholder={message('searchTxt', 'Search by name...')}
+							bind:value={searchValue}
+							type="search"
+						/>
+					</label>
+					{#if searchValue}
+						<button type="button" class="clear-search" onclick={clearSearch}>
+							Clear
 						</button>
 					{/if}
 				</div>
+
+				<div class="status-tabs" role="tablist" aria-label="Filter by status">
+					{#each statusFilters as filter (filter.mode)}
+						<button
+							type="button"
+							role="tab"
+							class:active={filterMode === filter.mode}
+							aria-selected={filterMode === filter.mode}
+							onclick={() => {
+								filterMode = filter.mode;
+							}}
+						>
+							<span>{filter.label}</span>
+							<small>{getFilterCount(filter.mode)}</small>
+						</button>
+					{/each}
+				</div>
+
+				<div class="folder-strip" aria-label="Extension folders">
+					<button
+						type="button"
+						class:active={activeFolderId === allFolderId}
+						onclick={() => {
+							selectFolder(allFolderId);
+						}}
+					>
+						<span>All</span>
+						<small>{getFolderCount(allFolderId)}</small>
+					</button>
+					<button
+						type="button"
+						class:active={activeFolderId === noFolderId}
+						onclick={() => {
+							selectFolder(noFolderId);
+						}}
+					>
+						<span>No folder</span>
+						<small>{getFolderCount(noFolderId)}</small>
+					</button>
+					{#each folders as folder (folder.id)}
+						<button
+							type="button"
+							class:active={activeFolderId === folder.id}
+							onclick={() => {
+								selectFolder(folder.id);
+							}}
+						>
+							<span>{folder.name}</span>
+							<small>{getFolderCount(folder.id)}</small>
+						</button>
+					{/each}
+				</div>
+
+				{#if organizeMode}
+					<div class="organize-panel">
+						<form
+							class="folder-form"
+							onsubmit={event => {
+								event.preventDefault();
+								handleCreateFolder();
+							}}
+						>
+							<input
+								placeholder="New folder"
+								bind:value={newFolderName}
+								aria-label="New folder name"
+							/>
+							<button type="submit">Add</button>
+						</form>
+						<div class="bulk-actions">
+							<button type="button" onclick={() => handleBulkAction(true)}>
+								Enable all
+							</button>
+							<button type="button" onclick={() => handleBulkAction(false)}>
+								Disable all
+							</button>
+							{#if activeFolderId !== allFolderId && activeFolderId !== noFolderId}
+								<button
+									type="button"
+									class="danger"
+									onclick={handleDeleteFolder}
+								>
+									{deleteFolderArmed ? 'Confirm delete' : 'Delete folder'}
+								</button>
+							{/if}
+						</div>
+					</div>
+				{/if}
 			</div>
 		{/if}
 	</section>

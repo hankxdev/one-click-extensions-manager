@@ -107,6 +107,7 @@ p {
 }
 
 .organize-toggle,
+.panel-summary,
 .clear-search,
 .status-tabs button,
 .folder-strip button,
@@ -152,9 +153,58 @@ p {
 .control-panel {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
-	padding: 8px 0 10px;
+	gap: 6px;
+	padding: 6px 0;
 	border-block: 1px solid var(--line-soft);
+}
+
+.panel-summary {
+	justify-content: space-between;
+	min-height: 34px;
+	padding-inline: 10px;
+	text-align: start;
+}
+
+.panel-summary span:first-child {
+	display: inline-flex;
+	min-width: 0;
+	gap: 8px;
+	align-items: baseline;
+}
+
+.panel-summary strong {
+	overflow: hidden;
+	color: var(--text);
+	font-size: 0.82rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.panel-summary small {
+	color: var(--muted);
+	font-size: 0.74rem;
+	font-weight: 800;
+}
+
+.dropdown-arrow {
+	width: 8px;
+	height: 8px;
+	margin-inline: 4px 2px;
+	border-block-end: 2px solid currentColor;
+	border-inline-end: 2px solid currentColor;
+	transform: rotate(45deg);
+	transition: transform 140ms ease;
+}
+
+.panel-summary[aria-expanded='true'] .dropdown-arrow {
+	transform: rotate(225deg);
+}
+
+.control-panel-body {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding-top: 2px;
 }
 
 .search-row {
@@ -523,6 +573,7 @@ select:focus {
 .mini-action:hover:not(:disabled),
 .icon-action:hover:not(:disabled),
 .organize-toggle:hover:not(:disabled),
+.panel-summary:hover:not(:disabled),
 .clear-search:hover:not(:disabled),
 .status-tabs button:hover:not(:disabled),
 .folder-strip button:hover:not(:disabled),
