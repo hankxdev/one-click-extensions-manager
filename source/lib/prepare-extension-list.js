@@ -1,13 +1,19 @@
 import optionsStorage from '../options-storage.js';
 
-function fillInTheBlanks(extension, isPinned = false) {
+function fillInTheBlanks(extension, {folder, folderId, isPinned = false}) {
 	extension.indexedName = extension.name.toLowerCase();
 	extension.isPinned = isPinned;
+	extension.folderId = folderId;
+	extension.folderName = folder?.name ?? '';
 	return extension;
 }
 
 export default async function prepareExtensionList(extensions) {
-	const {pinnedExtensions} = await optionsStorage.getAll();
+	const {extensionFolderAssignments, extensionFolders, pinnedExtensions} =
+		await optionsStorage.getAll();
+	const foldersById = new Map(
+		extensionFolders.map(folder => [folder.id, folder]),
+	);
 
 	return extensions
 		.filter(({type, id}) => type === 'extension' && id !== chrome.runtime.id)
@@ -27,7 +33,14 @@ export default async function prepareExtensionList(extensions) {
 
 			return a.enabled < b.enabled ? 1 : -1; // Enabled extensions first
 		})
-		.map(extension =>
-			fillInTheBlanks(extension, pinnedExtensions.includes(extension.id)),
-		);
+		.map(extension => {
+			const assignedFolderId = extensionFolderAssignments[extension.id];
+			const folder = foldersById.get(assignedFolderId);
+
+			return fillInTheBlanks(extension, {
+				folder,
+				folderId: folder ? assignedFolderId : '',
+				isPinned: pinnedExtensions.includes(extension.id),
+			});
+		});
 }

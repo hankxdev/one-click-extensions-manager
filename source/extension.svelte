@@ -14,20 +14,36 @@
 		installType,
 		optionsUrl,
 		icons,
-		showExtras = $bindable(),
+		folders = [],
+		folderId = '',
+		folderName = '',
+		showExtras = false,
+		organizeMode = false,
 		undoStack,
 		isPinned = false,
+		onfolderchange,
 		onpin,
 		oncontextmenu,
 	} = $props();
 
 	const getI18N = chrome.i18n.getMessage;
-	// The browser will still fill the "short name" with "name" if missing
+	// The browser will still fill the "short name" with "name" if missing.
 	const realName = $derived(trimName(shortName ?? name));
 	const primaryAction = $derived(getPrimaryAction({enabled, mayEnable}));
+	const statusText = $derived(enabled ? 'Active' : 'Off');
+	const helperText = $derived.by(() => {
+		if (!enabled) {
+			return mayEnable ? 'Click to enable' : 'Disabled by policy';
+		}
+
+		return primaryAction.type === 'popup'
+			? 'Click to open popup'
+			: 'Popup unavailable';
+	});
 
 	let busy = $state(false);
 	let error = $state('');
+	let removeArmed = $state(false);
 
 	function message(key, fallback) {
 		return getI18N(key) || fallback;
@@ -146,10 +162,10 @@
 	}
 
 	function handlePrimaryAction(event) {
-		// Check if Ctrl/Cmd is held down for pinning
+		removeArmed = false;
+
 		if (event.ctrlKey || event.metaKey) {
-			onpin?.();
-			return;
+			return togglePinned();
 		}
 
 		if (primaryAction.type === 'enable') {
@@ -168,35 +184,36 @@
 		return action();
 	}
 
-	function isInteractiveChildEvent(event) {
-		return (
-			event.target !== event.currentTarget &&
-			Boolean(event.target.closest?.('button, a, input, select, textarea'))
-		);
-	}
-
-	function handleRowKeydown(event) {
-		if (isInteractiveChildEvent(event)) {
-			return;
-		}
-
-		if (event.key !== 'Enter' && event.key !== ' ') {
-			return;
-		}
-
-		event.preventDefault();
-		return handlePrimaryAction(event);
-	}
-
 	function handleToggleClick() {
+		removeArmed = false;
 		return runAction(() => setEnabledWithUndo(!enabled));
 	}
 
-	function onUninstallClick() {
-		return runAction(
+	function togglePinned() {
+		removeArmed = false;
+		return runAction(async () => {
+			await onpin?.();
+		});
+	}
+
+	function handleFolderSelect(event) {
+		event.stopPropagation();
+		removeArmed = false;
+		onfolderchange?.(event.currentTarget.value);
+	}
+
+	async function onUninstallClick() {
+		if (!removeArmed) {
+			error = '';
+			removeArmed = true;
+			return;
+		}
+
+		removeArmed = false;
+		await runAction(
 			() =>
 				new Promise((resolve, reject) => {
-					chrome.management.uninstall(id, () => {
+					chrome.management.uninstall(id, {showConfirmDialog: true}, () => {
 						const failure = chrome.runtime.lastError?.message;
 						if (failure) {
 							reject(new Error(failure));
@@ -210,66 +227,131 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y_no_noninteractive_element_to_interactive_role -->
 <li
 	class:disabled={!enabled}
 	class:pinned={isPinned}
+	class:busy
 	class="ext type-{installType}"
-	role="button"
-	tabindex={busy ? -1 : 0}
-	onclick={handlePrimaryAction}
-	onkeydown={handleRowKeydown}
 >
 	<button
 		type="button"
-		class="ext-name"
+		class="ext-main"
 		oncontextmenu={handleContextMenu}
 		title={getPrimaryTitle()}
+		onclick={handlePrimaryAction}
 		disabled={busy}
 	>
-		<img alt="" src={pickBestIcon(icons, 16)} />{realName}
+		<span class="ext-icon">
+			<img alt="" src={pickBestIcon(icons, 32)} />
+		</span>
+		<span class="ext-copy">
+			<span class="ext-title-row">
+				<span class="ext-name">{realName}</span>
+				{#if folderName}
+					<span class="ext-pill folder">{folderName}</span>
+				{/if}
+				{#if isPinned}
+					<span class="ext-pill">Pinned</span>
+				{/if}
+				{#if installType === 'development'}
+					<span class="ext-pill dev">Dev</span>
+				{:else if installType === 'admin'}
+					<span class="ext-pill admin">Admin</span>
+				{/if}
+			</span>
+			<span class="ext-meta">
+				<span class:enabled class="status-dot"></span>
+				<span>{statusText}</span>
+				<span class="meta-divider">/</span>
+				<span>{helperText}</span>
+			</span>
+		</span>
 	</button>
-	<button
-		type="button"
-		class="ext-toggle"
-		class:enabled
-		role="switch"
-		aria-checked={enabled}
-		aria-label={getToggleTitle()}
-		title={getToggleTitle()}
-		onclick={event => runSecondaryAction(event, handleToggleClick)}
-		disabled={busy || !canToggle()}
-	>
-		<span class="ext-toggle-knob"></span>
-	</button>
-	{#if showExtras}
-		{#if optionsUrl && enabled}
+
+	<div class="ext-actions">
+		{#if organizeMode}
+			<select
+				class="folder-select"
+				aria-label="Move {realName} to folder"
+				onchange={handleFolderSelect}
+				onclick={event => {
+					event.stopPropagation();
+				}}
+			>
+				<option value="" selected={!folderId}>No folder</option>
+				{#each folders as folder (folder.id)}
+					<option value={folder.id} selected={folderId === folder.id}>
+						{folder.name}
+					</option>
+				{/each}
+			</select>
 			<button
 				type="button"
-				title={message('openToolbarPopup', 'Open extension popup')}
-				onclick={event => runSecondaryAction(event, openToolbarPopup)}
+				class="mini-action"
+				class:active={isPinned}
+				title={isPinned ? 'Unpin from top' : 'Pin to top'}
+				onclick={event => runSecondaryAction(event, togglePinned)}
 				disabled={busy}
 			>
-				<img src="icons/options.svg" alt="" />
+				{isPinned ? 'Pinned' : 'Pin'}
 			</button>
+		{:else if showExtras}
+			<button
+				type="button"
+				class="mini-action primary"
+				title={message('openToolbarPopup', 'Open extension popup')}
+				onclick={event => runSecondaryAction(event, openToolbarPopup)}
+				disabled={busy || !enabled}
+			>
+				Open
+			</button>
+			<button
+				type="button"
+				class="mini-action"
+				class:active={isPinned}
+				title={isPinned ? 'Unpin from top' : 'Pin to top'}
+				onclick={event => runSecondaryAction(event, togglePinned)}
+				disabled={busy}
+			>
+				{isPinned ? 'Pinned' : 'Pin'}
+			</button>
+			{#if optionsUrl && enabled}
+				<button
+					type="button"
+					class="icon-action"
+					title={message('openToolbarPopup', 'Open extension popup')}
+					onclick={event => runSecondaryAction(event, openToolbarPopup)}
+					disabled={busy}
+				>
+					<img src="icons/options.svg" alt="" />
+				</button>
+			{/if}
 		{/if}
 		<button
 			type="button"
-			title={message('openToolbarPopup', 'Open extension popup')}
-			onclick={event => runSecondaryAction(event, openToolbarPopup)}
-			disabled={busy || !enabled}
-		>
-			<img src="icons/ellipsis.svg" alt="" />
-		</button>
-		<button
-			type="button"
-			title={getI18N('uninstall')}
+			class="mini-action danger remove-action"
+			class:armed={removeArmed}
+			title={removeArmed ? 'Confirm uninstall' : 'Remove extension'}
 			onclick={event => runSecondaryAction(event, onUninstallClick)}
 			disabled={busy}
 		>
-			<img src="icons/bin.svg" alt="" />
+			{removeArmed ? 'Confirm' : 'Remove'}
 		</button>
-	{/if}
+		<button
+			type="button"
+			class="ext-toggle"
+			class:enabled
+			role="switch"
+			aria-checked={enabled}
+			aria-label={getToggleTitle()}
+			title={getToggleTitle()}
+			onclick={event => runSecondaryAction(event, handleToggleClick)}
+			disabled={busy || !canToggle()}
+		>
+			<span class="ext-toggle-knob"></span>
+		</button>
+	</div>
+
 	{#if error}
 		<p class="ext-error">{error}</p>
 	{/if}
