@@ -1,4 +1,4 @@
-## <img src="source/logo.png" width="30" align="left"> One Click Extension Manager
+## <img src="source/onfire-logo.svg" width="30" align="left"> OnFire Extensions Manager
 
 <img src="screencast.gif" align="right" alt="">
 
@@ -6,20 +6,69 @@
 
 ![](https://user-images.githubusercontent.com/1402241/226161439-960aebe9-cad1-4d4d-a59a-f007db2abfa3.png)
 
-A _very simple_ Chrome extension to manage your Chrome extensions.
+OnFire Extensions Manager is a modified fork of One Click Extension Manager,
+customized for a more capable local Brave/Chromium workflow.
 
-It only requires the `management` permission.
+This fork is the version to use from this repository and locally. It is
+visually branded as **OnFire Extensions Manager** so it is easy to distinguish
+from the original Chrome Web Store extension.
+
+Current fork additions include:
+
+- Opening other extensions' popups from the manager, including unpinned
+  extensions when the native helper is installed.
+- Folder organization, search, and compact status filters.
+- Enable/disable toggles plus a remove action that uninstalls extensions from
+  the browser.
+- A compact modern popup UI for local use.
+- Cross-platform native helper setup for macOS and Windows.
+
+## Original project credit
+
+This project is based on the original
+[One Click Extension Manager](https://github.com/hankxdev/one-click-extensions-manager)
+by [Hank Yang](https://momane.com/) and
+[Federico Brigante](https://fregante.com/). The original MIT license and
+copyright notice are preserved in this repository.
 
 ## Install
 
-[link-chrome]: https://chrome.google.com/webstore/detail/one-click-extension-manag/pbgjpgbpljobkekbhnnmlikbbfhbhmem 'Version published on Chrome Web Store'
-[link-edge]: https://microsoftedge.microsoft.com/addons/detail/one-click-extensions-mana/jdodenbllldnoogfmbmmgpieafbnaogm 'Version published on Edge Web Stroe'
+This fork is intended to be loaded unpacked from this repository, not installed
+from the original Web Store listing.
 
-[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="48" alt="Chrome" valign="middle">][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/pbgjpgbpljobkekbhnnmlikbbfhbhmem.svg?label=%20">][link-chrome] and other Chromium browsers
+1. Run `npm install` once.
+2. Run `npm test` to lint, test, and build `distribution/`.
+3. In Brave or Chrome, open `chrome://extensions`.
+4. Enable Developer Mode.
+5. Load unpacked from this repository's `distribution/` folder.
 
-[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/edge/edge.svg" width="48" alt="Edge" valign="middle">][link-edge] [<img valign="middle" src="https://img.shields.io/badge/dynamic/json?add-on&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjdodenbllldnoogfmbmmgpieafbnaogm&label=%20">][link-edge]
+The installed extension should appear as **OnFire Extensions Manager** with the
+custom OnFire logo.
 
-[<img src="https://raw.githubusercontent.com/iamcal/emoji-data/08ec822c38e0b7a6fea0b92a9c42e02b6ba24a84/img-apple-160/1f99a.png" width="48" valign="middle">](https://github.com/sponsors/fregante) _If you like this extension, consider [sponsoring or hiring](https://github.com/sponsors/fregante) the maintainer [@fregante](https://twitter.com/fregante)_
+## Native popup helper
+
+The native popup helper is required for the "open another extension's popup"
+feature. It supports macOS and Windows.
+
+After loading the unpacked extension, copy this extension's ID from
+`chrome://extensions`, then run the cross-platform installer:
+
+```sh
+npm run helper:install -- <extension-id> brave
+```
+
+Use `chrome` instead of `brave` when installing for Google Chrome. On Windows,
+`edge` and `chromium` are also accepted.
+
+Diagnostics and cleanup use the same cross-platform wrappers:
+
+```sh
+npm run helper:diagnose -- brave
+npm run helper:uninstall
+```
+
+Platform-specific scripts remain available under `native-helper/` for users who
+prefer direct macOS shell or Windows PowerShell commands.
 
 ## Internationalization
 
@@ -43,7 +92,7 @@ It's available in several languages:
 
 You can suggest improvements or new languages using the `web-ext-translator` web tool:
 
-1. Visit https://lusito.github.io/web-ext-translator/?gh=https://github.com/hankxdev/one-click-extensions-manager/tree/main
+1. Visit https://lusito.github.io/web-ext-translator/?gh=https://github.com/onfire7777/one-click-extensions-manager-V2/tree/main
 2. Make changes to your language
 3. Open a PR on this repo to submit your changes
 

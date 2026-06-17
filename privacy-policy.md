@@ -8,7 +8,7 @@ This Privacy Policy describes Our policies and procedures on the collection, use
 
 For the purposes of this Privacy Policy:
 
-Application means the software program provided by us downloaded by You on any electronic device, named **One click extensions manager**.
+Application means the software program provided by us downloaded by You on any electronic device, named **OnFire Extensions Manager**, a modified fork of One Click Extension Manager.
 
 Device means any device that can access the Service such as a computer, a cellphone or a digital tablet.
 
@@ -27,4 +27,4 @@ You means the individual accessing or using the Service, or the company, or othe
 Contact Us
 If you have any questions about this Privacy Policy, You can contact us:
 
-By visiting this page: https://github.com/hankxdev/one-click-extensions-manager
+By visiting this page: https://github.com/onfire7777/one-click-extensions-manager-V2

@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
+	browserProcessNamesFromConfig,
+	buildWindowsAutomationScript,
 	frameNativeMessage,
 	readNativeMessage,
 	validateRequest,
@@ -51,4 +53,31 @@ test('rejects truncated native messages with a clear error', () => {
 		() => readNativeMessage(frame.subarray(0, -2)),
 		/Truncated native message body/v,
 	);
+});
+
+test('normalizes configured Windows browser process names', () => {
+	assert.deepEqual(
+		browserProcessNamesFromConfig({
+			browserProcessNames: ['brave.exe', 'BRAVE', 'chrome'],
+		}),
+		['brave', 'chrome'],
+	);
+	assert.deepEqual(
+		browserProcessNamesFromConfig({browserApp: 'Google Chrome'}),
+		['chrome'],
+	);
+	assert.deepEqual(
+		browserProcessNamesFromConfig({browserDisplayName: 'Edge'}),
+		['msedge'],
+	);
+});
+
+test('escapes Windows automation script inputs', () => {
+	const script = buildWindowsAutomationScript({
+		browserProcessNames: ['brave'],
+		extensionNames: ["Owner's Extension"],
+	});
+
+	assert.match(script, /'Owner''s Extension'/v);
+	assert.match(script, /Find-BrowserProcess/v);
 });

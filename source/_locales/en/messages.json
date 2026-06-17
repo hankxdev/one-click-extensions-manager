@@ -15,7 +15,7 @@
 		"message": "View, use, enable, disable, and remove your extensions with ease."
 	},
 	"extName": {
-		"message": "One Click Extensions Manager V2"
+		"message": "OnFire Extensions Manager"
 	},
 	"extensionMenuUnavailable": {
 		"message": "Extension menu unavailable"
@@ -39,7 +39,7 @@
 		"message": "Extension action failed."
 	},
 	"nativeHelperMissing": {
-		"message": "Native popup helper is not installed. Run native-helper/install-macos.sh from this repository."
+		"message": "Native popup helper is not installed. Run npm run helper:install -- <extension-id> brave from this repository."
 	},
 	"nativeHelperOpenFailed": {
 		"message": "Native popup helper could not open this extension popup."

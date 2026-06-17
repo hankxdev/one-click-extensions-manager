@@ -81,7 +81,7 @@
 					)} ${detail}`
 				: message(
 						'nativeHelperMissing',
-						'Native popup helper is not installed. Run native-helper/install-macos.sh from this repository.',
+						'Native popup helper is not installed. Run npm run helper:install -- <extension-id> brave from this repository.',
 					);
 		}
 

@@ -370,12 +370,23 @@
 <svelte:window onkeydown={keyboardNavigationHandler} />
 <main class="app-shell">
 	<header class="topbar">
-		<div>
-			<h1>Extensions</h1>
-			<p>
-				{extensionStats.total} total, {extensionStats.active} active, {folders.length}
-				folders
-			</p>
+		<div class="brand-block">
+			<img
+				class="brand-logo"
+				src="onfire-logo.svg"
+				alt=""
+				width="34"
+				height="34"
+				aria-hidden="true"
+			/>
+			<div>
+				<p class="brand-label">OnFire Extensions Manager</p>
+				<h1>Extensions</h1>
+				<p>
+					{extensionStats.total} total, {extensionStats.active} active,
+					{folders.length} folders
+				</p>
+			</div>
 		</div>
 		<button
 			type="button"

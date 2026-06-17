@@ -12,8 +12,7 @@
 		"hash": "557ac2dd0ce9b4249f7dc37868bcfccf"
 	},
 	"extName": {
-		"message": "Viena klikšķa paplašinājumu pārvaldnieks",
-		"hash": "9f7e3f659272f7b34a4073ddd8e29658"
+		"message": "OnFire Extensions Manager"
 	},
 	"gotoOpt": {
 		"message": "Iestatījumi…",
@@ -46,6 +45,7 @@
 		"message": "Noņemt šo paplašinājumu",
 		"hash": "a04a561e0b5c8b0210a17382781cabd1"
 	},
-
-	"__WET_LOCALE__": {"message": "lv"}
+	"__WET_LOCALE__": {
+		"message": "lv"
+	}
 }

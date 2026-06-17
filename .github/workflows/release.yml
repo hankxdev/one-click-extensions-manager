@@ -1,6 +1,6 @@
 env:
   DIRECTORY: distribution
-  PROJECT_NAME: one-click-extensions-manager
+  PROJECT_NAME: onfire-extensions-manager
 
 # FILE GENERATED WITH: npx ghat fregante/ghatemplates/webext
 # SOURCE: https://github.com/fregante/ghatemplates

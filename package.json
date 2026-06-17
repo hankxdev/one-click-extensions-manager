@@ -1,12 +1,23 @@
 {
+	"name": "onfire-extensions-manager",
+	"description": "OnFire fork of One Click Extension Manager with folders, popup access, extension toggles, and uninstall controls.",
 	"type": "module",
 	"private": true,
+	"homepage": "https://github.com/onfire7777/one-click-extensions-manager-V2",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/onfire7777/one-click-extensions-manager-V2.git"
+	},
+	"license": "MIT",
 	"engines": {
 		"node": ">=22"
 	},
 	"scripts": {
 		"build": "rollup --config",
 		"fix": "run-p 'lint -- --fix' format",
+		"helper:diagnose": "node native-helper/diagnose.mjs",
+		"helper:install": "node native-helper/install.mjs",
+		"helper:uninstall": "node native-helper/uninstall.mjs",
 		"lint": "eslint .",
 		"format": "prettier . --write",
 		"format:check": "prettier . --check",

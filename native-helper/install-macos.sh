@@ -95,7 +95,7 @@ manifest_path="$install_dir/com.ocem.popuphost.json"
 cat >"$manifest_path" <<EOF
 {
   "name": "com.ocem.popuphost",
-  "description": "One Click Extensions Manager popup opener",
+  "description": "OnFire Extensions Manager popup opener",
   "path": "$install_dir/native-host",
   "type": "stdio",
   "allowed_origins": [

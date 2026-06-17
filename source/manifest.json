@@ -1,7 +1,8 @@
 {
-	"name": "One Click Extensions Manager V2",
-	"description": "View, use, enable, disable, and remove your extensions with popup support.",
-	"version": "2026.6.16",
+	"name": "OnFire Extensions Manager",
+	"short_name": "OnFire Manager",
+	"description": "OnFire fork of One Click Extension Manager with folders, popups, toggles, and uninstall controls.",
+	"version": "2026.6.17",
 	"manifest_version": 3,
 	"homepage_url": "https://github.com/onfire7777/one-click-extensions-manager-V2",
 	"default_locale": "en",
@@ -9,11 +10,13 @@
 	"host_permissions": ["http://127.0.0.1:17645/*"],
 	"minimum_chrome_version": "110",
 	"icons": {
-		"16": "logo.png",
-		"128": "logo.png"
+		"16": "onfire-logo.svg",
+		"48": "onfire-logo.svg",
+		"128": "onfire-logo.svg"
 	},
 	"action": {
-		"default_icon": "logo.png",
+		"default_title": "OnFire Extensions Manager",
+		"default_icon": "onfire-logo.svg",
 		"default_popup": "index.html"
 	},
 	"side_panel": {

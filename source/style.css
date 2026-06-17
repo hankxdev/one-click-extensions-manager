@@ -95,6 +95,36 @@ p {
 	padding: 2px 2px 6px;
 }
 
+.brand-block {
+	display: flex;
+	min-width: 0;
+	gap: 9px;
+	align-items: center;
+}
+
+.brand-logo {
+	flex: 0 0 auto;
+	width: 34px;
+	height: 34px;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px #1018281f;
+}
+
+.brand-block > div {
+	min-width: 0;
+}
+
+.brand-label {
+	overflow: hidden;
+	color: var(--accent);
+	font-size: 0.68rem;
+	font-weight: 850;
+	letter-spacing: 0.06em;
+	text-overflow: ellipsis;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
 .topbar h1 {
 	font-size: 1.2rem;
 	line-height: 1.1;
