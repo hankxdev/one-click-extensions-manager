@@ -1,12 +1,10 @@
 <script>
 	import pickBestIcon from './lib/icons.js';
 	import openInTab from './lib/open-in-tab.js';
-	import trimName from './lib/trim-name.js';
 
 	const {
 		id,
 		name,
-		shortName,
 		enabled = $bindable(),
 		installType,
 		homepageUrl,
@@ -28,8 +26,6 @@
 		`https://microsoftedge.microsoft.com/addons/detail/${id}`,
 	);
 	const url = $derived(generateHomeURL());
-	// The browser will still fill the "short name" with "name" if missing
-	const realName = $derived(trimName(shortName ?? name));
 
 	function generateHomeURL() {
 		if (installType !== 'normal') {
@@ -79,7 +75,7 @@
 		onclick={toggleExtension}
 		oncontextmenu={handleContextMenu}
 	>
-		<img alt="" src={pickBestIcon(icons, 16)} />{realName}
+		<img alt="" src={pickBestIcon(icons, 16)} />{name}
 	</button>
 	{#if optionsUrl && enabled}
 		<a href={optionsUrl} title={getI18N('gotoOpt')} onclick={openInTab}>
